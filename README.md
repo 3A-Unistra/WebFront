@@ -6,15 +6,19 @@
 Créer une branche dans laquelle travailler sur sa tâche:
 
 `git checkout -b "5.page de connexion"` où `5` est le numéro de l'issue et `page de connexion` la page concernée
+
 `git branch` permet de vérifier sur quelle branche vous vous trouvez à tout moment ( en vert avec une *)
 
 
 ## Mettre sur le dépôt distant
 
 `git add .` va add tous les fichiers
+
 `git commit -m "commentaire expliquant le contenu du commit`
+
 `git push -u origin 5.page de connexion` pour mettre sur le dépôt distant 
 ( attention à ne pas mettre de guillements sur le nom de la branche cette fois)
+
 `git status` permet à tout moment de vérifier l'avancée de la procédure, voir quels fichiers sont commit, etc)
 
 
