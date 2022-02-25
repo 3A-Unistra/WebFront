@@ -31,7 +31,7 @@ Comme titre, mettez le numéro de votre tâche et son contenu, comme ceci "#5: p
 
 Ne surtout pas cliquer sur "merge" plus bas, ce sera le rôle de Brice, 
 qu'il faut donc mettre en tant que reviewer (via la colonne de droite) pour qu'il soit notifié
-qu'il y ait une nouvelle merge request. Il approuvera (si Dieu veut hin) puis mergera lui-même,
+qu'il y ait une nouvelle merge request. Il approuvera puis mergera lui-même,
 et fermera en même temps votre branche personnelle utilisée (celle crée ligne 8)
 
 
