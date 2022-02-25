@@ -14,7 +14,7 @@ Créer une branche dans laquelle travailler sur sa tâche:
 
 `git add .` va add tous les fichiers
 
-`git commit -m "commentaire expliquant le contenu du commit`
+`git commit -m "commentaire expliquant le contenu du commit"`
 
 `git push -u origin 5.page de connexion` pour mettre sur le dépôt distant 
 ( attention à ne pas mettre de guillements sur le nom de la branche cette fois)
