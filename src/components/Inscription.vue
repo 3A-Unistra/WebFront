@@ -1,0 +1,104 @@
+<template class="inscription_page">
+    <!-- <h3 class="title">{{ tit }}</h3> -->
+    <h1 class="animate__animated animate__flipInX title">Page d'INSCRIPTION</h1>
+
+    <div class="container_inscription">
+        <div class="img_inscription">
+            <img id="img_inscription" src="../assets/img_form.png" alt="">
+        </div>
+
+        <div class="content_inscription">
+            <h1 class="animate__animated animate__bounce animate__repeat-2 inscription_title">INSCRIPTION</h1>
+
+            <form class="form_container">
+               
+                    <input type="text" class="champs_form" required  id="pseudo" aria-describedby="pseudo" placeholder="Entrer votre pseudo">
+                
+                    <input type="text" class="champs_form" required  id="nom" aria-describedby="nom" placeholder="Entrer votre nom">
+                
+                    <input type="email" class="champs_form" required  id="email" aria-describedby="emailHelp" placeholder="Entrer votre email">
+                
+                    <input type="password" class="champs_form" required  id="password" placeholder="Password">
+                
+                    <button type="button" class="champs_form btn btn-submit btn-lg btn_inscription" >S'inscrire</button>
+            
+            </form>
+        </div>
+      </div>
+
+</template>
+
+<!-- Script JS -->
+
+<script>
+export default {
+    name: 'inscriptionPage',
+  props: {/* Props  est un attribut que vous pouvez 
+              definir au niveau du composant qui sera 
+              transmis directement au template.*/
+      tit: String,
+  }
+    
+}
+</script>
+
+<!-- style Css -->
+
+<style scoped>
+    #app{
+        background-image: url("../assets/background.png");
+    }
+
+    .title{
+        text-align: center;
+        
+    }
+    ul{
+        max-width:500px;
+        background-color:rgb(211, 202, 202);
+        margin-left:auto;
+        margin-right:auto;
+    }
+   
+    /* flexbox formulaire d'inscription */
+    .container_inscription{
+        display: flex;
+        flex-direction: row;
+        margin-top: 100px;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+    #img_inscription{
+        max-width: 300px;
+        max-height: 500px;
+    }
+    .img_inscription{
+        display: block;
+        margin-left: 100px;
+    }
+    .content_inscription{
+        display: block;
+        margin-left: 100px;
+        margin-right:50px;
+    }
+
+    .form_container{
+        display: flex;
+        flex-direction: column;
+    }
+    .champs_form{
+        display: block;
+        margin-bottom: 10px;
+        padding: 8px;
+        min-width:400px;
+        border:1px solid #835B0E;
+        background:white
+    }
+    .inscription_title{
+        color:#835B0E;
+    }
+    .btn_inscription{
+        background:#d49b2f;
+    }
+        
+</style>
