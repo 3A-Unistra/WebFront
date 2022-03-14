@@ -9,13 +9,19 @@
 
         <div class="content_login">
             <h1 class="animate__animated animate__bounce animate__repeat-2 login_title">LOGIN</h1>
-
+            
             <form class="form_container">
                
                     <input type="text" class="champs_form" required  id="pseudo" aria-describedby="pseudo" placeholder="Entrer votre pseudo">
                                                 
                     <input type="password" class="champs_form" required  id="password" placeholder="Password">
-                
+                    <div class="form-check">
+                      <input class="form-check-input " type="radio" checked disabled>
+                       
+                      <label class="form-check-label"><router-link to="/forget">Mot de pass oublié</router-link> </label>
+                      
+                    </div>
+                    
                     <button type="button" class="champs_form btn btn-submit btn-lg btn_login" >Se connecter</button>
             </form>
         </div>
@@ -23,15 +29,18 @@
 </template>
 
 <!-- Script JS -->
-
 <script>
 export default {
+  
+  created () {
+  },
      name: 'loginPage',
 }
+
+
 </script>
 
-<!-- Script JS -->
-
+<!-- Style Css -->
 <style scoped>
     #app{
         background-image: url("../assets/background.png");
@@ -88,6 +97,8 @@ export default {
     .btn_login{
         background:#d49b2f;
     }
-        
+    .form-check-label{
+      padding-bottom: 10px;
+    }
     
 </style>
