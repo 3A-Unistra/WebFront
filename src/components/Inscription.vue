@@ -1,4 +1,4 @@
-<template class="inscription_page">
+<template >
     <!-- <h3 class="title">{{ tit }}</h3> -->
     <h1 class="animate__animated animate__flipInX title">Page d'INSCRIPTION</h1>
 
@@ -26,6 +26,9 @@
         </div>
       </div>
 
+    <!-- <a class="uk-button uk-button-primary" href="#target" uk-scroll>  Scroll up </a>
+    <a href="#" uk-totop uk-scroll> </a> -->
+
 </template>
 
 <!-- Script JS -->
@@ -50,9 +53,9 @@ export default {
     }
 
     .title{
-        text-align: center;
-        
+        text-align: center;  
     }
+    
     ul{
         max-width:500px;
         background-color:rgb(211, 202, 202);
