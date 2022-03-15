@@ -31,6 +31,13 @@ const routes = [
     name: 'Inscription',
     component: ()=>import ('../components/Inscription.vue')
   },
+
+{
+    path:'/profile',
+    name: 'Profile',
+    component: ()=>import ('../components/Profile.vue')
+  },
+
   /* appel du fichier login du component */
   {
     path:'/',

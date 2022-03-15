@@ -9,7 +9,8 @@
   </div>
   <nav class="menu">
     <router-link to="/">Login</router-link> |
-    <router-link to="/inscription">Inscription</router-link> 
+    <router-link to="/inscription">Inscription</router-link> |
+    <router-link to="/profile">profile</router-link>
     <!-- <router-link to="/forget">ForgetPassword</router-link> -->
   </nav>
   <router-view/>
