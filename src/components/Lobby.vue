@@ -1,10 +1,73 @@
 <template>
-    <Header></Header>
     <div class="bodyL">
                       <!---------------------PARTICIPANTS-------------------->
         <div class="part">
           <h1 class="h1Lobby">Participants</h1>
-          <ListeParticipants></ListeParticipants>
+            <div class="infos">
+              <img class="pp" src="../assets/grin.png" alt="photo de profil">
+              <div class="txtzone">
+                <div class="pseudo"> Joueur
+                </div>
+                <div class="bt_pret">
+                  <button type="button" class="btn btn-light btn-sm" disabled>Prêt !</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="infos">
+              <img class="pp" src="../assets/grin.png" alt="photo de profil">
+              <div class="txtzone">
+                <div class="pseudo"> Joueur
+                </div>
+                <div class="bt_pret">
+                  <button type="button" class="btn btn-dark btn-sm" disabled>En attente</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="infos">
+              <img class="pp" src="../assets/grin.png" alt="photo de profil">
+              <div class="txtzone">
+                <div class="pseudo"> Joueur
+                </div>
+                <div class="bt_pret">
+                  <button type="button" class="btn btn-dark btn-sm" disabled>En attente</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="infos">
+              <img class="pp" src="../assets/grin.png" alt="photo de profil">
+              <div class="txtzone">
+                <div class="pseudo"> Joueur
+                </div>
+                <div class="bt_pret">
+                  <button type="button" class="btn btn-light btn-sm" disabled>Prêt !</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="infos">
+              <img class="pp" src="../assets/grin.png" alt="photo de profil">
+              <div class="txtzone">
+                <div class="pseudo"> Joueur
+                </div>
+                <div class="bt_pret">
+                  <button type="button" class="btn btn-light btn-sm" disabled>Prêt !</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="infos">
+              <img class="pp" src="../assets/grin.png" alt="photo de profil">
+              <div class="txtzone">
+                <div class="pseudo"> Joueur
+                </div>
+                <div class="bt_pret">
+                  <button type="button" class="btn btn-dark btn-sm" disabled>En attente</button>
+                </div>
+              </div>
+            </div>
           
           <div class="infosb">
             <div class="titrebot">
@@ -45,12 +108,67 @@
           
             <div class="tour"> 
               <p>Nombre de tours : </p>
-              <ChoixTour></ChoixTour>
+                  <form>
+                    <div class="form-row align-items-center">
+                      <div class="col-auto my-1">
+                        <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
+                        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                          <option selected>...</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="3">4</option>
+                          <option value="3">5</option>
+                          <option value="3">6</option>
+                          <option value="3">7</option>
+                          <option value="3">8</option>
+                          <option value="3">9</option>
+                          <option value="3">10</option>
+                          <option value="1">11</option>
+                          <option value="2">12</option>
+                          <option value="3">13</option>
+                          <option value="3">14</option>
+                          <option value="3">15</option>
+                          <option value="3">16</option>
+                          <option value="3">17</option>
+                          <option value="3">18</option>
+                          <option value="3">19</option>
+                          <option value="3">20</option>
+                          <option value="3">21</option>
+                          <option value="3">22</option>
+                          <option value="3">23</option>
+                          <option value="3">24</option>
+                          <option value="3">25</option>
+
+                        </select>
+                      </div>
+                    </div>
+                  </form>
             </div>
               
             <div class="tour">
               <p>Durée d'un tour (en min): </p>
-              <ChoixDuree></ChoixDuree>
+              <form>
+                <div class="form-row align-items-center">
+                  <div class="col-auto my-1">
+                    <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
+                    <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                      <option selected>...</option>
+                      <option value="1">∞</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="3">4</option>
+                      <option value="3">5</option>
+                      <option value="3">6</option>
+                      <option value="3">7</option>
+                      <option value="3">8</option>
+                      <option value="3">9</option>
+                      <option value="3">10</option>               
+                    </select>
+                  </div>
+                </div>
+              </form>
             </div>
           
         <!----------------------SOMME DEPART--------------------->
@@ -71,7 +189,71 @@
                       <!----------------------FOLLOWS--------------------->  
         <div class="amis">
           <h1 class="h1Lobby">Amis connectés</h1>
-          <ListeFollows></ListeFollows>
+            <div class="infos">
+              <img class="pp" src="../assets/grin.png" alt="photo de profil"> 
+              <div class="txtzone">
+                <div class="pseudo"> Joueur
+                </div>
+                <div class="bt_pret">
+                  <button type="button" class="btn btn-light btn-sm" >Inviter</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="infos">
+              <img class="pp" src="../assets/grin.png" alt="photo de profil">
+              <div class="txtzone">
+                <div class="pseudo"> Joueur
+                </div>
+                <div class="bt_pret">
+                  <button type="button" class="btn btn-light btn-sm" >Inviter</button>
+                </div>
+              </div>
+            </div>   
+
+            <div class="infos">
+              <img class="pp" src="../assets/grin.png" alt="photo de profil">
+              <div class="txtzone">
+                <div class="pseudo"> Joueur
+                </div>
+                <div class="bt_pret">
+                  <button type="button" class="btn btn-light btn-sm" >Inviter</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="infos">
+              <img class="pp" src="../assets/grin.png" alt="photo de profil">
+              <div class="txtzone">
+                <div class="pseudo"> Joueur
+                </div>
+                <div class="bt_pret">
+                  <button type="button" class="btn btn-light btn-sm" >Inviter</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="infos">
+              <img class="pp" src="../assets/grin.png" alt="photo de profil">
+              <div class="txtzone">
+                <div class="pseudo"> Joueur
+                </div>
+                <div class="bt_pret">
+                  <button type="button" class="btn btn-light btn-sm" >Inviter</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="infos">
+              <img class="pp" src="../assets/grin.png" alt="photo de profil">
+              <div class="txtzone">
+                <div class="pseudo"> Joueur
+                </div>
+                <div class="bt_pret">
+                  <button type="button" class="btn btn-light btn-sm" >Inviter</button>
+                </div>
+              </div>
+            </div>
         </div>
 
     </div>
@@ -81,12 +263,8 @@
 
 
 <script>
-import Footer from './MyFooter'
-import Header from './HeaderLobby'
-import ChoixTour from './ChoixTourParam.vue'
-import ChoixDuree from './ChoixDuree.vue'
-import ListeParticipants from './ListeParticipants.vue'
-import ListeFollows from './ListeFollows.vue'
+import Footer from './Footer'
+import Header from './Header'
 
 export default {
     name: 'LobbyPage',
@@ -98,11 +276,7 @@ export default {
 
     components: {
     Header,
-    Footer,
-    ChoixTour,
-    ChoixDuree,
-    ListeParticipants,
-    ListeFollows
+    Footer
 }
 }
 
@@ -291,5 +465,6 @@ p{
 .btn_bot{
   color:#212529 !important;
 }
+
 
 </style>
