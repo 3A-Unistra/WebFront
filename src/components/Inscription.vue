@@ -1,6 +1,7 @@
 <template >
-    <!-- <h3 class="title">{{ tit }}</h3> -->
-    <h1 class="animate__animated animate__flipInX title">Page d'INSCRIPTION</h1>
+    <!-- <h3 class="title">{{ tit }}</h3> 
+    <h1 class="animate__animated animate__flipInX title">Page d'INSCRIPTION</h1>-->
+    <Header></Header>
 
     <div class="container_inscription">
         <div class="img_inscription">
@@ -25,6 +26,7 @@
             </form>
         </div>
       </div>
+      <Footer></Footer>
 
     <!-- <a class="uk-button uk-button-primary" href="#target" uk-scroll>  Scroll up </a>
     <a href="#" uk-totop uk-scroll> </a> -->
@@ -34,13 +36,22 @@
 <!-- Script JS -->
 
 <script>
+
+import Footer from './MyFooter'
+import Header from './MyHeader'
+
+
 export default {
     name: 'inscriptionPage',
   props: {/* Props  est un attribut que vous pouvez 
               definir au niveau du composant qui sera 
               transmis directement au template.*/
       tit: String,
-  }
+  },
+  components: {
+    Header,
+    Footer
+}
     
 }
 </script>

@@ -1,4 +1,5 @@
 <template >
+    <Header></Header>
     <section class="container">
         <section class="pseudo_img">
             <div class = "titre_nom">
@@ -60,15 +61,25 @@
             </section>
         </section>
     </section>
+    <Footer></Footer>
 </template>
 
 <!-- Script JS -->
 <script>
+
+import Footer from './MyFooter'
+import Header from './MyHeader'
+
+
 export default {
   
   created () {
   },
      name: 'profilePage',
+    components: {
+        Header,
+        Footer
+}
 }
 </script>
 
@@ -119,6 +130,7 @@ display: flex;
 flex-direction: row;
 justify-content: space-evenly;
 gap: 50px;
+margin-top:200px;
 }
 
 .pseudo_img {

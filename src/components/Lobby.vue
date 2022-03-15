@@ -1,4 +1,5 @@
 <template>
+  <Header></Header>
     <div class="bodyL">
                       <!---------------------PARTICIPANTS-------------------->
         <div class="part">
@@ -257,14 +258,13 @@
         </div>
 
     </div>
-    <Footer></Footer>
 </template>
 
 
 
 <script>
-import Footer from './Footer'
-import Header from './Header'
+//import Footer from './MyFooter'
+import Header from './MyHeader'
 
 export default {
     name: 'LobbyPage',
@@ -276,7 +276,7 @@ export default {
 
     components: {
     Header,
-    Footer
+    //Footer
 }
 }
 
@@ -294,6 +294,7 @@ export default {
   flex-direction: row;
   border-top: 4px solid #5F4339;
   /*border: 2px solid red;*/
+  
   
 }
 

@@ -8,10 +8,10 @@
     <forgetPage tit="Forget Password"/> -->
   </div>
   <nav class="menu">
-    <router-link to="/">Login</router-link> |
+    <!--<router-link to="/login">Login</router-link> |
     <router-link to="/inscription">Inscription</router-link> |
     <router-link to="/profile">profile</router-link>
-    <!-- <router-link to="/forget">ForgetPassword</router-link> -->
+    <router-link to="/forget">ForgetPassword</router-link> -->
   </nav>
   <router-view/>
 
@@ -20,7 +20,7 @@
 
 <script>
 
-  // méme role que le href
+  // méme role que le href  
   // import inscriptionPage from './components/Inscription.vue'
   // import loginPage from './components/Login.vue'
   // import forgetPage from './components/ForgetPassword.vue'
@@ -46,7 +46,7 @@ export default {
     margin: 30px;
   }
   #app{
-    height: 300vh;
+    
   }
 
 

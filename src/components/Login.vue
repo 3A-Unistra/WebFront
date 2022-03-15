@@ -1,7 +1,7 @@
 <template >
     <!-- <h3 class="title">{{ tit }}</h3> -->
-    <h1 class="animate__animated animate__flipInX title">Page Login</h1>
-
+    <!--<h1 class="animate__animated animate__flipInX title">Page Login</h1>-->
+    <Header></Header>
     <div class="container_login">
         <div class="img_login">
             <img id="img_login" src="../assets/img_form.png" alt="">
@@ -26,17 +26,26 @@
             </form>
         </div>
       </div>
+    <Footer></Footer>
 </template>
 
 <!-- Script JS -->
 <script>
+
+import Footer from './MyFooter'
+import Header from './MyHeader'
+
 export default {
   
   created () {
   },
      name: 'loginPage',
-}
+     components: {
+        Header,
+        Footer
+    },
 
+}
 
 </script>
 
