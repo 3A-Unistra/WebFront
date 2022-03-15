@@ -9,6 +9,10 @@
         <router-link to="/login">Connexion</router-link>
       </div>
       <div class="top_right">
+        <router-link to="/lobby">Lobby</router-link>
+        &nbsp;|&nbsp;
+        <router-link to="/profile">Profil</router-link>
+        &nbsp;|&nbsp;
         <router-link to="/">Accueil</router-link>
         &nbsp;|&nbsp;    
         <img class="options" src="../assets/rouage.png" alt="options">

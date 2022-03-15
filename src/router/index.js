@@ -32,6 +32,12 @@ const routes = [
   },
 
   {
+    path:'/lobby',
+    name: 'Lobby',
+    component: ()=>import ('../components/Lobby.vue')
+  },
+
+  {
     path:'/profile',
     name: 'Profile',
     component: ()=>import ('../components/Profile.vue')

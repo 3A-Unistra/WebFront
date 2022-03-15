@@ -20,7 +20,7 @@
 
 <script>
 
-  // méme role que le href
+  // méme role que le href  
   // import inscriptionPage from './components/Inscription.vue'
   // import loginPage from './components/Login.vue'
   // import forgetPage from './components/ForgetPassword.vue'
@@ -46,7 +46,7 @@ export default {
     margin: 30px;
   }
   #app{
-    height: 300vh;
+    
   }
 
 

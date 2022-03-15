@@ -62,15 +62,7 @@ export default {
 </script>
 
 <style>
-@font-face {
-  font-family: Alata;
-  src: url(../assets/Alata-Regular.ttf);
-}
 
-@font-face {
-  font-family: MotionPicture;
-  src: url(../assets/MotionPicture.ttf);
-}
 
  #app{
   margin: 0;
@@ -83,10 +75,7 @@ export default {
 body {
   font-family: 'Alata-regular';
   margin: 0;
-  background-image:url(../assets/bgmarron.png);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-
+  
 }
 h2 {
   color:#835B0E;

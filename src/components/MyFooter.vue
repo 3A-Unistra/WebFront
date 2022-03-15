@@ -1,5 +1,4 @@
 <template>
-   
     <div class="bottom">
          <div> 
             <img id="le_chien" src="../assets/mascot_Footer.png" alt="pion chien">
@@ -9,10 +8,10 @@
             <ul>
                 <li class="menu_title"> Menu </li>
                 <hr>
-                <li class="menu_info">Accueil</li>
-                <li class="menu_info">Inscription/Connexion</li>
-                <li class="menu_info">Profil</li>
-                <li class="menu_info">A propos</li>
+                <li class="menu_info"><router-link class="menu_ff" to="/">Accueil</router-link></li>
+                <li class="menu_info"><router-link class="menu_ff" to="/inscription">Inscription/Connexion</router-link></li>
+                <li class="menu_info"><router-link class="menu_ff" to="/profile">Profil</router-link></li>
+                <li class="menu_info"><router-link class="menu_ff" to="/Lobby">Lobby</router-link></li>
             </ul>
             <ul>
                 <li class="menu_title"> Réseaux </li>
@@ -42,10 +41,16 @@
                 <li class="menu_info">Aide</li>
             </ul>
         </div>
-        <div class="store_redirection">
-            <img class="logo_store" src="../assets/logo_appstore.png" alt="logo app store">
-            <img class="logo_store" src="../assets/logo_playstore.png" alt="logo app store">
+        
+        <div class="store_bg">
+            <p class="store_parag">Télecharger notre Jeu mobile et profitez d'une <br>
+                expérience unique ou que vous soyez</p>
+            <div class="store_redirection">   
+                <img class="logo_store" src="../assets/logo_appstore.png" alt="logo app store">
+                <img class="logo_store" src="../assets/logo_playstore.png" alt="logo app store">
+            </div>
         </div>
+
         <div class="text-center text-lg-start container_copyright">
             <!-- Copyright -->
             <div class="text-center p-3 copy">
@@ -54,15 +59,37 @@
             </div>
             <!-- Copyright -->
         </div>
-    </div>
+    
+</div>
 </template>
 
 <style>
 
-
+.menu_ff{
+    text-decoration: none;
+    color: white;
+}
+.menu_ff:hover{
+    color: #cd823f;
+}
+.store_bg{
+    background-image: url("../assets/bgmarron.png");
+    margin-top:-200px;
+    
+}
 
 .bg-light {
     width: 100%;
+}
+.store_parag{
+    text-align: center;
+    font-size: 25px;
+    color:white;
+    max-width: 700px;
+    padding-top:160px;
+    margin-left:auto;
+    margin-right: auto;
+    
 }
 
 .bottom {
@@ -72,7 +99,7 @@
     padding: 3% 0% 0% 0%;
     justify-content: center;
     z-index:2;
-    
+    margin-top: 200px;
 }
 
 #liens {
@@ -99,6 +126,7 @@
     position:inherit;
     z-index:3;
     position:relative;
+    margin-top:-200px;
     
 }
 
@@ -137,17 +165,15 @@ li:first-child {
 .store_redirection {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    padding: 0% 10% 0% 10%;
+    justify-content: center;
+    
 }
 
 .logo_store {
-    max-width: 40%;
-    max-height: auto;
-    margin:0;
-    padding: 0;
-    background-size: contain;
-}
+    display: inline-block;
+    max-width: 200px;
+    max-height: 150px;
+}   
 .container_copyright{
     background:black;
 }
