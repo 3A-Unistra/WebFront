@@ -8,11 +8,10 @@ import Forget from '../views/ForgetV.vue'
 const routes = [
   {
     name: 'Login',
-    path: '/', 
+    path: '/login', 
     component: Login, 
     //charge le fichier du component
   },
-  
   {
     name: 'Inscription',
     path: '/inscription',
@@ -32,7 +31,7 @@ const routes = [
     component: ()=>import ('../components/Inscription.vue')
   },
 
-{
+  {
     path:'/profile',
     name: 'Profile',
     component: ()=>import ('../components/Profile.vue')
@@ -40,9 +39,14 @@ const routes = [
 
   /* appel du fichier login du component */
   {
-    path:'/',
+    path:'/login',
     name: 'Login',
     component: ()=>import ('../components/Login.vue')
+  },
+  {
+    path:'/',
+    accueil: 'Accueil',
+    component: ()=>import ('../components/Accueil.vue')
   },
   /* appel du fichier MP forget du component */
   {
