@@ -81,10 +81,6 @@ h2 {
   color:#835B0E;
 }
 
-h1,h2,h3 {
-  font-family: 'MotionPicture';
-}
-
 .explication{
   display: flex;
   flex-direction: column;
@@ -132,7 +128,7 @@ section img {
   }
 
   .bloc_texte h2 {
-    font-size: 6vh;
+    font-size: 5vh;
     text-align: center;
   }
   .bloc_texte p {
