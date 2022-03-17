@@ -77,7 +77,7 @@
             </div>
             <div class="diff">
               <button type="button" class="btn btn-second btn-sm">+</button>
-              <p class="txtdif">Difficulté du Bot</p>
+              <div class="lobby_title" id="txtdif">Difficulté du Bot</div>
               <button type="button" class="btn btn-second btn-sm">-</button>
             </div>
             <div class="bt_lancer bt_bot">
@@ -93,7 +93,7 @@
         <div class="param">
           <h1 class="h1Lobby">Paramètres du salon</h1>
           <fieldset>
-            <p>Visibilité : </p>
+            <div class="lobby_title">Visibilité : </div>
             <div class="vchoix">
               <input type="radio" class="radio" name="x" value="y" id="y" />
               <label for="y">Public</label>
@@ -108,7 +108,7 @@
           <!----------------------TOUR & DUREE--------------------->
           
             <div class="tour"> 
-              <p>Nombre de tours : </p>
+              <div class="lobby_title">Nombre de tours : </div>
                   <form>
                     <div class="form-row align-items-center">
                       <div class="col-auto my-1">
@@ -148,7 +148,7 @@
             </div>
               
             <div class="tour">
-              <p>Durée d'un tour (en min): </p>
+              <div class="lobby_title">Durée d'un tour (en min): </div>
               <form>
                 <div class="form-row align-items-center">
                   <div class="col-auto my-1">
@@ -174,7 +174,7 @@
           
         <!----------------------SOMME DEPART--------------------->
           <div class="sommeDepart">
-            <p>Somme de départ :</p>
+            <div class="lobby_title">Somme de départ :</div>
           </div>
 
         <!--------------------BT LANCER PARTIE------------------->
@@ -256,14 +256,14 @@
               </div>
             </div>
         </div>
-
     </div>
+  <Footer></Footer>
 </template>
 
 
 
 <script>
-//import Footer from './MyFooter'
+import Footer from './MyFooter'
 import Header from './MyHeader'
 
 export default {
@@ -276,7 +276,7 @@ export default {
 
     components: {
     Header,
-    //Footer
+    Footer
 }
 }
 
@@ -368,7 +368,13 @@ input.radio {
   padding: 0 12vh;
 }
 
-p{
+/*p{
+  display: table-cell;
+  padding: .375rem 1.75rem .375rem .0rem;;
+  vertical-align: middle !important;
+}*/
+
+.lobby_title{
   display: table-cell;
   padding: .375rem 1.75rem .375rem .0rem;;
   vertical-align: middle !important;
@@ -450,7 +456,7 @@ p{
   padding: 5% 55% 0% 0%;  
 }
 
-.txtdif{
+#txtdif{
   padding: 0%;
   margin: 0%;
 }
