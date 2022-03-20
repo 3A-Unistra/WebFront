@@ -1,0 +1,31 @@
+{
+  "nav": {
+    // header
+    "home": "Home",
+    "about": "About",
+    "login": "Login",
+    "signup": "Sign up",
+    "profil": "Profile",
+    "lobby": "Lobby",
+    // footer 
+    "reseaux": "Networks",
+    "liens": "Links",
+    "cond_gene": "General conditions",
+    "faq": "FAQ",
+    "license": "Licence",
+    "aide": "Help",
+    "propagande1": "Download our mobile Game and enjoy a unique",
+    "propagande2": "experience wherever you are",
+    // page inscription
+    "SIGNUP": "SIGN UP",
+    "LOGIN": "LOGIN",
+    "player": "Player",
+    "enter_password": "Enter your password",
+    "enter_mail": "Enter your email",
+    "enter_name": "Enter your name",
+    "enter_pseudo": "Enter your username",
+    "forgot_passw": "email forgotten",
+    "to_login": "Log in"
+
+  }
+}

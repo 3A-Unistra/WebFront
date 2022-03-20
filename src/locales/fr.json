@@ -1,0 +1,30 @@
+{
+  "nav": {
+    // header
+    "home": "Accueil",
+    "about": "A propos",
+    "login": "Connexion",
+    "signup": "Inscription",
+    "profil": "Profil",
+    "lobby": "Salon",
+    // footer 
+    "reseaux": "Réseaux",
+    "liens": "Liens",
+    "cond_gene": "Conditions générales",
+    "faq": "FAQ",
+    "license": "License",
+    "aide": "Aide",
+    "propagande1": "Télecharger notre Jeu mobile et profitez d'une",
+    "propagande2": "expérience unique ou que vous soyez",
+    // page inscription connexion
+    "SIGNUP": "INSCRIPTION",
+    "LOGIN": "CONNEXION",
+    "player": "Joueur",
+    "enter_password": "Entrez votre mot de passe",
+    "enter_mail": "Entrez votre adresse mail",
+    "enter_name": "Entrez votre nom",
+    "enter_pseudo": "Entrez votre pseudo",
+    "forgot_passw": "mot de pass oublié",
+    "to_login": "Se connecter"
+  }
+}

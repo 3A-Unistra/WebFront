@@ -7,7 +7,8 @@
             <div class="infos">
               <img class="pp" src="../assets/grin.png" alt="photo de profil">
               <div class="txtzone">
-                <div class="pseudo"> Joueur
+                <div class="pseudo">
+                  {{ $t("nav.player") }}
                 </div>
                 <div class="bt_pret">
                   <button type="button" class="btn btn-light btn-sm" disabled>Prêt !</button>
@@ -294,6 +295,7 @@ export default {
   flex-direction: row;
   border-top: 4px solid #5F4339;
   /*border: 2px solid red;*/
+  z-index: 1;
   
   
 }

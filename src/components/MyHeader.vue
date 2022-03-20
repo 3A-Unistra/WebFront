@@ -4,18 +4,24 @@
     <div class="top_bar">
       <img class="logo_coin" src="../assets/logo_couleur.png" alt="logo">
       <div class="login">
-        <router-link to="/inscription">Inscription</router-link>
+        <router-link to="/inscription">{{ $t("nav.signup") }}</router-link>
         &nbsp;/&nbsp;
-        <router-link to="/login">Connexion</router-link>
+        <router-link to="/login">{{ $t("nav.login") }}</router-link>
       </div>
       <div class="top_right">
-        <router-link to="/lobby">Lobby</router-link>
+        <router-link to="/lobby">{{ $t("nav.lobby") }}</router-link>
         &nbsp;|&nbsp;
-        <router-link to="/profile">Profil</router-link>
+        <router-link to="/profile">{{ $t("nav.profil") }}</router-link>
         &nbsp;|&nbsp;
-        <router-link to="/">Accueil</router-link>
+        <router-link to="/">{{ $t("nav.home") }}</router-link>
         &nbsp;|&nbsp;    
         <img class="options" src="../assets/rouage.png" alt="options">
+        <div class="locale-switcher">
+          <select v-model="$i18n.locale">
+            <option value="en">English</option>
+            <option value="fr">French</option>
+          </select>
+        </div>
       </div>
     </div>
 
@@ -39,6 +45,7 @@
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover;
   font-size: 2vh;
+  z-index: 3;
   }
 
 .top_bar {
@@ -54,7 +61,8 @@
 .logo_coin {
   height: 80px;
   max-width: inherit;
-  padding-left: 12%;
+  padding-right: 12%;
+  padding-top: 1%;
 }
 
 a {
@@ -119,7 +127,7 @@ a:hover {
   }
   .logo_coin {
     height: 100%;
-    padding-left: 1%;
+    padding-left: 3%;
     padding-right: 3% ;
   }
   .logo{
