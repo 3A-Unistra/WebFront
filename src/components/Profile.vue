@@ -3,7 +3,7 @@
     <section class="container">
         <section class="pseudo_img">
             <div class = "titre_nom">
-            Mon compte
+            {{ $t("compte") }}
             </div>
             <section class="pseudo_img">
                <div class = "img_cropper">
@@ -12,7 +12,7 @@
 
                 <section class="pseudo_id">
                     <div>
-                    pseudo
+                    {{ $t("pseudo") }}
                     </div>
 
                     <div class="id_number">
@@ -32,31 +32,31 @@
 
             <section class ="info_txt">
                 <div>
-                Nom du joueur :
+                    {{ $t("nom_joueur") }} :
                 </div>
 
                 <div>
-                Pseudo : 
+                {{ $t("pseudo") }} : 
                 </div>
 
                  <div>
-                Meilleur score :
+                     {{ $t("high_score") }} :
                 </div>
 
                 <div>
-                Pion favori :
+                    {{ $t("fav_pion") }} :
                 </div>
             </section>
 
             <section class ="info_bouton">
                 <button class="follow"
                 type="button">
-                suivre
+                {{ $t("suivre") }}
                 </button>
 
                 <button class="report"
                 type="button">
-                signaler
+                {{ $t("signaler") }}
                 </button>
             </section>
         </section>

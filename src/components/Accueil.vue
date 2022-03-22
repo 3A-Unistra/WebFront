@@ -5,20 +5,20 @@
       <section>
         <img src="../assets/mrmonopoly.png" alt="image stras">
         <div class="bloc_texte">
-          <h2> {{ titre_texte1 }} </h2>
+          <h2> {{ $t("titre_texte1") }} </h2>
           <p>
             <br>
-            {{ texte1 }}
+            {{ $t("texte1") }}
           </p>
         </div>
       </section>
       <section>
         <div class="bloc_texte">
-          <h2> {{ titre_texte2 }} </h2>
+          <h2> {{ $t("titre_texte2") }} </h2>
           <p>
             <br>
-            {{ texte2 }}
-            <a href="https://www.regledujeu.fr/monopoly/"> ici </a>.
+            {{ $t("texte2") }}
+            <a :href="$t('regle')"> {{ $t("ici") }} </a>.
           </p>
         </div>
         <img src="../assets/mrmonopoly.png" alt="image strasbourg">

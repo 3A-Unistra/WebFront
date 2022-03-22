@@ -1,30 +1,45 @@
 {
-  "nav": {
-    // header
-    "home": "Accueil",
-    "about": "A propos",
-    "login": "Connexion",
-    "signup": "Inscription",
-    "profil": "Profil",
-    "lobby": "Salon",
-    // footer 
-    "reseaux": "Réseaux",
-    "liens": "Liens",
-    "cond_gene": "Conditions générales",
-    "faq": "FAQ",
-    "license": "License",
-    "aide": "Aide",
-    "propagande1": "Télecharger notre Jeu mobile et profitez d'une",
-    "propagande2": "expérience unique ou que vous soyez",
-    // page inscription connexion
-    "SIGNUP": "INSCRIPTION",
-    "LOGIN": "CONNEXION",
-    "player": "Joueur",
-    "enter_password": "Entrez votre mot de passe",
-    "enter_mail": "Entrez votre adresse mail",
-    "enter_name": "Entrez votre nom",
-    "enter_pseudo": "Entrez votre pseudo",
-    "forgot_passw": "mot de pass oublié",
-    "to_login": "Se connecter"
-  }
+  // header
+  "home": "Accueil",
+  "about": "A propos",
+  "login": "Connexion",
+  "signup": "Inscription",
+  "profil": "Profil",
+  "lobby": "Salon",
+  // footer 
+  "reseaux": "Réseaux",
+  "liens": "Liens",
+  "cond_gene": "Conditions générales",
+  "faq": "FAQ",
+  "license": "License",
+  "aide": "Aide",
+  "propagande1": "Télecharger notre Jeu mobile et profitez d'une",
+  "propagande2": "expérience unique ou que vous soyez",
+  // page inscription connexion
+  "SIGNUP": "INSCRIPTION",
+  "LOGIN": "CONNEXION",
+  "player": "Joueur",
+  "enter_password": "Entrez votre mot de passe",
+  "enter_mail": "Entrez votre adresse mail",
+  "enter_name": "Entrez votre nom",
+  "enter_pseudo": "Entrez votre pseudo",
+  "forgot_passw": "mot de passe oublié ?",
+  "to_login": "Se connecter",
+  // page profil
+  "compte": "Mon compte",
+  "pseudo": "Pseudo",
+  "nom_joueur": "Nom du joueur",
+  "high_score": "Meilleur score",
+  "fav_pion": "Pion favori",
+  "suivre": "suivre",
+  "signaler": "signaler",
+  // page accueil
+    "texte2": "Mesurez-vous à l’intelligence artificielle spécialement conçue pour jouer avec les plus isolés d’entre nous. Même le fin fond de l’Ardèche ne vous empêchera pas de jouer à votre jeu de plateau favori. Retrouvez le détail des règles du jeu ",
+    "texte1": "L’équipe 3A de la faculté de Math-Info de Strasbourg a développé pour vous la version alsacienne du jeu de plateau le plus connu au monde. Mettez à la paille des adversaires des quatre coins du globe en investissant dans les propriétés de la capitale européenne. Jouez en ligne en famille ou entre amis, et faites-leur découvrir la ville de Strasbourg à travers des parties riches en rebondissements !",
+    "titre_texte2": "Pas d’amis ? Sans connexion ? Pas de panique !",
+    "titre_texte1": "Jouez à la version strasbourgeoise du célèbre jeu Monopoly",
+    "regle": "https://www.regledujeu.fr/monopoly/",
+    "ici": "ici"
+
+
 }

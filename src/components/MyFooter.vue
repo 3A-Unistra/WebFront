@@ -8,13 +8,13 @@
             <ul>
                 <li class="menu_title"> Menu </li>
                 <hr>
-                <li class="menu_info"><router-link class="menu_ff" to="/">{{ $t("nav.home") }}</router-link></li>
-                <li class="menu_info"><router-link class="menu_ff" to="/inscription">{{ $t("nav.signup") }}/{{ $t("nav.login") }}</router-link></li>
-                <li class="menu_info"><router-link class="menu_ff" to="/profile">{{ $t("nav.profil") }}</router-link></li>
-                <li class="menu_info"><router-link class="menu_ff" to="/Lobby">{{ $t("nav.lobby") }}</router-link></li>
+                <li class="menu_info"><router-link class="menu_ff" to="/">{{ $t("home") }}</router-link></li>
+                <li class="menu_info"><router-link class="menu_ff" to="/inscription">{{ $t("signup") }}/{{ $t("login") }}</router-link></li>
+                <li class="menu_info"><router-link class="menu_ff" to="/profile">{{ $t("profil") }}</router-link></li>
+                <li class="menu_info"><router-link class="menu_ff" to="/Lobby">{{ $t("lobby") }}</router-link></li>
             </ul>
             <ul>
-                <li class="menu_title"> {{ $t("nav.reseaux") }} </li>
+                <li class="menu_title"> {{ $t("reseaux") }} </li>
                 <hr>
                 <li>
                     <a href="">
@@ -33,20 +33,20 @@
                 </li>
             </ul>
             <ul>
-                <li class="menu_title"> {{ $t("nav.liens") }} </li>
+                <li class="menu_title"> {{ $t("liens") }} </li>
                 <hr>
-                <li class="menu_info">{{ $t("nav.cond_gene") }}</li>
-                <li class="menu_info">{{ $t("nav.faq") }}</li>
-                <li class="menu_info">{{ $t("nav.license") }}</li>
-                <li class="menu_info">{{ $t("nav.aide") }}</li>
+                <li class="menu_info">{{ $t("cond_gene") }}</li>
+                <li class="menu_info">{{ $t("faq") }}</li>
+                <li class="menu_info">{{ $t("license") }}</li>
+                <li class="menu_info">{{ $t("aide") }}</li>
             </ul>
         </div>
         
         <div class="store_bg">
             <p class="store_parag">
-                {{ $t("nav.propagande1") }} 
+                {{ $t("propagande1") }} 
                 <br>
-                {{ $t("nav.propagande2") }}
+                {{ $t("propagande2") }}
             </p>
             <div class="store_redirection">   
                 <img class="logo_store" src="../assets/logo_appstore.png" alt="logo app store">

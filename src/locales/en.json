@@ -1,31 +1,43 @@
-{
-  "nav": {
-    // header
-    "home": "Home",
-    "about": "About",
-    "login": "Login",
-    "signup": "Sign up",
-    "profil": "Profile",
-    "lobby": "Lobby",
-    // footer 
-    "reseaux": "Networks",
-    "liens": "Links",
-    "cond_gene": "General conditions",
-    "faq": "FAQ",
-    "license": "Licence",
-    "aide": "Help",
-    "propagande1": "Download our mobile Game and enjoy a unique",
-    "propagande2": "experience wherever you are",
-    // page inscription
-    "SIGNUP": "SIGN UP",
-    "LOGIN": "LOGIN",
-    "player": "Player",
-    "enter_password": "Enter your password",
-    "enter_mail": "Enter your email",
-    "enter_name": "Enter your name",
-    "enter_pseudo": "Enter your username",
-    "forgot_passw": "email forgotten",
-    "to_login": "Log in"
-
-  }
+{  
+  // header
+  "home": "Home",
+  "about": "About",
+  "login": "Login",
+  "signup": "Sign up",
+  "profil": "Profile",
+  "lobby": "Lobby",
+  // footer 
+  "reseaux": "Networks",
+  "liens": "Links",
+  "cond_gene": "General conditions",
+  "faq": "FAQ",
+  "license": "Licence",
+  "aide": "Help",
+  "propagande1": "Download our mobile Game and enjoy a unique",
+  "propagande2": "experience wherever you are",
+  // page inscription
+  "SIGNUP": "SIGN UP",
+  "LOGIN": "LOGIN",
+  "player": "Player",
+  "enter_password": "Enter your password",
+  "enter_mail": "Enter your email",
+  "enter_name": "Enter your name",
+  "enter_pseudo": "Enter your username",
+  "forgot_passw": "Forgot your email ?",
+  "to_login": "Log in",
+  // page profil
+  "compte": "My account",
+  "pseudo": "Username",
+  "nom_joueur": "Player name",
+  "high_score": "High-score",
+  "fav_pion": "Favorite pawn",
+  "suivre": "follow",
+  "signaler": "report",
+  // page accueil
+  "texte2": "Mesurez-vous à l’intelligence artificielle spécialement conçue pour jouer avec les plus isolés d’entre nous. Même le fin fond de l’Ardèche ne vous empêchera pas de jouer à votre jeu de plateau favori. Retrouvez le détail des règles du jeu ",
+  "texte1": "L’équipe 3A de la faculté de Math-Info de Strasbourg a développé pour vous la version alsacienne du jeu de plateau le plus connu au monde. Mettez à la paille des adversaires des quatre coins du globe en investissant dans les propriétés de la capitale européenne. Jouez en ligne en famille ou entre amis, et faites-leur découvrir la ville de Strasbourg à travers des parties riches en rebondissements !",
+  "titre_texte2": "No friend ? No connection ? No problem !",
+  "titre_texte1": "Play the Strasbourg version of the famous board game ",
+  "regle": "https://www.ultraboardgames.com/monopoly/game-rules.php",
+  "ici": "here"
 }

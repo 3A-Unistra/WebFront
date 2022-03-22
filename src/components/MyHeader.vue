@@ -4,16 +4,16 @@
     <div class="top_bar">
       <img class="logo_coin" src="../assets/logo_couleur.png" alt="logo">
       <div class="login">
-        <router-link to="/inscription">{{ $t("nav.signup") }}</router-link>
+        <router-link to="/inscription">{{ $t("signup") }}</router-link>
         &nbsp;/&nbsp;
-        <router-link to="/login">{{ $t("nav.login") }}</router-link>
+        <router-link to="/login">{{ $t("login") }}</router-link>
       </div>
       <div class="top_right">
-        <router-link to="/lobby">{{ $t("nav.lobby") }}</router-link>
+        <router-link to="/lobby">{{ $t("lobby") }}</router-link>
         &nbsp;|&nbsp;
-        <router-link to="/profile">{{ $t("nav.profil") }}</router-link>
+        <router-link to="/profile">{{ $t("profil") }}</router-link>
         &nbsp;|&nbsp;
-        <router-link to="/">{{ $t("nav.home") }}</router-link>
+        <router-link to="/">{{ $t("home") }}</router-link>
         &nbsp;|&nbsp;    
         <img class="options" src="../assets/rouage.png" alt="options">
         <div class="locale-switcher">
