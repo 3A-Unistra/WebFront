@@ -191,7 +191,7 @@ li:first-child {
 }
 
 @media screen and (max-width: 480px) {
-
+    
     #liens{
         width: 100%;
         justify-content: space-around;
@@ -199,12 +199,13 @@ li:first-child {
         margin-right: 0;
         margin-bottom: 3%;
         margin-left: 0;
-        padding: 0 5%;
+        padding: 1% 5%;
     }
 
     ul:last-child {
         margin-right: 2%;
         padding-right: 0;
+        padding-left: 0%;
     }
 
     ul:first-child {
@@ -228,6 +229,10 @@ li:first-child {
         display: none;
     }
 
+    .store_parag {
+        padding-top:250px;
+    }
+
     .menu_info{
     font-size:15px;
     }
@@ -241,7 +246,7 @@ li:first-child {
         margin-left: 73%;
     }
     ul:last-child {
-        padding-right: 0;
+        padding-right: 5%;
     }
     #liens {
         justify-content: space-around;

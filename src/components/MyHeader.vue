@@ -115,6 +115,7 @@ a:hover {
   }
   .top_bar {
     justify-content: space-between;
+    padding: 1% 0;
   }
   .logo_coin {
     height: 100%;
@@ -126,12 +127,17 @@ a:hover {
     max-width: 92%;
   }
   .login {
-    width: 49%;
-    height: 70%;
+    width: 36%;
+    height: 49%;
+    font-size: 1.1vh;
   }
 
   .top_right {
     width: 20%;
+  }
+
+  .top_right a {
+    font-size: 0.8vh;
   }
 
   .options {
@@ -146,9 +152,18 @@ a:hover {
     padding-left: 5%;
   }
 
+  .top_bar {
+    padding: 1% 0;
+  }
+
+  .top_right a {
+    font-size: 1.5vh;
+  }
+
   .login {
-    width: 30vh;
-    height: 52%;
+    width: 22vh;
+    height: 43%;
+    font-size: 1.6vh;
   }
 
 }
