@@ -1,6 +1,5 @@
 <template>
   <div class="haut">
-
     <div class="top_bar">
       <img class="logo_coin" src="../assets/logo_couleur.png" alt="logo">
       <div class="login">
@@ -9,13 +8,28 @@
         <router-link to="/login">{{ $t("login") }}</router-link>
       </div>
       <div class="top_right">
-        <router-link to="/lobby">{{ $t("lobby") }}</router-link>
+        <router-link to="/lobby">
+          {{ $t("lobby") }}
+        </router-link>
         &nbsp;|&nbsp;
-        <router-link to="/profile">{{ $t("profil") }}</router-link>
+        <router-link to="/profile">
+          {{ $t("profil") }}
+        </router-link>
         &nbsp;|&nbsp;
-        <router-link to="/">{{ $t("home") }}</router-link>
-        &nbsp;|&nbsp;    
-        <img class="options" src="../assets/rouage.png" alt="options">
+        <router-link to="/">
+          {{ $t("home") }}
+        </router-link>
+        &nbsp;|&nbsp;
+        <!---->      
+        <!---->
+        <div class="options">
+          <button alt="options" onclick="dropdown_options()"></button>
+          <ul id="liste_option">
+            <li> first </li>
+            <li> deux </li>
+            <li> trois </li>
+          </ul>
+        </div>
         <div class="locale-switcher">
           <select v-model="$i18n.locale">
             <option value="en">English</option>
@@ -31,6 +45,18 @@
   </div>
 </template>
 
+<script>
+//show and hide dropdown list item on button click  
+   // eslint-disable-next-line no-unused-vars
+  function dropdown_options() {  
+    var click = document.getElementById("liste_option");  
+    if(click.style.display ==="none") {  
+      click.style.display ="block";  
+      } else {  
+        click.style.display ="none";  
+    }   
+  }  
+</script>  
 <style>
 
 
@@ -97,6 +123,14 @@ a {
 
 .options {
   width: 5vh;
+}
+
+.options button {
+  background-image: url(../assets/rouage.png);
+}
+
+#liste_option {
+  display: none;
 }
 .bottom_bar {
   display: flex;
