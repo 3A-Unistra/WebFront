@@ -19,8 +19,10 @@
                 
                     <input type="email" class="champs_form" required  id="email" aria-describedby="emailHelp" placeholder="Entrer votre email">
                 
-                    <input type="password" class="champs_form" required  id="password" placeholder="Password">
-                
+                    <input type="password" class="champs_form" required  id="password" placeholder="Entrer votre mot de passe">
+                    
+                    <input type="password" class="champs_form" required  id="password" placeholder="Confirmer votre Mot de passe">
+
                     <button type="button" class="champs_form btn btn-submit btn-lg btn_inscription" >S'inscrire</button>
             
             </form>
