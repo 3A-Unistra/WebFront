@@ -34,16 +34,13 @@ import Header from './MyHeader'
 
 export default {
   name: 'AccueilPage',
-  props: { /* Props  est un attribut que vous pouvez
-              definir au niveau du composant qui sera
-              transmis directement au template. */
+  props: { 
     tit: String
   },
 
   components: {
     Header,
     Footer
-
   },
   data: function () {
     return {
@@ -63,7 +60,6 @@ export default {
 
 <style>
 
-
  #app{
   margin: 0;
   padding: 0;
@@ -72,19 +68,17 @@ export default {
   flex-direction: column;
 }
 
-body {
-  font-family: 'Alata-regular';
-  margin: 0;
-  
-}
+
 h2 {
   color:#835B0E;
 }
 
 .explication{
+  font-family: Arial, Helvetica, sans-serif;
   display: flex;
   flex-direction: column;
   padding-top: 8vh;
+  background: url("../assets/background.png");
 }
 
 section{
@@ -112,10 +106,6 @@ section img {
   font-size: 3vh;
 }
 
-.explication section:nth-child(2){
-  background: rgba(0,0,0,.04);
-
-}
 
 @media screen and (max-width: 480px) {
 
