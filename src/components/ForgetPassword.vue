@@ -1,4 +1,4 @@
-<template class="forget_page">
+<template>
     <Header></Header>
         <div class="content_forget">
             <section class ="container">
@@ -46,6 +46,7 @@ components: {
     }
 
     .content_forget{
+        font-family: Arial, Helvetica, sans-serif;
         display: flex;
         flex-direction: column;
         justify-content: center;

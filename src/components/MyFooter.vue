@@ -93,7 +93,7 @@
 }
 
 .bottom {
-    font-family: Alata;
+    font-family: Arial, Helvetica, sans-serif;
     display: flex;
     flex-direction: column;
     padding: 3% 0% 0% 0%;

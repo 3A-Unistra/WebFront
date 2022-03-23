@@ -27,8 +27,8 @@
 
 <style>
 
-
 .haut {
+  font-family: Arial, Helvetica, sans-serif;
   display: flex;
   flex-direction: column;
   height: 70vh;

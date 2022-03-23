@@ -34,16 +34,13 @@ import Header from './MyHeader'
 
 export default {
   name: 'AccueilPage',
-  props: { /* Props  est un attribut que vous pouvez
-              definir au niveau du composant qui sera
-              transmis directement au template. */
+  props: { 
     tit: String
   },
 
   components: {
     Header,
     Footer
-
   },
   data: function () {
     return {
@@ -63,7 +60,6 @@ export default {
 
 <style>
 
-
  #app{
   margin: 0;
   padding: 0;
@@ -72,16 +68,13 @@ export default {
   flex-direction: column;
 }
 
-body {
-  font-family: 'Alata-regular';
-  margin: 0;
-  
-}
+
 h2 {
   color:#835B0E;
 }
 
 .explication{
+  font-family: Arial, Helvetica, sans-serif;
   display: flex;
   flex-direction: column;
   padding-top: 8vh;
