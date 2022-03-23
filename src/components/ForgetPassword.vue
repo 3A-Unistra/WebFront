@@ -37,7 +37,10 @@ components: {
 
 <!-- style Css -->
 
-<style scoped>
+<style>
+    #app{
+         background: url("../assets/background.png");
+    }
 
     .container {
         display: flex;
@@ -55,7 +58,7 @@ components: {
         border-radius:30px ;
         margin-left: auto;
         margin-right: auto;
-        margin-top: 200px;
+        margin-top: 50px;
         padding: 50px;
 }
 
