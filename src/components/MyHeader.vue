@@ -23,19 +23,30 @@
         <!---->      
         <!---->
         <div class="options">
-          <button alt="options" onclick="dropdown_options()"></button>
+          <button @click="dropdown_options"></button>
           <ul id="liste_option">
-            <li> first </li>
-            <li> deux </li>
-            <li> trois </li>
+            <li id="close_button" @click="dropdown_options"> &times;</li>
+            
+            <span class="titre_dropdown">
+              {{ $t("langue") }}:
+            </span>
+            <li class="list_elem">
+              <div class="locale-switcher">
+                <select v-model="$i18n.locale">
+                  <option value="en">English</option>
+                  <option value="fr">French</option>
+                </select>
+              </div> 
+            </li>
+
+            <span class="titre_dropdown">
+              {{ $t("affichage") }}:
+              </span> 
+            <li id="to_light_mode" class="list_elem"> {{ $t("modeC") }} </li>
+            <li id="to_dark_mode" class="list_elem"> {{ $t("modeN") }} </li>
           </ul>
         </div>
-        <div class="locale-switcher">
-          <select v-model="$i18n.locale">
-            <option value="en">English</option>
-            <option value="fr">French</option>
-          </select>
-        </div>
+        
       </div>
     </div>
 
@@ -46,16 +57,23 @@
 </template>
 
 <script>
-//show and hide dropdown list item on button click  
-   // eslint-disable-next-line no-unused-vars
-  function dropdown_options() {  
-    var click = document.getElementById("liste_option");  
-    if(click.style.display ==="none") {  
-      click.style.display ="block";  
-      } else {  
-        click.style.display ="none";  
-    }   
-  }  
+export default {        
+    mounted() {
+      this.dropdown_options();
+    },
+    methods: {
+        dropdown_options() {
+          var click = document.getElementById("liste_option");  
+
+          if(click.style.display ==="none") {  
+            click.style.display ="block";  
+          } 
+          else {  
+            click.style.display ="none"; 
+          }
+        }
+    }
+};
 </script>  
 <style>
 
@@ -120,23 +138,84 @@ a {
   align-items: center;
   width: 17%;
 }
-
+ /*  DROPDOWN BELOW */
 .options {
-  width: 5vh;
+  display: flex;
+  flex-direction: column;
+  width: 50px;
+  height: 50px;
 }
 
 .options button {
+  width: 100%;
+  height: 100%;
   background-image: url(../assets/rouage.png);
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 #liste_option {
   display: none;
+  list-style-type: none;
+  z-index: 1;
+  background-color: white;
+  color: #cd823f;
+  top: 0;
+  right: 0;
+  width: 12%;
+  height: 100%;
+  padding-left: 0;
+  padding-bottom: 2%;
+  position: absolute;
+}
+
+#close_button {
+  padding: 1% 0 3% 3% ;
+  font-size: 5vh;
+  cursor: pointer;
+}
+
+.list_elem {
+  padding-top: 0;
+  padding-bottom: 4%;
+  padding-left: 30%;
+  font-size: 2vh;
+}
+
+.list_elem:nth-child(3) {
+  padding-bottom: 12%;
+  padding-top: 4%;
+}
+.titre_dropdown {
+  font-size: 2.5vh;
+  font-weight: 600;
+  padding-left: 18%;
+  height: 30%;
 }
 .bottom_bar {
   display: flex;
   justify-content: center;
   padding-top: 5% ;
 }
+
+#to_light_mode, #to_dark_mode {
+  padding-top: 4% ;
+  cursor: pointer;
+}
+
+#to_dark_mode:hover {
+  color: white;
+  background-color: #3a210c;
+}
+
+#to_light_mode:hover {
+  color: #cd823f;
+  background-color: rgba(255, 255, 255, 0.219);
+}
+
+/* fin dropdown */
 
 .logo{
   max-height: 100%;
@@ -181,9 +260,23 @@ a:hover {
   .top_right a {
     font-size: 0.8vh;
   }
-
+  #liste_option {
+    height: 50%;
+  }
   .options {
-    width: 3vh;
+    width: 30px;
+    height: 30px;
+  }
+  .options button {
+    width: inherit;
+    height: inherit;
+  }
+
+  #liste_option {
+    width: 40%;
+  }
+  .titre_dropdown {
+    font-size: 2vh;
   }
 
 }
@@ -206,6 +299,19 @@ a:hover {
     width: 22vh;
     height: 43%;
     font-size: 1.6vh;
+  }
+
+  .options {
+    width: 50px;
+    height: 50px;
+  }
+  .options button {
+    width: inherit;
+    height: inherit;
+  }
+
+  #liste_option {
+    width: 30%;
   }
 
 }

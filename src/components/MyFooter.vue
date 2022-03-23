@@ -5,7 +5,7 @@
         </div>
         <div id="liens">
             
-            <ul>
+            <ul class="list_footer">
                 <li class="menu_title"> Menu </li>
                 <hr>
                 <li class="menu_info"><router-link class="menu_ff" to="/">{{ $t("home") }}</router-link></li>
@@ -13,26 +13,26 @@
                 <li class="menu_info"><router-link class="menu_ff" to="/profile">{{ $t("profil") }}</router-link></li>
                 <li class="menu_info"><router-link class="menu_ff" to="/Lobby">{{ $t("lobby") }}</router-link></li>
             </ul>
-            <ul>
+            <ul class="list_footer">
                 <li class="menu_title"> {{ $t("reseaux") }} </li>
                 <hr>
-                <li>
+                <li class="menu_logo">
                     <a href="">
                         <img id="insta_size" src="../assets/instagram.png" alt="instagram">
                     </a>
                 </li>
-                <li>
+                <li class="menu_logo">
                     <a href="">
                         <img class="social" src="../assets/facebook.png" alt="facebook">
                     </a>
                 </li>
-                <li>
+                <li class="menu_logo">
                     <a href="">
                         <img class="social" src="../assets/twitter.png" alt="twitter">
                     </a>
                 </li>
             </ul>
-            <ul>
+            <ul class="list_footer">
                 <li class="menu_title"> {{ $t("liens") }} </li>
                 <hr>
                 <li class="menu_info">{{ $t("cond_gene") }}</li>
@@ -68,17 +68,10 @@
 
 <style>
 
-.menu_ff{
-    text-decoration: none;
-    color: white;
-}
-.menu_ff:hover{
-    color: #cd823f;
-}
+
 .store_bg{
     background-image: url("../assets/bgmarron.png");
     margin-top:-200px;
-    
 }
 
 .bg-light {
@@ -140,24 +133,20 @@ hr {
     border: solid;
 }
 
-ul {
+.list_footer {
     list-style-type: none;
     padding: 2% 8%;
     max-width: 100%;
 }
 
-li {
-    padding-top: 30px;
-    color: white; 
-}
-
-li:first-child {
+.menu_title:first-child {
     padding-top: 30px;
 }
 
 .social{
     max-height: 40px;
     max-width: 40px;
+    margin-left: 3%;
 }
 
 #insta_size {
@@ -187,9 +176,25 @@ li:first-child {
     color:white;
 }
 .menu_info{
+    padding-top: 30px;
+    color: white; 
     font-size:18px;
 }
+
+.menu_ff{
+    text-decoration: none;
+    color: white;
+}
+.menu_ff:hover{
+    color: #cd823f;
+}
+
+.menu_logo {
+    padding-top: 30px;
+}
 .menu_title{
+    padding-top: 30px;
+    color: white; 
     font-size:30px;
 }
 
@@ -205,28 +210,28 @@ li:first-child {
         padding: 1% 5%;
     }
 
-    ul:last-child {
+    .list_footer:last-child {
         margin-right: 2%;
         padding-right: 0;
         padding-left: 0%;
     }
 
-    ul:first-child {
+    .list_footer:first-child {
         margin-left: 1%;
         padding-left: 2%;
         padding-right: 0;
     }
-    #insta_size {
+    /*#insta_size {
         max-height: 55px;
         max-width: 55px;
         padding-bottom: 25%;
     }
 
     .social{
-        max-height: 50px;
-        max-width: 50px;
+        height: 50px;
+        width: 50px;
         padding-bottom: 25%;
-    }  
+    }*/  
 
     #le_chien {
         display: none;
@@ -242,13 +247,13 @@ li:first-child {
 }
 
 @media screen  and (min-width: 481px) and (max-width: 810px) {
-    ul {
+    .list_footer {
         padding: 1% 5%;
     }
     #le_chien {
         margin-left: 73%;
     }
-    ul:last-child {
+    .list_footer:last-child {
         padding-right: 5%;
     }
     #liens {

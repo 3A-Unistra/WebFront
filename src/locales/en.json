@@ -6,6 +6,10 @@
   "signup": "Sign up",
   "profil": "Profile",
   "lobby": "Lobby",
+  "affichage": "Display",
+  "langue": "Language",
+  "modeN": "Dark mode",
+  "modeC": "Light mode",
   // footer 
   "reseaux": "Networks",
   "liens": "Links",
@@ -15,7 +19,7 @@
   "aide": "Help",
   "propagande1": "Download our mobile Game and enjoy a unique",
   "propagande2": "experience wherever you are",
-  // page inscription
+  // page inscription connexion
   "SIGNUP": "SIGN UP",
   "LOGIN": "LOGIN",
   "player": "Player",
