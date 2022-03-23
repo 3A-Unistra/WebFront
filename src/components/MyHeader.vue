@@ -3,42 +3,50 @@
 
     <div class="top_bar">
       <img class="logo_coin" src="../assets/logo_couleur.png" alt="logo">
-      <div class="login">
+      <div class="login">  
         <router-link to="/inscription">Inscription</router-link>
         &nbsp;/&nbsp;
         <router-link to="/login">Connexion</router-link>
       </div>
       <div class="top_right">
+        <div class="menu_mr">
         <router-link to="/lobby">Lobby</router-link>
-        &nbsp;|&nbsp;
+        
+        </div>
+        <div class="menu_mr">
         <router-link to="/profile">Profil</router-link>
-        &nbsp;|&nbsp;
-        <router-link to="/">Accueil</router-link>
-        &nbsp;|&nbsp;    
-        <img class="options" src="../assets/rouage.png" alt="options">
+        <!-- &nbsp;|&nbsp; -->
+        </div>
+        <div class="menu_mr">
+        <router-link to="/">Accueil  </router-link>
+        <!-- &nbsp;|&nbsp;    -->
+        </div> 
+        <img class="options" src="../assets/traduction.png" alt="options">
       </div>
     </div>
 
-    <div class="bottom_bar">
-      <img class="logo" src="../assets/logo_couleur.png" alt="logo">
-    </div>
+    <!-- <div class="bottom_bar"> -->
+      <!-- <img class="logo" src="../assets/logo_couleur.png" alt="logo"> -->
+    <!-- </div> -->
   </div>
 </template>
 
 <style>
 
-
 .haut {
+  font-family: Arial, Helvetica, sans-serif;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
-  height: 70vh;
+  height: 85vh;
   padding: 0% 0%;
-  max-width: 100%;
+  /* max-width: 100%; */
   background-image: url(../assets/stras.jpg);
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover;
-  font-size: 2vh;
+  
+ 
   }
 
 .top_bar {
@@ -49,6 +57,10 @@
   max-width: 100%;
   max-height: 11%;
   padding: 1% 3%;
+}
+.menu_mr{
+  /* margin-left:25px; */
+  margin-right:20px;
 }
 
 .logo_coin {
@@ -71,8 +83,10 @@ a {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  width: 18%;
-  height: 90%;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   font-weight: 600;
   color: red;
   background-color: white;
@@ -88,7 +102,7 @@ a {
 }
 
 .options {
-  width: 5vh;
+  width: 3vh;
 }
 .bottom_bar {
   display: flex;
