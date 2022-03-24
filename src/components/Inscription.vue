@@ -21,7 +21,7 @@
                 
                     <input type="password" class="champs_form" required  id="password" :placeholder="$t('enter_password')">
 
-                    <input type="password" class="champs_form" required  id="password" placeholder="Confirmer votre Mot de passe">
+                    <input type="password" class="champs_form" required  id="password" :placeholder="$t('confirm_password')">
                 
                     <button type="button" class="champs_form btn btn-submit btn-lg btn_inscription" >{{ $t("signup") }}</button>
             

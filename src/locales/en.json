@@ -24,6 +24,7 @@
   "LOGIN": "LOGIN",
   "player": "Player",
   "enter_password": "Enter your password",
+  "confirm_password": " Confirm your password",
   "enter_mail": "Enter your email",
   "enter_name": "Enter your name",
   "enter_pseudo": "Enter your username",
