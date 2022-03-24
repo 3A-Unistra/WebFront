@@ -50,7 +50,7 @@ export default {
 </script>
 
 <!-- Style Css -->
-<style scoped>
+<style>
     #app{
         background-image: url("../assets/background.png");
     }
@@ -59,18 +59,12 @@ export default {
         text-align: center;
         
     }
-    ul{
-        max-width:500px;
-        background-color:rgb(211, 202, 202);
-        margin-left:auto;
-        margin-right:auto;
-    }
-   
+    
     /* flexbox formulaire d'login */
     .container_login{
         display: flex;
         flex-direction: row;
-        margin-top: 100px;
+        margin-top: 20px;
         flex-wrap: wrap;
         justify-content: space-evenly;
     }

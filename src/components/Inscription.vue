@@ -20,6 +20,8 @@
                     <input type="email" class="champs_form" required  id="email" aria-describedby="emailHelp" :placeholder="$t('enter_mail')">
                 
                     <input type="password" class="champs_form" required  id="password" :placeholder="$t('enter_password')">
+
+                    <input type="password" class="champs_form" required  id="password" placeholder="Confirmer votre Mot de passe">
                 
                     <button type="button" class="champs_form btn btn-submit btn-lg btn_inscription" >{{ $t("signup") }}</button>
             
@@ -58,29 +60,23 @@ export default {
 
 <!-- style Css -->
 
-<style scoped>
+<style>
     #app{
-        background-image: url("../assets/background.png");
+         background: url("../assets/background.png");
     }
-
+   
     .title{
         text-align: center;  
-    }
-    
-    ul{
-        max-width:500px;
-        background-color:rgb(211, 202, 202);
-        margin-left:auto;
-        margin-right:auto;
     }
    
     /* flexbox formulaire d'inscription */
     .container_inscription{
         display: flex;
         flex-direction: row;
-        margin-top: 100px;
+        margin-top: 20px;
         flex-wrap: wrap;
         justify-content: space-evenly;
+         background: url("../assets/background.png");
     }
     #img_inscription{
         max-width: 300px;
