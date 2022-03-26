@@ -51,9 +51,9 @@
       </div>
     </div>
 
-    <div class="bottom_bar">
-      <img class="logo" src="../assets/logo_couleur.png" alt="logo">
-    </div>
+    <!-- <div class="bottom_bar"> -->
+      <!-- <img class="logo" src="../assets/logo_couleur.png" alt="logo"> -->
+    <!-- </div> -->
   </div>
 </template>
 
@@ -78,13 +78,14 @@ export default {
 </script>  
 <style>
 
-
 .haut {
+  font-family: Arial, Helvetica, sans-serif;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
-  height: 70vh;
+  height: 85vh;
   padding: 0% 0%;
-  max-width: 100%;
+  /* max-width: 100%; */
   background-image: url(../assets/stras.jpg);
   background-position: center; 
   background-repeat: no-repeat;
@@ -101,6 +102,10 @@ export default {
   max-width: 100%;
   max-height: 11%;
   padding: 1% 3%;
+}
+.menu_mr{
+  /* margin-left:25px; */
+  margin-right:20px;
 }
 
 .logo_coin {
@@ -124,8 +129,10 @@ a {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  width: 18%;
-  height: 90%;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   font-weight: 600;
   color: red;
   background-color: white;

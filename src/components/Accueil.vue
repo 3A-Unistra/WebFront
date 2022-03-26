@@ -34,9 +34,7 @@ import Header from './MyHeader'
 
 export default {
   name: 'AccueilPage',
-  props: { /* Props  est un attribut que vous pouvez
-              definir au niveau du composant qui sera
-              transmis directement au template. */
+  props: { 
     tit: String
   },
 
@@ -49,13 +47,13 @@ export default {
 
 <style>
 
-
  #app{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  background: url("../assets/background.png");  
 }
 
 .explication {
@@ -68,9 +66,11 @@ h2 {
 }
 
 .explication{
+  font-family: Arial, Helvetica, sans-serif;
   display: flex;
   flex-direction: column;
   padding-top: 8vh;
+  background: url("../assets/background.png");
 }
 
 section{
@@ -98,10 +98,6 @@ section img {
   font-size: 3vh;
 }
 
-.explication section:nth-child(2){
-  background: rgba(0,0,0,.04);
-
-}
 
 @media screen and (max-width: 480px) {
 

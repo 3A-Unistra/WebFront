@@ -24,6 +24,7 @@
   "LOGIN": "CONNEXION",
   "player": "Joueur",
   "enter_password": "Entrez votre mot de passe",
+  "confirm_password": " Confirmez votre mot de passe",
   "enter_mail": "Entrez votre adresse mail",
   "enter_name": "Entrez votre nom",
   "enter_pseudo": "Entrez votre pseudo",
