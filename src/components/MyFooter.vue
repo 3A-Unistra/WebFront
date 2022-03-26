@@ -89,7 +89,6 @@
     padding-top:160px;
     margin-left:auto;
     margin-right: auto;
-    
 }
 
 .bottom {
@@ -99,7 +98,7 @@
     padding: 3% 0% 0% 0%;
     justify-content: center;
     z-index:2;
-    margin-top: 200px;
+    margin-top: 150px;
 }
 
 #liens {
@@ -166,7 +165,6 @@ li:first-child {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    
 }
 
 .logo_store {
