@@ -333,9 +333,10 @@ input:checked + .slider:before {
     max-width: 92%;
   }
   .login {
-    width: 36%;
+    width: inherit;
     height: 49%;
-    font-size: 1.1vh;
+    font-size: 1vh;
+    align-items: center;
   }
 
   .top_right {
