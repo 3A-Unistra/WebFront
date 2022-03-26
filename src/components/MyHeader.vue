@@ -20,13 +20,9 @@
           {{ $t("home") }}
         </router-link>
         &nbsp;|&nbsp;
-        <!---->      
-        <!---->
         <div class="options">
           <button @click="dropdown_options"></button>
-          <ul id="liste_option">
-            <li id="close_button" @click="dropdown_options"> &times;</li>
-            
+          <ul id="liste_option">            
             <span class="titre_dropdown">
               {{ $t("langue") }}:
             </span>
@@ -41,12 +37,17 @@
 
             <span class="titre_dropdown">
               {{ $t("affichage") }}:
-              </span> 
-            <li id="to_light_mode" class="list_elem"> {{ $t("modeC") }} </li>
-            <li id="to_dark_mode" class="list_elem"> {{ $t("modeN") }} </li>
+            </span>
+            <div class="change_mode">
+              <img class="symbol_mode" src="../assets/light-mode.png">
+              <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider round"></span>
+              </label>
+              <img class="symbol_mode" src="../assets/dark-mode.png">
+            </div>
           </ul>
         </div>
-        
       </div>
     </div>
 
@@ -85,8 +86,8 @@ export default {
   padding: 0% 0%;
   max-width: 100%;
   background-image: url(../assets/stras.jpg);
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
+  background-position: center; 
+  background-repeat: no-repeat;
   background-size: cover;
   font-size: 2vh;
   z-index: 3;
@@ -138,10 +139,20 @@ a {
   align-items: center;
   width: 17%;
 }
+
+.logo{
+  max-height: 100%;
+  max-width: 100%;
+  padding: 2% 5%;
+}
+
+a:hover {
+  opacity: 0.5;
+}
+
  /*  DROPDOWN BELOW */
 .options {
-  display: flex;
-  flex-direction: column;
+  display: block;
   width: 50px;
   height: 50px;
 }
@@ -162,38 +173,44 @@ a {
   z-index: 1;
   background-color: white;
   color: #cd823f;
-  top: 0;
-  right: 0;
-  width: 12%;
-  height: 100%;
-  padding-left: 0;
-  padding-bottom: 2%;
+  top: 7%;
+  right: 1%;
+  width: 20vh;
+  border-radius: 25px;
+  padding: 1% 0 2% 0;
   position: absolute;
 }
 
 #close_button {
-  padding: 1% 0 3% 3% ;
+  padding: 1% 0 2% 3% ;
   font-size: 5vh;
   cursor: pointer;
+}
+
+.list_elem:nth-child(2) {
+  padding-bottom: 10%;
+  padding-top: 4%;
+  padding-left: 25% ;
 }
 
 .list_elem {
   padding-top: 0;
   padding-bottom: 4%;
-  padding-left: 30%;
+  padding-left: 10%;
   font-size: 2vh;
 }
 
-.list_elem:nth-child(3) {
-  padding-bottom: 12%;
+.titre_dropdown:first-child {
   padding-top: 4%;
 }
+
 .titre_dropdown {
   font-size: 2.5vh;
   font-weight: 600;
   padding-left: 18%;
   height: 30%;
 }
+
 .bottom_bar {
   display: flex;
   justify-content: center;
@@ -217,16 +234,78 @@ a {
 
 /* fin dropdown */
 
-.logo{
-  max-height: 100%;
-  max-width: 100%;
-  padding: 2% 5%;
+/* TOGGLE SWITCH */
+
+.change_mode {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-top: 3%;
 }
 
-a:hover {
-  opacity: 0.5;
+.symbol_mode {
+  width: 31px;
+  height: 31px;
 }
 
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: black;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
 
 @media screen and (max-width: 480px) {
   
@@ -239,7 +318,6 @@ a:hover {
     padding: 1% 0;
   }
   .logo_coin {
-    height: 100%;
     padding-left: 3%;
     padding-right: 3% ;
   }
@@ -261,7 +339,9 @@ a:hover {
     font-size: 0.8vh;
   }
   #liste_option {
-    height: 50%;
+    top: 4%;
+    right: 2%;
+    width: 40%;
   }
   .options {
     width: 30px;
@@ -272,11 +352,13 @@ a:hover {
     height: inherit;
   }
 
-  #liste_option {
-    width: 40%;
-  }
   .titre_dropdown {
-    font-size: 2vh;
+    font-size: 1.6vh;
+  }
+
+  .list_elem:nth-child(2) {
+    font-size: inherit;
+    padding-bottom: 5%;
   }
 
 }
@@ -312,7 +394,15 @@ a:hover {
 
   #liste_option {
     width: 30%;
+    right: 2%;
   }
+
+
+.symbol_mode {
+  width: 32px;
+  height: 32px;
+}
+
 
 }
 
