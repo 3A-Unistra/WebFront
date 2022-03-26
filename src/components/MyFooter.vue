@@ -89,17 +89,16 @@
     padding-top:160px;
     margin-left:auto;
     margin-right: auto;
-    
 }
 
 .bottom {
-    font-family: Alata;
+    font-family: Arial, Helvetica, sans-serif;
     display: flex;
     flex-direction: column;
     padding: 3% 0% 0% 0%;
     justify-content: center;
     z-index:2;
-    margin-top: 200px;
+    margin-top: 150px;
 }
 
 #liens {
@@ -166,7 +165,6 @@ li:first-child {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    
 }
 
 .logo_store {

@@ -60,29 +60,23 @@ export default {
 
 <!-- style Css -->
 
-<style scoped>
+<style>
     #app{
-        background-image: url("../assets/background.png");
+         background: url("../assets/background.png");
     }
-
+   
     .title{
         text-align: center;  
-    }
-    
-    ul{
-        max-width:500px;
-        background-color:rgb(211, 202, 202);
-        margin-left:auto;
-        margin-right:auto;
     }
    
     /* flexbox formulaire d'inscription */
     .container_inscription{
         display: flex;
         flex-direction: row;
-        margin-top: 100px;
+        margin-top: 20px;
         flex-wrap: wrap;
         justify-content: space-evenly;
+         background: url("../assets/background.png");
     }
     #img_inscription{
         max-width: 300px;

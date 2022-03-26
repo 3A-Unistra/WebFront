@@ -1,4 +1,4 @@
-<template class="forget_page">
+<template>
     <Header></Header>
         <div class="content_forget">
             <section class ="container">
@@ -37,7 +37,10 @@ components: {
 
 <!-- style Css -->
 
-<style scoped>
+<style>
+    #app{
+         background: url("../assets/background.png");
+    }
 
     .container {
         display: flex;
@@ -46,6 +49,7 @@ components: {
     }
 
     .content_forget{
+        font-family: Arial, Helvetica, sans-serif;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -55,7 +59,7 @@ components: {
         border-radius:30px ;
         margin-left: auto;
         margin-right: auto;
-        margin-top: 200px;
+        margin-top: 50px;
         padding: 50px;
 }
 

@@ -66,6 +66,7 @@ export default {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  background: url("../assets/background.png");  
 }
 
 
@@ -77,7 +78,7 @@ h2 {
   font-family: Arial, Helvetica, sans-serif;
   display: flex;
   flex-direction: column;
-  padding-top: 8vh;
+  /* padding-top: 8vh; */
   background: url("../assets/background.png");
 }
 
@@ -99,11 +100,14 @@ section img {
   width: 35%;
 }
 .bloc_texte h2 {
-  font-size: 7vh;
+  font-size: 5.5vh;
+  text-align:justify;
 }
 .bloc_texte p{
   text-align: justify;
   font-size: 3vh;
+  text-align:justify;
+
 }
 
 

@@ -290,6 +290,7 @@ export default {
 }
 
 .bodyL{
+  font-family: Arial, Helvetica, sans-serif;
   display: flex;
   flex-direction: row;
   border-top: 4px solid #5F4339;
