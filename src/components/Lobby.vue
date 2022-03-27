@@ -16,76 +16,30 @@
               </div>
             </div>
 
-            <div class="infos">
-              <img class="pp" src="../assets/grin.png" alt="photo de profil">
-              <div class="txtzone">
-                <div class="pseudo"> Joueur
-                </div>
-                <div class="bt_pret">
-                  <button type="button" class="btn btn-dark btn-sm" disabled>En attente</button>
-                </div>
-              </div>
+          <div class="infos" v-for="gen in gens" :key="gen.pseudo">
+            <img class="pp" v-bind:src="gen.photo" alt="photo de profil">
+            <div class="txtzone">
+              <div class="pseudo">{{gen.pseudo}}</div>
+              <label class="switch prt">
+                <input type="checkbox" class="t_attente">
+                <span class="slider round prts"></span>
+                <span class="labels" data-on="PRÊT!" data-off=""></span>
+              </label>          
             </div>
+          </div>
 
-            <div class="infos">
-              <img class="pp" src="../assets/grin.png" alt="photo de profil">
-              <div class="txtzone">
-                <div class="pseudo"> Joueur
-                </div>
-                <div class="bt_pret">
-                  <button type="button" class="btn btn-dark btn-sm" disabled>En attente</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="infos">
-              <img class="pp" src="../assets/grin.png" alt="photo de profil">
-              <div class="txtzone">
-                <div class="pseudo"> Joueur
-                </div>
-                <div class="bt_pret">
-                  <button type="button" class="btn btn-light btn-sm" disabled>Prêt !</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="infos">
-              <img class="pp" src="../assets/grin.png" alt="photo de profil">
-              <div class="txtzone">
-                <div class="pseudo"> Joueur
-                </div>
-                <div class="bt_pret">
-                  <button type="button" class="btn btn-light btn-sm" disabled>Prêt !</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="infos">
-              <img class="pp" src="../assets/grin.png" alt="photo de profil">
-              <div class="txtzone">
-                <div class="pseudo"> Joueur
-                </div>
-                <div class="bt_pret">
-                  <button type="button" class="btn btn-dark btn-sm" disabled>En attente</button>
-                </div>
-              </div>
-            </div>
-          
           <div class="infosb">
             <div class="titrebot">
               <img class="botbleu" src="../assets/botbleu.png" alt="robot bleu">
-              <h1 class="bot">Bot</h1>
+              <h1 class="bot">BOT</h1>
             </div>
             <div class="diff">
-              <button type="button" class="btn btn-second btn-sm">+</button>
+              <button type="button" class="diff_bot"><img class="chevron" src="../assets/chevrons_gauche.png"></button>
               <div class="lobby_title" id="txtdif">Difficulté du Bot</div>
-              <button type="button" class="btn btn-second btn-sm">-</button>
+              <button type="button" class="diff_bot"><img class="chevron" src="../assets/chevrons_droite.png"></button>
             </div>
-            <div class="bt_lancer bt_bot">
-            <button type="button" class="btn btn-primary btn-lg btn_bot">Ajouter un Bot</button>
-          </div>
-
             
+          <button type="button" class="bt_ajout_bot">Ajouter un BOT <img class="botnoir" src="../assets/botnoir.png"></button>
           </div>
           
           
@@ -106,154 +60,78 @@
             </div>
                         
           </fieldset>
-          <!----------------------TOUR & DUREE--------------------->
+          <!----------------------ENCHERE--------------------->
           
-            <div class="tour"> 
-              <div class="lobby_title">Nombre de tours : </div>
-                  <form>
-                    <div class="form-row align-items-center">
-                      <div class="col-auto my-1">
-                        <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
-                        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                          <option selected>...</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="3">4</option>
-                          <option value="3">5</option>
-                          <option value="3">6</option>
-                          <option value="3">7</option>
-                          <option value="3">8</option>
-                          <option value="3">9</option>
-                          <option value="3">10</option>
-                          <option value="1">11</option>
-                          <option value="2">12</option>
-                          <option value="3">13</option>
-                          <option value="3">14</option>
-                          <option value="3">15</option>
-                          <option value="3">16</option>
-                          <option value="3">17</option>
-                          <option value="3">18</option>
-                          <option value="3">19</option>
-                          <option value="3">20</option>
-                          <option value="3">21</option>
-                          <option value="3">22</option>
-                          <option value="3">23</option>
-                          <option value="3">24</option>
-                          <option value="3">25</option>
+            <div class="toggle"> 
+              <div class="lobby_title">Enchères : </div>
+              <label class="switch">
+                <input type="checkbox">
+                <span class="slider round"></span>
+              </label>
+            </div>
 
-                        </select>
-                      </div>
-                    </div>
+          <!----------------------DOUBLER ARGENT--------------------->
+          
+            <div class="toggle"> 
+              <div class="lobby_title">Doubler l'argent sur la case GO : </div>
+              <label class="switch">
+                <input type="checkbox">
+                <span class="slider round"></span>
+              </label>
+            </div>
+
+          <!----------------------ACHAT 1ER TOUR--------------------->
+            <div class="toggle"> 
+              <div class="lobby_title">Acheter des biens dès le premier tour : </div>
+              <label class="switch">
+                <input type="checkbox">
+                <span class="slider round"></span>
+              </label>
+            </div>
+          <!----------------------TEMPS D'ACTIONS--------------------->
+
+            <div v-if="tempsCheck(tempsAction) == true" class="tour"> 
+              <div class="lobby_title"> Temps d'action par tour : </div>
+                  <form>
+                    <input class="champ" type="text" v-model="tempsAction">
                   </form>
             </div>
-              
-            <div class="tour">
-              <div class="lobby_title">Durée d'un tour (en min): </div>
-              <form>
-                <div class="form-row align-items-center">
-                  <div class="col-auto my-1">
-                    <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
-                    <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                      <option selected>...</option>
-                      <option value="1">∞</option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="3">4</option>
-                      <option value="3">5</option>
-                      <option value="3">6</option>
-                      <option value="3">7</option>
-                      <option value="3">8</option>
-                      <option value="3">9</option>
-                      <option value="3">10</option>               
-                    </select>
-                  </div>
-                </div>
-              </form>
+
+            <div v-else class="tour">
+              <div class="lobby_title"> Temps d'action par tour <span class="cdt">(entre 30s et 120s) </span> : </div>
+                  <form>
+                    <input class="champF" type="text" v-model="tempsAction">
+                  </form>
             </div>
+          <!----------------------TOUR MAX--------------------->
           
+            <div class="tour"> 
+              <div class="lobby_title">Nombre de tour maximum : </div>
+                  <form>
+                    <input class="champ" type="text" v-model="tourMax">
+                  </form>
+            </div>         
         <!----------------------SOMME DEPART--------------------->
-          <div class="sommeDepart">
-            <div class="lobby_title">Somme de départ :</div>
-          </div>
-
+            <div class="tour"> 
+              <div class="lobby_title">Somme de départ : </div>
+                  <form>
+                    <input class="champ" type="text" v-model="sommeDepart">
+                  </form>
+            </div> 
         <!--------------------BT LANCER PARTIE------------------->
-          <div class="bt_lancer">
-            <button type="button" class="btn btn-primary btn-lg">Lancer la partie</button>
-          </div>
-
-          <div class="bt_quitter">
-            <button type="button" class="btn btn-dark">Quitter</button>
-          </div>
-          <div class="taillepage"></div>
+          
+          <button type="button" class="bt_lancer" v-on:click="tempsCheck(tempsAction)"><h1 class="Lancer">Lancer la partie</h1></button>
+          
+          <button type="button" class="bt_quitter">Quitter</button>
         </div>
-                      <!----------------------FOLLOWS--------------------->  
+                      <!----------------------FOLLOWS--------------------->     
         <div class="amis">
           <h1 class="h1Lobby">Amis connectés</h1>
-            <div class="infos">
-              <img class="pp" src="../assets/grin.png" alt="photo de profil"> 
+            <div class="infos" v-for="gen in gens" :key="gen.pseudo">
+            <img class="pp" v-bind:src="gen.photo" alt="photo de profil"> 
               <div class="txtzone">
-                <div class="pseudo"> Joueur
-                </div>
-                <div class="bt_pret">
-                  <button type="button" class="btn btn-light btn-sm" >Inviter</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="infos">
-              <img class="pp" src="../assets/grin.png" alt="photo de profil">
-              <div class="txtzone">
-                <div class="pseudo"> Joueur
-                </div>
-                <div class="bt_pret">
-                  <button type="button" class="btn btn-light btn-sm" >Inviter</button>
-                </div>
-              </div>
-            </div>   
-
-            <div class="infos">
-              <img class="pp" src="../assets/grin.png" alt="photo de profil">
-              <div class="txtzone">
-                <div class="pseudo"> Joueur
-                </div>
-                <div class="bt_pret">
-                  <button type="button" class="btn btn-light btn-sm" >Inviter</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="infos">
-              <img class="pp" src="../assets/grin.png" alt="photo de profil">
-              <div class="txtzone">
-                <div class="pseudo"> Joueur
-                </div>
-                <div class="bt_pret">
-                  <button type="button" class="btn btn-light btn-sm" >Inviter</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="infos">
-              <img class="pp" src="../assets/grin.png" alt="photo de profil">
-              <div class="txtzone">
-                <div class="pseudo"> Joueur
-                </div>
-                <div class="bt_pret">
-                  <button type="button" class="btn btn-light btn-sm" >Inviter</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="infos">
-              <img class="pp" src="../assets/grin.png" alt="photo de profil">
-              <div class="txtzone">
-                <div class="pseudo"> Joueur
-                </div>
-                <div class="bt_pret">
-                  <button type="button" class="btn btn-light btn-sm" >Inviter</button>
-                </div>
+                <div class="pseudo">{{gen.pseudo}}</div>
+                <button type="button" class="bt_inviter" >Inviter</button>
               </div>
             </div>
         </div>
@@ -278,7 +156,66 @@ export default {
     components: {
     Header,
     Footer
-}
+  },
+  data: function() {
+    return { 
+      gens: [
+        {
+            photo : require('../assets/grin.png'),
+            pseudo : 'Joueur 1'
+        },
+        {
+            photo : require('../assets/grin.png'),
+            pseudo : 'Joueur 2'
+        },
+        {
+            photo : require('../assets/grin.png'),
+            pseudo : 'Joueur 3'
+        },
+        {
+            photo : require('../assets/grin.png'),
+            pseudo : 'Joueur 4'
+        },
+        {
+            photo : require('../assets/grin.png'),
+            pseudo : 'Joueur 5'
+        },
+        {
+            photo : require('../assets/grin.png'),
+            pseudo : 'Joueur 6'
+        },
+        {
+            photo : require('../assets/grin.png'),
+            pseudo : 'Joueur 7'
+        },
+        {
+            photo : require('../assets/grin.png'),
+            pseudo : 'Joueur 8'
+        }
+      ],
+
+      tempsAction: '30',
+      tourMax : 2,
+      sommeDepart : 0      
+    }
+  },
+  methods: {
+    tempsCheck(str){
+      var entree = str.split(':'),
+          sec = 0, min = 1,
+          booleen = true;
+
+      while(entree.length > 0){
+        sec += min * parseInt(entree.pop(), 10);
+        min *= 60;
+      }
+      if ( (sec < 30) || (sec > 120) || isNaN(sec)) {
+        booleen = false;
+      }
+      return booleen;
+    }
+
+  }
 }
 
 </script>
@@ -297,7 +234,6 @@ export default {
   border-top: 4px solid #5F4339;
   /*border: 2px solid red;*/
   z-index: 1;
-  
   
 }
 
@@ -338,6 +274,8 @@ fieldset {
   flex-direction: row;
   justify-content: space-between;
   padding: 0 12vh;
+  padding-top: 25px;
+  padding-bottom: 12px;
   text-align: center;
   float: left;
   clear: none;
@@ -350,32 +288,141 @@ label {
   display: block;
   padding: 0px 1em 0px 8px;
 }
+/*Encheres*/
 
-input[type=radio],
-input.radio {
-  float: left;
-  clear: none;
-  margin: 2px 0 0 2px;
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #5F4339;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #5F4339;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
 }
 
 
+.slider.round {
+  border-radius: 34px;
+}
 
-.tour{
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.prt{
+  margin-left: 40%;
+  width: 80px;
+}
+
+.prts:before{
+  left: 19px;
+}
+
+/*ajout texte toggle*/
+
+.prt .labels {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 12px;
+  font-weight: bold;
+  transition: all 0.4s ease-in-out;
+}
+
+.prt .labels::after {
+  content: attr(data-off);
+  position: absolute;
+  right: 5px;
+  color: #4d4d4d;
+  opacity: 1;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+  transition: all 0.4s ease-in-out;
+}
+
+.prt .labels::before {
+  content: attr(data-on);
+  position: absolute;
+  left: 5px;
+  color: #3a3838;
+  opacity: 0;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.4);
+  transition: all 0.4s ease-in-out;
+}
+
+.prt input:checked~.labels::after {
+  opacity: 0;
+}
+
+.prt input:checked~.labels::before {
+  opacity: 1;
+}
+
+.t_attente:checked + .prts {
+  background-color: #d3aa5d;
+}
+
+.t_attente:focus + .prts {
+  box-shadow: 0 0 1px #5F4339;
+}
+
+
+.tour, .toggle{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 0 12vh;
 }
 
+
+
 .sommeDepart{
   padding: 0 12vh;
 }
 
-/*p{
-  display: table-cell;
-  padding: .375rem 1.75rem .375rem .0rem;;
-  vertical-align: middle !important;
-}*/
+
 
 .lobby_title{
   display: table-cell;
@@ -383,18 +430,42 @@ input.radio {
   vertical-align: middle !important;
 }
 
-.btn-primary{
-  color: inherit !important;
-  background-color: rgba(206, 153, 54, 0.78) !important;
-  border-color: #5F4339 !important;
+.Lancer{
+  font-weight: bold;
 }
 
 .bt_lancer{
-  margin-top: 6vh;
+border-radius: 15px;
+height: 12%;
+width: 70%;
+font-weight: bold;
+border: none;
+outline: none;
+background-color: #d3aa5d ;
+color: #6e4d0b;
+margin-top: 10%;
+margin-left: 15%;
+}
+
+.bt_lancer:hover{
+  background-color:#b08d4d;
 }
 
 .bt_quitter{
-  margin-top: 5vh;
+border-radius: 7px;
+height: 60px;
+width: 200px;
+font-weight: bold;
+border: none;
+outline: none;
+margin-top: 5vh;
+margin-left: 36%;
+background-color: #272626;
+font-size: x-large;
+color : #c6c6c6;
+}
+.bt_quitter:hover{
+  background-color:#3a3838;
 }
 
 .taillepage{
@@ -402,8 +473,6 @@ input.radio {
 }
 
 /* Participants */
-
-
 
 .infos{
   border-bottom: 2px solid #F4F2EC;
@@ -423,10 +492,28 @@ input.radio {
 
 
 .pp{
-  /*padding-left: 19%;*/
-  max-height: 70px;
-  max-width:  70px;
+  max-height: 60px;
+  max-width:  60px;
   padding: 0% 4% 4% 0%;
+}
+
+.pseudo{
+  font-weight: bold;
+  margin-right: 40% ;
+}
+
+.bt_inviter{
+  width: 91px;
+  height: 31px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  background-color: #F4F2EC;
+  font-weight: bold;
+  margin-left: 40%;
+}
+.bt_inviter:hover{
+  background-color:#e5e5e5;
 }
 
 .txtzone{
@@ -443,6 +530,9 @@ input.radio {
   flex-direction: row;
   justify-content: space-around;
   padding-top: 6%;
+  padding-bottom: 7%;
+  border-bottom: 2px solid #F4F2EC;
+  font-weight: bold;
 }
 
 .titrebot{
@@ -455,8 +545,9 @@ input.radio {
 .bot{
   max-height: 70px;
   max-width:  70px;
+  font-weight: bold;
   color: #FFE100;
-  padding: 5% 55% 0% 0%;  
+  padding: 2% 55% 0% 0%;  
 }
 
 #txtdif{
@@ -466,15 +557,63 @@ input.radio {
 
 .botbleu{
   padding-left: 6%;
+  width:  80px;
+  height: 60px;
 }
-.bt_bot{
-  margin-top: 6% !important;
-  border-top: #F4F2EC !important;
+
+.botnoir{
+  width: 40px;
+  padding-bottom: 7px;
+}
+
+.bt_ajout_bot{
+  border-radius: 15px;
+  height: 50px;
+  width: 270px;
+  font-weight: bold;
+  border: none;
+  outline: none;
+  background-color: #d3aa5d ;
+  color: black;
+  margin: 10% 0% 10% 5%;
+}
+
+.bt_ajout_bot:hover{
+  background-color:#b08d4d;
 }
 
 .btn_bot{
   color:#212529 !important;
 }
 
+.diff_bot{
+  border-radius: 13px;
+  width: 45px;
+  height: 30px;
+  border: none;
+  outline: none;
+}
+
+
+.chevron{
+  padding-bottom: 50px;
+}
+
+.champ, .champF{
+  background-color: #f4eded;
+  border: #9f8e88;
+  border-bottom: 2px solid #212529 !important;
+  margin: 1% 0% 1% 0%;
+  text-align: center;
+}
+.champF{
+  border: #eb0707;
+  border-bottom: 2px solid #eb0707!important;
+  background-color: #fc8080;
+}
+.cdt{
+  color: #eb0707;
+  font-weight: bold;
+}
 
 </style>
