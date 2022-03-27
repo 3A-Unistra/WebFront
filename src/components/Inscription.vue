@@ -9,21 +9,21 @@
         </div>
 
         <div class="content_inscription">
-            <h1 class="animate__animated animate__bounce animate__repeat-2 inscription_title">INSCRIPTION</h1>
+            <h1 class="animate__animated animate__bounce animate__repeat-2 inscription_title">{{ $t("SIGNUP") }}</h1>
 
             <form class="form_container">
                
-                    <input type="text" class="champs_form" required  id="pseudo" aria-describedby="pseudo" placeholder="Entrer votre pseudo">
+                    <input type="text" class="champs_form" required  id="pseudo" aria-describedby="pseudo" :placeholder="$t('enter_pseudo')">
                 
-                    <input type="text" class="champs_form" required  id="nom" aria-describedby="nom" placeholder="Entrer votre nom">
+                    <input type="text" class="champs_form" required  id="nom" aria-describedby="nom" :placeholder="$t('enter_name')">
                 
-                    <input type="email" class="champs_form" required  id="email" aria-describedby="emailHelp" placeholder="Entrer votre email">
+                    <input type="email" class="champs_form" required  id="email" aria-describedby="emailHelp" :placeholder="$t('enter_mail')">
                 
-                    <input type="password" class="champs_form" required  id="password" placeholder="Entrer votre mot de passe">
-                    
-                    <input type="password" class="champs_form" required  id="password" placeholder="Confirmer votre Mot de passe">
+                    <input type="password" class="champs_form" required  id="password" :placeholder="$t('enter_password')">
 
-                    <button type="button" class="champs_form btn btn-submit btn-lg btn_inscription" >S'inscrire</button>
+                    <input type="password" class="champs_form" required  id="password" :placeholder="$t('confirm_password')">
+                
+                    <button type="button" class="champs_form btn btn-submit btn-lg btn_inscription" >{{ $t("signup") }}</button>
             
             </form>
         </div>

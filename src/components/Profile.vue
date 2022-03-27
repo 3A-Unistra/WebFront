@@ -2,14 +2,18 @@
     <Header></Header>
     <section class="container">
         <section class="pseudo_img">
-            <div class = "titre_nom">Mon compte</div>
+            <div class = "titre_nom">
+                {{ $t("compte") }}
+            </div>
             <section class="pseudo_img">
-               <div class = "img_cropper">
+                <div class = "img_cropper">
                     <img id="img_avatar" src="../assets/AvatarBateau.png" alt="">
                 </div>
 
                 <section class="pseudo_id">
-                    <div>pseudo</div>
+                    <div>
+                        {{ $t("pseudo") }}
+                    </div>
 
                     <div class="id_number">#2243</div>
                 </section>
@@ -21,22 +25,34 @@
                 <div class = "info_titInforma"></div>
             </section>
 
+            <section class ="info_txt">
+                <div>
+                    {{ $t("nom_joueur") }} :
+                </div>
 
-            <section class="info_txt">
-                <div>Nom du joueur :</div>
+                <div>
+                {{ $t("pseudo") }} : 
+                </div>
 
-                <div>Pseudo : </div>
+                 <div>
+                     {{ $t("high_score") }} :
+                </div>
 
-                 <div>Meilleur score :</div>
-
-                <div>Pion favori :</div>
+                <div>
+                    {{ $t("fav_pion") }} :
+                </div>
             </section>
 
             <section class ="info_bouton">
                 <button class="follow"
-                type="button">suivre</button>
+                type="button">
+                {{ $t("suivre") }}
+                </button>
 
-                <button class="report" type="button">signaler</button>
+                <button class="report"
+                type="button">
+                {{ $t("signaler") }}
+                </button>
             </section>
         </section>
     </section>
