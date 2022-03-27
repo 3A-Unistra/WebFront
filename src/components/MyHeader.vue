@@ -39,12 +39,12 @@
               {{ $t("affichage") }}:
             </span>
             <div class="change_mode">
-              <img class="symbol_mode" src="../assets/light-mode.png">
+              <img class="symbol_mode" src="../assets/sun_light.png">
               <label class="switch">
                 <input type="checkbox" checked>
                 <span class="slider round"></span>
               </label>
-              <img class="symbol_mode" src="../assets/dark-mode.png">
+              <img class="symbol_mode" src="../assets/lune_dark.png">
             </div>
           </ul>
         </div>
