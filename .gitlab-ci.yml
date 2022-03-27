@@ -1,20 +1,18 @@
 build site:
-  image: node:6
+  image: node:alpine
   stage: build
   script:
-    - npm install --progress=false
+    - npm install
     - npm run build
   artifacts:
-    expire_in: 1 week
+    expire_in: 1 hour
     paths:
       - dist
 
 unit test:
-  image: node:6
-  stage: test
   script:
-    - npm install --progress=false
-    - npm run unit
+    - npm install
+    - npm run jest
 
 deploy:
   image: alpine
