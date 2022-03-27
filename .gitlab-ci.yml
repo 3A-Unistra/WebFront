@@ -15,6 +15,9 @@ pages:
       - main
 
 unit test:
+  image: node:alpine
+  stage: test
   script:
+    - npm install
     - npm run test
 
