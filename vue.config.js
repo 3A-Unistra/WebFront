@@ -1,7 +1,7 @@
 const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
   transpileDependencies: true,
-  publicPat: process.env.NODE_ENV === 'production' ? '/WebFront/' : '/',
+  publicPath: process.env.NODE_ENV === 'production' ? '/WebFront/' : '/',
   pluginOptions: {
     i18n: {
       locale: 'en',
