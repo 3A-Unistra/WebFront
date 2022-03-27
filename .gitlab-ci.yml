@@ -1,4 +1,4 @@
-Pages:
+pages:
   image: node:alpine
   stage: build
   script:
