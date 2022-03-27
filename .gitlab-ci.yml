@@ -16,6 +16,5 @@ pages:
 
 unit test:
   script:
-    - npm install
     - npm run test
 
