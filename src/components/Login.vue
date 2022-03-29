@@ -103,5 +103,21 @@ export default {
     .form-check-label{
       padding-bottom: 10px;
     }
+
+@media screen and (max-width: 450px) {
+    .img_login{
+        margin-left: 0px;
+    }
+    input{
+        min-width: 300px;
+    }
+    .content_login{
+        max-width: 350px;
+        margin-left: 0px;
+    }
+    .container_login{
+        margin-left: 0px;
+    }
+}
     
 </style>

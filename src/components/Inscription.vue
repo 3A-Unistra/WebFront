@@ -110,5 +110,21 @@ export default {
     .btn_inscription{
         background:#d49b2f;
     }
+
+    @media screen and (max-width: 450px) {
+        .img_inscription{
+            margin-left: 0px;
+        }
+        input{
+            min-width: 300px;
+        }
+        .content_inscription{
+            max-width: 350px;
+            margin-left: 0px;
+        }
+        .container_inscription{
+            margin-left: 0px;
+        }
+}
         
 </style>
