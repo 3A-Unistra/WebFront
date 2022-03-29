@@ -42,7 +42,13 @@
     "titre_texte2": "Pas d’amis ? Sans connexion ? Pas de panique !",
     "titre_texte1": "Jouez à la version strasbourgeoise du célèbre jeu Monopoly",
     "regle": "https://www.regledujeu.fr/monopoly/",
-    "ici": "ici"
+    "ici": "ici",
 
-
+  // page d'après co
+    "deco": "Se déconnecter",
+    "creer":"Créer une partie",
+    "entrer_lien":"Entrez le lien pour rejoindre la partie",
+    "rejoindre":"Rejoindre",
+    "salon":"Salon",
+    "nb_participants":"Nombre de participants : "
 }

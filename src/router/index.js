@@ -59,8 +59,13 @@ const routes = [
     path:'/forget',
     name: 'Forget',
     component: ()=>import ('../components/ForgetPassword.vue')
+  },
+  /* appel du fichier apresCo du component */
+  {
+    path:'/apresCo',
+    name: 'ApresCo',
+    component: ()=>import ('../views/ApresCo.vue')
   }
-  
 ]
 
 const router = createRouter({
