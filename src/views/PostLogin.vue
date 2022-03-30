@@ -39,7 +39,7 @@ export default {
   
   created () {
   },
-     name: 'AfterLoginPage',
+     name: 'PostLoginPage',
     components: {
         Header,
         Footer,

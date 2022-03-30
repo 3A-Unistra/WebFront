@@ -6,7 +6,7 @@
   "signup": "Inscription",
   "profil": "Profil",
   "lobby": "Salon",
-  "afterlogin" : "Après connexion",
+  "postlogin" : "Après connexion",
   "affichage": "Affichage",
   "langue": "Langue",
   // footer 
