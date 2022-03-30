@@ -8,7 +8,7 @@
         <router-link to="/login">{{ $t("login") }}</router-link>
       </div>
       <div class="top_right">
-        <router-link to="/apresCo">apresConnexion</router-link>
+        <router-link to="/after_login">{{ $t("afterlogin") }}</router-link>
         &nbsp;|&nbsp;
         <router-link to="/lobby">
           {{ $t("lobby") }}

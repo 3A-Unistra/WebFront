@@ -1,10 +1,8 @@
 <template>
-<!-- v-for="gen in gens" :key="gen.pseudo" -->
-
-    <div class="loop" v-for="salon in salons" :key="salon.num">
+    <div class="loop" v-for="salon in salons" :key="salon.id_salon">
         <div class="salon">
-            <p class="nom_salon">{{ $t("salon") }} N° {{salon.num}}</p>
-            <p class="nbr_part">{{ $t("nb_participants") }}{{salon.part}}</p>
+            <p class="nom_salon">{{ $t("salon") }} N° {{salon.id_salon}}</p>
+            <p class="nbr_part">{{ $t("nb_participants") }}{{salon.nb_participants}}</p>
             <button class="rej_salon" type="boutton">{{ $t("rejoindre") }}</button>
         </div>
     </div>
@@ -19,36 +17,36 @@ export default {
     return { 
       salons: [
         {
-            num : '1',
-            part: '6'
+            id_salon : '1',
+            nb_participants: '6'
         },
         {
-            num : '2',
-            part: '4'
+            id_salon : '2',
+            nb_participants: '4'
         },
         {
-            num : '3',
-            part: '7'
+            id_salon : '3',
+            nb_participants: '7'
         },
         {
-            num : '4',
-            part: '5'
+            id_salon : '4',
+            nb_participants: '5'
         },
         {
-            num : '5',
-            part: '8'
+            id_salon : '5',
+            nb_participants: '8'
         },
         {
-            num : '6',
-            part: '4'
+            id_salon : '6',
+            nb_participants: '4'
         },
         {
-            num : '7',
-            part: '8'
+            id_salon : '7',
+            nb_participants: '8'
         },
         {
-            num : '8',
-            part: '6'
+            id_salon : '8',
+            nb_participants: '6'
         }
       ]
     }

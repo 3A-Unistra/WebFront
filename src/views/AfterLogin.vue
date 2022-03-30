@@ -39,7 +39,7 @@ export default {
   
   created () {
   },
-     name: 'apresCoPage',
+     name: 'AfterLoginPage',
     components: {
         Header,
         Footer,
@@ -153,7 +153,7 @@ export default {
         width: 70vh;
         height: 50px;
         font-weight: bold;
-        text-align: center;
+        padding-left: 20px;
     }
 
     .opt{

@@ -60,11 +60,11 @@ const routes = [
     name: 'Forget',
     component: ()=>import ('../components/ForgetPassword.vue')
   },
-  /* appel du fichier apresCo du component */
+  /* appel du fichier after login du component */
   {
-    path:'/apresCo',
-    name: 'ApresCo',
-    component: ()=>import ('../views/ApresCo.vue')
+    path:'/after_login',
+    name:'After Login',
+    component: ()=>import ('../views/AfterLogin.vue')
   }
 ]
 
