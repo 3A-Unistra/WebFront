@@ -11,19 +11,19 @@
         <div class="content_inscription">
             <h1 class="animate__animated animate__bounce animate__repeat-2 inscription_title">{{ $t("SIGNUP") }}</h1>
 
-            <form class="form_container">
+            <form @submit.prevent="createAccount" class="form_container">
                
-                    <input type="text" class="champs_form" required  id="pseudo" aria-describedby="pseudo" :placeholder="$t('enter_pseudo')">
+                    <input v-model="login" type="text" class="champs_form" required  id="pseudo" aria-describedby="pseudo" :placeholder="$t('enter_pseudo')">
                 
-                    <input type="text" class="champs_form" required  id="nom" aria-describedby="nom" :placeholder="$t('enter_name')">
+                    <input v-model="name" type="text" class="champs_form" required  id="nom" aria-describedby="nom" :placeholder="$t('enter_name')">
                 
-                    <input type="email" class="champs_form" required  id="email" aria-describedby="emailHelp" :placeholder="$t('enter_mail')">
+                    <input v-model="email" type="email" class="champs_form" required  id="email" aria-describedby="emailHelp" :placeholder="$t('enter_mail')">
                 
-                    <input type="password" class="champs_form" required  id="password" :placeholder="$t('enter_password')">
+                    <input v-model="password" type="password" class="champs_form" required  id="password" :placeholder="$t('enter_password')">
 
-                    <input type="password" class="champs_form" required  id="password" :placeholder="$t('confirm_password')">
+                    <input v-model="verifPassword" type="password" class="champs_form" required  id="password" :placeholder="$t('confirm_password')">
                 
-                    <button type="button" class="champs_form btn btn-submit btn-lg btn_inscription" >{{ $t("signup") }}</button>
+                    <button type="submit" class="champs_form btn btn-submit btn-lg btn_inscription" >{{ $t("signup") }}</button>
             
             </form>
         </div>
@@ -49,6 +49,25 @@ export default {
               definir au niveau du composant qui sera 
               transmis directement au template.*/
       tit: String,
+  },
+  data () {
+      return {
+        login: '',
+        password: '',
+        email: '',
+        name:'',
+        verifPassword: ''
+      }
+  },
+  methods: {
+      createAccount: function () {
+          this.$store.dispatch('createAccount', {
+              email:this.email,
+              name :this.name ,
+              login: this.login,
+              password: this.password,
+          })
+      }
   },
   components: {
     Header,
