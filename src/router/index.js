@@ -59,8 +59,13 @@ const routes = [
     path:'/forget',
     name: 'Forget',
     component: ()=>import ('../components/ForgetPassword.vue')
+  },
+  /* appel du fichier post login du component */
+  {
+    path:'/post_login',
+    name:'Post Login',
+    component: ()=>import ('../views/PostLogin.vue')
   }
-  
 ]
 
 const router = createRouter({
