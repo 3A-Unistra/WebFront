@@ -2,9 +2,15 @@
     <Header></Header>
     <section class="container">
         <section class="pseudo_img">
-            <div class = "titre_nom">
+            <div class="titre_edit">
+                <div class = "titre_nom">
                 {{ $t("compte") }}
+                </div>
+                <button v-if="edit==false" class="bt_edit" type="button" v-on:click="edit=true">
+                    <img class="edit" src="../assets/edit.png">
+                </button>
             </div>
+                    
             <section class="pseudo_img">
                 <div class = "img_cropper">
                     <img id="img_avatar" src="../assets/AvatarBateau.png" alt="">
@@ -12,7 +18,7 @@
 
                 <section class="pseudo_id">
                     <div>
-                        {{ $t("pseudo") }}
+                        {{pseudo}}
                     </div>
 
                     <div class="id_number">#2243</div>
@@ -26,21 +32,49 @@
             </section>
 
             <section class ="info_txt">
-                <div>
-                    {{ $t("nom_joueur") }} :
+                <div class="txt_et_champ">
+                    <div>
+                        {{ $t("nom_joueur") }} :                    
+                    </div>
+                    <form>
+                    <input v-if="edit == false" class="champP" type="text" v-model="nomJoueur" readonly>
+                    <input v-else class="champP" type="text" v-model="nomJoueur" disabled>
+                    </form>
                 </div>
 
-                <div>
-                {{ $t("pseudo") }} : 
+                <div class="txt_et_champ">
+                    <div>
+                        {{ $t("pseudo") }} :                    
+                    </div>
+                    <form>
+                    <input v-if="edit == false" class="champP" type="text" v-model="pseudo" readonly>
+                    <input v-else class="champEdit" type="text" v-model="pseudo">
+                    </form>
                 </div>
 
-                 <div>
-                     {{ $t("high_score") }} :
+                <div class="txt_et_champ">
+                    <div>
+                        {{ $t("high_score") }} :                    
+                    </div>
+                    <form>
+                    <input v-if="edit == false" class="champP" type="text" v-model="meilleurScore" readonly>
+                    <input v-else class="champP" type="text" v-model="meilleurScore" disabled>
+                    </form>
                 </div>
 
-                <div>
-                    {{ $t("fav_pion") }} :
+                <div class="txt_et_champ">
+                    <div>
+                        {{ $t("fav_pion") }} :                    
+                    </div>
+                    <form>
+                    <input v-if="edit == false" class="champP" type="text" v-model="pionFav" readonly>
+                    <input v-else class="champEdit" type="text" v-model="pionFav">
+                    </form>
                 </div>
+                <button v-if="edit == true" class="bt_save" type="button" v-on:click="edit=false">
+                <img class="edit" src="../assets/save.png">
+                </button>
+                <div v-else class="saveplace"></div>                
             </section>
 
             <section class ="info_bouton">
@@ -71,10 +105,19 @@ export default {
   created () {
   },
      name: 'profilePage',
-    components: {
+     components: {
         Header,
         Footer
-}
+    },
+    data() {
+        return {
+            edit: false,
+            nomJoueur:'Nom',
+            pseudo:'Pseudo',
+            meilleurScore: '1234',
+            pionFav: 'Pion 8'
+        }
+    },
 }
 </script>
 
@@ -111,12 +154,53 @@ export default {
     color: #989291;
     }
 
+    .titre_edit, .txt_et_champ{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    }
+
     .titre_nom {
     color: #977637;
     font-size: 35px;
     text-decoration: underline;
     text-underline-offset: 10px;
     text-decoration-thickness: 3px;
+    }
+
+    .bt_edit, .bt_save{
+    width:  30px;
+    height: 30px;    
+    outline: none;
+    border-radius: 50px;
+    border: 2px solid #624d24;
+    
+    }
+
+    .bt_edit{
+    margin-top: 20px;
+    margin-right: 190px;
+    background-color: #edebe9;
+    }
+
+    .bt_save{
+    margin-left: 90%;
+    background-color: #c6c6c6;
+    }
+
+    .bt_edit:hover, .bt_save:hover{
+    background-color:#a19375;
+    }
+
+    .saveplace{
+    width: 30px;
+    height: 30px;
+    }
+
+    .edit{
+    width:  20px;
+    height: 20px;
+    padding-bottom: 2px;
     }
 
     .template {
@@ -203,6 +287,19 @@ export default {
 
     .report{
     background-color:#756e6e
+    }
+
+    .champP, .champEdit{
+    width: 30ch;
+    margin-right: 12vh;    
+    background-color: #c6c6c6;
+    padding-left: 20px;
+    font-weight: bold;
+    border: none;
+    }
+
+    .champEdit{
+    border-bottom: 1px solid #222121;
     }
 
 </style>
