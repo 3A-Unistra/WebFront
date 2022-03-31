@@ -33,7 +33,7 @@
 
 import Footer from '../components/MyFooter'
 import Header from '../components/MyHeader'
-import Salon  from '../components/MySalon.vue'
+import Salon  from '../components/SalonComponent.vue'
 
 export default {
   
