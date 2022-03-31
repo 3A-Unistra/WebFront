@@ -67,6 +67,9 @@ export default {
               login: this.login,
               password: this.password,
           })
+            this.$router.push('/'); 
+
+
       }
   },
   computed: {
