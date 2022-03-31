@@ -9,7 +9,7 @@
                 <li class="menu_title"> Menu </li>
                 <hr>
                 <li class="menu_info"><router-link class="menu_ff" to="/">{{ $t("home") }}</router-link></li>
-                <li class="menu_info"><router-link class="menu_ff" to="/inscription">{{ $t("signup") }}/{{ $t("login") }}</router-link></li>
+                <li class="menu_info"><router-link class="menu_ff" to="/signup">{{ $t("signup") }}/{{ $t("login") }}</router-link></li>
                 <li class="menu_info"><router-link class="menu_ff" to="/profile">{{ $t("profil") }}</router-link></li>
                 <li class="menu_info"><router-link class="menu_ff" to="/Lobby">{{ $t("lobby") }}</router-link></li>
             </ul>

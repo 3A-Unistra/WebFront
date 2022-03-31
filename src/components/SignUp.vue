@@ -44,7 +44,7 @@ import Header from './MyHeader'
 
 
 export default {
-    name: 'inscriptionPage',
+    name: 'SignUpPage',
   props: {/* Props  est un attribut que vous pouvez 
               definir au niveau du composant qui sera 
               transmis directement au template.*/

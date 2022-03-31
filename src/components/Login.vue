@@ -39,7 +39,7 @@ export default {
   
   created () {
   },
-     name: 'loginPage',
+     name: 'LoginPage',
      components: {
         Header,
         Footer

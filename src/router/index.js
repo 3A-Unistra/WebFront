@@ -26,9 +26,9 @@ const routes = [
   /**  @ appel des fichiers du component */
   /* appel du fichier inscription du component */
   {
-    path:'/inscription',
-    name: 'Inscription',
-    component: ()=>import ('../components/Inscription.vue')
+    path:'/signup',
+    name: 'SignUp',
+    component: ()=>import ('../components/SignUp.vue')
   },
 
   {
@@ -51,8 +51,8 @@ const routes = [
   },
   {
     path:'/',
-    accueil: 'Accueil',
-    component: ()=>import ('../components/Accueil.vue')
+    accueil: 'Home',
+    component: ()=>import ('../components/Home.vue')
   },
   /* appel du fichier MP forget du component */
   {

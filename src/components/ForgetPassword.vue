@@ -23,7 +23,7 @@
 import Footer from './MyFooter'
 import Header from './MyHeader'
 export default {
-    name: 'forgetPage',
+    name: 'ForgetPage',
   props: {
       tit: String,
   },
