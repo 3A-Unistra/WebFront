@@ -23,7 +23,7 @@
 
                     <input v-model="verifPassword" type="password" class="champs_form" required  id="password" :placeholder="$t('confirm_password')">
                 
-                    <button type="submit" class="champs_form btn btn-submit btn-lg btn_inscription" >{{ $t("signup") }}</button>
+                    <button :disabled="PasswordDontMatch" type="submit" class="champs_form btn btn-submit btn-lg btn_inscription" >{{ $t("signup") }}</button>
             
             </form>
         </div>
@@ -68,6 +68,16 @@ export default {
               password: this.password,
           })
       }
+  },
+  computed: {
+        PasswordDontMatch: function () {
+          if (this.password == this.verifPassword) {
+              return false;
+          } else {
+              return true;
+          }
+          
+      },
   },
   components: {
     Header,
