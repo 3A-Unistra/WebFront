@@ -1,18 +1,17 @@
-import { createStore } from "vuex";
-console.log(process.env) // remove this after you've confirmed it working
+import { createStore/*, storeKey*/ } from "vuex";
 
 const axios = require('axios');
+import router from '../router/index.js';
 
 export default createStore ({
     state: {
-        username1: "dd",
-        username2: ""
+        username1: "",
+        loggedin: false
     },
     actions: {
         createAccount:({commit},userInfos) => {
             commit;
-            console.log(userInfos);
-            axios.post(process.env.PATH_API,userInfos, {
+            axios.post('http://localhost:3000/api/users/register',userInfos, {
                 
             headers: {
                     'Content-Type': 'application/json'
@@ -20,6 +19,7 @@ export default createStore ({
             })
             .then(function (response) {
                 console.log(response);
+                router.push('/Login');
             })
             .catch(function(error) {
                 console.log(error);
@@ -31,8 +31,13 @@ export default createStore ({
 
     },
     mutations: {
-        rentreusrname(state, newusername) {
+        rentreusrname(state, newusername)
+        {
             state.username1 = newusername;     
+        },
+        gettingin(state,loggedin)
+        {
+            state.loggedin = loggedin;
         }
     },
     modules: {
