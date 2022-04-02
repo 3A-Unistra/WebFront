@@ -1,4 +1,5 @@
 import { createStore } from "vuex";
+console.log(process.env) // remove this after you've confirmed it working
 
 const axios = require('axios');
 
@@ -11,7 +12,7 @@ export default createStore ({
         createAccount:({commit},userInfos) => {
             commit;
             console.log(userInfos);
-            axios.post('http://localhost:3000/api/users/register',userInfos, {
+            axios.post(process.env.PATH_API,userInfos, {
                 
             headers: {
                     'Content-Type': 'application/json'
