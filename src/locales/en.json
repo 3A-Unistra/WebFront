@@ -34,8 +34,11 @@
   "nom_joueur": "Player name",
   "high_score": "High-score",
   "fav_pion": "Favorite pawn",
-  "suivre": "follow",
-  "signaler": "report",
+  "editer": "Edit",
+  "enregistrer":"Save changes",
+  "supprimer":"Delete account",
+  "suivre": "Follow",
+  "signaler": "Report",
   // page accueil
   "texte2": "Test yourself against artificial intelligence specially designed to play with the most isolated among us. Even the farthest reaches of the Ardèche will not prevent you from playing your favorite board game. Find out more about the rules of the game",
   "texte1": "The 3A team of the Computer Science faculty of Strasbourg has developed for you the Alsatian version of the most famous board game in the world. Strip opponents from all over the world by investing in the properties of the European capital. Play online with your family or friends, and let them discover the city of Strasbourg through exciting games!",

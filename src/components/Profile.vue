@@ -3,20 +3,24 @@
     <section class="container">
         <section class="pseudo_img">
             <div class="titre_edit">
-                <div class = "titre_nom">
+                <div v-if="monCompte==true" class = "titre_nom">
                 {{ $t("compte") }}
                 </div>
-                <button v-if="edit==false" class="bt_edit" type="button" v-on:click="edit=true">
-                    <img class="edit" src="../assets/edit.png">
-                </button>
+                <div v-else class="titre_nom">
+                    <div>
+                        {{pseudo}}
+                    </div>
+
+                    <div class="id_number">#2243</div>
+                </div>
             </div>
                     
             <section class="pseudo_img">
                 <div class = "img_cropper">
                     <img id="img_avatar" src="../assets/AvatarBateau.png" alt="">
                 </div>
-
-                <section class="pseudo_id">
+            
+                <section v-if="monCompte==true" class="pseudo_id">
                     <div>
                         {{pseudo}}
                     </div>
@@ -70,21 +74,29 @@
                     <input v-if="edit == false" class="champP" type="text" v-model="pionFav" readonly>
                     <input v-else class="champEdit" type="text" v-model="pionFav">
                     </form>
-                </div>
-                <button v-if="edit == true" class="bt_save" type="button" v-on:click="edit=false">
-                <img class="edit" src="../assets/save.png">
-                </button>
-                <div v-else class="saveplace"></div>                
+                </div>              
             </section>
 
             <section class ="info_bouton">
-                <button class="follow"
+                <button v-if="monCompte == true" class="bt_edit" type="button" v-on:click="edit=true" :hidden="edit==true">
+                {{$t("editer")}}
+                </button>
+
+                <button v-else class="follow"
                 type="button">
                 {{ $t("suivre") }}
                 </button>
 
-                <button class="report"
-                type="button">
+                
+                <button v-if="monCompte == true" class="bt_save" type="button" v-on:click="edit=false" :hidden="edit==false">
+                {{$t("enregistrer")}}
+                </button>
+
+                <button v-if="monCompte == true" class="bt_supp" type="button" :hidden="edit==true">
+                {{$t("supprimer")}}
+                </button>
+
+                <button v-else class="report" type="button" v-on:click="edit=false">
                 {{ $t("signaler") }}
                 </button>
             </section>
@@ -111,6 +123,7 @@ export default {
     },
     data() {
         return {
+            monCompte: true,
             edit: false,
             nomJoueur:'Nom',
             pseudo:'Pseudo',
@@ -161,46 +174,13 @@ export default {
     }
 
     .titre_nom {
+    display: flex;
+    flex-direction: row;
     color: #977637;
     font-size: 35px;
     text-decoration: underline;
     text-underline-offset: 10px;
     text-decoration-thickness: 3px;
-    }
-
-    .bt_edit, .bt_save{
-    width:  30px;
-    height: 30px;    
-    outline: none;
-    border-radius: 50px;
-    border: 2px solid #624d24;
-    
-    }
-
-    .bt_edit{
-    margin-top: 20px;
-    margin-right: 190px;
-    background-color: #edebe9;
-    }
-
-    .bt_save{
-    margin-left: 90%;
-    background-color: #c6c6c6;
-    }
-
-    .bt_edit:hover, .bt_save:hover{
-    background-color:#a19375;
-    }
-
-    .saveplace{
-    width: 30px;
-    height: 30px;
-    }
-
-    .edit{
-    width:  20px;
-    height: 20px;
-    padding-bottom: 2px;
     }
 
     .template {
@@ -256,7 +236,7 @@ export default {
     gap: 50px;
     }
 
-    .follow, .report {
+    .follow, .report, .bt_edit, .bt_save, .bt_supp {
     border-radius: 7px;
     height: 40px;
     width: 200px;
@@ -265,27 +245,27 @@ export default {
     outline: none;
     }
 
-    .follow:hover {
+    .follow:hover, .bt_edit:hover {
     background-color:#967027 ;
     }
 
-    .follow:active {
+    .follow:active, .bt_edit:active {
     background-color:#694f1b ;
     }
 
-    .report:hover {
+    .report:hover, .bt_save:hover, .bt_supp:hover {
     background-color:#504b4b;
     }
 
-    .report:active {
+    .report:active, .bt_save:active, .bt_supp:active {
     background-color:#222121;
     }
 
-    .follow{
+    .follow, .bt_edit{
     background-color:#ca9735
     }
 
-    .report{
+    .report, .bt_save, .bt_supp{
     background-color:#756e6e
     }
 
