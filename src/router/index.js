@@ -19,7 +19,7 @@ const routes = [
   },
   {
     name: 'Forget',
-    path: '/forget',
+    path: '/Forget',
     component: Forget,
   },
   
