@@ -16,7 +16,7 @@
               </div>
             </div>
 
-          <div class="infos" v-for="gen in gens" :key="gen.pseudo">
+          <div class="infos" v-for="gen in gens" :key="gen.pseudo" @click="sameProfil(gen.pseudo)">
             <img class="pp" v-bind:src="gen.photo" alt="photo de profil">
             <div class="txtzone">
               <div class="pseudo">{{gen.pseudo}}</div>
@@ -213,7 +213,15 @@ export default {
         booleen = false;
       }
       return booleen;
+    },
+    checkSameProfil(nameProfile) {
+      if (nameProfile == this.$store.state.username) {
+          this.$store.commit('checkingSameProfile',true);       
+      } else {
+          this.$store.commit('checkingSameProfile',false);
+      }
     }
+
 
   }
 }

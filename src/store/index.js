@@ -5,8 +5,9 @@ import router from '../router/index.js';
 
 export default createStore ({
     state: {
-        username1: "",
-        loggedin: false
+        username: "",
+        loggedin: false,
+        sameProfile: true
     },
     actions: {
         createAccount:({commit},userInfos) => {
@@ -24,7 +25,24 @@ export default createStore ({
             .catch(function(error) {
                 console.log(error);
             });
-        } 
+        },
+        checkLogin:({commit},userInfos) => {
+            commit;
+            axios.post('http://localhost:3000/api/users/login',userInfos, {
+                
+            headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(function (response) {
+                console.log(response);
+                router.push('/profile');
+
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+        }  
 
     },
     getters: {
@@ -33,11 +51,15 @@ export default createStore ({
     mutations: {
         rentreusrname(state, newusername)
         {
-            state.username1 = newusername;     
+            state.username = newusername;     
         },
         gettingin(state,loggedin)
         {
             state.loggedin = loggedin;
+        },
+        checkingSameProfile(state,newSameProfile)
+        {
+            state.sameProfile = newSameProfile;
         }
     },
     modules: {

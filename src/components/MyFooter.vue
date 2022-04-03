@@ -58,7 +58,7 @@
             <!-- Copyright -->
             <div class="text-center p-3 copy">
                 © 2022 Copyright:
-                <a class="strasspoly_copy" href="https://mdbootstrap.com/">STRASSOPOLY GAME</a>
+                <a class="strasspoly_copy" >STRASSOPOLY GAME</a>
             </div>
             <!-- Copyright -->
         </div>
