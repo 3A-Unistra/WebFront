@@ -4,19 +4,8 @@
                       <!---------------------PARTICIPANTS-------------------->
         <div class="part">
           <h1 class="h1Lobby">Participants</h1>
-            <div class="infos">
-              <img class="pp" src="../assets/grin.png" alt="photo de profil">
-              <div class="txtzone">
-                <div class="pseudo">
-                  {{ $t("nav.player") }}
-                </div>
-                <div class="bt_pret">
-                  <button type="button" class="btn btn-light btn-sm" disabled>Prêt !</button>
-                </div>
-              </div>
-            </div>
 
-          <div class="infos" v-for="gen in gens" :key="gen.pseudo" @click="sameProfil(gen.pseudo)">
+          <div class="infos" v-for="gen in gens" :key="gen.pseudo" >
             <img class="pp" v-bind:src="gen.photo" alt="photo de profil">
             <div class="txtzone">
               <div class="pseudo">{{gen.pseudo}}</div>
@@ -127,7 +116,7 @@
                       <!----------------------FOLLOWS--------------------->     
         <div class="amis">
           <h1 class="h1Lobby">Amis connectés</h1>
-            <div class="infos" v-for="gen in gens" :key="gen.pseudo">
+            <div class="infos" v-for="gen in gens" :key="gen.pseudo" >
             <img class="pp" v-bind:src="gen.photo" alt="photo de profil"> 
               <div class="txtzone">
                 <div class="pseudo">{{gen.pseudo}}</div>

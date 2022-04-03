@@ -36,7 +36,7 @@ export default createStore ({
             })
             .then(function (response) {
                 console.log(response);
-                router.push('/profile');
+                router.push('/Lobby');
 
             })
             .catch(function(error) {

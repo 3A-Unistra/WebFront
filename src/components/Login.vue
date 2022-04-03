@@ -58,8 +58,6 @@ export default {
           }),
             this.$store.commit('rentreusrname',this.login); // on garde le nom pour comparer aux autres profils
             this.$store.commit('gettingin',true); // on passe en état connecté
-            console.log(this.$store.state.loggedin);
-            console.log(this.$store.state.username);
         }
     }
 }
