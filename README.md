@@ -1,3 +1,9 @@
+# Installation package front
+
+`npm install vuex`
+
+`npm install axios`
+
 # Utilisation Git
 
 
