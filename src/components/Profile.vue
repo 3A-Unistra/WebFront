@@ -77,7 +77,7 @@
                 </div>              
             </section>
 
-            <section class ="info_bouton">
+            <form class ="info_bouton" @submit.prevent="changeNamePawn">
                 <button v-if="monCompte == true" class="bt_edit" type="button" v-on:click="edit=true" :hidden="edit==true">
                 {{$t("editer")}}
                 </button>
@@ -88,7 +88,7 @@
                 </button>
 
                 
-                <button v-if="monCompte == true" class="bt_save" type="button" v-on:click="edit=false" :hidden="edit==false">
+                <button v-if="monCompte == true" class="bt_save" type="submit" v-on:click="edit=false" :hidden="edit==false">
                 {{$t("enregistrer")}}
                 </button>
 
@@ -99,7 +99,7 @@
                 <button v-else class="report" type="button" v-on:click="edit=false">
                 {{ $t("signaler") }}
                 </button>
-            </section>
+            </form>
         </section>
     </section>
     <Footer></Footer>
@@ -128,7 +128,14 @@ export default {
             nomJoueur:'Nom',
             pseudo:'Pseudo',
             meilleurScore: '1234',
-            pionFav: 'Pion 8'
+            pionFav: 'Pion 8',
+            enattendantstatepointusername: 'ah'
+        }
+    },
+    methods: {
+        changeNamePawn: function() {
+            console.log(this.pseudo);
+            
         }
     },
 }
