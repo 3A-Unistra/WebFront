@@ -70,11 +70,20 @@ export default {
   
   created () {
   },
-     name: 'profilePage',
+    name: 'profilePage',
     components: {
         Header,
         Footer
-}
+    }/*,
+    computed: {
+        verifLoggedIn: function() {
+            if (!this.$store.state.loggedin) {
+                this.$router.push('/');
+                return 0;
+            }
+            return 0;
+        }
+    }*/
 }
 </script>
 

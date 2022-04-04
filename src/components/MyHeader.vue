@@ -3,12 +3,12 @@
     <div class="top_bar">
       <img class="logo_coin" src="../assets/logo_couleur.png" alt="logo">
       <div class="login">
-        <router-link to="/inscription">{{ $t("signup") }}</router-link>
+        <router-link to="/signup">{{ $t("signup") }}</router-link>
         &nbsp;/&nbsp;
         <router-link to="/login">{{ $t("login") }}</router-link>
       </div>
       <div class="top_right">
-        <router-link to="/post_login">{{ $t("postlogin") }}</router-link>
+        <router-link to="/post_login">postlogin</router-link>
         &nbsp;|&nbsp;
         <router-link to="/lobby">
           {{ $t("lobby") }}
