@@ -31,8 +31,8 @@
   "to_login": "Log in",
   // page profil
   "compte": "My account",
-  "pseudo": "Username",
-  "nom_joueur": "Player name",
+  "pseudo": "Login",
+  "nom_joueur": "Username",
   "high_score": "High-score",
   "fav_pion": "Favorite pawn",
   "suivre": "follow",
