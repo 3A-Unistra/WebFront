@@ -31,10 +31,6 @@
         </section>
 
         <section class ="information">
-            <section class = "test">
-                <div class = "info_titInforma"></div>
-            </section>
-
             <section class ="info_txt">
                 <div class="txt_et_champ">
                     <div>
@@ -126,16 +122,19 @@ export default {
             monCompte: true,
             edit: false,
             nomJoueur:'Nom',
-            pseudo:'Pseudo',
+            pseudo:this.$store.state.username,
             meilleurScore: '1234',
-            pionFav: 'Pion 8',
-            enattendantstatepointusername: 'ah'
+            pionFav: '8',
         }
     },
     methods: {
         changeNamePawn: function() {
             console.log(this.pseudo);
-            
+            this.$store.dispatch('changeNamePawn',{
+                username:this.$store.state.username,
+                login:this.pseudo,
+                pawn:this.pionFav
+            })
         }
     },
 }

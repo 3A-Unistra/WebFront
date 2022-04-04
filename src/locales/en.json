@@ -6,6 +6,7 @@
   "signup": "Sign up",
   "profil": "Profile",
   "lobby": "Lobby",
+  "Postlogin" : "Post login",
   "affichage": "Display",
   "langue": "Language",
   // footer 
@@ -45,5 +46,12 @@
   "titre_texte2": "No friend ? No connection ? No problem !",
   "titre_texte1": "Play the Strasbourg version of the famous board game ",
   "regle": "https://www.ultraboardgames.com/monopoly/game-rules.php",
-  "ici": "here"
+  "ici": "here",
+  // page d'après co
+  "deco": "Disconnect",
+  "creer": "Create new lobby",
+  "entrer_lien": "Enter a link to join a lobby",
+  "rejoindre": "Join",
+  "salon": "Room",
+  "nb_participants": "Number of players: "
 }

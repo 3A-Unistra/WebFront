@@ -10,19 +10,19 @@
         <div class="content_login">
             <h1 class="animate__animated animate__bounce animate__repeat-2 login_title">{{ $t("LOGIN") }}</h1>
             
-            <form class="form_container">
+            <form @submit.prevent="checkName" class="form_container">
                
-                    <input type="text" class="champs_form" required  id="pseudo" aria-describedby="pseudo" :placeholder="$t('enter_pseudo')">
+                    <input  v-model="name" type="text" class="champs_form" required  id="pseudo" aria-describedby="pseudo" :placeholder="$t('enter_pseudo')">
                                                 
-                    <input type="password" class="champs_form" required  id="password" :placeholder="$t('enter_password')">
+                    <input v-model="password" type="password" class="champs_form" required  id="password" :placeholder="$t('enter_password')">
+                    
                     <div class="form-check">
                       <input class="form-check-input " type="radio" checked disabled>
                        
-                      <label class="form-check-label"><router-link to="/forget">{{ $t("forgot_passw") }}</router-link> </label>
-                      
+                      <label class="form-check-label"><router-link to="/forget">{{ $t("forgot_passw") }}</router-link> </label> 
                     </div>
                     
-                    <button type="button" class="champs_form btn btn-submit btn-lg btn_login" >{{ $t("to_login") }}</button>
+                    <button type="submit" class="champs_form btn btn-submit btn-lg btn_login" >{{ $t("to_login") }}</button>
             </form>
         </div>
       </div>
@@ -39,12 +39,27 @@ export default {
   
   created () {
   },
-     name: 'loginPage',
+     name: 'LoginPage',
      components: {
         Header,
         Footer
     },
-
+    data () {
+      return {
+        name: '',
+        password: ''
+      }
+  },
+    methods: {
+        checkName: function() {
+            this.$store.dispatch('checkName', {
+              name: this.name,
+              password: this.password,
+          }),
+            this.$store.commit('rentreusrname',this.name); // on garde le nom pour comparer aux autres profils
+            this.$store.commit('gettingin',true); // on passe en état connecté
+        }
+    }
 }
 
 </script>
