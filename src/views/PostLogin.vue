@@ -3,9 +3,8 @@
     
     <section class="container">
         <section class="opt">
-            <button @click="logout" class="deconnection" type="boutton">{{ $t("deco") }}
-                <img class="icone" src="../assets/deco.png" alt="icone deco">
-            </button>
+            <LogOutButton></LogOutButton>
+            
             <button class="creer_partie" type="boutton">{{ $t("creer") }}
                 <img class="icone" src="../assets/reseau.png" alt="icone reseau">
             </button>        
@@ -31,6 +30,7 @@
 <!-- Script JS -->
 <script>
 
+import LogOutButton from '../components/LogOutButton'
 import Footer from '../components/MyFooter'
 import Header from '../components/MyHeader'
 import Salon  from '../components/SalonComponent.vue'
@@ -43,7 +43,8 @@ export default {
     components: {
         Header,
         Footer,
-        Salon
+        Salon,
+        LogOutButton
     },
     methods: {
         logout: function() {
