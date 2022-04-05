@@ -6,6 +6,8 @@ import router from '../router/index.js';
 export default createStore ({
     state: {
         username: "",
+        login: "",
+        piece: 0,
         loggedin: false,
         sameProfile: true
     },
@@ -49,6 +51,14 @@ export default createStore ({
 
     },
     mutations: {
+        clearUserData(state)
+        {
+            state.username = "",
+            state.login = "",
+            state.piece = 0,
+            state.loggedin = false
+
+        },
         rentreusrname(state, newusername)
         {
             state.username = newusername;     

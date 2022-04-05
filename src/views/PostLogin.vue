@@ -3,7 +3,7 @@
     
     <section class="container">
         <section class="opt">
-            <button class="deconnection" type="boutton">{{ $t("deco") }}
+            <button @click="logout" class="deconnection" type="boutton">{{ $t("deco") }}
                 <img class="icone" src="../assets/deco.png" alt="icone deco">
             </button>
             <button class="creer_partie" type="boutton">{{ $t("creer") }}
@@ -44,7 +44,13 @@ export default {
         Header,
         Footer,
         Salon
-}       
+    },
+    methods: {
+        logout: function() {
+            this.$store.commit('clearUserData'),
+            this.$router.push('/')
+        }
+    }       
 }
 </script>
 
