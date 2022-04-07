@@ -48,6 +48,7 @@
               </label>
               <img class="symbol_mode" src="../assets/lune_dark.png">
             </div>
+            <LogOutButton style="margin-bottom: 0;"></LogOutButton>
           </ul>
         </div>
       </div>
@@ -60,9 +61,14 @@
 </template>
 
 <script>
+import LogOutButton from '../components/LogOutButton'
+
 export default {        
     mounted() {
       this.dropdown_options();
+    },
+    components: {
+      LogOutButton
     },
     methods: {
         dropdown_options() {

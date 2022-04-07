@@ -18,6 +18,7 @@
   "aide": "Aide",
   "propagande1": "Télechargez notre Jeu mobile et profitez d'une",
   "propagande2": "expérience unique où que vous soyez",
+
   // page inscription connexion
   "SIGNUP": "INSCRIPTION",
   "LOGIN": "CONNEXION",
@@ -46,10 +47,31 @@
     "ici": "ici",
 
   // page d'après co
-    "deco": "Se déconnecter",
+    "deco": "Déconnexion",
     "creer":"Créer une partie",
     "entrer_lien":"Entrez le lien pour rejoindre la partie",
     "rejoindre":"Rejoindre",
     "salon":"Salon",
-    "nb_participants":"Nombre de participants : "
+    "nb_participants":"Nombre de participants : ",
+
+  // page lobby
+    "participants": "Participants",
+    "difficulte_bot":"Difficulté du BOT",
+    "ajout_bot": "Ajouter un BOT",
+    "param_salon": "Paramètres du Salon",
+    "visibilite": "Visibilité :",
+    "public": "Public",
+    "prive": "Privé",
+    "encheres":"Enchères",
+    "double_sur_depart":"Doubler l'Argent sur la Case GO :",
+    "achat_prem_tour": "Acheter des Biens dès le Premier Tour :",
+    "temps_tour": "Temps d'Action par Tour :",
+    "duree_exemple": "(entre 30 et 120s) :",
+    "nbr_tour_max": "Nombre de Tour Maximum :",
+    "somme_depart": "Somme de Départ :",
+    "lancer_partie": "Lancer la Partie",
+    "quitter":"Quitter",
+    "amis_co":"Amis Connectés",
+    "inviter":"Inviter"
+
 }
