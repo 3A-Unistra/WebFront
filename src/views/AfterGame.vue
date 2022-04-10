@@ -83,6 +83,24 @@ export default {
                     score:89,
                     ranking: 5
                 },
+                {
+                    profilePicture:"",
+                    namePlayer:"",
+                    score:89,
+                    ranking: 5
+                },
+                {
+                    profilePicture:"",
+                    namePlayer:"",
+                    score:89,
+                    ranking: 5
+                },
+                {
+                    profilePicture:"",
+                    namePlayer:"",
+                    score:89,
+                    ranking: 5
+                },
             ]
         }
     }
