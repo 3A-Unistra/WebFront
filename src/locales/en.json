@@ -70,5 +70,14 @@
   "lancer_partie": "Start the Game",
   "quitter":"Exit",
   "amis_co":"Friends Online",
-  "inviter":"Invite"
+  "inviter":"Invite",
+
+  // page après game
+
+  "return_lobby":"Go back to lobby",
+  "resultat":"Game result",
+  "score": "SCORE",
+  "rang": "RANKING",
+  "joueurs": "PLAYER"
+
 }

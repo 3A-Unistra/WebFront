@@ -9,7 +9,8 @@ export default createStore ({
         login: "",
         piece: 0,
         loggedin: false,
-        sameProfile: true
+        sameProfile: true,
+        numberPlayers: 4
     },
     actions: {
         createAccount:({commit},userInfos) => {

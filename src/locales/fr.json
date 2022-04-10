@@ -72,6 +72,13 @@
     "lancer_partie": "Lancer la Partie",
     "quitter":"Quitter",
     "amis_co":"Amis Connectés",
-    "inviter":"Inviter"
+    "inviter":"Inviter",
 
+  // page après game
+
+  "return_lobby":"Revenir au lobby",
+  "resultat":"Résultat de la partie",
+  "score": "SCORE",
+  "rang": "RANG",
+  "joueurs": "JOUEUR"
 }
