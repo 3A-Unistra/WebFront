@@ -10,7 +10,8 @@ export default createStore ({
         piece: 0,
         loggedin: false,
         sameProfile: true,
-        numberPlayers: 4
+        numberPlayers: 4,
+        IsFollowing: true
     },
     actions: {
         createAccount:({commit},userInfos) => {

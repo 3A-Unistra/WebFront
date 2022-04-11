@@ -44,9 +44,14 @@
             </section>
 
             <section class ="info_bouton">
-                <button class="follow"
+                <button  v-if="checkFollow()==true" class="follow"
                 type="button">
                 {{ $t("suivre") }}
+                </button>
+
+                <button  v-else class="follow"
+                type="button">
+                {{ $t("unfollow") }}
                 </button>
 
                 <button class="report"
@@ -74,16 +79,12 @@ export default {
     components: {
         Header,
         Footer
-    }/*,
-    computed: {
-        verifLoggedIn: function() {
-            if (!this.$store.state.loggedin) {
-                this.$router.push('/');
-                return 0;
-            }
-            return 0;
+    },
+    methods:{
+        checkFollow: function() {
+            return true;
         }
-    }*/
+    }
 }
 </script>
 
