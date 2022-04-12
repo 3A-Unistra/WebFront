@@ -8,7 +8,7 @@
           <div class="infos" v-for="gen in gens" :key="gen.pseudo" >
             <img class="pp" v-bind:src="gen.photo" alt="photo de profil">
             <div class="txtzone">
-              <div class="pseudo">{{gen.pseudo}}</div>
+              <div class="pseudo" @click="checkFollow(gen.pseudo)">{{gen.pseudo}}</div>
               <label class="switch prt">
                 <input type="checkbox" class="t_attente">
                 <span class="slider round prts"></span>
@@ -119,7 +119,7 @@
             <div class="infos" v-for="gen in gens" :key="gen.pseudo" >
             <img class="pp" v-bind:src="gen.photo" alt="photo de profil"> 
               <div class="txtzone">
-                <div class="pseudo">{{gen.pseudo}}</div>
+                <div class="pseudo" @click="checkFollow(gen.pseudo)">{{gen.pseudo}}</div>
                 <button type="button" class="bt_inviter" >{{ $t("inviter") }}</button>
               </div>
             </div>
@@ -151,7 +151,7 @@ export default {
       gens: [
         {
             photo : require('../assets/grin.png'),
-            pseudo : 'Joueur 1'
+            pseudo : 'pla'
         },
         {
             photo : require('../assets/grin.png'),
@@ -209,9 +209,15 @@ export default {
       } else {
           this.$store.commit('checkingSameProfile',false);
       }
+    },
+    checkFollow: function(pseudoClickedOn) {
+      this.$store.commit('updatePseudoClickedOn',pseudoClickedOn);
+      this.$store.dispatch('getIds', {
+        otherName: pseudoClickedOn,
+        ownName: this.$store.state.username
+      })
+      this.$store.commit('changeFollowState',true);
     }
-
-
   }
 }
 
