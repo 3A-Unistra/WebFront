@@ -17,7 +17,7 @@
                     
             <section class="pseudo_img">
                 <div class = "img_cropper">
-                    <img id="img_avatar" src="../assets/AvatarBateau.png" alt="">
+                    <img id="img_avatar" @click="verifState" src="../assets/AvatarBateau.png" alt="">
                 </div>
             
                 <section v-if="monCompte==true" class="pseudo_id">
@@ -68,7 +68,7 @@
                     </div>
                     <form>
                     <input v-if="edit == false" class="champP" type="text" v-model="pionFav" readonly>
-                    <input v-else class="champEdit" type="text" v-model="pionFav">
+                    <input v-else class="champEdit" type="text" v-model="this.$store.state.pawnProfil">
                     </form>
                 </div>              
             </section>
@@ -106,7 +106,7 @@
 
 import Footer from './MyFooter'
 import Header from './MyHeader'
-
+import { mapState } from 'vuex'
 
 export default {
   
@@ -121,13 +121,19 @@ export default {
         return {
             monCompte: true,
             edit: false,
-            nomJoueur:'Nom',
-            pseudo:this.$store.state.username,
+            //nomJoueur:"",
+            //pseudo:"",
             meilleurScore: '1234',
-            pionFav: '8',
+            //pionFav: "",
         }
     },
     methods: {
+        verifState: function () {
+            console.log(this.$store.state.usernameProfil);
+            console.log(this.$store.state.loginProfil);
+            console.log(this.$store.state.pawnProfil);
+        },
+
         changeNamePawn: function() {
             console.log(this.pseudo);
             this.$store.dispatch('changeNamePawn',{
@@ -135,8 +141,21 @@ export default {
                 login:this.pseudo,
                 pawn:this.pionFav
             })
+        },
+        getUserProfile: function(name){
+            this.$store.dispatch('getUserProfile',{
+                username:name,
+            })
+            this.pseudo = this.$store.state.loginProfil
         }
     },
+    computed :{
+    ...mapState({
+        nomJoueur: 'usernameProfil',
+        pseudo: 'loginProfil',
+        pionFav: 'pawnProfil'
+    }) 
+}
 }
 </script>
 
