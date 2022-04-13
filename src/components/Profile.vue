@@ -11,7 +11,7 @@
                         {{pseudo}}
                     </div>
 
-                    <div class="id_number">#2243</div>
+                    <!--<div class="id_number">#2243</div>-->
                 </div>
             </div>
                     
@@ -211,6 +211,7 @@ export default {
     flex-direction: row;
     color: #977637;
     font-size: 35px;
+    padding-left: 3%;
     text-decoration: underline;
     text-underline-offset: 10px;
     text-decoration-thickness: 3px;
