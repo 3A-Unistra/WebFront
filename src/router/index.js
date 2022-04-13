@@ -65,6 +65,11 @@ const routes = [
     path:'/post_login',
     name:'Post Login',
     component: ()=>import ('../views/PostLogin.vue')
+  },
+  {
+    path:'/after_game',
+    name:'AfterGame',
+    component: ()=>import ('../views/AfterGame.vue')
   }
 ]
 
@@ -72,6 +77,8 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+export { routes };
+
 export { routes };
 
 export default router

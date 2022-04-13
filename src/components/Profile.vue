@@ -7,7 +7,7 @@
             </div>
             <section class="pseudo_img">
                 <div class = "img_cropper">
-                    <img id="img_avatar" src="../assets/AvatarBateau.png" alt="">
+                    <img id="img_avatar" @click="checkFollow" src="../assets/AvatarBateau.png" alt="">
                 </div>
 
                 <section class="pseudo_id">
@@ -44,9 +44,14 @@
             </section>
 
             <section class ="info_bouton">
-                <button class="follow"
+                <button  v-if="verif_follow" @click="Follow" class="follow"
                 type="button">
-                {{ $t("suivre") }}
+                {{ $t("follow") }}
+                </button>
+
+                <button  v-else @click="Unfollow" class="follow"
+                type="button">
+                {{ $t("unfollow") }}
                 </button>
 
                 <button class="report"
@@ -70,20 +75,33 @@ export default {
   
   created () {
   },
+  data() {
+      return {
+          nomJoueur:"a récupérer de manière cool et dynamique",
+          verif_follow:this.$store.state.IsFollowing
+      }
+  },
     name: 'profilePage',
     components: {
         Header,
         Footer
-    }/*,
-    computed: {
-        verifLoggedIn: function() {
-            if (!this.$store.state.loggedin) {
-                this.$router.push('/');
-                return 0;
-            }
-            return 0;
+    },
+    methods:{
+        Follow: function() {
+            this.$store.dispatch('Follow', {
+                otherName: this.$store.state.pseudoClickedOn, // recup en cliquant sur le nom du joueur menant à sa page
+                ownName: this.$store.state.username // stocké depuis notre connexion
+            })
+            this.$store.commit('changeFollowState',true);
+        },
+        Unfollow: function () {
+            this.$store.dispatch('Unfollow', {
+                otherName: this.$store.state.pseudoClickedOn, // recup en cliquant sur le nom du joueur menant à sa page
+                ownName: this.$store.state.username // stocké depuis notre connexion
+            })
+            this.$store.commit('changeFollowState',false);
         }
-    }*/
+    }
 }
 </script>
 

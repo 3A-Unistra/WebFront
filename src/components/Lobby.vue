@@ -3,12 +3,12 @@
     <div class="bodyL">
                       <!---------------------PARTICIPANTS-------------------->
         <div class="part">
-          <h1 class="h1Lobby">Participants</h1>
+          <h1 class="h1Lobby">{{ $t("participants") }}</h1>
 
           <div class="infos" v-for="gen in gens" :key="gen.pseudo" >
             <img class="pp" v-bind:src="gen.photo" alt="photo de profil">
             <div class="txtzone">
-              <div class="pseudo">{{gen.pseudo}}</div>
+              <div class="pseudo" @click="checkFollow(gen.pseudo)">{{gen.pseudo}}</div>
               <label class="switch prt">
                 <input type="checkbox" class="t_attente">
                 <span class="slider round prts"></span>
@@ -24,35 +24,35 @@
             </div>
             <div class="diff">
               <button type="button" class="diff_bot"><img class="chevron" src="../assets/chevrons_gauche.png"></button>
-              <div class="lobby_title" id="txtdif">Difficulté du Bot</div>
+              <div class="lobby_title" id="txtdif">{{ $t("difficulte_bot") }}</div>
               <button type="button" class="diff_bot"><img class="chevron" src="../assets/chevrons_droite.png"></button>
             </div>
             
-          <button type="button" class="bt_ajout_bot">Ajouter un BOT <img class="botnoir" src="../assets/botnoir.png"></button>
+          <button type="button" class="bt_ajout_bot">{{ $t("ajout_bot") }} <img class="botnoir" src="../assets/botnoir.png"></button>
           </div>
           
           
         </div>
                       <!----------------------PARAMETRES--------------------->
         <div class="param">
-          <h1 class="h1Lobby">Paramètres du salon</h1>
+          <h1 class="h1Lobby">{{ $t("param_salon") }}</h1>
           <fieldset>
-            <div class="lobby_title">Visibilité : </div>
+            <div class="lobby_title">{{ $t("visibilite") }} </div>
             <div class="vchoix">
               <input type="radio" class="radio" name="x" value="y" id="y" />
-              <label for="y">Public</label>
+              <label for="y">{{ $t("public") }}</label>
             </div>
             
             <div>
               <input type="radio" class="radio" name="x" value="z" id="z" />
-              <label for="z">Privé</label>
+              <label for="z">{{ $t("prive") }}</label>
             </div>
                         
           </fieldset>
           <!----------------------ENCHERE--------------------->
           
             <div class="toggle"> 
-              <div class="lobby_title">Enchères : </div>
+              <div class="lobby_title">{{ $t("encheres") }} : </div>
               <label class="switch">
                 <input type="checkbox">
                 <span class="slider round"></span>
@@ -62,7 +62,7 @@
           <!----------------------DOUBLER ARGENT--------------------->
           
             <div class="toggle"> 
-              <div class="lobby_title">Doubler l'argent sur la case GO : </div>
+              <div class="lobby_title">{{ $t("double_sur_depart") }} </div>
               <label class="switch">
                 <input type="checkbox">
                 <span class="slider round"></span>
@@ -71,7 +71,7 @@
 
           <!----------------------ACHAT 1ER TOUR--------------------->
             <div class="toggle"> 
-              <div class="lobby_title">Acheter des biens dès le premier tour : </div>
+              <div class="lobby_title">{{ $t("achat_prem_tour") }}</div>
               <label class="switch">
                 <input type="checkbox">
                 <span class="slider round"></span>
@@ -80,14 +80,14 @@
           <!----------------------TEMPS D'ACTIONS--------------------->
 
             <div v-if="tempsCheck(tempsAction) == true" class="tour"> 
-              <div class="lobby_title"> Temps d'action par tour : </div>
+              <div class="lobby_title">{{ $t("temps_tour") }}</div>
                   <form>
                     <input class="champ" type="text" v-model="tempsAction">
                   </form>
             </div>
 
             <div v-else class="tour">
-              <div class="lobby_title"> Temps d'action par tour <span class="cdt">(entre 30s et 120s) </span> : </div>
+              <div class="lobby_title">{{ $t("temps_tour") }} <span class="cdt">{{ $t("duree_exemple") }} </span> </div>
                   <form>
                     <input class="champF" type="text" v-model="tempsAction">
                   </form>
@@ -95,32 +95,32 @@
           <!----------------------TOUR MAX--------------------->
           
             <div class="tour"> 
-              <div class="lobby_title">Nombre de tour maximum : </div>
+              <div class="lobby_title">{{ $t("nbr_tour_max") }} </div>
                   <form>
                     <input class="champ" type="text" v-model="tourMax">
                   </form>
             </div>         
         <!----------------------SOMME DEPART--------------------->
             <div class="tour"> 
-              <div class="lobby_title">Somme de départ : </div>
+              <div class="lobby_title">{{ $t("somme_depart") }}</div>
                   <form>
                     <input class="champ" type="text" v-model="sommeDepart">
                   </form>
             </div> 
         <!--------------------BT LANCER PARTIE------------------->
           
-          <button type="button" class="bt_lancer" v-on:click="tempsCheck(tempsAction)"><h1 class="Lancer">Lancer la partie</h1></button>
+          <button type="button" class="bt_lancer" v-on:click="tempsCheck(tempsAction)"><h1 class="Lancer">{{ $t("lancer_partie") }}</h1></button>
           
-          <button type="button" class="bt_quitter">Quitter</button>
+          <button type="button" class="bt_quitter">{{ $t("quitter") }}</button>
         </div>
                       <!----------------------FOLLOWS--------------------->     
         <div class="amis">
-          <h1 class="h1Lobby">Amis connectés</h1>
+          <h1 class="h1Lobby">{{ $t("amis_co") }}</h1>
             <div class="infos" v-for="gen in gens" :key="gen.pseudo" >
             <img class="pp" v-bind:src="gen.photo" alt="photo de profil"> 
               <div class="txtzone">
-                <div class="pseudo">{{gen.pseudo}}</div>
-                <button type="button" class="bt_inviter" >Inviter</button>
+                <div class="pseudo" @click="checkFollow(gen.pseudo)">{{gen.pseudo}}</div>
+                <button type="button" class="bt_inviter" >{{ $t("inviter") }}</button>
               </div>
             </div>
         </div>
@@ -151,7 +151,7 @@ export default {
       gens: [
         {
             photo : require('../assets/grin.png'),
-            pseudo : 'Joueur 1'
+            pseudo : 'pla'
         },
         {
             photo : require('../assets/grin.png'),
@@ -209,9 +209,15 @@ export default {
       } else {
           this.$store.commit('checkingSameProfile',false);
       }
+    },
+    checkFollow: function(pseudoClickedOn) {
+      this.$store.commit('updatePseudoClickedOn',pseudoClickedOn);
+      this.$store.dispatch('getIds', {
+        otherName: pseudoClickedOn,
+        ownName: this.$store.state.username
+      })
+      this.$store.commit('changeFollowState',true);
     }
-
-
   }
 }
 
