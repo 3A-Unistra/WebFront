@@ -49,7 +49,7 @@
                     </div>
                     <form>
                     <input v-if="edit == false" class="champP" type="text" v-model="pseudo" readonly>
-                    <input v-else class="champEdit" type="text" v-model="pseudo">
+                    <input v-else class="champEdit" type="text" v-model="pseudo" style="background-color:blue;">
                     </form>
                 </div>
 
@@ -82,17 +82,15 @@
                 <button v-if="monCompte == true" class="bt_edit" type="button" v-on:click="edit=true" :hidden="edit==true">
                 {{$t("editer")}}
                 </button>
-
+                <button  v-else-if="verif_follow==true" @click="Unfollow" class="follow" type="button">
+                                {{ $t("unfollow") }}
+                </button>
                 <button v-else class="follow"
                 type="button">
                 {{ $t("follow") }}
                 </button>
 
-                <button  v-else @click="Unfollow" class="follow"
-                type="button">
-                {{ $t("unfollow") }}
-                </button>
-
+                
                 
                 <button v-if="monCompte == true" class="bt_save" type="submit" v-on:click="edit=false" :hidden="edit==false">
                 {{$t("enregistrer")}}
