@@ -1,4 +1,4 @@
-import { createStore/*, storeKey*/ } from "vuex";
+import { createStore,/*, storeKey*/ } from "vuex";
 
 const axios = require('axios');
 import router from '../router/index.js';
@@ -12,7 +12,11 @@ export default createStore ({
         sameProfile: true,
         numberPlayers: 4,
         IsFollowing: false,
-        pseudoClickedOn: "pla"
+        pseudoClickedOn: "",
+        usernameProfil: "",
+        loginProfil: "",
+        pawnProfil: ""
+        
     },
     actions: {
         createAccount:({commit},userInfos) => {
@@ -26,6 +30,7 @@ export default createStore ({
             .then(function () {
                 //console.log(response);
                 router.push('/Login');
+                return true;
             })
             .catch(function(error) {
                 console.log(error);
@@ -48,6 +53,27 @@ export default createStore ({
             .catch(function(error) {
                 console.log(error);
             });
+        },
+        
+        getUserProfile:({commit},userInfos) => {
+            commit;
+            axios.post('http://localhost:3000/api/users/getProfile',userInfos, {
+                
+            headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(function (response) {
+                console.log(response.data);
+                commit('changeUsrnameProfil', response.data.username)
+                commit('changeLoginProfil', response.data.login)
+                commit('changePawnProfil', response.data.pawn)
+
+                router.push('/profile');
+            })
+            .catch(function(error) {
+                console.log(error);
+            }); 
         },
 
         getIds:({commit},userNames) => {
@@ -80,6 +106,21 @@ export default createStore ({
                 return false;
             });
         } ,
+
+        changeNamePawn:({commit},userInfos) => {
+            commit;
+            axios.post('http://localhost:3000/api/users/editProfile',userInfos, {                
+            headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(function () {
+                router.push('/profile');
+            })
+            .catch(function(error) {
+                console.log(error);
+            }); 
+        },
 
         Follow:({commit},userNames) => {
             commit;
@@ -177,7 +218,17 @@ export default createStore ({
         checkingSameProfile(state,newSameProfile)
         {
             state.sameProfile = newSameProfile;
+        },
+        changePawnProfil(state,newPawnProfil){
+            state.pawnProfil = newPawnProfil;
+        },
+        changeUsrnameProfil(state,newUsProfil){
+            state.usernameProfil = newUsProfil;
+        },
+        changeLoginProfil(state,newLoginProfil){
+            state.loginProfil = newLoginProfil;
         }
+        
     },
     modules: {
 
