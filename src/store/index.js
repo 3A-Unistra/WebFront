@@ -9,7 +9,7 @@ export default createStore ({
         login: "",
         piece: 0,
         loggedin: false,
-        sameProfile: false,
+        sameProfile: true,
         numberPlayers: 4,
         IsFollowing: false,
         pseudoClickedOn: "",

@@ -19,14 +19,6 @@
                 <div class = "img_cropper">
                     <img id="img_avatar" @click="verifState" src="../assets/AvatarBateau.png" alt="">
                 </div>
-            
-                <section v-if="this.$store.state.sameProfile==true" class="pseudo_id">
-                    <div>
-                        {{pseudo}}
-                    </div>
-
-                    <div class="id_number">#2243</div>
-                </section>
             </section>
         </section>
 
