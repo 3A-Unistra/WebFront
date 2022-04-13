@@ -10,7 +10,7 @@
         <div class="content_login">
             <h1 class="animate__animated animate__bounce animate__repeat-2 login_title">{{ $t("LOGIN") }}</h1>
             
-            <form @submit.prevent="checkName" class="form_container">
+            <form @submit.prevent="checkLogin" class="form_container">
                
                     <input  v-model="name" type="text" class="champs_form" required  id="pseudo" aria-describedby="pseudo" :placeholder="$t('enter_pseudo')">
                                                 
@@ -51,8 +51,8 @@ export default {
       }
   },
     methods: {
-        checkName: function() {
-            this.$store.dispatch('checkName', {
+        checkLogin: function() {
+            this.$store.dispatch('checkLogin', {
               name: this.name,
               password: this.password,
           }),

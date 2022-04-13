@@ -3,7 +3,7 @@
     <section class="container">
         <section class="pseudo_img">
             <div class="titre_edit">
-                <div v-if="monCompte==true" class = "titre_nom">
+                <div v-if="this.$store.state.sameProfile==true" class = "titre_nom">
                 {{ $t("compte") }}
                 </div>
                 <div v-else class="titre_nom">
@@ -20,7 +20,7 @@
                     <img id="img_avatar" @click="verifState" src="../assets/AvatarBateau.png" alt="">
                 </div>
             
-                <section v-if="monCompte==true" class="pseudo_id">
+                <section v-if="this.$store.state.sameProfile==true" class="pseudo_id">
                     <div>
                         {{pseudo}}
                     </div>
@@ -48,7 +48,7 @@
                     </div>
                     <form>
                     <input v-if="edit == false" class="champP" type="text" v-model="pseudo" readonly>
-                    <input v-else class="champEdit" type="text" v-model="pseudo">
+                    <input v-else class="champEdit" type="text" v-model="this.$store.state.loginProfil">
                     </form>
                 </div>
 
@@ -74,27 +74,26 @@
             </section>
                 
             <form class ="info_bouton" @submit.prevent="changeNamePawn">
-                <button  v-if="verif_follow" @click="Follow" class="follow" type="button">
+                <button v-if="this.$store.state.sameProfile == true" class="bt_edit" type="button" @click="edit=true" :hidden="edit==true">
+                    {{$t("editer")}}
+                </button>
+                
+                <button v-else-if="verif_follow == false" class="follow"
+                type="button">
                     {{ $t("follow") }}
                 </button>
-                <button v-if="monCompte == true" class="bt_edit" type="button" v-on:click="edit=true" :hidden="edit==true">
-                {{$t("editer")}}
+                <button  v-else @click="Unfollow" class="follow" type="button">
+                    {{ $t("unfollow") }}
                 </button>
-                <button  v-else-if="verif_follow==true" @click="Unfollow" class="follow" type="button">
-                                {{ $t("unfollow") }}
-                </button>
-                <button v-else class="follow"
-                type="button">
-                {{ $t("follow") }}
-                </button>
-
+                <!--
                 
+                -->
                 
-                <button v-if="monCompte == true" class="bt_save" type="submit" v-on:click="edit=false" :hidden="edit==false">
+                <button v-if="this.$store.state.sameProfile == true" class="bt_save" type="submit" v-on:click="edit=false" :hidden="edit==false">
                 {{$t("enregistrer")}}
                 </button>
 
-                <button v-if="monCompte == true" class="bt_supp" type="button" :hidden="edit==true">
+                <button v-if="this.$store.state.sameProfile == true" class="bt_supp" type="button" :hidden="edit==true">
                 {{$t("supprimer")}}
                 </button>
 
@@ -125,7 +124,6 @@ export default {
     },
     data() {
         return {
-            monCompte: true,
             edit: false,
             meilleurScore: '1234',
             verif_follow:this.$store.state.IsFollowing

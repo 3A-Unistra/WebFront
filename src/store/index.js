@@ -9,7 +9,7 @@ export default createStore ({
         login: "",
         piece: 0,
         loggedin: false,
-        sameProfile: true,
+        sameProfile: false,
         numberPlayers: 4,
         IsFollowing: false,
         pseudoClickedOn: "",
@@ -31,24 +31,6 @@ export default createStore ({
                 //console.log(response);
                 router.push('/Login');
                 return true;
-            })
-            .catch(function(error) {
-                console.log(error);
-            });
-        },
-        checkName:({commit},userInfos) => {
-            commit;
-            axios.post('http://localhost:3000/api/users/login',userInfos, {
-                
-            headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(function (response) {
-                console.log(response);
-                router.push('/Lobby');
-                return response.data.name
-
             })
             .catch(function(error) {
                 console.log(error);
@@ -127,16 +109,13 @@ export default createStore ({
 
         changeNamePawn:({commit},userInfos) => {
             commit;
-            axios.post('http://localhost:3000/api/users/editProfile',userInfos, {
-                
+            axios.post('http://localhost:3000/api/users/editProfile',userInfos, {                
             headers: {
                     'Content-Type': 'application/json'
                 }
             })
-            .then(function (response) {
-                console.log("voici la reponse "+response);
+            .then(function () {
                 router.push('/profile');
-
             })
             .catch(function(error) {
                 console.log(error);
