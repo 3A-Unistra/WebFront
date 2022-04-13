@@ -1,4 +1,4 @@
-<template>
+<template >
     <Header></Header>
     <section class="container">
         <section class="pseudo_img">
@@ -14,11 +14,10 @@
                     <div class="id_number">#2243</div>
                 </div>
             </div>
-        </section>    
                     
             <section class="pseudo_img">
                 <div class = "img_cropper">
-                    <img id="img_avatar" @click="checkFollow" src="../assets/AvatarBateau.png" alt="">
+                    <img id="img_avatar" @click="verifState" src="../assets/AvatarBateau.png" alt="">
                 </div>
             
                 <section v-if="monCompte==true" class="pseudo_id">
@@ -49,7 +48,7 @@
                     </div>
                     <form>
                     <input v-if="edit == false" class="champP" type="text" v-model="pseudo" readonly>
-                    <input v-else class="champEdit" type="text" v-model="pseudo" style="background-color:blue;">
+                    <input v-else class="champEdit" type="text" v-model="pseudo">
                     </form>
                 </div>
 
@@ -73,12 +72,11 @@
                     </form>
                 </div>              
             </section>
-
-            <section class ="info_bouton">
+                
+            <form class ="info_bouton" @submit.prevent="changeNamePawn">
                 <button  v-if="verif_follow" @click="Follow" class="follow" type="button">
                     {{ $t("follow") }}
                 </button>
-            <form class ="info_bouton" @submit.prevent="changeNamePawn">
                 <button v-if="monCompte == true" class="bt_edit" type="button" v-on:click="edit=true" :hidden="edit==true">
                 {{$t("editer")}}
                 </button>
@@ -152,7 +150,7 @@ export default {
             this.$store.dispatch('getUserProfile',{
                 username:name,
             })
-            this.pseudo = this.$store.state.loginProfil
+            //this.pseudo = this.$store.state.loginProfil
         },
         Follow: function() {
             this.$store.dispatch('Follow', {
