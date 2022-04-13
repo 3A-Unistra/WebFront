@@ -56,36 +56,42 @@ export default {
                 {
                     profilePicture:require('../assets/grin.png'),
                     namePlayer:"joueur1",
+                    login:"",
                     score:5,
                     ranking: 1
                 },
                 {
                     profilePicture: require('../assets/grin.png'),
                     namePlayer:"joueur2",
+                    login:"",
                     score:4,
                     ranking: 2
                 },
                 {
                     profilePicture:require('../assets/grin.png'),
                     namePlayer:"joueur3",
+                    login:"",
                     score:5,
                     ranking: 3
                 },
                 {
                     profilePicture:require('../assets/grin.png'),
                     namePlayer:"joueur4",
+                    login:"",
                     score:5,
                     ranking: 4
                 },
                 {
                     profilePicture:"",
                     namePlayer:"",
+                    login:"",
                     score:89,
                     ranking: 5
                 },
                 {
                     profilePicture:"",
                     namePlayer:"",
+                    login:"",
                     score:89,
                     ranking: 5
                 },

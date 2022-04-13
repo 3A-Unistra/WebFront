@@ -6,6 +6,8 @@
         <div class="player_info">
             <img id="pfp_result" :src="profilePicture">
             <p>{{namePlayer}}</p>
+            <p> / {{login}}</p>
+
         </div>
         <div class="player_score">
             {{score}}
@@ -62,6 +64,7 @@
 export default {
     props: {
         namePlayer: String,
+        login: String,
         profilePicture: String,
         score: Number,
         ranking: Number

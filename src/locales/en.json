@@ -25,8 +25,8 @@
   "enter_password": "Enter your password",
   "confirm_password": " Confirm your password",
   "enter_mail": "Enter your email",
-  "enter_name": "Enter your name",
-  "enter_pseudo": "Enter your username",
+  "enter_name": "Enter your username",
+  "enter_pseudo": "Enter your login",
   "forgot_passw": "Forgot your email ?",
   "to_login": "Log in",
   // page profil
@@ -37,7 +37,6 @@
   "fav_pion": "Favorite pawn",
   "follow": "follow",
   "unfollow": "unfollow",
-  "signaler": "report",
   "editer": "Edit",
   "enregistrer":"Save changes",
   "supprimer":"Delete account",
