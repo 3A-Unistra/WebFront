@@ -67,6 +67,11 @@ const routes = [
     component: ()=>import ('../views/PostLogin.vue')
   },
   {
+    path:'/prelobby',
+    name: 'PreLobby',
+    component: ()=>import ('../views/PreLobby.vue')
+  },
+  {
     path:'/after_game',
     name:'AfterGame',
     component: ()=>import ('../views/AfterGame.vue')

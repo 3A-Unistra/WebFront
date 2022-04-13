@@ -37,7 +37,8 @@ import Salon  from '../components/SalonComponent.vue'
 
 export default {
   
-  created () {
+  created : function() {
+      console.log("on arrive sur l'après connexion ")
   },
      name: 'PostLoginPage',
     components: {
