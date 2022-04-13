@@ -10,8 +10,6 @@
                     <div>
                         {{pseudo}}
                     </div>
-
-                    <!--<div class="id_number">#2243</div>-->
                 </div>
             </div>
                     
