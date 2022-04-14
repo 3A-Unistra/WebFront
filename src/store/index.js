@@ -16,7 +16,6 @@ export default createStore ({
         sameProfile: true,
         numberPlayers: 4,
         IsFollowing: false,
-        pseudoClickedOn: "",
 
         //Informations du profil cliqué
         usernameProfil: "",
@@ -229,10 +228,6 @@ export default createStore ({
         quickId(state,id)
         {
             state.id = id
-        },
-        updatePseudoClickedOn(state,newPCO) 
-        {
-            state.pseudoClickedOn = newPCO
         },
         changeFollowState(state, newState)
         {

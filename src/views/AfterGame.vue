@@ -12,7 +12,7 @@
             <span>{{ $t("score") }}</span>
         </div>
         <PlayerResult id="loop_result" v-for="index in numberPlayers" :key="index-1" 
-        :ranking= 'players[index-1].ranking' :namePlayer= 'players[index-1].namePlayer' :profilePicture= 'players[index-1].profilePicture' :score= 'players[index-1].score'>
+        :ranking= 'players[index-1].ranking' :namePlayer= 'players[index-1].namePlayer' :login= 'players[index-1].namePlayer' :profilePicture= 'players[index-1].profilePicture' :score= 'players[index-1].score'>
         </PlayerResult>
         <div class="button_row">
             <button class="bt_lobby" type=button><router-link to="/Lobby">{{ $t("return_lobby") }}</router-link></button>
@@ -47,7 +47,11 @@ export default {
             } else {
                 console.log("paramètre non existant");
             }
-        }
+        },
+        getInfosPlayers(listPlayers) {
+            this.players = listPlayers
+        },
+        
     },
     data : function () {
         return {
@@ -55,7 +59,7 @@ export default {
             players: [
                 {
                     profilePicture:require('../assets/grin.png'),
-                    namePlayer:"joueur1",
+                    namePlayer:"ra",
                     login:"",
                     score:5,
                     ranking: 1
@@ -94,19 +98,7 @@ export default {
                     login:"",
                     score:89,
                     ranking: 5
-                },
-                {
-                    profilePicture:"",
-                    namePlayer:"",
-                    score:89,
-                    ranking: 5
-                },
-                {
-                    profilePicture:"",
-                    namePlayer:"",
-                    score:89,
-                    ranking: 5
-                },
+                }                 
             ]
         }
     }

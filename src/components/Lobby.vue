@@ -241,22 +241,6 @@ export default {
       this.players = message.listPlayers
     },
 
-    // METHODES LIANT AUX PROFILS
-    checkSameProfil(nameProfile) {
-      if (nameProfile == this.$store.state.username) {
-          this.$store.commit('checkingSameProfile',true);       
-      } else {
-          this.$store.commit('checkingSameProfile',false);
-      }
-    },
-    checkFollow: function(pseudoClickedOn) {
-      this.$store.commit('updatePseudoClickedOn',pseudoClickedOn);
-      this.$store.dispatch('getIds', {
-        otherName: pseudoClickedOn,
-        ownName: this.$store.state.username
-      })
-      this.$store.commit('changeFollowState',true);
-    },
 
     wantToQuit: function() {
       if(this.$store.state.isHost == true)

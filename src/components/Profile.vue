@@ -54,7 +54,7 @@
 
                 <div class="txt_et_champ">
                     <div>
-                        {{ $t("fav_pion") }} :                    
+                        {{ $t("fav_pion") }}:                    
                     </div>
                     <form>
                     <input v-if="edit == false" class="champP" type="text" v-model="pionFav" readonly>
@@ -142,14 +142,14 @@ export default {
         },
         Follow: function() {
             this.$store.dispatch('Follow', {
-                otherName: this.$store.state.pseudoClickedOn, // recup en cliquant sur le nom du joueur menant à sa page
+                otherName: this.$store.state.usernameProfil, // recup en cliquant sur le nom du joueur menant à sa page
                 ownName: this.$store.state.username // stocké depuis notre connexion
             })
             this.$store.commit('changeFollowState',true);
         },
         Unfollow: function () {
             this.$store.dispatch('Unfollow', {
-                otherName: this.$store.state.pseudoClickedOn, // recup en cliquant sur le nom du joueur menant à sa page
+                otherName: this.$store.state.usernameProfil, // recup en cliquant sur le nom du joueur menant à sa page
                 ownName: this.$store.state.username // stocké depuis notre connexion
             })
             this.$store.commit('changeFollowState',false);
