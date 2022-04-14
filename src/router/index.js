@@ -69,7 +69,7 @@ const routes = [
   {
     path:'/prelobby',
     name: 'PreLobby',
-    component: ()=>import ('../views/PreLobby.vue')
+    component: ()=>import ('../components/PreLobby.vue')
   },
   {
     path:'/after_game',

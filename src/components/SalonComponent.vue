@@ -1,56 +1,28 @@
 <template>
-    <div class="loop" v-for="salon in salons" :key="salon.id_salon">
         <div class="salon">
-            <p class="nom_salon">{{ $t("salon") }} N° {{salon.id_salon}}</p>
-            <p class="nbr_part">{{ $t("nb_participants") }}{{salon.nb_participants}}</p>
-            <button class="rej_salon" type="boutton">{{ $t("rejoindre") }}</button>
-        </div>
-    </div>
-
-        
-
+            <p class="nom_salon"> {{nameLobby}}</p>
+            <p class="nbr_part">{{ $t("nb_participants") }}</p>
+            <p class="nbr_part">{{nbPlayers}} / {{maxNbPlayers}}</p>
+            <button class="rej_salon" @click="joinLobby" type="boutton">{{ $t("rejoindre") }}</button>
+    </div>  
 </template>
 
 <script>
 export default {
-    data: function() {
-    return { 
-      salons: [
-        {
-            id_salon : '1',
-            nb_participants: '6'
-        },
-        {
-            id_salon : '2',
-            nb_participants: '4'
-        },
-        {
-            id_salon : '3',
-            nb_participants: '7'
-        },
-        {
-            id_salon : '4',
-            nb_participants: '5'
-        },
-        {
-            id_salon : '5',
-            nb_participants: '8'
-        },
-        {
-            id_salon : '6',
-            nb_participants: '4'
-        },
-        {
-            id_salon : '7',
-            nb_participants: '8'
-        },
-        {
-            id_salon : '8',
-            nb_participants: '6'
+    props: {
+        nbPlayers: Number,
+        nameLobby: String,
+        maxNbPlayers: Number,
+        public: Boolean,
+        id: Number
+    },
+
+    methods: {
+        joinLobby: function() {
+            console.log(this.id+"\n"+this.$state.store.username)
         }
-      ]
     }
-}}
+}
 </script>
 
 <style>

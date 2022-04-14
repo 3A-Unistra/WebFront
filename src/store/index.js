@@ -5,19 +5,27 @@ import router from '../router/index.js';
 
 export default createStore ({
     state: {
+
+        //Informations de l'user connecté:
         username: "",
         login: "",
         piece: 0,
+        id:-1,
+
         loggedin: false,
         sameProfile: true,
         numberPlayers: 4,
         IsFollowing: false,
         pseudoClickedOn: "",
+
+        //Informations du profil cliqué
         usernameProfil: "",
         loginProfil: "",
-        pawnProfil: ""
-        
+        pawnProfil: "",
+
+        publicLobby: false  
     },
+
     actions: {
         createAccount:({commit},userInfos) => {
             commit;
@@ -107,6 +115,24 @@ export default createStore ({
             });
         } ,
 
+        getOwnId:({commit},username) => {
+            commit;
+            return axios.post('http://localhost:3000/api/users/getownid',username, {
+                
+            headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(function (response) {
+                commit('quickId',response.data.ownId)
+                console.log(response.data.ownId);
+                return response
+            })
+            .catch(function(error) {
+                return error;
+            });
+        },
+
         changeNamePawn:({commit},userInfos) => {
             commit;
             axios.post('http://localhost:3000/api/users/editProfile',userInfos, {                
@@ -191,6 +217,14 @@ export default createStore ({
 
     },
     mutations: {
+        setLobby(state,publicLobby)
+        {
+            state.publicLobby= publicLobby
+        },
+        quickId(state,id)
+        {
+            state.id = id
+        },
         updatePseudoClickedOn(state,newPCO) 
         {
             state.pseudoClickedOn = newPCO

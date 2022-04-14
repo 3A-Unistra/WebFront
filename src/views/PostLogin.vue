@@ -2,14 +2,14 @@
     <Header></Header>
     
     <section class="container">
+        
         <section class="opt">
             <LogOutButton></LogOutButton>
             
-            <button class="creer_partie" type="boutton">{{ $t("creer") }}
+            <button class="creer_partie" @click="$router.push('/prelobby')" type="boutton">{{ $t("creer") }}
                 <img class="icone" src="../assets/reseau.png" alt="icone reseau">
             </button>        
         </section>
-    
 
         <section class ="info_salon">
             <div class="lien">
@@ -18,10 +18,11 @@
                     <img class="icone" src="../assets/verif.png" alt="icone verif"/>
                 </button>
             </div>
-            <div class="liste_salon">
-                <Salon></Salon>
-            </div>
+            <div class="liste_salon" v-for="salon in salonsAffichables" :key="salon.name">
+                <Salon  :maxNbPlayers="salon.maxNbPlayers" :nameLobby="salon.name" :nbPlayers="salon.nbPlayers" :public="salon.public"></Salon>
+                </div>
         </section>
+
     </section>
 
     <Footer></Footer>
@@ -38,7 +39,31 @@ import Salon  from '../components/SalonComponent.vue'
 export default {
   
   created : function() {
-      console.log("on arrive sur l'après connexion ")
+      console.log("bien connecté")
+      /*
+
+      partie socket à recevoir et envoyer
+
+
+
+      */
+  },
+  data () {
+      return {
+        listeSalons: [
+            { id:1, name:'salon1', public: true, nbPlayers:8, maxNbPlayers:8 },
+            { id:2, name:'salon2', public: true, nbPlayers:7, maxNbPlayers:8  },
+            { id:3, name:'salon3', public: false, nbPlayers:3, maxNbPlayers:8 },
+            { id:4 ,name:'salon4', public: false, nbPlayers:8, maxNbPlayers:8  },
+        ],
+        newSalon: {
+            id:2,
+            name:'salon dynamique',
+            public:true,
+            nbPlayers:10,
+            maxNbPlayers: 7
+        }
+      }
   },
      name: 'PostLoginPage',
     components: {
@@ -51,8 +76,48 @@ export default {
         logout: function() {
             this.$store.commit('clearUserData'),
             this.$router.push('/')
-        }
-    }       
+        },
+
+        receptionSalon: function(newSalon) {
+            let foundSalon = 0 ;
+            this.listeSalons.find(salon => {
+                if(salon.id == newSalon.id)
+                {
+                    foundSalon = 1;
+                    this.replace(newSalon)
+                }
+            }) 
+            if(foundSalon == 0) {
+                this.addInstance(newSalon)
+            } 
+        },
+
+        replace: function(oldLobbyNewVersion) {
+
+            //on cherche l'id dans la liste des salons déjà présents
+            this.listeSalons.find(salon => {
+                if (salon.id === oldLobbyNewVersion.id) {
+
+                    salon.name = oldLobbyNewVersion.name ;
+                    salon.nbPlayers = oldLobbyNewVersion.nbPlayers ;
+                    salon.maxNbPlayers = oldLobbyNewVersion.maxNbPlayers ;
+                    salon.public = oldLobbyNewVersion.public ;
+
+                }
+            })
+        },
+
+        addInstance: function(newLobby) {
+            this.listeSalons.push(newLobby);
+            console.log("etape 2")
+            console.log(newLobby.name + " a été ajouté a la liste");
+        },
+    },
+    computed: {
+      salonsAffichables: function () {
+        return this.listeSalons.filter(salon => salon.public && salon.nbPlayers < salon.maxNbPlayers)
+      }
+    }
 }
 </script>
 
