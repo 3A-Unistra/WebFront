@@ -10,8 +10,9 @@
             <div class="txtzone">
               <div class="pseudo" @click="checkFollow(player.pseudo)">{{player.pseudo}}</div>
               
-              <label class="switch prt" v-if="ownToggle(player.username) == true"> <!-- PARTIE TOGGLE -->
-                <input type="checkbox"  id="yourSwitch" class="t_attente" :disabled="this.$store.state.isFollowing == true">
+              <!-- PARTIE TOGGLE -->
+              <label class="switch prt" v-if="ownToggle(player.username) == true"> 
+                <input type="checkbox" class="t_attente" :disabled="this.$store.state.isFollowing == true">
                 <span class="slider round prts" :disabled="this.$store.state.isFollowing  == true"></span>
                 <span class="labels" data-on="PRÊT!" data-off="" :disabled="this.$store.state.isFollowing == true"></span> 
               </label>  
@@ -100,7 +101,7 @@
             </div> 
         <!--------------------BT LANCER PARTIE------------------->
           
-          <button type="button" class="bt_lancer" v-if="this.$store.state.isHost" v-on:click="tempsCheck(tempsAction)"><h1 class="Lancer">{{ $t("lancer_partie") }}</h1></button>
+          <button type="button" @click="startGame" class="bt_lancer" v-if="this.$store.state.isHost" v-on:click="tempsCheck(tempsAction)"><h1 class="Lancer">{{ $t("lancer_partie") }}</h1></button>
           
           <button type="button" @click="wantToQuit" class="bt_quitter">{{ $t("quitter") }}</button>
         </div>
@@ -258,9 +259,17 @@ export default {
     },
 
     wantToQuit: function() {
-      console.log(this.$store.state.id+"\n"+ this.roomId)
-      // paquet envoyé pour demander à sortir
+      if(this.$store.state.isHost == true)
+      {
+        console.log(this.$store.state.id+"\n"+ this.roomId) // paquet DeleteRoom envoyé par host
+      } else {
+        console.log(this.$store.state.id+"\n"+ this.roomId) // paquet LeaveRoom
+      }
       this.$router.push('/post_login')
+    },
+    startGame: function()
+    {
+      console.log(this.$store.state.id) // paquet LaunchGame
     }
   }
 }
