@@ -23,7 +23,9 @@ export default createStore ({
         loginProfil: "",
         pawnProfil: "",
 
-        publicLobby: false  
+        publicLobby: false  ,
+        isHost: false
+
     },
 
     actions: {
@@ -216,6 +218,10 @@ export default createStore ({
 
     },
     mutations: {
+        setHost(state,isHost)
+        {
+            state.isHost = isHost
+        },
         setLobby(state,publicLobby)
         {
             state.publicLobby= publicLobby

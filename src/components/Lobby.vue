@@ -5,15 +5,17 @@
         <div class="part">
           <h1 class="h1Lobby">{{ $t("participants") }}</h1>
 
-          <div class="infos" v-for="gen in gens" :key="gen.pseudo" >
-            <img class="pp" v-bind:src="gen.photo" alt="photo de profil">
+          <div class="infos" v-for="player in players" :key="player.pseudo" >
+            <img class="pp" v-bind:src="player.photo" alt="photo de profil">
             <div class="txtzone">
-              <div class="pseudo" @click="checkFollow(gen.pseudo)">{{gen.pseudo}}</div>
-              <label class="switch prt">
-                <input type="checkbox" class="t_attente">
-                <span class="slider round prts"></span>
-                <span class="labels" data-on="PRÊT!" data-off=""></span>
-              </label>          
+              <div class="pseudo" @click="checkFollow(player.pseudo)">{{player.pseudo}}</div>
+              
+              <label class="switch prt" v-if="ownToggle(player.username) == true"> <!-- PARTIE TOGGLE -->
+                <input type="checkbox"  id="yourSwitch" class="t_attente" :disabled="this.$store.state.isFollowing == true">
+                <span class="slider round prts" :disabled="this.$store.state.isFollowing  == true"></span>
+                <span class="labels" data-on="PRÊT!" data-off="" :disabled="this.$store.state.isFollowing == true"></span> 
+              </label>  
+
             </div>
           </div>
 
@@ -23,12 +25,13 @@
               <h1 class="bot">BOT</h1>
             </div>
             <div class="diff">
-              <button type="button" class="diff_bot"><img class="chevron" src="../assets/chevrons_gauche.png"></button>
-              <div class="lobby_title" id="txtdif">{{ $t("difficulte_bot") }}</div>
-              <button type="button" class="diff_bot"><img class="chevron" src="../assets/chevrons_droite.png"></button>
+              <button type="button" @click="modifyBotLevel(-1)" class="diff_bot"><img class="chevron" @click="modifyBotLevel(-1)"  src="../assets/chevrons_gauche.png"></button>
+              <div class="lobby_title" id="txtdif">
+                {{ $t("difficulte_bot") }}: <input type="text"  style="width:40px;" v-model="botDifficulty" readonly></div>
+              <button type="button" class="diff_bot"><img class="chevron" @click="modifyBotLevel(1)"  src="../assets/chevrons_droite.png"></button>
             </div>
             
-          <button type="button" class="bt_ajout_bot">{{ $t("ajout_bot") }} <img class="botnoir" src="../assets/botnoir.png"></button>
+          <button type="button" @click="ajoutBot" class="bt_ajout_bot">{{ $t("ajout_bot") }} <img class="botnoir" src="../assets/botnoir.png"></button>
           </div>
           
           
@@ -36,25 +39,13 @@
                       <!----------------------PARAMETRES--------------------->
         <div class="param">
           <h1 class="h1Lobby">{{ $t("param_salon") }}</h1>
-          <fieldset>
-            <div class="lobby_title">{{ $t("visibilite") }} </div>
-            <div class="vchoix">
-              <input type="radio" class="radio" name="x" value="y" id="y" />
-              <label for="y">{{ $t("public") }}</label>
-            </div>
-            
-            <div>
-              <input type="radio" class="radio" name="x" value="z" id="z" />
-              <label for="z">{{ $t("prive") }}</label>
-            </div>
-                        
-          </fieldset>
+
           <!----------------------ENCHERE--------------------->
           
             <div class="toggle"> 
               <div class="lobby_title">{{ $t("encheres") }} : </div>
               <label class="switch">
-                <input type="checkbox">
+                <input type="checkbox" :disabled="this.$store.state.isHost == false">
                 <span class="slider round"></span>
               </label>
             </div>
@@ -64,7 +55,7 @@
             <div class="toggle"> 
               <div class="lobby_title">{{ $t("double_sur_depart") }} </div>
               <label class="switch">
-                <input type="checkbox">
+                <input type="checkbox" :disabled="this.$store.state.isHost == false">
                 <span class="slider round"></span>
               </label>
             </div>
@@ -73,7 +64,7 @@
             <div class="toggle"> 
               <div class="lobby_title">{{ $t("achat_prem_tour") }}</div>
               <label class="switch">
-                <input type="checkbox">
+                <input type="checkbox" :disabled="this.$store.state.isHost == false">
                 <span class="slider round"></span>
               </label>
             </div>
@@ -82,14 +73,14 @@
             <div v-if="tempsCheck(tempsAction) == true" class="tour"> 
               <div class="lobby_title">{{ $t("temps_tour") }}</div>
                   <form>
-                    <input class="champ" type="text" v-model="tempsAction">
+                    <input class="champ" type="text" :disabled="this.$store.state.isHost == false" v-model="tempsAction">
                   </form>
             </div>
 
             <div v-else class="tour">
               <div class="lobby_title">{{ $t("temps_tour") }} <span class="cdt">{{ $t("duree_exemple") }} </span> </div>
                   <form>
-                    <input class="champF" type="text" v-model="tempsAction">
+                    <input class="champF" type="text" :disabled="this.$store.state.isHost == false" v-model="tempsAction">
                   </form>
             </div>
           <!----------------------TOUR MAX--------------------->
@@ -97,32 +88,35 @@
             <div class="tour"> 
               <div class="lobby_title">{{ $t("nbr_tour_max") }} </div>
                   <form>
-                    <input class="champ" type="text" v-model="tourMax">
+                    <input class="champ" type="text" :disabled="this.$store.state.isHost == false" v-model="tourMax">
                   </form>
             </div>         
         <!----------------------SOMME DEPART--------------------->
             <div class="tour"> 
               <div class="lobby_title">{{ $t("somme_depart") }}</div>
                   <form>
-                    <input class="champ" type="text" v-model="sommeDepart">
+                    <input class="champ" type="text" :disabled="this.$store.state.isHost == false" v-model="sommeDepart">
                   </form>
             </div> 
         <!--------------------BT LANCER PARTIE------------------->
           
-          <button type="button" class="bt_lancer" v-on:click="tempsCheck(tempsAction)"><h1 class="Lancer">{{ $t("lancer_partie") }}</h1></button>
+          <button type="button" class="bt_lancer" v-if="this.$store.state.isHost" v-on:click="tempsCheck(tempsAction)"><h1 class="Lancer">{{ $t("lancer_partie") }}</h1></button>
           
-          <button type="button" class="bt_quitter">{{ $t("quitter") }}</button>
+          <button type="button" @click="wantToQuit" class="bt_quitter">{{ $t("quitter") }}</button>
         </div>
                       <!----------------------FOLLOWS--------------------->     
         <div class="amis">
           <h1 class="h1Lobby">{{ $t("amis_co") }}</h1>
-            <div class="infos" v-for="gen in gens" :key="gen.pseudo" >
-            <img class="pp" v-bind:src="gen.photo" alt="photo de profil"> 
+            <div class="infos" v-for="player in players" :key="player.pseudo" >
+            <img class="pp" v-bind:src="player.photo" alt="photo de profil"> 
               <div class="txtzone">
-                <div class="pseudo" @click="checkFollow(gen.pseudo)">{{gen.pseudo}}</div>
+                <div class="pseudo" @click="checkFollow(player.pseudo)">{{player.pseudo}}</div>
                 <button type="button" class="bt_inviter" >{{ $t("inviter") }}</button>
               </div>
             </div>
+            <h3 style="padding-top:15%"> Room ID: </h3>
+            <input type="text"  style="width:100%;" v-model="roomId" readonly>
+
         </div>
     </div>
   <Footer></Footer>
@@ -131,15 +125,14 @@
 
 
 <script>
+
+//window.addEventListener('load', switchToggle);
 import Footer from './MyFooter'
 import Header from './MyHeader'
 
 export default {
     name: 'LobbyPage',
-    props: { /* Props  est un attribut que vous pouvez
-                definir au niveau du composant qui sera
-                transmis directement au template. */
-      tit: String
+    props: {
     },
 
     components: {
@@ -148,44 +141,54 @@ export default {
   },
   data: function() {
     return { 
-      gens: [
+      players: [
         {
             photo : require('../assets/grin.png'),
-            pseudo : 'pla'
+            pseudo : 'pla',
+            username: 'ra'
         },
         {
             photo : require('../assets/grin.png'),
-            pseudo : 'Joueur 2'
+            pseudo : 'Joueur 2',
+            username: 'ra'
         },
         {
             photo : require('../assets/grin.png'),
-            pseudo : 'Joueur 3'
+            pseudo : 'Joueur 3',
+            username: 'ra'
         },
         {
             photo : require('../assets/grin.png'),
-            pseudo : 'Joueur 4'
+            pseudo : 'Joueur 4',
+            username: 'ra'
         },
         {
             photo : require('../assets/grin.png'),
-            pseudo : 'Joueur 5'
+            pseudo : 'Joueur 5',
+            username: 'ra'
         },
         {
             photo : require('../assets/grin.png'),
-            pseudo : 'Joueur 6'
+            pseudo : 'Joueur 6',
+            username: 'hila'
         },
         {
             photo : require('../assets/grin.png'),
-            pseudo : 'Joueur 7'
-        },
+            pseudo : 'Joueur 7',
+            username: 'geoffrey'
+       },
         {
             photo : require('../assets/grin.png'),
-            pseudo : 'Joueur 8'
+            pseudo : 'Joueur 8',
+            username: 'Etienne'
         }
       ],
 
       tempsAction: '30',
       tourMax : 2,
-      sommeDepart : 0      
+      sommeDepart : 0 ,
+      botDifficulty: 0  ,
+      roomId: 3345   
     }
   },
   methods: {
@@ -203,6 +206,41 @@ export default {
       }
       return booleen;
     },
+    ownToggle: function(usernameToCompare) {
+      console.log(this.$store.state.username+"\n"+ usernameToCompare)
+      if (this.$store.state.username == usernameToCompare) {
+        return true
+      }
+      return false
+    },
+
+
+    // METHODES BOT
+    modifyBotLevel: function(ajout)
+    {
+      console.log(ajout +" "+ this.botDifficulty)
+      if(!((this.botDifficulty == 0 && ajout < 0) || (ajout > 0 && this.botDifficulty == 8)))
+      {
+        this.botDifficulty += ajout
+        console.log(this.botDifficulty)
+      }
+    },
+
+    ajoutBot: function() {
+      console.log(this.botDifficulty)
+      // envoi de l'id du joueur (pq?) et de l'id de la room aussi
+    },
+
+
+
+    //METHODE RECUPERANT LA LISTE DES JOUEURS RECUE DANS LE PAQUET
+    updateListPlayers(message)
+    {
+      console.log(message.listPlayers)
+      this.players = message.listPlayers
+    },
+
+    // METHODES LIANT AUX PROFILS
     checkSameProfil(nameProfile) {
       if (nameProfile == this.$store.state.username) {
           this.$store.commit('checkingSameProfile',true);       
@@ -217,6 +255,12 @@ export default {
         ownName: this.$store.state.username
       })
       this.$store.commit('changeFollowState',true);
+    },
+
+    wantToQuit: function() {
+      console.log(this.$store.state.id+"\n"+ this.roomId)
+      // paquet envoyé pour demander à sortir
+      this.$router.push('/post_login')
     }
   }
 }

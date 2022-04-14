@@ -32,6 +32,7 @@ export default {
   methods: {
         setPrive: function (privateOrNot) {
                 this.$store.commit('setLobby',privateOrNot)
+                this.$store.commit('setHost',true)
                 this.$router.push('/lobby')
 
         },
