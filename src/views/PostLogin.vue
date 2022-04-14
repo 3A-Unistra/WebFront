@@ -19,7 +19,7 @@
                 </button>
             </div>
             <div class="liste_salon" v-for="salon in salonsAffichables" :key="salon.name">
-                <Salon  :maxNbPlayers="salon.maxNbPlayers" :nameLobby="salon.name" :nbPlayers="salon.nbPlayers" :public="salon.public"></Salon>
+                <Salon  :maxNbPlayers="salon.maxNbPlayers" :nameLobby="salon.name" :nbPlayers="salon.nbPlayers" :private="salon.private"></Salon>
                 </div>
         </section>
 
@@ -51,15 +51,15 @@ export default {
   data () {
       return {
         listeSalons: [
-            { id:1, name:'salon1', public: true, nbPlayers:8, maxNbPlayers:8 },
-            { id:2, name:'salon2', public: true, nbPlayers:7, maxNbPlayers:8  },
-            { id:3, name:'salon3', public: false, nbPlayers:3, maxNbPlayers:8 },
-            { id:4 ,name:'salon4', public: false, nbPlayers:8, maxNbPlayers:8  },
+            { id:1, name:'salon1', private: true, nbPlayers:8, maxNbPlayers:8 },
+            { id:2, name:'salon2', private: true, nbPlayers:7, maxNbPlayers:8  },
+            { id:3, name:'salon3', private: false, nbPlayers:3, maxNbPlayers:8 },
+            { id:4 ,name:'salon4', private: false, nbPlayers:8, maxNbPlayers:8  },
         ],
         newSalon: {
             id:2,
             name:'salon dynamique',
-            public:true,
+            private:true,
             nbPlayers:10,
             maxNbPlayers: 7
         }
@@ -101,7 +101,7 @@ export default {
                     salon.name = oldLobbyNewVersion.name ;
                     salon.nbPlayers = oldLobbyNewVersion.nbPlayers ;
                     salon.maxNbPlayers = oldLobbyNewVersion.maxNbPlayers ;
-                    salon.public = oldLobbyNewVersion.public ;
+                    salon.private = oldLobbyNewVersion.private ;
 
                 }
             })
@@ -115,7 +115,7 @@ export default {
     },
     computed: {
       salonsAffichables: function () {
-        return this.listeSalons.filter(salon => salon.public && salon.nbPlayers < salon.maxNbPlayers)
+        return this.listeSalons.filter(salon => salon.private && salon.nbPlayers < salon.maxNbPlayers)
       }
     }
 }

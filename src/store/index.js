@@ -125,7 +125,6 @@ export default createStore ({
             })
             .then(function (response) {
                 commit('quickId',response.data.ownId)
-                console.log(response.data.ownId);
                 return response
             })
             .catch(function(error) {

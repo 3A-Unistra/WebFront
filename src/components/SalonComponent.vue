@@ -19,7 +19,8 @@ export default {
 
     methods: {
         joinLobby: function() {
-            console.log(this.id+"\n"+this.$state.store.username)
+            console.log(this.$store.state.id+"\n"+this.$store.state.username)
+            this.$router.push('/lobby')
         }
     }
 }
