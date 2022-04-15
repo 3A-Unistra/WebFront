@@ -3,9 +3,10 @@
         <div class="player_rank">
             {{ranking}}
         </div>
-        <div class="player_info">
+        <div class="player_info" @click="toProfil(this.namePlayer)">
             <img id="pfp_result" :src="profilePicture">
-            <p>{{namePlayer}}</p>
+            <p> {{login}}</p>
+
         </div>
         <div class="player_score">
             {{score}}
@@ -62,10 +63,33 @@
 export default {
     props: {
         namePlayer: String,
+        login: String,
         profilePicture: String,
         score: Number,
         ranking: Number
     },
+    methods: {
+        toProfil: function(nameClickedOn) {
+            if (nameClickedOn == this.$store.state.username) {
+                this.$store.commit('checkingSameProfile',true);       
+            } else {
+                this.$store.commit('checkingSameProfile',false);
+            }
+            this.$store.dispatch('getUserProfile',{
+                username:nameClickedOn,
+            })
+
+            this.checkFollow(nameClickedOn)
+        },
+        // METHODES LIANT AUX PROFILS
+        checkFollow: function(pseudoClickedOn) {
+            this.$store.dispatch('getIds', {
+                otherName: pseudoClickedOn,
+                ownName: this.$store.state.username
+            })
+            this.$store.commit('changeFollowState',true);
+        },
+    }
 
     /*data: function() {
     return { 

@@ -14,7 +14,7 @@
           {{ $t("lobby") }}
         </router-link>
         &nbsp;|&nbsp;
-        <router-link to="/profile">
+        <router-link to="/profile" @click="getUserProfile(ownUsername)">
           {{ $t("profil") }}
         </router-link>
         &nbsp;|&nbsp;
@@ -53,10 +53,6 @@
         </div>
       </div>
     </div>
-
-    <!-- <div class="bottom_bar"> -->
-      <!-- <img class="logo" src="../assets/logo_couleur.png" alt="logo"> -->
-    <!-- </div> -->
   </div>
 </template>
 
@@ -70,6 +66,12 @@ export default {
     components: {
       LogOutButton
     },
+    
+    data(){
+      return{
+        ownUsername: this.$store.state.username
+      }
+    },
     methods: {
         dropdown_options() {
           var click = document.getElementById("liste_option");  
@@ -80,6 +82,12 @@ export default {
           else {  
             click.style.display ="none"; 
           }
+        },
+        getUserProfile: function(name){
+            this.$store.dispatch('getUserProfile',{
+                username:name,
+            })
+            this.pseudo = this.$store.state.loginProfil
         }
     }
 };

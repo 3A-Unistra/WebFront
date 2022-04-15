@@ -13,9 +13,9 @@
 
             <form @submit.prevent="createAccount" class="form_container">
                
-                    <input v-model="login" type="text" class="champs_form" required  id="pseudo" aria-describedby="pseudo" :placeholder="$t('enter_pseudo')">
+                    <input v-model="name" type="text" class="champs_form" required  id="pseudo" aria-describedby="pseudo" :placeholder="$t('enter_name')">
                 
-                    <input v-model="name" type="text" class="champs_form" required  id="nom" aria-describedby="nom" :placeholder="$t('enter_name')">
+                    <input v-model="login" type="text" class="champs_form" required  id="nom" aria-describedby="nom" :placeholder="$t('enter_pseudo')">
                 
                     <input v-model="email" type="email" class="champs_form" required  id="email" aria-describedby="emailHelp" :placeholder="$t('enter_mail')">
                 

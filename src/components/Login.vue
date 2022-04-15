@@ -12,7 +12,7 @@
             
             <form @submit.prevent="checkLogin" class="form_container">
                
-                    <input  v-model="login" type="text" class="champs_form" required  id="pseudo" aria-describedby="pseudo" :placeholder="$t('enter_pseudo')">
+                    <input  v-model="username" type="text" class="champs_form" required  id="pseudo" aria-describedby="pseudo" :placeholder="$t('enter_name')">
                                                 
                     <input v-model="password" type="password" class="champs_form" required  id="password" :placeholder="$t('enter_password')">
                     
@@ -46,19 +46,22 @@ export default {
     },
     data () {
       return {
-        login: '',
+        username: '',
         password: ''
       }
   },
     methods: {
         checkLogin: function() {
             this.$store.dispatch('checkLogin', {
-              login: this.login,
+              username: this.username,
               password: this.password,
           }),
-            this.$store.commit('rentreusrname',this.login); // on garde le nom pour comparer aux autres profils
+            this.$store.commit('rentreusrname',this.username); // on garde le nom pour comparer aux autres profils
             this.$store.commit('gettingin',true); // on passe en état connecté
-        }
+            this.$store.dispatch('getOwnId',{
+                name:this.username
+            })
+        },
     }
 }
 
