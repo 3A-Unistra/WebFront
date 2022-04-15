@@ -15,7 +15,7 @@ export default createStore ({
         pseudoClickedOn: "",
         usernameProfil: "",
         loginProfil: "",
-        pawnProfil: ""
+        pawnProfil: Math.floor(Math.random()*7)
         
     },
     actions: {
