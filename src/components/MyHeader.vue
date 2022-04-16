@@ -4,24 +4,24 @@
       <img class="logo_coin" src="../assets/logo_couleur.png" alt="logo">
       <div class="login">
         <router-link to="/signup">{{ $t("signup") }}</router-link>
-        &nbsp;/&nbsp;
+        <span class="sp_menu">&nbsp;|&nbsp;</span>
         <router-link to="/login">{{ $t("login") }}</router-link>
       </div>
       <div class="top_right">
-        <router-link to="/post_login">postlogin</router-link>
-        &nbsp;|&nbsp;
-        <router-link to="/lobby">
-          {{ $t("lobby") }}
-        </router-link>
-        &nbsp;|&nbsp;
-        <router-link to="/profile" @click="getUserProfile(ownUsername)">
-          {{ $t("profil") }}
-        </router-link>
-        &nbsp;|&nbsp;
         <router-link to="/">
           {{ $t("home") }}
         </router-link>
-        &nbsp;|&nbsp;
+        <span class="sp_menu">&nbsp;|&nbsp;</span>
+        <router-link to="/lobby">
+          {{ $t("lobby") }}
+        </router-link>
+        <span class="sp_menu">&nbsp;|&nbsp;</span>
+        <router-link to="/profile" @click="getUserProfile(ownUsername)">
+          {{ $t("profil") }}
+        </router-link>
+        <span class="sp_menu">&nbsp;|&nbsp;</span>
+        <router-link to="/post_login">postlogin</router-link>
+        <!-- <span class="sp_menu">&nbsp;/&nbsp;</span> -->
         <div class="options">
           <button @click="dropdown_options"></button>
           <ul id="liste_option">            
@@ -181,8 +181,8 @@ a:hover {
 }
 
 .options button {
-  width: 100%;
-  height: 100%;
+  width: inherit;
+  height: inherit;
   background-image: url(../assets/rouage.png);
   background-size: cover;
   background-color: transparent;
@@ -330,104 +330,70 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
+/* Mode mobile */
 @media screen and (max-width: 480px) {
-  
   .haut {
     height: 40vh;
     font-size: 15px;
   }
-  .top_bar {
-    justify-content: space-between;
-    padding: 1% 0;
+  .login{
+    margin-top:90px;
+    margin-left:190px;
+    padding:3px 10px 3px 10px;
+    width:auto;
+   
   }
-  .logo_coin {
-    padding-left: 3%;
-    padding-right: 3% ;
+  .top_bar{
+    margin-left: -50px;
+    flex-direction:row;
+    box-sizing:unset;
   }
-  .logo{
-    max-height: 92%;
-    max-width: 92%;
+  .logo_coin{
+    display:none;
   }
-  .login {
-    width: inherit;
-    height: 49%;
-    font-size: 1vh;
-    align-items: center;
+  .options button{
+   width: inherit;
+  height: inherit;
   }
-
-  .top_right {
-    width: 20%;
-  }
-
-  .top_right a {
-    font-size: 0.8vh;
-  }
-  #liste_option {
-    top: 4%;
-    right: 2%;
-    width: 40%;
-  }
-  .options {
-    width: 30px;
-    height: 30px;
-  }
-  .options button {
-    width: inherit;
-    height: inherit;
-  }
-
-  .titre_dropdown {
-    font-size: 1.6vh;
-  }
-
-  .list_elem:nth-child(2) {
-    font-size: inherit;
-    padding-bottom: 5%;
-  }
-
-}
-
-@media screen and (min-width: 481px) and (max-width: 810px) {
   
-  .logo_coin {
-    padding-left: 5%;
-  }
-
-  .top_bar {
-    padding: 1% 0;
-  }
-
-  .top_right a {
-    font-size: 1.5vh;
-  }
-
-  .login {
-    width: 22vh;
-    height: 43%;
-    font-size: 1.6vh;
-  }
-
-  .options {
-    width: 50px;
-    height: 50px;
-  }
-  .options button {
-    width: inherit;
-    height: inherit;
-  }
-
-  #liste_option {
-    width: 30%;
-    right: 2%;
-  }
-
-
-.symbol_mode {
-  width: 32px;
-  height: 32px;
 }
 
+/* mode tablette */
+@media screen and (min-width: 480px) and (max-width: 1000px) {
+  html{
+    margin: 0;
+    padding: 0;
+  }
+ .top_bar{
+   flex-wrap: wrap;
+   flex-direction:column;
+   justify-content:center;
+   box-sizing:unset;
+ }
+ .haut {
+    height: 40vh;
+    font-size: 15px;
+  }
+  .sp_menu{
+    display: none;
+  }
 
+  .top_right{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    box-sizing:unset;
+    margin-top:100px;
+    margin-right:-150px;
+  }
+  .logo_coin{
+    display:none;
+  }
+  .options button{
+   width: inherit;
+  height: inherit;
+  }
+  
 }
 
 </style>
