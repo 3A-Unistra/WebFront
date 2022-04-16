@@ -22,7 +22,7 @@ export default createStore ({
         loginProfil: "",
         pawnProfil: "",
 
-        publicLobby: false  ,
+        publicLobby: false,
         isHost: false
 
     },
