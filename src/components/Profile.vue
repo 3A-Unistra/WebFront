@@ -314,4 +314,81 @@ export default {
     border-bottom: 1px solid #222121;
     }
 
+    
+
+    /* Version mobile */
+    @media screen and (max-width: 480px) {
+        .container{
+            display:flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+        }
+        .info_txt{
+            margin-left:-50px;
+        }
+        /* .txt_et_champ{
+            width:100px;
+        } */
+        .titre_nom{
+            min-width: 250px;
+        }
+        .img_cropper{
+            margin-left: 125%;
+        }
+        .champP{
+            max-width: 100px;
+        }
+        .information{
+            min-width:100%;
+        }
+        .txt_et_champ div{
+            min-width:130px;
+        }
+        .info_bouton{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        .champEdit{
+            max-width: 150px;
+        }
+    }
+    /* version tablette */
+    @media screen and (min-width: 480px) and (max-width: 1200px) {
+         .container{
+            display:flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+        }
+        .info_txt{
+            margin-left:-50px;
+        }
+        /* .txt_et_champ{
+            width:100px;
+        } */
+        .titre_nom{
+            min-width: 250px;
+        }
+        .img_cropper{
+            margin-left: 125%;
+        }
+        .champP{
+            max-width: 100px;
+        }
+        .information{
+            min-width:100%;
+        }
+        .txt_et_champ div{
+            min-width:130px;
+        }
+        .info_bouton{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        .champEdit{
+            max-width: 150px;
+        }
+    }
+
 </style>

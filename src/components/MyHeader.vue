@@ -360,10 +360,7 @@ input:checked + .slider:before {
 
 /* mode tablette */
 @media screen and (min-width: 480px) and (max-width: 1000px) {
-  html{
-    margin: 0;
-    padding: 0;
-  }
+ 
  .top_bar{
    flex-wrap: wrap;
    flex-direction:column;
@@ -384,7 +381,7 @@ input:checked + .slider:before {
     flex-wrap: wrap;
     box-sizing:unset;
     margin-top:100px;
-    margin-right:-150px;
+    margin-right:-90px;
   }
   .logo_coin{
     display:none;

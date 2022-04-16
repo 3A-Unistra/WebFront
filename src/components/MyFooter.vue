@@ -197,6 +197,7 @@ hr {
     font-size:30px;
 }
 
+
 @media screen and (max-width: 700px) {
     
     #liens{
@@ -251,6 +252,9 @@ hr {
     }
     .n3{
         margin-left: 20px;
+    }
+    .store_redirection{
+        max-width: 500px;
     }
 }
 
