@@ -236,11 +236,6 @@ export default {
         flex-direction: column;
     }
 
-    .liste_salon{
-        /* overflow-x: hidden;
-        overflow-y: auto; */
-    }
-
     @media screen and (min-width: 850px) and (max-width: 1200px) {
         .container{
             flex-direction: column;

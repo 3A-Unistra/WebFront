@@ -69,7 +69,7 @@ components: {
     }
     .champs_form{
         display: flex;
-        min-width: 600px;
+        width: 600px;
         padding:15px;
         border-radius:10px;
         border:1px solid #835B0E;
@@ -125,4 +125,33 @@ components: {
        background-color:#222121;
     }
 
+    /* mode tablette*/
+    @media screen and (max-width: 700px) {
+        .champs_form{
+            max-width: 500px;
+        }
+        .forget_title{
+            font-size:30px;
+            margin-top:10px;
+        }
+        .btn_container{
+            flex-direction: column;
+            align-items: center;
+        }
+        .bnt_nul{
+            margin-bottom: 15px;
+        }
+        .btn{
+            width:200px;
+        }
+        .content_forget{
+            height:auto;
+            width:90%;
+        }
+    }
+
+    /* mode telephone */
+    @media screen and (max-width: 480px){
+
+    }
 </style>
