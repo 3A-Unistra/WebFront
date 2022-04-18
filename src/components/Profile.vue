@@ -338,6 +338,9 @@ export default {
         .champP{
             max-width: 100px;
         }
+        input{
+            max-width: 220px;
+        }
         .information{
             min-width:100%;
         }
