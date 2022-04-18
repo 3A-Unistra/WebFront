@@ -1,43 +1,7 @@
 <template>
   <Header></Header>
     <div class="bodyL">
-                      <!---------------------PARTICIPANTS-------------------->
-        <div class="part">
-          <h1 class="h1Lobby">{{ $t("participants") }}</h1>
-
-          <div class="infos" v-for="player in players" :key="player.pseudo" >
-            <img class="pp" v-bind:src="player.photo" alt="photo de profil">
-            <div class="txtzone">
-              <div class="pseudo" @click="checkFollow(player.pseudo)">{{player.pseudo}}</div>
-              
-              <!-- PARTIE TOGGLE -->
-              <label class="switch prt" v-if="ownToggle(player.username) == true"> 
-                <input type="checkbox" class="t_attente" :disabled="this.$store.state.isFollowing == true">
-                <span class="slider round prts" :disabled="this.$store.state.isFollowing  == true"></span>
-                <span class="labels" data-on="PRÊT!" data-off="" :disabled="this.$store.state.isFollowing == true"></span> 
-              </label>  
-
-            </div>
-          </div>
-
-          <div class="infosb">
-            <div class="titrebot">
-              <img class="botbleu" src="../assets/botbleu.png" alt="robot bleu">
-              <h1 class="bot">BOT</h1>
-            </div>
-            <div class="diff">
-              <button type="button" @click="modifyBotLevel(-1)" class="diff_bot"><img class="chevron" @click="modifyBotLevel(-1)"  src="../assets/chevrons_gauche.png"></button>
-              <div class="lobby_title" id="txtdif">
-                {{ $t("difficulte_bot") }}: <input type="text"  style="width:40px;" v-model="botDifficulty" readonly></div>
-              <button type="button" class="diff_bot"><img class="chevron" @click="modifyBotLevel(1)"  src="../assets/chevrons_droite.png"></button>
-            </div>
-            
-          <button type="button" @click="ajoutBot" class="bt_ajout_bot">{{ $t("ajout_bot") }} <img class="botnoir" src="../assets/botnoir.png"></button>
-          </div>
-          
-          
-        </div>
-                      <!----------------------PARAMETRES--------------------->
+              <!----------------------PARAMETRES--------------------->
         <div class="param">
           <h1 class="h1Lobby">{{ $t("param_salon") }}</h1>
 
@@ -105,20 +69,60 @@
           
           <button type="button" @click="wantToQuit" class="bt_quitter">{{ $t("quitter") }}</button>
         </div>
-                      <!----------------------FOLLOWS--------------------->     
-        <div class="amis">
-          <h1 class="h1Lobby">{{ $t("amis_co") }}</h1>
+
+                      <!---------------------PARTICIPANTS-------------------->
+        <div class="container_amis_part">
+          <div class="part">
+            <h1 class="h1Lobby">{{ $t("participants") }}</h1>
+
             <div class="infos" v-for="player in players" :key="player.pseudo" >
-            <img class="pp" v-bind:src="player.photo" alt="photo de profil"> 
+              <img class="pp" v-bind:src="player.photo" alt="photo de profil">
               <div class="txtzone">
                 <div class="pseudo" @click="checkFollow(player.pseudo)">{{player.pseudo}}</div>
-                <button type="button" class="bt_inviter" >{{ $t("inviter") }}</button>
+                
+                <!-- PARTIE TOGGLE -->
+                <label class="switch prt" v-if="ownToggle(player.username) == true"> 
+                  <input type="checkbox" class="t_attente" :disabled="this.$store.state.isFollowing == true">
+                  <span class="slider round prts" :disabled="this.$store.state.isFollowing  == true"></span>
+                  <span class="labels" data-on="PRÊT!" data-off="" :disabled="this.$store.state.isFollowing == true"></span> 
+                </label>  
+
               </div>
             </div>
-            <h3 style="padding-top:15%"> Room ID: </h3>
-            <input type="text"  style="width:100%;" v-model="roomId" readonly>
+
+            <div class="infosb">
+              <div class="titrebot">
+                <img class="botbleu" src="../assets/botbleu.png" alt="robot bleu">
+                <h1 class="bot">BOT</h1>
+              </div>
+              <div class="diff">
+                <button type="button" @click="modifyBotLevel(-1)" class="diff_bot"><img class="chevron" @click="modifyBotLevel(-1)"  src="../assets/chevrons_gauche.png"></button>
+                <div class="lobby_title" id="txtdif">
+                  {{ $t("difficulte_bot") }}: <input type="text"  style="width:40px;" v-model="botDifficulty" readonly></div>
+                <button type="button" class="diff_bot"><img class="chevron" @click="modifyBotLevel(1)"  src="../assets/chevrons_droite.png"></button>
+              </div>
+              
+            <button type="button" @click="ajoutBot" class="bt_ajout_bot">{{ $t("ajout_bot") }} <img class="botnoir" src="../assets/botnoir.png"></button>
+            </div>
+          </div>
+
+                        <!----------------------FOLLOWS--------------------->     
+          <div class="amis">
+            <h1 class="h1Lobby">{{ $t("amis_co") }}</h1>
+              <div class="infos" v-for="player in players" :key="player.pseudo" >
+              <img class="pp" v-bind:src="player.photo" alt="photo de profil"> 
+                <div class="txtzone">
+                  <div class="pseudo" @click="checkFollow(player.pseudo)">{{player.pseudo}}</div>
+                  <button type="button" class="bt_inviter" >{{ $t("inviter") }}</button>
+                </div>
+              </div>
+              <h3 style="padding-top:15%"> Room ID: </h3>
+              <input type="text"  style="width:100%;" v-model="roomId" readonly>
+          </div>
 
         </div>
+        
+       
     </div>
   <Footer></Footer>
 </template>
@@ -655,5 +659,103 @@ color : #c6c6c6;
   color: #eb0707;
   font-weight: bold;
 }
+.amis input{
+  max-width:80%;
+}
 
+/* mode tablette */
+ @media screen  and (max-width: 1040px) {
+  .bt_inviter{
+    margin-left:-3%;
+  }
+  .bodyL{
+    flex-direction: column;
+  }
+
+  .part{
+
+  display:block;
+  width:49%;
+
+  }
+  .amis{
+    
+    display:block;
+    width:49%;
+  }
+
+  .param{
+  width:100%;
+  padding-bottom: 50px;
+  }
+  .champ{
+  max-width: 170px;
+  }
+  .container_amis_part{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  }
+  .bt_ajout_bot{
+  max-width:200px;
+  }
+  .h1Lobby{
+    font-size: 30px;
+  }
+ }
+ /* mode telephone */
+  @media screen and (max-width: 550px)  {
+  .container_amis_part{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  }
+  .bt_ajout_bot{
+  max-width:200px;
+  margin-left: 0px;
+  }
+  .botnoir{
+    display: none;
+    padding:0px;
+  }
+  .h1Lobby{
+    font-size: 25px;
+  }
+  .slider{
+    min-width:70px;
+  }
+  }
+  /* mode pc */
+  @media screen and (min-width: 1040px)  {
+  .container_amis_part{
+    display:contents;
+  }
+  .part{
+    order: 1;
+  }
+  .param{
+    order: 2;
+    width:60%;
+  }
+  .amis{
+    order: 3;
+  }
+    .bt_inviter{
+    margin-left:-1%;
+  }
+  .amis input{
+    margin-left:1.5em;
+  }
+  .haut{
+  height:10vh;
+  padding-top: 30px;
+  background-size:inherit;
+  }
+
+  .login{
+    display: none;
+  }
+  }
 </style>
