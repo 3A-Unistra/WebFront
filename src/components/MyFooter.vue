@@ -5,7 +5,7 @@
         </div>
         <div id="liens">
             
-            <ul class="list_footer">
+            <ul class="list_footer n1">
                 <li class="menu_title"> Menu </li>
                 <hr>
                 <li class="menu_info"><router-link class="menu_ff" to="/">{{ $t("home") }}</router-link></li>
@@ -13,7 +13,8 @@
                 <li class="menu_info"><router-link class="menu_ff" to="/profile">{{ $t("profil") }}</router-link></li>
                 <li class="menu_info"><router-link class="menu_ff" to="/Lobby">{{ $t("lobby") }}</router-link></li>
             </ul>
-            <ul class="list_footer">
+
+            <ul class="list_footer n2">
                 <li class="menu_title"> {{ $t("reseaux") }} </li>
                 <hr>
                 <li class="menu_logo">
@@ -23,16 +24,16 @@
                 </li>
                 <li class="menu_logo">
                     <a href="">
-                        <img class="social" src="../assets/facebook.png" alt="facebook">
+                        <img class="social fb" src="../assets/facebook.png" alt="facebook">
                     </a>
                 </li>
                 <li class="menu_logo">
                     <a href="">
-                        <img class="social" src="../assets/twitter.png" alt="twitter">
+                        <img class="social twitter" src="../assets/twitter.png" alt="twitter">
                     </a>
                 </li>
             </ul>
-            <ul class="list_footer">
+            <ul class="list_footer n3">
                 <li class="menu_title"> {{ $t("liens") }} </li>
                 <hr>
                 <li class="menu_info">{{ $t("cond_gene") }}</li>
@@ -196,17 +197,20 @@ hr {
     font-size:30px;
 }
 
-@media screen and (max-width: 480px) {
+
+@media screen and (max-width: 700px) {
     
     #liens{
-        width: 100%;
-        justify-content: space-around;
-        height: 70%;
-        margin-right: 0;
-        margin-bottom: 3%;
-        margin-left: 0;
-        padding: 1% 5%;
+       display:flex;
+       flex-direction:column;
+       flex-wrap: wrap;
+       justify-content:flex-start;
+       background-image: url("../assets/BG_Footer.png");
+       background-size: cover;
+       width: 100%;  
+       padding-bottom:20px;
     }
+  
 
     .list_footer:last-child {
         margin-right: 2%;
@@ -219,37 +223,47 @@ hr {
         padding-left: 2%;
         padding-right: 0;
     }
-    /*#insta_size {
-        max-height: 55px;
-        max-width: 55px;
-        padding-bottom: 25%;
-    }
-
-    .social{
-        height: 50px;
-        width: 50px;
-        padding-bottom: 25%;
-    }*/  
+   
 
     #le_chien {
         display: none;
     }
+    .store_parag{
 
-    .store_parag {
-        padding-top:250px;
+        padding-top:40px;
+        
     }
-
+    .store_bg{
+        
+        margin-top:-55px;
+        
+    }
     .menu_info{
     font-size:15px;
     }
+    .n2{
+        margin-left: -20px;
+    }
+    .fb{
+        margin-left: 3px;
+    }
+    .twitter{
+        margin-left: 0px;
+    }
+    .n3{
+        margin-left: 20px;
+    }
+    .store_redirection{
+        max-width: 500px;
+    }
 }
 
-@media screen  and (min-width: 481px) and (max-width: 810px) {
+@media screen  and (min-width: 700px) and (max-width: 1010px) {
     .list_footer {
         padding: 1% 5%;
     }
     #le_chien {
-        margin-left: 73%;
+        display:none;
     }
     .list_footer:last-child {
         padding-right: 5%;
@@ -258,6 +272,7 @@ hr {
         justify-content: space-around;
         max-width: 100%;
         height: 50%;
+        width:90%;
     }
     .bottom {
         width: 100%;

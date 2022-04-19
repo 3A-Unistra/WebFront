@@ -130,8 +130,8 @@ export default {
     .container {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
-    gap: 50px;
+    justify-content: space-around;
+    /* gap: 50px; */
     margin-top:20px;
     padding-bottom: 20px;
     }
@@ -140,13 +140,13 @@ export default {
     display: flex;
     flex-direction: column;
     font-weight: bold;
-    gap: 30px;
+    /* gap: 30px; */
     padding: 30px 0px 30px 0px;
     }
 
     .info_salon {
-    padding: 15px 70px 30px 70px;
-    width: 80%;
+    padding: 15px 20px 30px 20px;
+    /* width: 80%; */
     height: 550px;
     display: flex;
     background-color:#c6c6c6 ;
@@ -223,10 +223,12 @@ export default {
     }
 
     .champLien{
-        width: 70vh;
+        width: 600px;
         height: 50px;
         font-weight: bold;
         padding-left: 20px;
+        border-radius:10px;
+        margin-right:20px;
     }
 
     .opt{
@@ -234,9 +236,72 @@ export default {
         flex-direction: column;
     }
 
-    .liste_salon{
-        overflow-x: hidden;
-        overflow-y: auto;
+    @media screen and (min-width: 850px) and (max-width: 1200px) {
+        .container{
+            flex-direction: column;
+            justify-content:center;
+        }
+        .opt{
+            margin-bottom: 30px;
+            margin-left:30%;
+        }
+        .info_salon{
+            min-width:90%;
+            margin: 0px;
+        }
+        .champLien{
+            border-radius:10px;
+            margin-left: 10px;
+        }
+
     }
+     @media screen and (min-width: 300px) and (max-width: 850px) {
+         .container{
+            flex-direction: column;
+            justify-content:center;
+        }
+        .opt{
+            margin-bottom: 30px;
+            margin-left:30%;
+        }
+        .info_salon{
+            min-width:90%;
+            margin: 0px;
+        }
+        .champLien{
+            border-radius:10px;
+            padding-left:15px;
+            /* margin-left: 10px; */
+        }
+         .salon{
+             display:flex;
+             flex-direction:row;
+             flex-wrap: wrap;
+             justify-content: space-around;
+             max-width: 500px;
+             height:auto;
+             padding-bottom: 10px;
+             /* padding-top: 10px; */
+         }
+         .icone{
+             display: none;
+         }
+         .nom_salon{
+             display: block;
+             margin-right: 15px;
+         }
+         .nbr_part{
+             display: block;
+            margin-right: 15px;
+
+         }
+         .rej_salon{
+             display: block;
+         }
+         .rej_salon{
+             margin-left: 10%;
+         }
+     }
+
 
 </style>
