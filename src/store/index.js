@@ -209,8 +209,42 @@ export default createStore ({
             .catch(function(error) {
                 console.log(error);
                 return false;
+            }); 
+        } , 
+        checkforgot:({commit},userInfos) => {
+            commit;
+            axios.post('http://localhost:3000/api/users/forget',userInfos, {
+                
+            headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(function () {
+                //console.log(response);
+                router.push('/Login');
+            })
+            .catch(function(error) {
+                console.log(error);
             });
-        }
+        },
+        checkreset:({commit},userInfos) => {
+            commit;
+            axios.post('http://localhost:3000/api/users/reset/:token',userInfos, {
+                
+            headers: {
+                    'Content-Type': 'application/json'
+                }
+            })  
+            .then(function(response) {
+                console.log(response);
+                router.push('/Login');
+            })
+            
+            .catch(function(error) {
+                console.log(error);
+            });
+        },        
+    
 
     },
     getters: {
