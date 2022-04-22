@@ -1,15 +1,8 @@
 <template>
-
-
-
-
   <div class="haut">
     <div class="top_bar">
-
-      <!-- <img class="logo_coin" src="../assets/logo_couleur.png" alt="logo"> -->
+      <img class="logo_coin" src="../assets/logo_couleur.png" alt="logo">
       <div class="login">
-
-        
         <router-link to="/signup">{{ $t("signup") }}</router-link>
         <span class="sp_menu">&nbsp;|&nbsp;</span>
         <router-link to="/login">{{ $t("login") }}</router-link>
@@ -346,6 +339,7 @@ input:checked + .slider:before {
 
 /* Mode mobile */
 @media screen and (max-width: 480px) {
+
   .haut {
     height: 40vh;
     font-size: 15px;
