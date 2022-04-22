@@ -1,28 +1,35 @@
 <template>
   <div class="haut">
     <div class="top_bar">
-      <img class="logo_coin" src="../assets/logo_couleur.png" alt="logo">
-      <div class="login">
+
+      <!-- <img class="logo_coin" src="../assets/logo_couleur.png" alt="logo"> -->
+        <div class="top_right lead" >
+          
+          <div class="Menu_principale">
+
+            <router-link to="/">
+              {{ $t("home") }}
+            </router-link>
+            <span class="sp_menu">&nbsp;|&nbsp;</span>
+            <router-link to="/lobby">
+              {{ $t("lobby") }}
+            </router-link>
+            <span class="sp_menu">&nbsp;|&nbsp;</span>
+            <router-link to="/profile" @click="getUserProfile(ownUsername)">
+              {{ $t("profil") }}
+            </router-link>
+            <span class="sp_menu">&nbsp;|&nbsp;</span>
+            <router-link to="/post_login">Postlogin</router-link>
+            <!-- <span class="sp_menu">&nbsp;/&nbsp;</span> -->
+          </div>
+        </div>
+
+           <div class="login">
         <router-link to="/signup">{{ $t("signup") }}</router-link>
         <span class="sp_menu">&nbsp;|&nbsp;</span>
         <router-link to="/login">{{ $t("login") }}</router-link>
       </div>
-      
-      <div class="top_right lead" >
-        <router-link to="/">
-          {{ $t("home") }}
-        </router-link>
-        <span class="sp_menu">&nbsp;|&nbsp;</span>
-        <router-link to="/lobby">
-          {{ $t("lobby") }}
-        </router-link>
-        <span class="sp_menu">&nbsp;|&nbsp;</span>
-        <router-link to="/profile" @click="getUserProfile(ownUsername)">
-          {{ $t("profil") }}
-        </router-link>
-        <span class="sp_menu">&nbsp;|&nbsp;</span>
-        <router-link to="/post_login">Postlogin</router-link>
-        <!-- <span class="sp_menu">&nbsp;/&nbsp;</span> -->
+
         <div class="options">
           <button @click="dropdown_options"></button>
           <ul id="liste_option">            
@@ -37,7 +44,7 @@
                 </select>
               </div> 
             </li>
-
+<!-- 
             <span class="titre_dropdown">
               {{ $t("affichage") }}:
             </span>
@@ -48,13 +55,13 @@
                 <span class="slider round"></span>
               </label>
               <img class="symbol_mode" src="../assets/lune_dark.png">
-            </div>
+            </div> -->
             <LogOutButton style="margin-bottom: 0;"></LogOutButton>
           </ul>
         </div>
       </div>
     </div>
-  </div>
+
 
 </template>
 
@@ -111,6 +118,7 @@ export default {
   font-size: 2vh;
   z-index: 3;
   }
+
 
 .top_bar {
   display: flex;
@@ -335,6 +343,14 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+button.deconnection{
+  max-width:120px;
+  height:100%;
+  font-size:12px;
+}
+.deconnection .icone{
+  max-width: 25%;
 }
 
 /* Mode mobile */
