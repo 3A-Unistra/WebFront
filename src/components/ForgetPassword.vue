@@ -8,10 +8,9 @@
             </form>
 
                 <div CLASS="btn_container">
-
-                        <button href="#" class="btn btn-help bnt_nul">Annuler</button>
+                     <button href="#" class="btn btn-help bnt_nul">Annuler</button>
                         <button type="submit" class="btn  btn_rec">Récupérer</button>
-                    </div>
+                </div>
             </section>
         </div>
     <Footer></Footer>
