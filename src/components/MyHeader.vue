@@ -1,13 +1,21 @@
 <template>
+
+
+
+
   <div class="haut">
     <div class="top_bar">
-      <img class="logo_coin" src="../assets/logo_couleur.png" alt="logo">
+
+      <!-- <img class="logo_coin" src="../assets/logo_couleur.png" alt="logo"> -->
       <div class="login">
+
+        
         <router-link to="/signup">{{ $t("signup") }}</router-link>
         <span class="sp_menu">&nbsp;|&nbsp;</span>
         <router-link to="/login">{{ $t("login") }}</router-link>
       </div>
-      <div class="top_right">
+      
+      <div class="top_right lead" >
         <router-link to="/">
           {{ $t("home") }}
         </router-link>
@@ -20,7 +28,7 @@
           {{ $t("profil") }}
         </router-link>
         <span class="sp_menu">&nbsp;|&nbsp;</span>
-        <router-link to="/post_login">postlogin</router-link>
+        <router-link to="/post_login">Postlogin</router-link>
         <!-- <span class="sp_menu">&nbsp;/&nbsp;</span> -->
         <div class="options">
           <button @click="dropdown_options"></button>
@@ -54,6 +62,7 @@
       </div>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -140,6 +149,7 @@ a {
 
 .top_right a {
   color: black;
+  font-size: 18px;
 }
 .login {
   display: flex;
@@ -181,13 +191,17 @@ a:hover {
 }
 
 .options button {
-  width: inherit;
-  height: inherit;
-  background-image: url(../assets/rouage.png);
+  /* width: inherit;
+  height: inherit; */
+  background-image: url(../assets/settings.png);
   background-size: cover;
   background-color: transparent;
   border: none;
   cursor: pointer;
+  width:25px;
+  height:25px;
+  margin-left: 20px;
+  margin-top: 10px;
 }
 
 #liste_option {
@@ -392,5 +406,6 @@ input:checked + .slider:before {
   }
   
 }
+
 
 </style>

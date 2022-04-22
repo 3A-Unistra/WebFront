@@ -9,8 +9,8 @@
 
                 <div CLASS="btn_container">
 
-                        <button href="#" class="btn btn-help bnt_nul">annuler</button>
-                        <button type="submit" class="btn  btn_rec">recuperer</button>
+                        <button href="#" class="btn btn-help bnt_nul">Annuler</button>
+                        <button type="submit" class="btn  btn_rec">Récupérer</button>
                     </div>
             </section>
         </div>
@@ -94,7 +94,7 @@ components: {
         margin-top:30px;
     }
     .btn_rec{
-        display: flex;
+        display: block;
         justify-content: center;
         background-color:#ca9735;
         padding-left: 40px;
@@ -109,7 +109,7 @@ components: {
         background-color:#694f1b 
         }
     .bnt_nul{
-        display: flex;
+        display: block;
         justify-content: center;
         background-color:grey;
         padding-left: 40px;
@@ -138,9 +138,7 @@ components: {
             flex-direction: column;
             align-items: center;
         }
-        .bnt_nul{
-            margin-bottom: 15px;
-        }
+        
         .btn{
             width:200px;
         }
@@ -148,10 +146,14 @@ components: {
             height:auto;
             width:90%;
         }
+        .bnt_nul{
+            order: 2;
+        }
+        .btn_rec{
+            order: 1;
+             margin-bottom: 15px;
+        }
     }
 
-    /* mode telephone */
-    @media screen and (max-width: 480px){
-
-    }
+    
 </style>
