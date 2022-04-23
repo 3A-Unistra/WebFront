@@ -2,13 +2,13 @@
     <Header></Header>
         <div class="content_forget">
             <section class ="container">
-            <h1 class="animate__animated animate__bounce animate__repeat-2 forget_title">Entrez votre email</h1>
+            <h1 class="animate__animated animate__bounce animate__repeat-2 forget_title">{{ $t("Entrez votre email") }}</h1>
             <form  @submit.prevent="checkforgot" class="form_container">
-                    <input v-model="forgetPass" type="email" class="champs_form" required  id="email" aria-describedby="emailHelp" placeholder="Entrez votre mail pour récupérer votre mot de passe">
+                    <input v-model="forgetPass" type="email" class="champs_form" required  id="email" aria-describedby="emailHelp" :placeholder=" $t('Entrez votre mail pour modifier votre mot de passe')">
                     <div CLASS="btn_container">
 
-                        <button href="#" class="btn btn-help bnt_nul">annuler</button>
-                        <button type="submit" class="btn  btn_rec">recuperer</button>
+                        <button class="btn btn-help bnt_nul" type="button"><router-link to="/Login">{{ $t("Annuler") }}</router-link></button>
+                        <button type="submit" class="btn  btn_rec">{{ $t("recuperer") }}</button>
                     </div>
             </form>
             </section>
@@ -136,6 +136,10 @@ components: {
     .btn_nul:active {
        background-color:#222121;
     }
+    a {
+    text-decoration: none;
+    color:black;
+}
 
     /* mode tablette*/
     @media screen and (max-width: 700px) {

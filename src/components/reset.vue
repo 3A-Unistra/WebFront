@@ -3,13 +3,13 @@
         <div class="content_forget">
            <form @submit.prevent="checkreset">
             <section class ="container">
-            <h1 class="animate__animated animate__bounce animate__repeat-2 forget_title">{{ $t("Entrez votre Nouveau mot de passe")}}</h1>
-               <input v-model="password" type="password" class="champs_form" required  id="zpassword" placeholder="Enter password">
-               <input v-model="confirmpassword" type="password" class="champs_form" required  id="password" placeholder="Confirm password">
+            <h1 class="animate__animated animate__bounce animate__repeat-2 forget_title">{{ $t("Enter Your New Password")}}</h1>
+               <input v-model="password" type="password" class="champs_form" required  id="zpassword" :placeholder=" $t('Enter password')">
+               <input v-model="confirmpassword" type="password" class="champs_form" required  id="password" :placeholder=" $t('Confirm password')">
             </section>
             <div CLASS="btn_container">
 
-                        <button href="#" class="btn btn-help bnt_nul">{{ $t("Annuler")}}</button>
+                        <button class="btn btn-help bnt_nul" type="button"><router-link to="/Login">{{ $t("Annuler") }}</router-link></button>
                         <button type="submit" class="btn  btn_rec">{{ $t("Confirmer")}}</button>
             </div>
             </form>
@@ -130,6 +130,10 @@ components: {
     .btn_nul:active {
        background-color:#222121;
     }
+    a {
+    text-decoration: none;
+    color:black;
+}
     @media screen and (max-width: 450px){
     .champs_form{
         margin-left:0px;
