@@ -2,6 +2,7 @@ import { createStore,/*, storeKey*/ } from "vuex";
 
 const axios = require('axios');
 import router from '../router/index.js';
+axios.defaults.baseURL =process.env.VUE_APP_PATH_API
 
 export default createStore ({
     state: {
@@ -30,7 +31,7 @@ export default createStore ({
     actions: {
         createAccount:({commit},userInfos) => {
             commit;
-            axios.post('http://localhost:3000/api/users/register',userInfos, {
+            axios.post('/users/register',userInfos, {
                 
             headers: {
                     'Content-Type': 'application/json'
@@ -48,7 +49,7 @@ export default createStore ({
 
         checkLogin:({commit},userInfos) => {
             commit;
-            axios.post('http://localhost:3000/api/users/login',userInfos, {
+            axios.post('/users/login',userInfos, {
                 
             headers: {
                     'Content-Type': 'application/json'
@@ -66,7 +67,7 @@ export default createStore ({
         
         getUserProfile:({commit},userInfos) => {
             commit;
-            axios.post('http://localhost:3000/api/users/getProfile',userInfos, {
+            axios.post('/users/getProfile',userInfos, {
                 
             headers: {
                     'Content-Type': 'application/json'
@@ -87,7 +88,7 @@ export default createStore ({
 
         getIds:({commit},userNames) => {
             commit;
-            axios.post('http://localhost:3000/api/users/get_ids',userNames, {
+            axios.post('/users/get_ids',userNames, {
                 
             headers: {
                     'Content-Type': 'application/json'
@@ -118,7 +119,7 @@ export default createStore ({
 
         getOwnId:({commit},username) => {
             commit;
-            return axios.post('http://localhost:3000/api/users/getownid',username, {
+            return axios.post('/users/getownid',username, {
                 
             headers: {
                     'Content-Type': 'application/json'
@@ -135,7 +136,7 @@ export default createStore ({
 
         changeNamePawn:({commit},userInfos) => {
             commit;
-            axios.post('http://localhost:3000/api/users/editProfile',userInfos, {                
+            axios.post('/users/editProfile',userInfos, {                
             headers: {
                     'Content-Type': 'application/json'
                 }
@@ -150,7 +151,7 @@ export default createStore ({
 
         Follow:({commit},userNames) => {
             commit;
-            axios.post('http://localhost:3000/api/users/get_ids',userNames, {
+            axios.post('/users/get_ids',userNames, {
                 
             headers: {
                     'Content-Type': 'application/json'
@@ -159,7 +160,7 @@ export default createStore ({
             .then(function (response) {
                 console.log(response.data.ownId );
                 console.log(response.data.otherId );
-                axios.post('http://localhost:3000/api/users/follow',response.data, {
+                axios.post('/users/follow',response.data, {
                 
                 headers: {
                     'Content-Type': 'application/json'
@@ -182,7 +183,7 @@ export default createStore ({
 
         Unfollow:({commit},userNames) => {
             commit;
-            axios.post('http://localhost:3000/api/users/get_ids',userNames, {
+            axios.post('/users/get_ids',userNames, {
                 
             headers: {
                     'Content-Type': 'application/json'
@@ -191,7 +192,7 @@ export default createStore ({
             .then(function (response) {
                 console.log(response.data.ownId );
                 console.log(response.data.otherId );
-                axios.post('http://localhost:3000/api/users/unfollow',response.data, {
+                axios.post('/users/unfollow',response.data, {
                 
                 headers: {
                     'Content-Type': 'application/json'
