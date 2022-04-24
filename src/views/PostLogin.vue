@@ -5,7 +5,11 @@
     <section class="opt">
       <LogOutButton></LogOutButton>
 
-      <button class="creer_partie" @click="this.$router.push('../components/PreLobby')" type="boutton">
+      <button
+        class="creer_partie"
+        @click="this.$router.push('../components/PreLobby')"
+        type="boutton"
+      >
         {{ $t("creer") }}
         <img class="icone" src="../assets/reseau.png" alt="icone reseau" />
       </button>
@@ -19,17 +23,13 @@
           <img class="icone" src="../assets/verif.png" alt="icone verif" />
         </button>
       </div>
-      <div
-        class="liste_salon"
-        v-for="salon in salonsAffichables"
-        :key="salon.name"
-      >
+      <div class="liste_salon" v-for="(salon,index) in salonsAffichables" :key="salon.name">
         <Salon
           :maxNbPlayers="salon.maxNbPlayers"
           :nameLobby="salon.name"
           :nbPlayers="salon.nbPlayers"
           :private="salon.private"
-           @my-event="joinLobby"
+          @my-event="joinLobby(index)"
         ></Salon>
       </div>
     </section>
@@ -45,56 +45,74 @@ import Footer from "../components/MyFooter";
 import Header from "../components/MyHeader";
 import Salon from "../components/SalonComponent.vue";
 
+
 export default {
   created: function () {
-    if (this.lobbySocketState !== 0) return;
-    this.lobbySocket = new WebSocket("wss://ws.ifelse.io");
-    this.lobbySocketState = 1;
+    this.lobbySocket = new WebSocket('ws://monopoly.schawnndev.fr:80/ws/lobby?token=8a222daf-4b2f-4a32-936a-7820ba3f248a');
     this.lobbySocket.onopen = (e) => {
       console.log("open");
       console.log(e);
-      this.lobbySocketState = 2;
     };
     this.lobbySocket.onerror = (e) => {
       console.log("error");
       console.log(e);
-      this.lobbySocketState = 0;
     };
 
     this.lobbySocket.onclose = (e) => {
       console.log("close");
       console.log(e);
-      this.lobbySocketState = 0;
     };
     this.lobbySocket.onmessage = (e) => {
-      if (e.data === "Request served by d7e94330") {
-        console.log("message");
-      } else {
-        let EnterRoomSucceed = JSON.parse(e.data);
-        console.log(EnterRoomSucceed);
-        if (EnterRoomSucceed.piece >=0) {
-          this.piece = EnterRoomSucceed.piece;
-        }
+      let paquet = JSON.parse(e.data);
+      console.log("contenu du paquet recu quand on envoie un paquet Postlogin : " + e.data)
+      if (paquet.name === "BroadcastNewRoomToLobby") {
+        console.log("un salon a été crée (2). Modification de la liste :")
+        this.$store.commit("createSalon", {
+          id: paquet.game_token,
+          name: paquet.name,
+          private: paquet.is_private,
+          nbPlayers: paquet.nb_players,
+          maxNbPlayers: 8
+        });
+        console.log(this.$store.state.listeSalons)
+        console.log(this.$store.state.listePlayers)
+        console.log("succes")
       }
-    };
+
+      if (paquet.name === "EnterRoomSucceed") {
+        console.log("le joueur a rejoins avec succès le lobby")
+        this.$store.state.piece = paquet.piece
+        this.$router.push("/lobby");
+      }
+      /*if (paquet.name === "BroadcastUpdateLobby") {
+  let index = this.$store.state.listeSalons.indexOf(paquet.token)
+   console.log("index du tableau a mettre a jour : "+ index);
+    switch (paquet.reason) {
+          case 1:
+            console.log("on ajoute un joueur, raison 1")
+            this.$store.commit("ajoutJoueur", index);
+            break;
+          case 2:
+            //this.$store.commit("suppressionJoueur", index);
+            console.log("suppression joueur")
+            break;
+          case 7:
+            console.log("on ajoute un bot, raison 7")
+            this.$store.commit("ajoutJoueur", index);
+            break;
+          default:
+            console.log("ne concerne pas la mise a jour de lobby");
+        }
+    this.$store.commit("updateSalon",{
+      reason : paquet.reason, 
+      token : paquet.game_token,
+    });
+}*/
+    }
   },
   data() {
     return {
       lobbySocket: WebSocket,
-      lobbySocketState: 0,
-      listeSalons: [
-        {id: 1, name: "salon1", private: true, nbPlayers: 8, maxNbPlayers: 8},
-        {id: 2, name: "salon2", private: true, nbPlayers: 7, maxNbPlayers: 8},
-        {id: 3, name: "salon3", private: false, nbPlayers: 3, maxNbPlayers: 8},
-        {id: 4, name: "salon4", private: false, nbPlayers: 8, maxNbPlayers: 8},
-      ],
-      newSalon: {
-        id: 2,
-        name: "salon dynamique",
-        private: true,
-        nbPlayers: 10,
-        maxNbPlayers: 7,
-      },
     };
   },
   name: "PostLoginPage",
@@ -108,58 +126,46 @@ export default {
     logout: function () {
       this.$store.commit("clearUserData"), this.$router.push("/");
     },
-    joinLobby: function () {
+    joinLobby: function (index) {
+      let salonToJoin = this.$store.state.listeSalons[index].id
       let EnterRoom = {
+        name: "EnterRoom",
         player_token: this.$store.state.id,
-        game_token: this.$store.state.username,
+        game_token: salonToJoin,
       };
-      if (this.lobbySocketState === 0){
-        console.log("reconnexion")
-        this.lobbySocket.onopen = (e) => {
-      console.log("open");
-      console.log(e);
-      this.lobbySocketState = 2;       
-     }
-      }
+      console.log("paquet envoyé quand on join la room : " + JSON.stringify(EnterRoom))
       this.lobbySocket.send(JSON.stringify(EnterRoom));
-      this.$router.push("/lobby");
     },
 
-    receptionSalon: function (newSalon) {
-      let foundSalon = 0;
+    deleteSalon: function (index) {
+      this.salon.splice(index, 1)
+    },
+
+    updateSalon: function (gameToken, updateReason) {
+
       this.listeSalons.find((salon) => {
-        if (salon.id == newSalon.id) {
-          foundSalon = 1;
-          this.replace(newSalon);
+
+        if (salon.id === gameToken) {
+          switch (updateReason) {
+            case 1:
+              console.log(salon)
+              salon.nbPlayers++;
+              break;
+            case 2:
+              salon.nbPlayers--;
+              break;
+            default:
+              console.log("ne concerne pas la mise a jour de lobby");
+          }
         }
       });
-      if (foundSalon == 0) {
-        this.addInstance(newSalon);
-      }
-    },
-
-    replace: function (oldLobbyNewVersion) {
-      //on cherche l'id dans la liste des salons déjà présents
-      this.listeSalons.find((salon) => {
-        if (salon.id === oldLobbyNewVersion.id) {
-          salon.name = oldLobbyNewVersion.name;
-          salon.nbPlayers = oldLobbyNewVersion.nbPlayers;
-          salon.maxNbPlayers = oldLobbyNewVersion.maxNbPlayers;
-          salon.private = oldLobbyNewVersion.private;
-        }
-      });
-    },
-
-    addInstance: function (newLobby) {
-      this.listeSalons.push(newLobby);
-      console.log("etape 2");
-      console.log(newLobby.name + " a été ajouté a la liste");
     },
   },
   computed: {
     salonsAffichables: function () {
-      return this.listeSalons.filter(
-        (salon) => salon.private && salon.nbPlayers < salon.maxNbPlayers
+      console.log("tout les salosn a afficher" + JSON.stringify(this.$store.state.listeSalons))
+      return this.$store.state.listeSalons.filter(
+        (salon) => !salon.private && salon.nbPlayers < salon.maxNbPlayers
       );
     },
   },

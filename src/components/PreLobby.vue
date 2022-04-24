@@ -1,9 +1,7 @@
 <template>
   <Header></Header>
   <div v-for="salon in listeSalons" :key="salon.name">
-    <div v-if="salon.public == true && salon.nbPlayers != salon.maxNbPlayers">
-      {{ salon.name }}
-    </div>
+    <div v-if="salon.public == true && salon.nbPlayers != salon.maxNbPlayers">{{ salon.name }}</div>
   </div>
   <button type="button" @click="setPrive(true)">salon privé</button>
   <button type="button" @click="setPrive(false)">salon public</button>
@@ -14,6 +12,7 @@
 <script>
 import Footer from "../components/MyFooter";
 import Header from "../components/MyHeader";
+
 
 export default {
   name: "LoginPage",
@@ -28,7 +27,7 @@ export default {
   },
 
   created: function () {
-    this.lobbySocket = new WebSocket("wss://ws.ifelse.io");
+    this.lobbySocket = new WebSocket('ws://monopoly.schawnndev.fr:80/ws/lobby?token=8a222daf-4b2f-4a32-936a-7820ba3f248a');
     this.lobbySocket.onopen = (e) => {
       console.log("open");
       console.log(e);
@@ -43,25 +42,29 @@ export default {
       console.log(e);
     };
     this.lobbySocket.onmessage = (e) => {
-      if (e.data === "Request served by d7e94330") {
-        console.log("message");
-      } else {
-        let CreateGameSucceed = JSON.parse(e.data);
-        console.log(CreateGameSucceed);
+      let paquet = JSON.parse(e.data)
+      if (paquet.name === 'CreateGameSucceed') {
+        this.$store.commit("setPiece", paquet.piece);
+        this.$store.commit("joinRoom", {
+          photo: '',
+          pseudo:this.$store.state.pseudo,
+          username:this.$store.state.username,
+        });
+        this.$router.push("/lobby");
       }
     };
   },
   methods: {
     createGame: function () {
-      let CreateGame = {
+      let paquet = {
+        name: 'CreateGame',
         player_token: this.$store.state.id,
         is_private: this.$store.state.publicLobby,
       };
-      this.lobbySocket.send(JSON.stringify(CreateGame));
-      //this.$router.push("/lobby");
+      console.log("request for server (1) creating a game :\n " + JSON.stringify(paquet))
+      this.lobbySocket.send(JSON.stringify(paquet));
     },
     setPrive: function (privateOrNot) {
-      console.log("test");
       this.$store.commit("setLobby", privateOrNot);
       this.$store.commit("setHost", true);
       this.createGame();

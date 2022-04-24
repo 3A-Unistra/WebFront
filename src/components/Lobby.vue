@@ -5,17 +5,19 @@
     <div class="part">
       <h1 class="h1Lobby">{{ $t("participants") }}</h1>
 
-      <div class="infos" v-for="(player,index) in players" :key="player.pseudo">
+      <div
+        class="infos"
+        v-for="(player, index) in joueurs"
+        :key="player.pseudo"
+      >
         <div v-if="player.username != ''">
           <img class="pp" v-bind:src="player.photo" alt="photo de profil" />
           <div class="txtzone">
             <div class="pseudo" @click="checkFollow(player.pseudo)">
-              {{ player.pseudo }}
+              {{ player.pseudo }}       
             </div>
             <div v-if="player.username === 'BOT'">
-            <button @click="deleteBot(index)">
-              supprimer
-            </button>
+              <button @click="deleteBot(index)">supprimer</button>
             </div>
 
             <!-- PARTIE TOGGLE -->
@@ -210,43 +212,32 @@
 </template>
 
 <script>
-
 //window.addEventListener('load', switchToggle);
-import Footer from './MyFooter'
-import Header from './MyHeader'
+import Footer from "./MyFooter";
+import Header from "./MyHeader";
+import { mapState } from "vuex";
 
 export default {
-    name: 'LobbyPage',
-    props: {
-    },
+  name: "LobbyPage",
+  props: {},
 
-    components: {
+  components: {
     Header,
-    Footer
+    Footer,
   },
 
-
-  data: function() {
+  data: function () {
     return {
       lobbySocket: WebSocket,
-
-      players: [
-        {
-            photo : '',
-            pseudo : '',
-            username: '',
-        },
-      ],
-
-      tempsAction: '30',
-      tourMax : 2,
-      sommeDepart : 0 ,
-      botDifficulty: 0  ,
-      roomId: 3345
-    }
+      tempsAction: "30",
+      tourMax: 2,
+      sommeDepart: 0,
+      botDifficulty: 0,
+      roomId: 3345,
+    };
   },
-created: function () {
-    this.lobbySocket = new WebSocket("wss://ws.ifelse.io");
+  created: function () {
+    this.lobbySocket = new WebSocket('ws://monopoly.schawnndev.fr:80/ws/lobby?token=8a222daf-4b2f-4a32-936a-7820ba3f248a');
     this.lobbySocket.onopen = (e) => {
       console.log("open");
       console.log(e);
@@ -261,113 +252,135 @@ created: function () {
       console.log(e);
     };
     this.lobbySocket.onmessage = (e) => {
-      if (e.data === "Request served by d7e94330") {
-        console.log("message");
-      } else {
-        let StatusRoom = JSON.parse(e.data);
-        if (StatusRoom.player_token) {
-        this.playerJoined('','test',StatusRoom.player_token)
-        }
+      let paquet = JSON.parse(e.data);
+      console.log("contenu du paquet recu quand on envoie un paquet Postlogin : " + paquet)
+      if (paquet.name === "EnterRoom") {
+        console.log(paquet.player_token)
+        this.playerJoined(paquet.player_token);
       }
-    };
+       if (paquet.name === "LeaveRoomSucceed") {
+         console.log("Room quitté")
+        this.playerJoined(paquet.player_token);
+      }
+
+      if (paquet.name === "BroadcastUpdateRoom"){
+        console.log("le joueur supprimé ou ajouté : " + paquet.player)
+      }
+      };
   },
   methods: {
-    tempsCheck(str){
-      var entree = str.split(':'),
-          sec = 0, min = 1,
-          booleen = true;
+    tempsCheck(str) {
+      var entree = str.split(":"),
+        sec = 0,
+        min = 1,
+        booleen = true;
 
-      while(entree.length > 0){
+      while (entree.length > 0) {
         sec += min * parseInt(entree.pop(), 10);
         min *= 60;
       }
-      if ( (sec < 30) || (sec > 120) || isNaN(sec)) {
+      if (sec < 30 || sec > 120 || isNaN(sec)) {
         booleen = false;
       }
       return booleen;
     },
-    checkPlayer: function(){
-    },
     leaveRoom: function () {
       let LeaveRoom = {
+        name: "LeaveRoom",
         player_token: this.$store.state.id,
-        game_token: 'this.$store.state.publicLobby',
+        game_token: "this.$store.state.publicLobby",
       };
       this.lobbySocket.send(JSON.stringify(LeaveRoom));
-      console.log("ici on quitte la room"+JSON.stringify(LeaveRoom))
+      console.log("ici on quitte la room" + JSON.stringify(LeaveRoom));
     },
-    addBot: function() {
-     let AddBot = {
+    addBot: function () {
+      let AddBot = {
+        name: "AddBot",
         player_token: this.$store.state.id,
-        game_token: 'game_token',
+        game_token: "this.$store.state.listeSalons.id",
       };
       this.lobbySocket.send(JSON.stringify(AddBot));
-      console.log("ici on ajoute un bot"+JSON.stringify(AddBot))
+      console.log("ici on ajoute un bot" + JSON.stringify(AddBot));
     },
 
     // METHODES BOT
-    modifyBotLevel: function(ajout)
-    {
-      console.log(ajout +" "+ this.botDifficulty)
-      if(!((this.botDifficulty == 0 && ajout < 0) || (ajout > 0 && this.botDifficulty == 8)))
-      {
-        this.botDifficulty += ajout
-        console.log(this.botDifficulty)
+    modifyBotLevel: function (ajout) {
+      console.log(ajout + " " + this.botDifficulty);
+      if (
+        !(
+          (this.botDifficulty == 0 && ajout < 0) ||
+          (ajout > 0 && this.botDifficulty == 8)
+        )
+      ) {
+        this.botDifficulty += ajout;
       }
-    console.log("username"+this.$store.state.username)
+      console.log("username" + this.$store.state.username);
     },
 
-    ajoutBot: function() {
-    const bot = {
-        photo :require("../assets/botnoir.png"),
-        pseudo : 'BOT',
-        username: 'BOT',
-    }
-    if (this.players.length<8) {
-    this.players.push(bot)
-    this.addBot()
-    }
+    ajoutBot: function () {
+      const bot = {
+        photo: require("../assets/botnoir.png"),
+        pseudo: "BOT",
+        username: "BOT",
+      };
+      console.log(this.$store.state.listePlayers.length)
+      if (this.$store.state.listePlayers.length < 8) {
+        this.$store.commit("joinRoom", bot);
+       this.addBot();
+      }
     },
 
-    playerJoined: function(photo, pseudo, username){
-    const player = {
-        photo: photo,
-        pseudo:pseudo,
-        username:username,
-    }
- if (this.players.length<8) {
-    this.players.push(player)
- }
+    playerJoined: function (playerToken) {
+      console.log("je suis rentré")
+      this.$store.dispatch('getUserProfileViaId',{
+        id : playerToken
+      })
+      const player = {
+        pseudo: this.pseudo,
+        username: this.nomJoueur,
+      };
+      if (this.players.length < 8) {
+        this.players.push(player);
+      }
     },
 
-    deleteBot: function(index){
-        this.players.splice(index,1)
+    deleteBot: function (index) {
+      
+      this.$store.commit("leaveRoom", index);
+
     },
 
     //METHODE RECUPERANT LA LISTE DES JOUEURS RECUE DANS LE PAQUET
-    updateListPlayers(message)
-    {
-      console.log(message.listPlayers)
-      this.players = message.listPlayers
+    updateListPlayers(message) {
+      console.log(message.listPlayers);
+      this.players = message.listPlayers;
     },
 
-
-    wantToQuit: function() {
-      if(this.$store.state.isHost == true)
-      {
-        console.log("chancher de host de manière aléatoire")
-        this.leaveRoom() // paquet DeleteRoom envoyé par host
+    wantToQuit: function () {
+      if (this.$store.state.isHost == true) {
+        console.log("chancher de host de manière aléatoire");
+        this.leaveRoom(); // paquet DeleteRoom envoyé par host
       } else {
-        this.leaveRoom()
+        this.leaveRoom();
       }
-     // this.$router.push('/post_login')
+      // this.$router.push('/post_login')
     },
-    startGame: function()
-    {
-      console.log(this.$store.state.id) // paquet LaunchGame
-    }
-  }
-}
+    startGame: function () {
+      console.log(this.$store.state.id); // paquet LaunchGame
+    },
+  },
+  computed: {
+    joueurs: function () {
+      return this.$store.state.listePlayers
+    },
+    ...mapState({
+      nomJoueur: "usernameProfil",
+      pseudo: "loginProfil",
+      piece: "pawnProfil",
+      photo: "photoProfil",
+    }),
+  },
+};
 </script>
 
 <style>
