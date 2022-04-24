@@ -3,6 +3,9 @@ import { createStore,/*, storeKey*/ } from "vuex";
 const axios = require('axios');
 import router from '../router/index.js';
 axios.defaults.baseURL =process.env.VUE_APP_PATH_API
+/*const config = {
+    headers: { 'Authorization': `Bearer ${this.state.token}` }
+};*/
 
 export default createStore ({
     state: {
@@ -24,7 +27,8 @@ export default createStore ({
         pawnProfil: "",
 
         publicLobby: false  ,
-        isHost: false
+        isHost: false,
+        token: /*localStorage.getItem('user-token') ||*/ ''
 
     },
 
@@ -56,25 +60,41 @@ export default createStore ({
                 }
             })
             .then(function (response) {
-                console.log(response.data);
+                const token = response.data.token
+                localStorage.setItem('user-token', token) // store the token in localstorage
+                commit('saveToken',token);
+                console.log(localStorage.getItem('user-token'));
+                console.log("date expiration en plus: "+ JSON.stringify(token));
                 router.push('/post_login');
 
             })
             .catch(function(error) {
+                localStorage.removeItem('user-token') // if the request fails, remove any possible user token if possible
+                commit('saveToken',null);
                 console.log(error);
             });
+        },
+        fetchAccessToken({ commit }) {
+            commit('saveToken', localStorage.getItem('user-token'));
         },
         
         getUserProfile:({commit},userInfos) => {
             commit;
+            const token = localStorage.getItem('user-token');
+
+            console.log("voici le token:\n"+localStorage.getItem('user-token'));
+            console.log("voici la date d'expiration du token:\n"+token.expiresIn);
+
             axios.post('/users/getProfile',userInfos, {
-                
-            headers: {
-                    'Content-Type': 'application/json'
-                }
+                headers: {
+                     'Authorization': 'Bearer '+token,
+                     'Content-Type': 'application/json'
+                    }
             })
             .then(function (response) {
                 console.log(response.data);
+                console.log("on est dans le then avec "+token);
+
                 commit('changeUsrnameProfil', response.data.username)
                 commit('changeLoginProfil', response.data.login)
                 commit('changePawnProfil', response.data.pawn)
@@ -218,6 +238,10 @@ export default createStore ({
 
     },
     mutations: {
+        saveToken(state,token)
+        {
+            state.token =token
+        },
         setHost(state,isHost)
         {
             state.isHost = isHost
@@ -239,7 +263,9 @@ export default createStore ({
             state.username = "",
             state.login = "",
             state.piece = 0,
-            state.loggedin = false
+            state.loggedin = false,
+            state.token = '',
+            localStorage.removeItem('user-token') // if the request fails, remove any possible user token if possible
 
         },
         rentreusrname(state, newusername)

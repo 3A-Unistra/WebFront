@@ -8,7 +8,8 @@
             
             <button class="creer_partie" @click="$router.push('/prelobby')" type="boutton">{{ $t("creer") }}
                 <img class="icone" src="../assets/reseau.png" alt="icone reseau">
-            </button>        
+            </button>
+            <button @click="affichetoken">afficher le token du store </button>    
         </section>
 
         <section class ="info_salon">
@@ -76,6 +77,9 @@ export default {
         logout: function() {
             this.$store.commit('clearUserData'),
             this.$router.push('/')
+        },
+        affichetoken: function() {
+            console.log("doit tenir 10sec: "+localStorage.getItem('user-token'))
         },
 
         receptionSalon: function(newSalon) {
