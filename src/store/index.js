@@ -28,7 +28,8 @@ export default createStore({
 
         //liste des salons a afficher dans PostLobby
         listeSalons: [],
-
+        //Le numéro de la room
+        indexRoom: -1,
         //liste des joueurs dans un lobby
         listePlayers: [],
     },
@@ -259,7 +260,6 @@ export default createStore({
         //},
         ajoutJoueur(state, index){
             state.this.$set(this.listeSalons[index].nbPlayers,this.listeSalons[index].nbPlayers);
-
         },
 
         setPiece(state, piece) {

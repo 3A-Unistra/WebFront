@@ -75,6 +75,10 @@ const routes = [
     path:'/after_game',
     name:'AfterGame',
     component: ()=>import ('../views/AfterGame.vue')
+  },  {
+    path:'/webGl',
+    name:'webGL',
+    component: ()=>import ('../views/webGl.vue')
   }
 ]
 

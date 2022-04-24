@@ -27,7 +27,8 @@ export default {
   },
 
   created: function () {
-    this.lobbySocket = new WebSocket('ws://monopoly.schawnndev.fr:80/ws/lobby?token=8a222daf-4b2f-4a32-936a-7820ba3f248a');
+
+    this.lobbySocket = new WebSocket('ws://monopoly.schawnndev.fr:80/ws/lobby?token=' +this.$store.state.id);
     this.lobbySocket.onopen = (e) => {
       console.log("open");
       console.log(e);
@@ -45,9 +46,10 @@ export default {
       let paquet = JSON.parse(e.data)
       if (paquet.name === 'CreateGameSucceed') {
         this.$store.commit("setPiece", paquet.piece);
+        console.log("pseudo :" + this.$store.state.usernameProfil)
         this.$store.commit("joinRoom", {
           photo: '',
-          pseudo:this.$store.state.pseudo,
+          pseudo:this.$store.state.username,
           username:this.$store.state.username,
         });
         this.$router.push("/lobby");
@@ -60,6 +62,7 @@ export default {
         name: 'CreateGame',
         player_token: this.$store.state.id,
         is_private: this.$store.state.publicLobby,
+        max_nb_players: 8
       };
       console.log("request for server (1) creating a game :\n " + JSON.stringify(paquet))
       this.lobbySocket.send(JSON.stringify(paquet));

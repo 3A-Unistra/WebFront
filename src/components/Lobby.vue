@@ -237,7 +237,7 @@ export default {
     };
   },
   created: function () {
-    this.lobbySocket = new WebSocket('ws://monopoly.schawnndev.fr:80/ws/lobby?token=8a222daf-4b2f-4a32-936a-7820ba3f248a');
+    this.lobbySocket = new WebSocket('ws://monopoly.schawnndev.fr:80/ws/lobby?token=' +this.$store.state.id);
     this.lobbySocket.onopen = (e) => {
       console.log("open");
       console.log(e);
@@ -253,19 +253,17 @@ export default {
     };
     this.lobbySocket.onmessage = (e) => {
       let paquet = JSON.parse(e.data);
-      console.log("contenu du paquet recu quand on envoie un paquet Postlogin : " + paquet)
-      if (paquet.name === "EnterRoom") {
-        console.log(paquet.player_token)
-        this.playerJoined(paquet.player_token);
-      }
+      console.log("contenu du paquet recu quand on envoie un paquet Lobby : " + JSON.stringify(paquet))
+
        if (paquet.name === "LeaveRoomSucceed") {
          console.log("Room quitté")
-        this.playerJoined(paquet.player_token);
+      }
+            if (paquet.name === "StatusRoom") {
+        console.log("on push les détail du lobby ici via lobb")
+        console.log(e.data)
       }
 
-      if (paquet.name === "BroadcastUpdateRoom"){
-        console.log("le joueur supprimé ou ajouté : " + paquet.player)
-      }
+
       };
   },
   methods: {
@@ -288,7 +286,7 @@ export default {
       let LeaveRoom = {
         name: "LeaveRoom",
         player_token: this.$store.state.id,
-        game_token: "this.$store.state.publicLobby",
+        game_token: this.$store.state.listeSalon[this.$store.state.indexRoom].id,
       };
       this.lobbySocket.send(JSON.stringify(LeaveRoom));
       console.log("ici on quitte la room" + JSON.stringify(LeaveRoom));
@@ -297,7 +295,7 @@ export default {
       let AddBot = {
         name: "AddBot",
         player_token: this.$store.state.id,
-        game_token: "this.$store.state.listeSalons.id",
+        game_token: this.$store.state.listeSalons[this.$store.state.indexRoom].id,
       };
       this.lobbySocket.send(JSON.stringify(AddBot));
       console.log("ici on ajoute un bot" + JSON.stringify(AddBot));
@@ -323,24 +321,9 @@ export default {
         pseudo: "BOT",
         username: "BOT",
       };
-      console.log(this.$store.state.listePlayers.length)
       if (this.$store.state.listePlayers.length < 8) {
         this.$store.commit("joinRoom", bot);
        this.addBot();
-      }
-    },
-
-    playerJoined: function (playerToken) {
-      console.log("je suis rentré")
-      this.$store.dispatch('getUserProfileViaId',{
-        id : playerToken
-      })
-      const player = {
-        pseudo: this.pseudo,
-        username: this.nomJoueur,
-      };
-      if (this.players.length < 8) {
-        this.players.push(player);
       }
     },
 

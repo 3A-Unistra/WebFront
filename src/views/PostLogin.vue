@@ -48,7 +48,7 @@ import Salon from "../components/SalonComponent.vue";
 
 export default {
   created: function () {
-    this.lobbySocket = new WebSocket('ws://monopoly.schawnndev.fr:80/ws/lobby?token=8a222daf-4b2f-4a32-936a-7820ba3f248a');
+    this.lobbySocket = new WebSocket('ws://monopoly.schawnndev.fr:80/ws/lobby?token=' +this.$store.state.id);
     this.lobbySocket.onopen = (e) => {
       console.log("open");
       console.log(e);
@@ -64,9 +64,8 @@ export default {
     };
     this.lobbySocket.onmessage = (e) => {
       let paquet = JSON.parse(e.data);
-      console.log("contenu du paquet recu quand on envoie un paquet Postlogin : " + e.data)
+      console.log("contenu du paquet recu quand on envoie un paquet Postlogin : " + JSON.stringify(e.data))
       if (paquet.name === "BroadcastNewRoomToLobby") {
-        console.log("un salon a été crée (2). Modification de la liste :")
         this.$store.commit("createSalon", {
           id: paquet.game_token,
           name: paquet.name,
@@ -74,16 +73,52 @@ export default {
           nbPlayers: paquet.nb_players,
           maxNbPlayers: 8
         });
-        console.log(this.$store.state.listeSalons)
-        console.log(this.$store.state.listePlayers)
-        console.log("succes")
       }
 
       if (paquet.name === "EnterRoomSucceed") {
-        console.log("le joueur a rejoins avec succès le lobby")
         this.$store.state.piece = paquet.piece
         this.$router.push("/lobby");
       }
+
+      if (paquet.name === "StatusRoom") {
+        let index = 0
+        console.log("on va donner la liste des joueurs du lobby au joueur")
+        console.log("tableau joueur : " + paquet.players)
+        while (index < paquet.nb_players) {
+          console.log("tableau joueur avec index : " + paquet.players[index])
+          this.$store.commit("joinRoom", {
+            photo: '',
+            pseudo: paquet.players[index],
+            username: paquet.players[index],
+          });
+          index++
+        }
+      }
+
+      if (paquet.name === "BroadcastUpdateRoom") {
+        switch (paquet.reason) {
+          case 1:
+            console.log("on ajoute un joueur, raison 1")
+
+            this.$store.commit("joinRoom", {
+              photo: '',
+              pseudo: paquet.player,
+              username: paquet.player,
+            });
+            break;
+          case 2:
+            //this.$store.commit("suppressionJoueur", index);
+            console.log("suppression joueur")
+            break;
+          case 7:
+            console.log("on ajoute un bot, raison 7")
+            //this.$store.commit("ajoutJoueur", index);
+            break;
+          default:
+            console.log("ne concerne pas la mise a jour de lobby");
+        }
+      }
+
       /*if (paquet.name === "BroadcastUpdateLobby") {
   let index = this.$store.state.listeSalons.indexOf(paquet.token)
    console.log("index du tableau a mettre a jour : "+ index);
@@ -133,8 +168,21 @@ export default {
         player_token: this.$store.state.id,
         game_token: salonToJoin,
       };
-      console.log("paquet envoyé quand on join la room : " + JSON.stringify(EnterRoom))
       this.lobbySocket.send(JSON.stringify(EnterRoom));
+    },
+    playerJoined: function (playerToken) {
+      console.log("je suis rentré")
+      this.$store.dispatch('getUserProfileViaId', {
+        id: playerToken
+      })
+      /* const player = {
+         pseudo: this.pseudo,
+         username: this.nomJoueur,
+       };
+       if (this.players.length < 8) {
+         this.players.push(player);
+       }*/
+
     },
 
     deleteSalon: function (index) {
