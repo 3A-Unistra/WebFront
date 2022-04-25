@@ -15,7 +15,13 @@
                     
             <section class="pseudo_img">
                 <div class = "img_cropper">
-                    <img id="img_avatar" @click="verifState" src="../assets/AvatarBateau.png" alt="">
+                
+                <div :id="'img_avatar'+this.$store.state.pawnProfil">
+                </div>
+            
+                <!--
+                    <img id="img_avatar" src="../assets/AvatarBateau.png" alt="">
+                -->
                 </div>
             </section>
         </section>
@@ -52,13 +58,21 @@
                     </form>
                 </div>
 
-                <div class="txt_et_champ">
+                <div class="txt_et_appercu">
                     <div>
                         {{ $t("fav_pion") }}:                    
                     </div>
                     <form>
-                    <input v-if="edit == false" class="champP" type="text" v-model="pionFav" readonly>
-                    <input v-else class="champEdit" type="text" v-model="this.$store.state.pawnProfil">
+                    
+                    <div v-if="edit == false" class="choixPion editf" >  
+                        <button class="bt_pion" :id="'id_bt_pion'+ this.$store.state.pawnProfil" type="button" >                           
+                        </button>
+                    </div>
+
+                    <div v-else class="choixPion" >  
+                        <button class="bt_pion"  v-for="pion in pions" :key="pion.idPion" :id="'id_bt_pion'+ pion.idPion" type="button" @click="this.$store.state.pawnProfil=pion.idPion" :src="pion.appercu" >                           
+                        </button>
+                    </div>
                     </form>
                 </div>              
             </section>
@@ -116,7 +130,43 @@ export default {
         return {
             edit: false,
             meilleurScore: '1234',
-            verif_follow:this.$store.state.IsFollowing
+            verif_follow:this.$store.state.IsFollowing,
+            pions: 
+            [
+                {
+                    appercu:'0_Bretzel.png',
+                    idPion: 0
+                },
+                {
+                    appercu:'1_Biere.png', 
+                    idPion: 1
+                },
+                {
+                    appercu:'2_Bike.png', 
+                    idPion: 2
+                },
+                {
+                    appercu:'3_Bugatti.png',
+                    idPion: 3
+                },
+                {
+                    appercu:'4_Cigogne.png',
+                    idPion: 4
+                },
+                {
+                    appercu:'5_Gargouille.png',
+                    idPion: 5
+                },
+                {
+                    appercu:'6_Hamster.png',
+                    idPion: 6
+                },
+                {
+                    appercu:'7_Mannele.png',
+                    idPion: 7
+                },
+            ]
+      
         }
     },
     methods: {
@@ -203,7 +253,14 @@ export default {
     flex-direction: row;
     justify-content: space-between;
     }
-
+    
+    .txt_et_appercu{
+    display: flex;
+    flex-direction: row;
+    width: 470px;
+    height: 60px;
+    }
+    
     .titre_nom {
     display: flex;
     flex-direction: row;
@@ -289,7 +346,7 @@ export default {
     background-color:#504b4b;
     }
 
-    .report:active, .bt_save:active, .bt_supp:active {
+    .report:active, .bt_save:active, .bt_supp:active, .bt_pion:active {
     background-color:#222121;
     }
 
@@ -314,7 +371,91 @@ export default {
     border-bottom: 1px solid #222121;
     }
 
-    
+    .bt_pion{        
+        width:  60px;
+        height: 60px;
+        margin-right: 10px;
+        border: none;
+    }
+
+    #img_avatar0{
+        background: url('../assets/0.png');
+        width:  366px;
+        height: 200px;
+    }
+    #img_avatar1{
+        background: url('../assets/1.png');
+        width:  366px;
+        height: 200px;
+    }
+    #img_avatar2{
+        background: url('../assets/2.png');
+        width:  366px;
+        height: 200px;
+    }
+    #img_avatar3{
+        background: url('../assets/3.png');
+        width:  366px;
+        height: 200px;
+    }
+    #img_avatar4{
+        background: url('../assets/4.png');
+        width:  366px;
+        height: 200px;
+    }
+    #img_avatar5{
+        background: url('../assets/5.png');
+        width:  366px;
+        height: 200px;
+    }
+    #img_avatar6{
+        background: url('../assets/6.png');
+        width:  366px;
+        height: 200px;
+    }
+    #img_avatar7{
+        background: url('../assets/7.png');
+        width:  366px;
+        height: 200px;
+    }
+
+    #id_bt_pion0{
+        background: url('../assets/appercuPions/0_Bretzel.png');
+    }
+    #id_bt_pion1{
+        background: url('../assets/appercuPions/1_Biere.png');
+    }
+    #id_bt_pion2{
+        background: url('../assets/appercuPions/2_Bike.png');
+    }
+    #id_bt_pion3{
+        background: url('../assets/appercuPions/3_Bugatti.png');
+    }
+    #id_bt_pion4{
+        background: url('../assets/appercuPions/4_Cigogne.png');
+    }
+    #id_bt_pion5{
+        background: url('../assets/appercuPions/5_Gargouille.png');
+    }
+    #id_bt_pion6{
+        background: url('../assets/appercuPions/6_Hamster.png');
+    }
+    #id_bt_pion7{
+        background: url('../assets/appercuPions/7_Mannele.png');
+    }
+
+    .choixPion{
+        margin-left: 20px;
+        max-width: 430px;
+        max-height: 80px;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .editf{
+        padding-left: 30px;
+    }
+
 
     /* Version mobile */
     @media screen and (max-width: 480px) {
