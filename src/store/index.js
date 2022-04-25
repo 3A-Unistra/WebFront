@@ -2,6 +2,8 @@ import { createStore,/*, storeKey*/ } from "vuex";
 
 const axios = require('axios');
 import router from '../router/index.js';
+axios.defaults.baseURL =process.env.VUE_APP_API_URL
+
 
 export default createStore ({
     state: {
