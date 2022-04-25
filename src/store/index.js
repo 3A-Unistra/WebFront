@@ -1,6 +1,6 @@
 import { createStore,/*, storeKey*/ } from "vuex";
 
-const axios = require('axios');
+import axios from 'axios';
 import router from '../router/index.js';
 axios.defaults.baseURL =process.env.VUE_APP_PATH_API
 /*const config = {
@@ -49,6 +49,21 @@ export default createStore ({
             .catch(function(error) {
                 console.log(error);
             });
+        },
+        postPost:({commit},idDuBoug) => {
+            commit;
+            axios.post('/users/getProfil',idDuBoug, {
+                
+            headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(function (response) {
+                console.log(response.data);
+            })
+            .catch(function(error) {
+                console.log(error);
+            }); 
         },
 
         checkLogin:({commit},userInfos) => {

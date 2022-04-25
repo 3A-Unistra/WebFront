@@ -9,7 +9,10 @@
             <button class="creer_partie" @click="$router.push('/prelobby')" type="boutton">{{ $t("creer") }}
                 <img class="icone" src="../assets/reseau.png" alt="icone reseau">
             </button>
-            <button @click="affichetoken">afficher le token du store </button>    
+            <button @click="postPost(idToSend)">afficher le profil du boug </button>
+            <button @click="postPostStore(this.idToSend)">afficher le profil depuis le store du boug </button>    
+  
+
         </section>
 
         <section class ="info_salon">
@@ -31,6 +34,8 @@
 
 <!-- Script JS -->
 <script>
+import axios from 'axios';
+//axios.defaults.baseURL =process.env.VUE_APP_PATH_API
 
 import LogOutButton from '../components/LogOutButton'
 import Footer from '../components/MyFooter'
@@ -63,7 +68,8 @@ export default {
             private:true,
             nbPlayers:10,
             maxNbPlayers: 7
-        }
+        },
+        idToSend: '092bc519-40b0-4159-8801-b29e36575e83'
       }
   },
      name: 'PostLoginPage',
@@ -95,6 +101,25 @@ export default {
                 this.addInstance(newSalon)
             } 
         },
+        postPost(idDuBoug) {
+            axios.post('http://localhost:3000/api/users/getProfil',idDuBoug, {
+                
+            headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(function (response) {
+                console.log(response.data);
+            })
+            .catch(function(error) {
+                console.log(error.response);
+                console.log(error.message);
+
+            }); 
+        },
+        postPostStore(idDuBoug) {
+            this.$store.dispatch('postPost',idDuBoug);
+       },
 
         replace: function(oldLobbyNewVersion) {
 
