@@ -45,6 +45,7 @@ components: {
         display: flex;
         flex-direction: column;
         justify-content: center;
+        width:auto;
     }
 
     .content_forget{
@@ -152,7 +153,26 @@ components: {
             order: 1;
              margin-bottom: 15px;
         }
+        .dropdown-toggle{
+            max-width:125px;
+        }
+
+    }
+    @media screen and (max-width: 450px) {
+        .container{
+            max-width:300px;
+        }
+        
+
     }
 
+    @media screen  and (min-width: 450px) and (max-width: 700px) {
+        .container{
+            max-width:370px;
+            margin-right: 30px;
+        }
+                
+
+    }
     
 </style>
