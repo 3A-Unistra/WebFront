@@ -555,9 +555,13 @@ color : #c6c6c6;
   background-color: #F4F2EC;
   font-weight: bold;
   margin-left: 40%;
+  color: black;
 }
 .bt_inviter:hover{
   background-color:#e5e5e5;
+}
+input{
+  color:#212529;
 }
 
 .txtzone{
@@ -726,6 +730,22 @@ color : #c6c6c6;
   .slider{
     min-width:70px;
   }
+  .toggle, .tour{
+   margin-left: 0px;
+   padding-left: 0px;
+
+  }
+  .lobby_title{
+    width:250px;
+    margin-left: 20px;
+    text-align:start;
+    margin-right:20px;
+  }
+  .slider{
+    margin-left:95%;
+  }
+
+
   }
   /* mode pc */
   @media screen and (min-width: 1040px)  {

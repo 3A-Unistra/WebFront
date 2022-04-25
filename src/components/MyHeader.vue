@@ -1,36 +1,36 @@
 <template>
   <div class="haut">
+    
     <div class="top_bar">
+      
+      <div class="Menu_principale dropdown">
 
-      <!-- <img class="logo_coin" src="../assets/logo_couleur.png" alt="logo"> -->
-        <div class="top_right lead" >
-          
-          <div class="Menu_principale">
+          <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
+             <img src="https://img.icons8.com/ios-glyphs/30/000000/circled-menu.png"/> 
+            MENU
+          </button>
+            <ul class="dropdown-menu">
+              <li class="drop_elem"><router-link to="/"> {{ $t("home") }} </router-link></li>
+               
+                <!-- <span class="sp_menu">&nbsp;|&nbsp;</span> -->
+                <li class="drop_elem"><router-link to="/lobby">{{ $t("lobby") }}</router-link></li>
 
-            <router-link to="/">
-              {{ $t("home") }}
-            </router-link>
-            <span class="sp_menu">&nbsp;|&nbsp;</span>
-            <router-link to="/lobby">
-              {{ $t("lobby") }}
-            </router-link>
-            <span class="sp_menu">&nbsp;|&nbsp;</span>
-            <router-link to="/profile" @click="getUserProfile(ownUsername)">
-              {{ $t("profil") }}
-            </router-link>
-            <span class="sp_menu">&nbsp;|&nbsp;</span>
-            <router-link to="/post_login">Postlogin</router-link>
-            <!-- <span class="sp_menu">&nbsp;/&nbsp;</span> -->
+                <!-- <span class="sp_menu">&nbsp;|&nbsp;</span> -->
+                <li class="drop_elem"> <router-link to="/profile" @click="getUserProfile(ownUsername)">{{ $t("profil") }}</router-link></li>
+                
+                <!-- <span class="sp_menu">&nbsp;|&nbsp;</span> -->
+                <li class="drop_elem">  <router-link to="/post_login">Postlogin</router-link></li>
+            </ul>
           </div>
-        </div>
 
            <div class="login">
-        <router-link to="/signup">{{ $t("signup") }}</router-link>
-        <span class="sp_menu">&nbsp;|&nbsp;</span>
-        <router-link to="/login">{{ $t("login") }}</router-link>
-      </div>
+              <router-link to="/signup">{{ $t("signup") }}</router-link>
+              <span class="sp_menu">&nbsp;|&nbsp;</span>
+              <router-link to="/login">{{ $t("login") }}</router-link>
+            </div>
 
-        <div class="options">
+
+           <div class="options">
           <button @click="dropdown_options"></button>
           <ul id="liste_option">            
             <span class="titre_dropdown">
@@ -44,22 +44,14 @@
                 </select>
               </div> 
             </li>
-<!-- 
-            <span class="titre_dropdown">
-              {{ $t("affichage") }}:
-            </span>
-            <div class="change_mode">
-              <img class="symbol_mode" src="../assets/sun_light.png">
-              <label class="switch">
-                <input type="checkbox" checked>
-                <span class="slider round"></span>
-              </label>
-              <img class="symbol_mode" src="../assets/lune_dark.png">
-            </div> -->
             <LogOutButton style="margin-bottom: 0;"></LogOutButton>
           </ul>
         </div>
-      </div>
+        </div>
+
+        
+      <!-- <img class="logo_coin" src="../assets/logo_couleur.png" alt="logo"> -->
+       
     </div>
 
 
@@ -118,8 +110,20 @@ export default {
   font-size: 2vh;
   z-index: 3;
   }
-
-
+.login{
+  margin-right: 20%;
+}
+.dropdown-menu{
+  padding:20px;
+  min-width:200px;
+  /* display: flex; */
+  flex-direction: column;
+  justify-content:space-around; 
+}
+.drop_elem{
+  font-weight: bold;
+  margin-bottom: 15px;
+}
 .top_bar {
   display: flex;
   flex-direction: row;
@@ -128,10 +132,15 @@ export default {
   max-width: 100%;
   max-height: 11%;
   padding: 1% 3%;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 .menu_mr{
   /* margin-left:25px; */
   margin-right:20px;
+}
+.name_menu{
+  font-size:20px;
 }
 
 .logo_coin {
@@ -190,6 +199,10 @@ a:hover {
   width: 50px;
   height: 50px;
 }
+.dropdown-toggle{
+  font-size: 18px;
+}
+
 
 .options button {
   /* width: inherit;
@@ -351,7 +364,9 @@ button.deconnection{
 }
 .deconnection .icone{
   max-width: 25%;
+  max-height: 25%;
 }
+
 
 /* Mode mobile */
 @media screen and (max-width: 480px) {
@@ -361,23 +376,35 @@ button.deconnection{
     font-size: 15px;
   }
   .login{
-    margin-top:90px;
+    /* margin-top:90px;
     margin-left:190px;
     padding:3px 10px 3px 10px;
-    width:auto;
-   
+    width:auto; */
+    margin-left: 10px;
   }
   .top_bar{
-    margin-left: -50px;
-    flex-direction:row;
+    /* margin-left: -50px; */
+    flex-direction:column;
     box-sizing:unset;
+    flex-wrap: wrap;
+    justify-content:space-around;
   }
   .logo_coin{
     display:none;
   }
-  .options button{
-   width: inherit;
+  .options{
+   /* width: inherit;
   height: inherit;
+   */
+   margin-left: -25%;
+   margin-right:0px;
+
+  }
+  .button.deconnection{
+    margin-left: 40%;
+  }
+  .dropdown-toggle{
+    margin-left: -25px;;
   }
   
 }
@@ -415,6 +442,50 @@ button.deconnection{
   height: inherit;
   }
   
+}
+
+/*  */
+
+/* Style the navigation menu */
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+  position: relative;
+}
+
+/* Hide the links inside the navigation menu (except for logo/home) */
+.topnav #myLinks {
+  display: none;
+}
+
+/* Style navigation menu links */
+.topnav a {
+  color: white;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  display: block;
+}
+
+/* Style the hamburger menu */
+.topnav a.icon {
+  background: black;
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+/* Add a grey background color on mouse-over */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Style the active link (or home/logo) */
+.active {
+  background-color: #04AA6D;
+  color: white;
 }
 
 
