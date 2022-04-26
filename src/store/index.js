@@ -2,7 +2,7 @@ import { createStore,/*, storeKey*/ } from "vuex";
 
 import axios from 'axios';
 import router from '../router/index.js';
-axios.defaults.baseURL =process.env.VUE_APP_PATH_API
+axios.defaults.baseURL =process.env.VUE_APP_API_URL
 /*const config = {
     headers: { 'Authorization': `Bearer ${this.state.token}` }
 };*/
@@ -50,22 +50,6 @@ export default createStore ({
                 console.log(error);
             });
         },
-        postPost:({commit},idDuBoug) => {
-            commit;
-            axios.post('/users/getProfil',idDuBoug, {
-                
-            headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(function (response) {
-                console.log(response.data);
-            })
-            .catch(function(error) {
-                console.log(error);
-            }); 
-        },
-
         checkLogin:({commit},userInfos) => {
             commit;
             axios.post('/users/login',userInfos, {
@@ -76,10 +60,11 @@ export default createStore ({
             })
             .then(function (response) {
                 const token = response.data.token
-                localStorage.setItem('user-token', token) // store the token in localstorage
+                console.log(response.data)
+                localStorage.setItem('user-token', JSON.stringify(token)); // store the token in localstorage
                 commit('saveToken',token);
-                console.log(localStorage.getItem('user-token'));
-                console.log("date expiration en plus: "+ JSON.stringify(token));
+                //console.log(localStorage.getItem('user-token'));
+                //console.log("date expiration en plus: "+ JSON.stringify(token));
                 router.push('/post_login');
 
             })

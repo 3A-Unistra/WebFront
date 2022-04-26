@@ -115,7 +115,7 @@ export default {
     data() {
         return {
             edit: false,
-            meilleurScore: '1234',
+            meilleurScore: '',
             verif_follow:this.$store.state.IsFollowing
         }
     },
