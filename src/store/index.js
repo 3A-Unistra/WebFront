@@ -17,6 +17,8 @@ export default createStore({
         numberPlayers: 4,
         IsFollowing: false,
 
+        gameToken:"",
+
         //Informations du profil cliqué
         usernameProfil: "",
         loginProfil: "",
@@ -28,10 +30,15 @@ export default createStore({
 
         //liste des salons a afficher dans PostLobby
         listeSalons: [],
-        //Le numéro de la room
-        indexRoom: -1,
         //liste des joueurs dans un lobby
         listePlayers: [],
+        //paramètre de la room
+        auctions: false,
+        doubleGO: false,
+        buyFirstRound: false,
+        timePerRound: -1,
+        maxRound: -1,
+        starterMoney: -1
     },
 
     actions: {
@@ -87,25 +94,6 @@ export default createStore({
                 })
                 .catch(function (error) {
                     console.log(error);
-                });
-        },
-
-        getUserProfileViaId: ({ commit }, userInfos) => {
-            commit;
-            axios.post('http://localhost:3000/api/users/getProfileViaId', userInfos, {
-
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-                .then(function (response) {
-                    commit('changeUsrnameProfil', response.data.username)
-                    commit('changeLoginProfil', response.data.login)
-                    commit('changePawnProfil', response.data.pawn)
-                    commit('changePhotoProfil', response.data.avatar)
-                })
-                .catch(function (error) {
-                    console.log(error.response);
                 });
         },
 
@@ -238,11 +226,15 @@ export default createStore({
 
     },
     getters: {
-
+    id: state => state.id
     },
     mutations: {
         setHost(state, isHost) {
             state.isHost = isHost
+        },
+
+        gameToken(state,gameToken) {
+            state.gameToken =gameToken
         },
 
         createSalon(state, newSalon) {

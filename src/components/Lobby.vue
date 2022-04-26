@@ -14,16 +14,16 @@
           <img class="pp" v-bind:src="player.photo" alt="photo de profil" />
           <div class="txtzone">
             <div class="pseudo" @click="checkFollow(player.pseudo)">
-              {{ player.pseudo }}       
+              {{ player.pseudo }}
             </div>
             <div v-if="player.username === 'BOT'">
               <button @click="deleteBot(index)">supprimer</button>
             </div>
 
             <!-- PARTIE TOGGLE -->
-            <label
+            <!--  <label
               class="switch prt"
-              v-if="this.$store.state.username === player.username"
+              v-if="this.$store.state.id === player.id"
             >
               <input
                 type="checkbox"
@@ -41,6 +41,7 @@
                 :disabled="this.$store.state.isFollowing == true"
               ></span>
             </label>
+-->
           </div>
         </div>
       </div>
@@ -76,7 +77,12 @@
           </button>
         </div>
 
-        <button type="button" @click="ajoutBot" class="bt_ajout_bot">
+        <button
+          type="button"
+          v-if="this.$store.state.isHost"
+          @click="ajoutBot"
+          class="bt_ajout_bot"
+        >
           {{ $t("ajout_bot") }}
           <img class="botnoir" src="../assets/botnoir.png" />
         </button>
@@ -94,6 +100,8 @@
           <input
             type="checkbox"
             :disabled="this.$store.state.isHost == false"
+            v-model="this.$store.state.auctions"
+            v-on:click="changeAuctions()"
           />
           <span class="slider round"></span>
         </label>
@@ -107,6 +115,8 @@
           <input
             type="checkbox"
             :disabled="this.$store.state.isHost == false"
+            v-model="this.$store.state.doubleGO"
+            v-on:click="changeDoubleGO()"
           />
           <span class="slider round"></span>
         </label>
@@ -119,6 +129,8 @@
           <input
             type="checkbox"
             :disabled="this.$store.state.isHost == false"
+            v-model="this.$store.state.buyFirstRound"
+            v-on:click="changeBuyFirstRound()"
           />
           <span class="slider round"></span>
         </label>
@@ -131,8 +143,9 @@
           <input
             class="champ"
             type="text"
+            v-model="this.$store.state.timePerRound"
             :disabled="this.$store.state.isHost == false"
-            v-model="tempsAction"
+            v-on:change="changeTimePerRound()"
           />
         </form>
       </div>
@@ -147,7 +160,6 @@
             class="champF"
             type="text"
             :disabled="this.$store.state.isHost == false"
-            v-model="tempsAction"
           />
         </form>
       </div>
@@ -160,7 +172,8 @@
             class="champ"
             type="text"
             :disabled="this.$store.state.isHost == false"
-            v-model="tourMax"
+            v-model="this.$store.state.maxRound"
+            v-on:change="changeTimePerRound()"
           />
         </form>
       </div>
@@ -172,7 +185,8 @@
             class="champ"
             type="text"
             :disabled="this.$store.state.isHost == false"
-            v-model="sommeDepart"
+            v-model="this.$store.state.starterMoney"
+            v-on:change="changeStarterMoney()"
           />
         </form>
       </div>
@@ -205,7 +219,7 @@
         </div>
       </div>
       <h3 style="padding-top: 15%">Room ID:</h3>
-      <input type="text" style="width: 100%" v-model="roomId" readonly />
+      <input type="text" style="width: 100%" readonly />
     </div>
   </div>
   <Footer></Footer>
@@ -215,7 +229,8 @@
 //window.addEventListener('load', switchToggle);
 import Footer from "./MyFooter";
 import Header from "./MyHeader";
-import { mapState } from "vuex";
+import {mapState} from "vuex";
+import socket from "../services/ws";
 
 export default {
   name: "LobbyPage",
@@ -228,45 +243,214 @@ export default {
 
   data: function () {
     return {
-      lobbySocket: WebSocket,
       tempsAction: "30",
       tourMax: 2,
       sommeDepart: 0,
       botDifficulty: 0,
-      roomId: 3345,
     };
   },
   created: function () {
-    this.lobbySocket = new WebSocket('ws://monopoly.schawnndev.fr:80/ws/lobby?token=' +this.$store.state.id);
-    this.lobbySocket.onopen = (e) => {
-      console.log("open");
+    socket.onopen = (e) => {
+      console.log("open Lobby");
       console.log(e);
     };
-    this.lobbySocket.onerror = (e) => {
-      console.log("error");
+    socket.onerror = (e) => {
+      console.log("error Lobby");
       console.log(e);
     };
 
-    this.lobbySocket.onclose = (e) => {
-      console.log("close");
+    socket.onclose = (e) => {
+      console.log("close Lobby");
       console.log(e);
     };
-    this.lobbySocket.onmessage = (e) => {
+    socket.onmessage = (e) => {
       let paquet = JSON.parse(e.data);
-      console.log("contenu du paquet recu quand on envoie un paquet Lobby : " + JSON.stringify(paquet))
+      console.log(
+        "contenu du paquet recu quand on envoie un paquet Lobby : " +
+          JSON.stringify(paquet)
+      );
 
-       if (paquet.name === "LeaveRoomSucceed") {
-         console.log("Room quitté")
+      if (paquet.name === "LeaveRoomSucceed") {
+        this.$store.state.listePlayers = [];
+        this.$router.push("/post_login");
       }
-            if (paquet.name === "StatusRoom") {
-        console.log("on push les détail du lobby ici via lobb")
-        console.log(e.data)
+
+      if (paquet.name === "BroadcastUpdateRoom") {
+        let index = this.$store.state.listePlayers
+          .map((object) => object.id)
+          .indexOf(paquet.player);
+        const found = this.$store.state.listePlayers.some(
+          (player) => player.id === paquet.player
+        );
+        switch (paquet.reason) {
+          case 1:
+            console.log("nouveau joueur dans une room avec l'index :" + index);
+            if (!found) {
+              this.$store.commit("joinRoom", {
+                photo: "",
+                pseudo: paquet.player,
+                username: paquet.player,
+              });
+              console.log(
+                "on a bien ajouté " +
+                  this.$store.state.listePlayers +
+                  " dans la room"
+              );
+            }
+            break;
+          case 2:
+            console.log("un joueur en moins dans la room");
+            this.deletePlayer(index);
+            console.log("index du salon a modif" + index);
+            break;
+          case 3:
+            console.log("une room est supprimée");
+            break;
+          case 4:
+            console.log("une room est crée");
+            break;
+          case 5:
+            console.log("nouveau host");
+            break;
+          case 6:
+            console.log("la game est lancée");
+            break;
+          case 7:
+            console.log("un bot est ajouté");
+            break;
+          case 8:
+            console.log("un bot est supprimé");
+            break;
+          default:
+            console.log("unknow");
+        }
       }
 
+      if (paquet.name === "StatusRoom") {
+        let index = 0;
+        while (index < paquet.nb_players) {
+          if (
+            this.$store.state.listePlayers
+              .map((object) => object.pseudo)
+              .indexOf(paquet.players[index]) === -1
+          ) {
+            this.$store.commit("joinRoom", {
+              photo: "",
+              pseudo: paquet.players[index],
+              username: paquet.players[index],
+            });
+          }
+          index++;
+        }
+        this.$store.state.auctions = paquet.option_auction;
 
-      };
+        this.$store.state.doubleGO = paquet.option_double_on_start;
+
+        this.$store.state.buyFirstRound = paquet.option_first_round_buy;
+
+        this.$store.state.timePerRound = paquet.option_max_time;
+
+        this.$store.state.maxRound = paquet.option_max_rounds;
+
+        this.$store.state.starterMoney = paquet.starting_balance;
+      }
+
+      if (paquet.name === "AppletPrepare") {
+        console.log("reception unity");
+        //socket.close()
+      }
+    };
   },
   methods: {
+    changeAuctions: function () {
+      let statusRoom = {
+        name: "StatusRoom",
+        game_token: this.$store.state.gameToken,
+        option_auction: !this.$store.state.auctions,
+        option_first_round_buy: this.$store.state.buyFirstRound,
+        option_double_on_start: this.$store.state.doubleGO,
+        option_max_time: this.$store.state.timePerRound,
+        option_max_rounds: this.$store.state.maxRound,
+        starting_balance: this.$store.state.starterMoney,
+      };
+      console.log(
+        "on envoie ça si on change l'option auction : " +
+          JSON.stringify(statusRoom)
+      );
+      socket.send(JSON.stringify(statusRoom));
+      return !this.$store.state.auction;
+    },
+    changeDoubleGO: function () {
+      let statusRoom = {
+        name: "StatusRoom",
+        game_token: this.$store.state.gameToken,
+        option_auction: this.$store.state.auctions,
+        option_double_on_start: !this.$store.state.doubleGO,
+        option_first_round_buy: this.$store.state.buyFirstRound,
+        option_max_time: this.$store.state.timePerRound,
+        option_max_rounds: this.$store.state.maxRound,
+        starting_balance: this.$store.state.starterMoney,
+      };
+      console.log(
+        "on envoie ça si on change l'option double go : " +
+          JSON.stringify(statusRoom)
+      );
+      socket.send(JSON.stringify(statusRoom));
+      return !this.$store.state.doubleGO;
+    },
+    changeBuyFirstRound: function () {
+      let statusRoom = {
+        name: "StatusRoom",
+        game_token: this.$store.state.gameToken,
+        option_auction: this.$store.state.auctions,
+        option_double_on_start: this.$store.state.doubleGO,
+        option_first_round_buy: !this.$store.state.buyFirstRound,
+        option_max_time: this.$store.state.timePerRound,
+        option_max_rounds: this.$store.state.maxRound,
+        starting_balance: this.$store.state.starterMoney,
+      };
+      socket.send(JSON.stringify(statusRoom));
+      return !this.$store.state.buyFirstRound;
+    },
+    changeTimePerRound: function () {
+      let statusRoom = {
+        name: "StatusRoom",
+        game_token: this.$store.state.gameToken,
+        option_auction: this.$store.state.auctions,
+        option_double_on_start: this.$store.state.doubleGO,
+        option_first_round_buy: this.$store.state.buyFirstRound,
+        option_max_time: this.$store.state.timePerRound,
+        option_max_rounds: this.$store.state.maxRound,
+        starting_balance: this.$store.state.starterMoney,
+      };
+      socket.send(JSON.stringify(statusRoom));
+    },
+    changeBuyMaxRound: function () {
+      let statusRoom = {
+        name: "StatusRoom",
+        game_token: this.$store.state.gameToken,
+        option_auction: this.$store.state.auctions,
+        option_double_on_start: this.$store.state.doubleGO,
+        option_first_round_buy: this.$store.state.buyFirstRound,
+        option_max_time: this.$store.state.timePerRound,
+        option_max_rounds: this.$store.state.maxRound,
+        starting_balance: this.$store.state.starterMoney,
+      };
+      socket.send(JSON.stringify(statusRoom));
+    },
+    changeStarterMoney: function () {
+      let statusRoom = {
+        name: "StatusRoom",
+        game_token: this.$store.state.gameToken,
+        option_auction: this.$store.state.auctions,
+        option_double_on_start: this.$store.state.doubleGO,
+        option_first_round_buy: this.$store.state.buyFirstRound,
+        option_max_time: this.$store.state.timePerRound,
+        option_max_rounds: this.$store.state.maxRound,
+        starting_balance: this.$store.state.starterMoney,
+      };
+      socket.send(JSON.stringify(statusRoom));
+    },
     tempsCheck(str) {
       var entree = str.split(":"),
         sec = 0,
@@ -282,22 +466,27 @@ export default {
       }
       return booleen;
     },
+
+    deletePlayer: function (index) {
+      this.$store.state.listePlayers.splice(index, 1);
+    },
+
     leaveRoom: function () {
       let LeaveRoom = {
         name: "LeaveRoom",
         player_token: this.$store.state.id,
-        game_token: this.$store.state.listeSalon[this.$store.state.indexRoom].id,
+        game_token: this.$store.state.gameToken,
       };
-      this.lobbySocket.send(JSON.stringify(LeaveRoom));
+      socket.send(JSON.stringify(LeaveRoom));
       console.log("ici on quitte la room" + JSON.stringify(LeaveRoom));
     },
     addBot: function () {
       let AddBot = {
         name: "AddBot",
         player_token: this.$store.state.id,
-        game_token: this.$store.state.listeSalons[this.$store.state.indexRoom].id,
+        game_token: this.$store.state.gameToken,
       };
-      this.lobbySocket.send(JSON.stringify(AddBot));
+      socket.send(JSON.stringify(AddBot));
       console.log("ici on ajoute un bot" + JSON.stringify(AddBot));
     },
 
@@ -323,14 +512,12 @@ export default {
       };
       if (this.$store.state.listePlayers.length < 8) {
         this.$store.commit("joinRoom", bot);
-       this.addBot();
+        this.addBot();
       }
     },
 
     deleteBot: function (index) {
-      
-      this.$store.commit("leaveRoom", index);
-
+      this.deletePlayer(index);
     },
 
     //METHODE RECUPERANT LA LISTE DES JOUEURS RECUE DANS LE PAQUET
@@ -340,8 +527,9 @@ export default {
     },
 
     wantToQuit: function () {
-      if (this.$store.state.isHost == true) {
+      if (this.$store.state.isHost === true) {
         console.log("chancher de host de manière aléatoire");
+        this.$store.state.isHost = false;
         this.leaveRoom(); // paquet DeleteRoom envoyé par host
       } else {
         this.leaveRoom();
@@ -349,12 +537,17 @@ export default {
       // this.$router.push('/post_login')
     },
     startGame: function () {
-      console.log(this.$store.state.id); // paquet LaunchGame
+      let playerId = {
+        name: "LaunchGame",
+        player_token: this.$store.state.id,
+      };
+    console.log("on envoie launchgame :" + JSON.stringify(playerId))
+      socket.send(JSON.stringify(playerId));
     },
   },
   computed: {
     joueurs: function () {
-      return this.$store.state.listePlayers
+      return this.$store.state.listePlayers;
     },
     ...mapState({
       nomJoueur: "usernameProfil",

@@ -12,6 +12,7 @@
 <script>
 import Footer from "../components/MyFooter";
 import Header from "../components/MyHeader";
+import socket from "../services/ws";
 
 
 export default {
@@ -22,36 +23,29 @@ export default {
   },
   data() {
     return {
-      lobbySocket: WebSocket,
     };
   },
 
   created: function () {
-
-    this.lobbySocket = new WebSocket('ws://monopoly.schawnndev.fr:80/ws/lobby?token=' +this.$store.state.id);
-    this.lobbySocket.onopen = (e) => {
-      console.log("open");
+    socket.onopen = (e) => {
+      console.log("open preLobby");
       console.log(e);
     };
-    this.lobbySocket.onerror = (e) => {
-      console.log("error");
+    socket.onerror = (e) => {
+      console.log("error preLobby");
       console.log(e);
     };
 
-    this.lobbySocket.onclose = (e) => {
-      console.log("close");
+    socket.onclose = (e) => {
+      console.log("close preLobby");
       console.log(e);
     };
-    this.lobbySocket.onmessage = (e) => {
+    socket.onmessage = (e) => {
       let paquet = JSON.parse(e.data)
       if (paquet.name === 'CreateGameSucceed') {
+        this.$store.commit("gameToken",paquet.game_token)
+        console.log(" id de la room aprs succss" +this.$store.state.gameToken)
         this.$store.commit("setPiece", paquet.piece);
-        console.log("pseudo :" + this.$store.state.usernameProfil)
-        this.$store.commit("joinRoom", {
-          photo: '',
-          pseudo:this.$store.state.username,
-          username:this.$store.state.username,
-        });
         this.$router.push("/lobby");
       }
     };
@@ -64,8 +58,7 @@ export default {
         is_private: this.$store.state.publicLobby,
         max_nb_players: 8
       };
-      console.log("request for server (1) creating a game :\n " + JSON.stringify(paquet))
-      this.lobbySocket.send(JSON.stringify(paquet));
+      socket.send(JSON.stringify(paquet));
     },
     setPrive: function (privateOrNot) {
       this.$store.commit("setLobby", privateOrNot);

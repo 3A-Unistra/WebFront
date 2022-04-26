@@ -23,7 +23,11 @@
           <img class="icone" src="../assets/verif.png" alt="icone verif" />
         </button>
       </div>
-      <div class="liste_salon" v-for="(salon,index) in salonsAffichables" :key="salon.name">
+      <div
+        class="liste_salon"
+        v-for="(salon, index) in salonsAffichables"
+        :key="salon.name"
+      >
         <Salon
           :maxNbPlayers="salon.maxNbPlayers"
           :nameLobby="salon.name"
@@ -44,111 +48,113 @@ import LogOutButton from "../components/LogOutButton";
 import Footer from "../components/MyFooter";
 import Header from "../components/MyHeader";
 import Salon from "../components/SalonComponent.vue";
-
+import socket from "../services/ws";
 
 export default {
   created: function () {
-    this.lobbySocket = new WebSocket('ws://monopoly.schawnndev.fr:80/ws/lobby?token=' +this.$store.state.id);
-    this.lobbySocket.onopen = (e) => {
+    socket.onopen = (e) => {
       console.log("open");
       console.log(e);
     };
-    this.lobbySocket.onerror = (e) => {
+    socket.onerror = (e) => {
       console.log("error");
       console.log(e);
     };
 
-    this.lobbySocket.onclose = (e) => {
+    socket.onclose = (e) => {
       console.log("close");
       console.log(e);
     };
-    this.lobbySocket.onmessage = (e) => {
+    socket.onmessage = (e) => {
       let paquet = JSON.parse(e.data);
-      console.log("contenu du paquet recu quand on envoie un paquet Postlogin : " + JSON.stringify(e.data))
+      console.log(
+        "contenu du paquet recu quand on envoie un paquet Postlogin : " +
+          JSON.stringify(e.data)
+      );
       if (paquet.name === "BroadcastNewRoomToLobby") {
+        if (
+          this.$store.state.listeSalons
+            .map((object) => object.id)
+            .indexOf(paquet.game_token) !== -1
+        ) {
+          console.log("existe déja, ne pas afficher");
+          return;
+        }
         this.$store.commit("createSalon", {
           id: paquet.game_token,
           name: paquet.name,
           private: paquet.is_private,
           nbPlayers: paquet.nb_players,
-          maxNbPlayers: 8
+          maxNbPlayers: 8,
         });
       }
 
       if (paquet.name === "EnterRoomSucceed") {
-        this.$store.state.piece = paquet.piece
+        this.$store.commit("gameToken", paquet.game_token);
+        this.$store.state.piece = paquet.piece;
         this.$router.push("/lobby");
       }
 
-      if (paquet.name === "StatusRoom") {
-        let index = 0
-        console.log("on va donner la liste des joueurs du lobby au joueur")
-        console.log("tableau joueur : " + paquet.players)
-        while (index < paquet.nb_players) {
-          console.log("tableau joueur avec index : " + paquet.players[index])
-          this.$store.commit("joinRoom", {
-            photo: '',
-            pseudo: paquet.players[index],
-            username: paquet.players[index],
-          });
-          index++
-        }
-      }
-
-      if (paquet.name === "BroadcastUpdateRoom") {
+      if (paquet.name === "BroadcastUpdateLobby") {
+        let index = this.$store.state.listeSalons
+          .map((object) => object.id)
+          .indexOf(paquet.game_token);
         switch (paquet.reason) {
           case 1:
-            console.log("on ajoute un joueur, raison 1")
+            console.log("nouveau joueur dans une room");
+            if (index !== -1) {
+              this.$store.state.listeSalons[index].nbPlayers++;
+            }
 
-            this.$store.commit("joinRoom", {
-              photo: '',
-              pseudo: paquet.player,
-              username: paquet.player,
-            });
             break;
           case 2:
-            //this.$store.commit("suppressionJoueur", index);
-            console.log("suppression joueur")
+            console.log("un joueur en moins dans la room");
+            if (index !== -1) {
+              this.$store.state.listeSalons[index].nbPlayers--;
+              console.log("index du salon a modif"+ index);
+            }
+            break;
+          case 3:
+            console.log("une room est supprimée");
+            this.deleteSalon(index);
+            console.log("index du salon a modif" + index);
+
+            break;
+          case 4:
+            console.log("une room est crée");
+            console.log("index du salon a modif")+ index;
+
+            break;
+          case 5:
+            console.log("nouveau host");
+
+            break;
+          case 6:
+            console.log("la game est lancée");
+
             break;
           case 7:
-            console.log("on ajoute un bot, raison 7")
-            //this.$store.commit("ajoutJoueur", index);
+            console.log("un bot est ajouté");
+            if (index !== -1) {
+              this.$store.state.listeSalons[index].nbPlayers++;
+            }
+            break;
+          case 8:
+            console.log("un bot est supprimée");
+
+            if (index !== -1) {
+              this.$store.state.listeSalons[index].nbPlayers--;
+              console.log("index du salon a modif"+ index);
+            }
             break;
           default:
-            console.log("ne concerne pas la mise a jour de lobby");
+            console.log("unknow");
         }
       }
-
-      /*if (paquet.name === "BroadcastUpdateLobby") {
-  let index = this.$store.state.listeSalons.indexOf(paquet.token)
-   console.log("index du tableau a mettre a jour : "+ index);
-    switch (paquet.reason) {
-          case 1:
-            console.log("on ajoute un joueur, raison 1")
-            this.$store.commit("ajoutJoueur", index);
-            break;
-          case 2:
-            //this.$store.commit("suppressionJoueur", index);
-            console.log("suppression joueur")
-            break;
-          case 7:
-            console.log("on ajoute un bot, raison 7")
-            this.$store.commit("ajoutJoueur", index);
-            break;
-          default:
-            console.log("ne concerne pas la mise a jour de lobby");
-        }
-    this.$store.commit("updateSalon",{
-      reason : paquet.reason, 
-      token : paquet.game_token,
-    });
-}*/
-    }
+    };
   },
   data() {
-    return {
-      lobbySocket: WebSocket,
-    };
+    return {};
   },
   name: "PostLoginPage",
   components: {
@@ -159,59 +165,25 @@ export default {
   },
   methods: {
     logout: function () {
+      socket.close();
       this.$store.commit("clearUserData"), this.$router.push("/");
     },
     joinLobby: function (index) {
-      let salonToJoin = this.$store.state.listeSalons[index].id
+      let salonToJoin = this.$store.state.listeSalons[index].id;
       let EnterRoom = {
         name: "EnterRoom",
         player_token: this.$store.state.id,
         game_token: salonToJoin,
       };
-      this.lobbySocket.send(JSON.stringify(EnterRoom));
-    },
-    playerJoined: function (playerToken) {
-      console.log("je suis rentré")
-      this.$store.dispatch('getUserProfileViaId', {
-        id: playerToken
-      })
-      /* const player = {
-         pseudo: this.pseudo,
-         username: this.nomJoueur,
-       };
-       if (this.players.length < 8) {
-         this.players.push(player);
-       }*/
-
+      socket.send(JSON.stringify(EnterRoom));
     },
 
     deleteSalon: function (index) {
-      this.salon.splice(index, 1)
-    },
-
-    updateSalon: function (gameToken, updateReason) {
-
-      this.listeSalons.find((salon) => {
-
-        if (salon.id === gameToken) {
-          switch (updateReason) {
-            case 1:
-              console.log(salon)
-              salon.nbPlayers++;
-              break;
-            case 2:
-              salon.nbPlayers--;
-              break;
-            default:
-              console.log("ne concerne pas la mise a jour de lobby");
-          }
-        }
-      });
+      this.$store.state.listeSalons.splice(index, 1);
     },
   },
   computed: {
     salonsAffichables: function () {
-      console.log("tout les salosn a afficher" + JSON.stringify(this.$store.state.listeSalons))
       return this.$store.state.listeSalons.filter(
         (salon) => !salon.private && salon.nbPlayers < salon.maxNbPlayers
       );
