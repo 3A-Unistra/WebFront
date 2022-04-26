@@ -3,14 +3,14 @@
         <div class="content_forget">
            <form @submit.prevent="checkreset">
             <section class ="container">
-            <h1 class="animate__animated animate__bounce animate__repeat-2 forget_title">{{ $t("Enter Your New Password")}}</h1>
-               <input v-model="password" type="password" class="champs_form" required  id="zpassword" :placeholder=" $t('Enter password')">
-               <input v-model="confirmpassword" type="password" class="champs_form" required  id="password" :placeholder=" $t('Confirm password')">
+            <h1 class="animate__animated animate__bounce animate__repeat-2 forget_title">{{ $t("EntN")}}</h1>
+               <input v-model="password" type="password" class="champs_form" required  id="zpassword" :placeholder=" $t('CEntN')">
+               <input v-model="confirmpassword" type="password" class="champs_form" required  id="password" :placeholder=" $t('CCEntN')">
             </section>
             <div CLASS="btn_container">
 
-                        <button class="btn btn-help bnt_nul" type="button"><router-link to="/Login">{{ $t("Annuler") }}</router-link></button>
-                        <button type="submit" class="btn  btn_rec">{{ $t("Confirmer")}}</button>
+                        <button class="btn btn-help bnt_nul" type="button"><router-link to="/Login">{{ $t("Anul") }}</router-link></button>
+                        <button type="submit" class="btn  btn_rec">{{ $t("conf")}}</button>
             </div>
             </form>
         </div>

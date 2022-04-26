@@ -92,5 +92,8 @@
   "Rec":"Recover",
 
   //reset
-  "conf": "Confirm"
+  "conf": "Confirm",
+  "EntN":"Enter Your New Password",
+  "CEntN":"Enter password",
+  "CCEntN": "Confirm password"
 }
