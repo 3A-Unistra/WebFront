@@ -135,9 +135,11 @@ export default {
             })
         },
         getUserProfile: function(name){
-            this.$store.dispatch('getUserProfile',{
+            this.$store.dispatch('getUserProfileViaId',{
                 username:name,
             })
+            this.$router.push('/profile');
+
             //this.pseudo = this.$store.state.loginProfil
         },
         Follow: function() {
