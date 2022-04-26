@@ -5,9 +5,9 @@
       
       <div class="Menu_principale dropdown">
 
-          <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
-             <img src="https://img.icons8.com/ios-glyphs/30/000000/circled-menu.png"/> 
-            MENU
+          <button class="btn bg-white dropdown-toggle" type="button" data-toggle="dropdown">
+             <img class="gift" src="../assets/menu.png"/> 
+            <!-- MENU -->
           </button>
             <ul class="dropdown-menu">
               <li class="drop_elem"><router-link to="/"> {{ $t("home") }} </router-link></li>
@@ -111,7 +111,8 @@ export default {
   z-index: 3;
   }
 .login{
-  margin-right: 20%;
+  margin-right: auto;
+  margin-left: auto;
 }
 .dropdown-menu{
   padding:20px;
@@ -134,6 +135,10 @@ export default {
   padding: 1% 3%;
   margin-left: 5%;
   margin-right: 5%;
+}
+.gift{
+  max-width:30px;
+  max-height: 30px;
 }
 .menu_mr{
   /* margin-left:25px; */
@@ -200,7 +205,8 @@ a:hover {
   height: 50px;
 }
 .dropdown-toggle{
-  font-size: 18px;
+  /* font-size: 18px; */
+  padding:5px;
 }
 
 
@@ -367,6 +373,16 @@ button.deconnection{
   max-height: 25%;
 }
 
+.drop_elem:hover {
+  background-color:#f5d18b;
+  
+}
+.drop_elem a{
+  font-size:22px;
+  font-weight: bold;
+  padding:15px 20px 15px 20px;
+}
+
 
 /* Mode mobile */
 @media screen and (max-width: 480px) {
@@ -384,10 +400,10 @@ button.deconnection{
   }
   .top_bar{
     /* margin-left: -50px; */
-    flex-direction:column;
-    box-sizing:unset;
+    flex-direction:row;
+    /* box-sizing:unset; */
     flex-wrap: wrap;
-    justify-content:space-around;
+    justify-content:space-evenly;
   }
   .logo_coin{
     display:none;
@@ -403,10 +419,8 @@ button.deconnection{
   .button.deconnection{
     margin-left: 40%;
   }
-  .dropdown-toggle{
-    margin-left: -25px;;
-  }
-  
+ 
+
 }
 
 /* mode tablette */
@@ -437,10 +451,10 @@ button.deconnection{
   .logo_coin{
     display:none;
   }
-  .options button{
+  /* .options button{
    width: inherit;
   height: inherit;
-  }
+  } */
   
 }
 
