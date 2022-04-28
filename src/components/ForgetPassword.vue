@@ -2,13 +2,13 @@
     <Header></Header>
         <div class="content_forget">
             <section class ="container">
-            <h1 class="animate__animated animate__bounce animate__repeat-2 forget_title">{{ $t("Ent") }}</h1>
+            <h1 class="animate__animated animate__bounce animate__repeat-2 forget_title">Enter Your Email</h1>
             <form  @submit.prevent="checkforgot" class="form_container">
-                    <input v-model="forgetPass" type="email" class="champs_form" required  id="email" aria-describedby="emailHelp" :placeholder=" $t('Enter')">
+                    <input v-model="forgetPass" type="email" class="champs_form" required  id="email" aria-describedby="emailHelp" placeholder="Enter Your Email to get Your Password">
                     <div CLASS="btn_container">
 
-                        <button class="btn btn-help bnt_nul" type="button"><router-link to="/Login">{{ $t("Anul") }}</router-link></button>
-                        <button type="submit" class="btn  btn_rec">{{ $t("Rec") }}</button>
+                        <button class="btn btn-help bnt_nul" type="button"><router-link to="/Login">Cancel</router-link></button>
+                        <button type="submit" class="btn  btn_rec">Recover</button>
                     </div>
             </form>
             </section>
@@ -72,7 +72,7 @@ components: {
         margin-right: auto;
         margin-top: 50px;
         padding: 50px;
-}
+        }
 
     .form_container{
         display: flex;

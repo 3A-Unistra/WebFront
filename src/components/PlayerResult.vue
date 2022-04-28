@@ -69,6 +69,13 @@ export default {
         ranking: Number
     },
     methods: {
+        checkFollow: function(pseudoClickedOn) {
+            this.$store.dispatch('getIds',{
+                otherName: pseudoClickedOn,
+                ownName: this.$store.state.username
+            })
+            this.$store.commit('changeFollowState',true);
+        },
         toProfil: function(nameClickedOn) {
             if (nameClickedOn == this.$store.state.username) {
                 this.$store.commit('checkingSameProfile',true);       
@@ -82,24 +89,7 @@ export default {
 
             this.checkFollow(nameClickedOn)
         },
-        
-        // METHODES LIANT AUX PROFILS
-        checkFollow: function(pseudoClickedOn) {
-            this.$store.dispatch('getIds',{
-                otherName: pseudoClickedOn,
-                ownName: this.$store.state.username
-            })
-            this.$store.commit('changeFollowState',true);
-        },
-        
-        /*
-        checkFollow: function(pseudoClickedOn) {
-            this.$store.dispatch('getIds', {
-                otherName: pseudoClickedOn,
-                ownName: this.$store.state.username
-            })
-            this.$store.commit('changeFollowState',true);
-        },*/
+    
     }
 
     /*data: function() {
