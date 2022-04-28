@@ -75,10 +75,10 @@ const routes = [
     path:'/after_game',
     name:'AfterGame',
     component: ()=>import ('../views/AfterGame.vue')
-  }, {
-    path:'/reset/:token',
-    name: 'Reset',
-    component: ()=>import ('../components/reset.vue')
+  },  {
+    path:'/webGl',
+    name:'webGL',
+    component: ()=>import ('../views/webGl.vue')
   }
 ]
 
