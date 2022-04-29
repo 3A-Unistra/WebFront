@@ -79,6 +79,11 @@ const routes = [
     path:'/webGl',
     name:'webGL',
     component: ()=>import ('../views/webGl.vue')
+  },
+  {
+    path:'/reset/:token',
+    name: 'Reset',
+    component: ()=>import ('../components/reset.vue')
   }
 ]
 

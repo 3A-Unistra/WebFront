@@ -84,5 +84,17 @@
   "resultat":"Résultat de la partie",
   "score": "SCORE",
   "rang": "RANG",
-  "joueurs": "JOUEUR"
+  "joueurs": "JOUEUR",
+
+  //forget Page
+  "Ent":"Entrez votre email",
+  "Enter":"Entrez votre mail pour modifier votre mot de passe",
+  "Anul":"Annuler",
+  "Rec":"recuperer",
+
+  //reset
+  "conf": "Confirme",
+  "EntN":"Entrez votre Nouveau mot de passe",
+  "CEntN":"Entrez votre mot de passe",
+  "CCEntN": "Confirmez mot de passe"
 }

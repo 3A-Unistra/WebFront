@@ -83,6 +83,17 @@
   "resultat":"Game result",
   "score": "SCORE",
   "rang": "RANKING",
-  "joueurs": "PLAYER"
+  "joueurs": "PLAYER",
 
+  //ForgetPassword 
+  "Ent":"Enter Your Email",
+  "Enter":"Enter Your Email to get Your Password",
+  "Anul":"Cancel",
+  "Rec":"Recover",
+
+  //reset
+  "conf": "Confirm",
+  "EntN":"Enter Your New Password",
+  "CEntN":"Enter password",
+  "CCEntN": "Confirm password"
 }
