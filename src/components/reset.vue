@@ -134,6 +134,7 @@ components: {
     text-decoration: none;
     color:black;
 }
+
     @media screen and (max-width: 450px){
     .champs_form{
         margin-left:0px;
@@ -146,5 +147,49 @@ components: {
     .container{
         margin-left: 0px;
     }
+    .btn_container{
+            flex-direction: column;
+            align-items: center;
+        }
+        .bnt_nul{
+            margin-bottom: 15px;
+        }
+        .btn{
+            width:200px;
+        }
     }
+    /* mode tablette*/
+    /*@media screen and (max-width: 700px) {
+        .champs_form{
+        margin-left:0px;
+        margin-top:5px;
+        min-width: 370px
+        }
+        .container{
+        margin-left: 0px;
+    }
+        .forget_title{
+            font-size:30px;
+            margin-top:10px;
+        }
+        .btn_container{
+            flex-direction: column;
+            align-items: center;
+        }
+        .bnt_nul{
+            margin-bottom: 15px;
+        }
+        .btn{
+            width:200px;
+        }
+        .content_forget{
+            height:auto;
+            width:90%;
+        }
+    }
+*/
+    /* mode telephone */
+    /*@media screen and (max-width: 480px){}*/
+
+
 </style>
