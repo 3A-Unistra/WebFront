@@ -1,52 +1,51 @@
 <template>
     <Header></Header>
         <div class="content_forget">
+           <form @submit.prevent="checkreset">
             <section class ="container">
-            <h1 class="animate__animated animate__bounce animate__repeat-2 forget_title">Entrez votre email</h1>
-            <form class="form_container">
-                    <input type="email" class="champs_form" required  id="email" aria-describedby="emailHelp" placeholder="Entrez votre mail pour récupérer votre mot de passe">
-            </form>
-
-                <div CLASS="btn_container">
-                     <button href="#" class="btn btn-help bnt_nul">Annuler</button>
-                        <button type="submit" class="btn  btn_rec">Récupérer</button>
-                </div>
+            <h1 class="animate__animated animate__bounce animate__repeat-2 forget_title">{{ $t("EntN")}}</h1>
+               <input v-model="password" type="password" class="champs_form" required  id="zpassword" :placeholder=" $t('CEntN')">
+               <input v-model="confirmpassword" type="password" class="champs_form" required  id="password" :placeholder=" $t('CCEntN')">
             </section>
+            <div CLASS="btn_container">
+
+                        <button class="btn btn-help bnt_nul" type="button"><router-link to="/Login">{{ $t("Anul") }}</router-link></button>
+                        <button type="submit" class="btn  btn_rec">{{ $t("conf")}}</button>
+            </div>
+            </form>
         </div>
     <Footer></Footer>
 </template>
-<!-- Script JS -->
 
 <script>
 import Footer from './MyFooter'
 import Header from './MyHeader'
 export default {
-    name: 'ForgetPage',
+    name: 'ResetPage',
   props: {
       tit: String,
   },
-  data () {
+    data () {
     return {
-        email: '',
+       password: '',
+       confirmpassword: ''
     }
-  },
-  
-    methods: {
-        checkforgot: function() {
-            this.$store.dispatch('checkforgot', {
-              forgetPass: this.forgetPass,
+  },methods: {
+      
+        checkreset: function() {
+            this.$store.dispatch('checkreset', {
+              password: this.password,
+              confirmpassword:this.confirmpassword,
+              token :this.$route.params.token
           })    
     }
-},
-
+    },
 components: {
     Header,
     Footer
 }
 }
 </script>
-
-<!-- style Css -->
 
 <style>
     #app{
@@ -57,7 +56,6 @@ components: {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        width:auto;
     }
 
     .content_forget{
@@ -74,14 +72,13 @@ components: {
         margin-top: 50px;
         padding: 50px;
         }
-
     .form_container{
         display: flex;
         justify-content: center;
     }
     .champs_form{
         display: flex;
-        width: 600px;
+        min-width: 600px;
         padding:15px;
         border-radius:10px;
         border:1px solid #835B0E;
@@ -96,9 +93,6 @@ components: {
         padding-left: auto;
         padding-right: auto;
     }
-    .btn_forget{
-        background:#d49b2f;
-    }
     .btn_container{
         display:flex;
         flex-direction:row;
@@ -106,7 +100,7 @@ components: {
         margin-top:30px;
     }
     .btn_rec{
-        display: block;
+        display: flex;
         justify-content: center;
         background-color:#ca9735;
         padding-left: 40px;
@@ -121,7 +115,7 @@ components: {
         background-color:#694f1b 
         }
     .bnt_nul{
-        display: block;
+        display: flex;
         justify-content: center;
         background-color:grey;
         padding-left: 40px;
@@ -141,11 +135,39 @@ components: {
     color:black;
 }
 
-    /* mode tablette*/
-    @media screen and (max-width: 700px) {
-        .champs_form{
-            max-width: 500px;
+    @media screen and (max-width: 450px){
+    .champs_form{
+        margin-left:0px;
+        margin-top:5px;
+        min-width: 370px
+    }
+    .content_forget{
+        margin-left: -50px;
         }
+    .container{
+        margin-left: 0px;
+    }
+    .btn_container{
+            flex-direction: column;
+            align-items: center;
+        }
+        .bnt_nul{
+            margin-bottom: 15px;
+        }
+        .btn{
+            width:200px;
+        }
+    }
+    /* mode tablette*/
+    /*@media screen and (max-width: 700px) {
+        .champs_form{
+        margin-left:0px;
+        margin-top:5px;
+        min-width: 370px
+        }
+        .container{
+        margin-left: 0px;
+    }
         .forget_title{
             font-size:30px;
             margin-top:10px;
@@ -154,7 +176,9 @@ components: {
             flex-direction: column;
             align-items: center;
         }
-        
+        .bnt_nul{
+            margin-bottom: 15px;
+        }
         .btn{
             width:200px;
         }
@@ -162,33 +186,10 @@ components: {
             height:auto;
             width:90%;
         }
-        .bnt_nul{
-            order: 2;
-        }
-        .btn_rec{
-            order: 1;
-             margin-bottom: 15px;
-        }
-        .dropdown-toggle{
-            max-width:125px;
-        }
-
     }
-    @media screen and (max-width: 450px) {
-        .container{
-            max-width:300px;
-        }
-        
+*/
+    /* mode telephone */
+    /*@media screen and (max-width: 480px){}*/
 
-    }
 
-    @media screen  and (min-width: 450px) and (max-width: 700px) {
-        .container{
-            max-width:370px;
-            margin-right: 30px;
-        }
-                
-
-    }
-    
 </style>
