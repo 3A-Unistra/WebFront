@@ -24,8 +24,7 @@ export default createStore({
         //Informations du profil cliqué
         usernameProfil: "",
         loginProfil: "",
-        pawnProfil: "",
-        photoProfil: "",
+        pawnProfil: Math.floor(Math.random()*7),
 
         publicLobby: false,
         isHost: false,  
