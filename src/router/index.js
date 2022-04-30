@@ -40,7 +40,7 @@ const routes = [
   {
     path:'/profile',
     name: 'Profile',
-    component: ()=>import ('../components/Profile.vue')
+    component: ()=>import ('../components/ProfileComponent.vue')
   },
 
   /* appel du fichier login du component */
