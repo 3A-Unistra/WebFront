@@ -2,15 +2,15 @@
     <Header></Header>
         <div class="content_forget">
             <section class ="container">
-            <h1 class="animate__animated animate__bounce animate__repeat-2 forget_title">Enter Your Email</h1>
-            <form  @submit.prevent="checkforgot" class="form_container">
-                    <input v-model="forgetPass" type="email" class="champs_form" required  id="email" aria-describedby="emailHelp" placeholder="Enter Your Email to get Your Password">
-                    <div CLASS="btn_container">
-
-                        <button class="btn btn-help bnt_nul" type="button"><router-link to="/Login">Cancel</router-link></button>
-                        <button type="submit" class="btn  btn_rec">Recover</button>
-                    </div>
+            <h1 class="animate__animated animate__bounce animate__repeat-2 forget_title">Entrez votre email</h1>
+            <form class="form_container">
+                    <input type="email" class="champs_form" required  id="email" aria-describedby="emailHelp" placeholder="Entrez votre mail pour récupérer votre mot de passe">
             </form>
+
+                <div CLASS="btn_container">
+                     <button href="#" class="btn btn-help bnt_nul">Annuler</button>
+                        <button type="submit" class="btn  btn_rec">Récupérer</button>
+                </div>
             </section>
         </div>
     <Footer></Footer>
@@ -57,6 +57,7 @@ components: {
         display: flex;
         flex-direction: column;
         justify-content: center;
+        width:auto;
     }
 
     .content_forget{
@@ -105,7 +106,7 @@ components: {
         margin-top:30px;
     }
     .btn_rec{
-        display: flex;
+        display: block;
         justify-content: center;
         background-color:#ca9735;
         padding-left: 40px;
@@ -120,7 +121,7 @@ components: {
         background-color:#694f1b 
         }
     .bnt_nul{
-        display: flex;
+        display: block;
         justify-content: center;
         background-color:grey;
         padding-left: 40px;
@@ -153,9 +154,7 @@ components: {
             flex-direction: column;
             align-items: center;
         }
-        .bnt_nul{
-            margin-bottom: 15px;
-        }
+        
         .btn{
             width:200px;
         }
@@ -163,10 +162,33 @@ components: {
             height:auto;
             width:90%;
         }
+        .bnt_nul{
+            order: 2;
+        }
+        .btn_rec{
+            order: 1;
+             margin-bottom: 15px;
+        }
+        .dropdown-toggle{
+            max-width:125px;
+        }
+
+    }
+    @media screen and (max-width: 450px) {
+        .container{
+            max-width:300px;
+        }
+        
+
     }
 
-    /* mode telephone */
-    @media screen and (max-width: 480px){
+    @media screen  and (min-width: 450px) and (max-width: 700px) {
+        .container{
+            max-width:370px;
+            margin-right: 30px;
+        }
+                
 
     }
+    
 </style>

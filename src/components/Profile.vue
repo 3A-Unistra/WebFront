@@ -23,7 +23,7 @@
         <section class ="information">
             <section class ="info_txt">
                 <div class="txt_et_champ">
-                    <div>
+                    <div class="titre_info">
                         {{ $t("nom_joueur") }} :                    
                     </div>
                     <form>
@@ -33,7 +33,7 @@
                 </div>
 
                 <div class="txt_et_champ">
-                    <div>
+                    <div class="titre_info">
                         {{ $t("pseudo") }} :                    
                     </div>
                     <form>
@@ -43,7 +43,7 @@
                 </div>
 
                 <div class="txt_et_champ">
-                    <div>
+                    <div class="titre_info">
                         {{ $t("high_score") }} :                    
                     </div>
                     <form>
@@ -53,7 +53,7 @@
                 </div>
 
                 <div class="txt_et_champ">
-                    <div>
+                    <div class="titre_info">
                         {{ $t("fav_pion") }}:                    
                     </div>
                     <form>
@@ -250,6 +250,9 @@ export default {
 
     gap: 30px;
     padding: 30px 0px 30px 0px;
+    }
+    .titre_info{
+        min-width: 200px;
     }
 
     .information {
