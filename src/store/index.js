@@ -2,36 +2,50 @@ import { createStore,/*, storeKey*/ } from "vuex";
 
 const axios = require('axios');
 import router from '../router/index.js';
+axios.defaults.baseURL =process.env.VUE_APP_API_URL
 
-export default createStore ({
+
+export default createStore({
     state: {
 
         //Informations de l'user connecté:
         username: "",
         login: "",
         piece: 0,
-        id:-1,
+        id: -1,
 
         loggedin: false,
         sameProfile: true,
         numberPlayers: 4,
         IsFollowing: false,
 
+        gameToken:"",
+
         //Informations du profil cliqué
         usernameProfil: "",
         loginProfil: "",
         pawnProfil: Math.floor(Math.random()*7),
 
-        publicLobby: false  ,
-        isHost: false
+        publicLobby: false,
+        isHost: false,  
 
-        
+        //liste des salons a afficher dans PostLobby
+        listeSalons: [],
+        //liste des joueurs dans un lobby
+        listePlayers: [],
+        //paramètre de la room
+        auctions: false,
+        doubleGO: false,
+        buyFirstRound: false,
+        timePerRound: -1,
+        maxRound: -1,
+        starterMoney: -1
     },
 
     actions: {
-        createAccount:({commit},userInfos) => {
+       createAccount:({commit},userInfos) => {
             commit;
-            axios.post('http://localhost:3000/api/users/register',userInfos, {
+            axios.post('/users/register',userInfos, {
                 
             headers: {
                     'Content-Type': 'application/json'
@@ -49,7 +63,7 @@ export default createStore ({
 
         checkLogin:({commit},userInfos) => {
             commit;
-            axios.post('http://localhost:3000/api/users/login',userInfos, {
+            axios.post('/users/login',userInfos, {
                 
             headers: {
                     'Content-Type': 'application/json'
@@ -67,7 +81,7 @@ export default createStore ({
         
         getUserProfile:({commit},userInfos) => {
             commit;
-            axios.post('http://localhost:3000/api/users/getProfile',userInfos, {
+            axios.post('/users/getProfile',userInfos, {
                 
             headers: {
                     'Content-Type': 'application/json'
@@ -88,7 +102,7 @@ export default createStore ({
 
         getIds:({commit},userNames) => {
             commit;
-            axios.post('http://localhost:3000/api/users/get_ids',userNames, {
+            axios.post('/users/get_ids',userNames, {
                 
             headers: {
                     'Content-Type': 'application/json'
@@ -96,7 +110,7 @@ export default createStore ({
             })
             .then(function (response) {
                 console.log(response.data);
-                axios.post('http://localhost:3000/api/users/is_follow',response.data, {
+                axios.post('/users/is_follow',response.data, {
                 
                 headers: {
                     'Content-Type': 'application/json'
@@ -119,7 +133,7 @@ export default createStore ({
 
         getOwnId:({commit},username) => {
             commit;
-            return axios.post('http://localhost:3000/api/users/getownid',username, {
+            return axios.post('/users/getownid',username, {
                 
             headers: {
                     'Content-Type': 'application/json'
@@ -136,7 +150,7 @@ export default createStore ({
 
         changeNamePawn:({commit},userInfos) => {
             commit;
-            axios.post('http://localhost:3000/api/users/editProfile',userInfos, {                
+            axios.post('/users/editProfile',userInfos, {                
             headers: {
                     'Content-Type': 'application/json'
                 }
@@ -151,7 +165,7 @@ export default createStore ({
 
         Follow:({commit},userNames) => {
             commit;
-            axios.post('http://localhost:3000/api/users/get_ids',userNames, {
+            axios.post('/users/get_ids',userNames, {
                 
             headers: {
                     'Content-Type': 'application/json'
@@ -160,7 +174,7 @@ export default createStore ({
             .then(function (response) {
                 console.log(response.data.ownId );
                 console.log(response.data.otherId );
-                axios.post('http://localhost:3000/api/users/follow',response.data, {
+                axios.post('/users/follow',response.data, {
                 
                 headers: {
                     'Content-Type': 'application/json'
@@ -183,7 +197,7 @@ export default createStore ({
 
         Unfollow:({commit},userNames) => {
             commit;
-            axios.post('http://localhost:3000/api/users/get_ids',userNames, {
+            axios.post('/users/get_ids',userNames, {
                 
             headers: {
                     'Content-Type': 'application/json'
@@ -192,7 +206,7 @@ export default createStore ({
             .then(function (response) {
                 console.log(response.data.ownId );
                 console.log(response.data.otherId );
-                axios.post('http://localhost:3000/api/users/unfollow',response.data, {
+                axios.post('/users/unfollow',response.data, {
                 
                 headers: {
                     'Content-Type': 'application/json'
@@ -210,60 +224,114 @@ export default createStore ({
             .catch(function(error) {
                 console.log(error);
                 return false;
+            }); 
+        } , 
+        checkforgot:({commit},userInfos) => {
+            commit;
+            axios.post('/users/forget',userInfos, {
+                
+            headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(function () {
+                //console.log(response);
+                router.push('/Login');
+            })
+            .catch(function(error) {
+                console.log(error);
             });
-        }
+        },
+        checkreset:({commit},userInfos) => {
+            commit;
+            axios.post('/users/reset/:token',userInfos, {
+                
+            headers: {
+                    'Content-Type': 'application/json'
+                }
+            })  
+            .then(function(response) {
+                console.log(response);
+                router.push('/Login');
+            })
+            
+            .catch(function(error) {
+                console.log(error);
+            });
+        },        
+    
 
     },
     getters: {
-
+    id: state => state.id
     },
     mutations: {
-        setHost(state,isHost)
-        {
+        setHost(state, isHost) {
             state.isHost = isHost
         },
-        setLobby(state,publicLobby)
-        {
-            state.publicLobby= publicLobby
+
+        gameToken(state,gameToken) {
+            state.gameToken =gameToken
         },
-        quickId(state,id)
-        {
+
+        createSalon(state, newSalon) {
+            state.listeSalons.push(newSalon);
+        },
+        joinRoom(state, newPlayer) {
+            state.listePlayers.push(newPlayer);
+        },
+
+        leaveRoom(state, index) {
+            state.listePlayers.splice(index, 1);
+        },
+
+        //suppressionJoueur(state, index){
+        //},
+        ajoutJoueur(state, index){
+            state.this.$set(this.listeSalons[index].nbPlayers,this.listeSalons[index].nbPlayers);
+        },
+
+        setPiece(state, piece) {
+            state.piece = piece
+        },
+        setLobby(state, publicLobby) {
+            state.publicLobby = publicLobby
+        },
+        quickId(state, id) {
             state.id = id
         },
-        changeFollowState(state, newState)
-        {
+        changeFollowState(state, newState) {
             state.IsFollowing = newState
         },
-        clearUserData(state)
-        {
+        clearUserData(state) {
             state.username = "",
-            state.login = "",
-            state.piece = 0,
-            state.loggedin = false
+                state.login = "",
+                state.piece = 0,
+                state.loggedin = false
 
         },
-        rentreusrname(state, newusername)
-        {
-            state.username = newusername;     
+        rentreusrname(state, newusername) {
+            state.username = newusername;
         },
-        gettingin(state,loggedin)
-        {
+        gettingin(state, loggedin) {
             state.loggedin = loggedin;
         },
-        checkingSameProfile(state,newSameProfile)
-        {
+        checkingSameProfile(state, newSameProfile) {
             state.sameProfile = newSameProfile;
         },
-        changePawnProfil(state,newPawnProfil){
+        changePawnProfil(state, newPawnProfil) {
             state.pawnProfil = newPawnProfil;
         },
-        changeUsrnameProfil(state,newUsProfil){
+        changeUsrnameProfil(state, newUsProfil) {
             state.usernameProfil = newUsProfil;
         },
-        changeLoginProfil(state,newLoginProfil){
+        changeLoginProfil(state, newLoginProfil) {
             state.loginProfil = newLoginProfil;
+        },
+        changePhotoProfil(state, newPhotoProfil) {
+            state.photoProfil = newPhotoProfil;
         }
-        
+
     },
     modules: {
 

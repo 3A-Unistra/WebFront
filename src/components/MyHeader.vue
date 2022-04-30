@@ -1,28 +1,36 @@
 <template>
   <div class="haut">
+    
     <div class="top_bar">
-      <img class="logo_coin" src="../assets/logo_couleur.png" alt="logo">
-      <div class="login">
-        <router-link to="/signup">{{ $t("signup") }}</router-link>
-        <span class="sp_menu">&nbsp;|&nbsp;</span>
-        <router-link to="/login">{{ $t("login") }}</router-link>
-      </div>
-      <div class="top_right">
-        <router-link to="/">
-          {{ $t("home") }}
-        </router-link>
-        <span class="sp_menu">&nbsp;|&nbsp;</span>
-        <router-link to="/lobby">
-          {{ $t("lobby") }}
-        </router-link>
-        <span class="sp_menu">&nbsp;|&nbsp;</span>
-        <router-link to="/profile" @click="getUserProfile(ownUsername)">
-          {{ $t("profil") }}
-        </router-link>
-        <span class="sp_menu">&nbsp;|&nbsp;</span>
-        <router-link to="/post_login">postlogin</router-link>
-        <!-- <span class="sp_menu">&nbsp;/&nbsp;</span> -->
-        <div class="options">
+      
+      <div class="Menu_principale dropdown">
+
+          <button class="btn bg-white dropdown-toggle" type="button" data-toggle="dropdown">
+             <img class="gift" src="../assets/menu.png"/> 
+            <!-- MENU -->
+          </button>
+            <ul class="dropdown-menu">
+              <li class="drop_elem"><router-link to="/"> {{ $t("home") }} </router-link></li>
+               
+                <!-- <span class="sp_menu">&nbsp;|&nbsp;</span> -->
+                <li class="drop_elem"><router-link to="/lobby">{{ $t("lobby") }}</router-link></li>
+
+                <!-- <span class="sp_menu">&nbsp;|&nbsp;</span> -->
+                <li class="drop_elem"> <router-link to="/profile" @click="getUserProfile(ownUsername)">{{ $t("profil") }}</router-link></li>
+                
+                <!-- <span class="sp_menu">&nbsp;|&nbsp;</span> -->
+                <li class="drop_elem">  <router-link to="/post_login">Postlogin</router-link></li>
+            </ul>
+          </div>
+
+           <div class="login">
+              <router-link to="/signup">{{ $t("signup") }}</router-link>
+              <span class="sp_menu">&nbsp;|&nbsp;</span>
+              <router-link to="/login">{{ $t("login") }}</router-link>
+            </div>
+
+
+           <div class="options">
           <button @click="dropdown_options"></button>
           <ul id="liste_option">            
             <span class="titre_dropdown">
@@ -36,24 +44,17 @@
                 </select>
               </div> 
             </li>
-
-            <span class="titre_dropdown">
-              {{ $t("affichage") }}:
-            </span>
-            <div class="change_mode">
-              <img class="symbol_mode" src="../assets/sun_light.png">
-              <label class="switch">
-                <input type="checkbox" checked>
-                <span class="slider round"></span>
-              </label>
-              <img class="symbol_mode" src="../assets/lune_dark.png">
-            </div>
             <LogOutButton style="margin-bottom: 0;"></LogOutButton>
           </ul>
         </div>
-      </div>
+        </div>
+
+        
+      <!-- <img class="logo_coin" src="../assets/logo_couleur.png" alt="logo"> -->
+       
     </div>
-  </div>
+
+
 </template>
 
 <script>
@@ -109,7 +110,21 @@ export default {
   font-size: 2vh;
   z-index: 3;
   }
-
+.login{
+  margin-right: auto;
+  margin-left: auto;
+}
+.dropdown-menu{
+  padding:20px;
+  min-width:200px;
+  /* display: flex; */
+  flex-direction: column;
+  justify-content:space-around; 
+}
+.drop_elem{
+  font-weight: bold;
+  margin-bottom: 15px;
+}
 .top_bar {
   display: flex;
   flex-direction: row;
@@ -118,10 +133,19 @@ export default {
   max-width: 100%;
   max-height: 11%;
   padding: 1% 3%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+.gift{
+  max-width:30px;
+  max-height: 30px;
 }
 .menu_mr{
   /* margin-left:25px; */
   margin-right:20px;
+}
+.name_menu{
+  font-size:20px;
 }
 
 .logo_coin {
@@ -140,6 +164,7 @@ a {
 
 .top_right a {
   color: black;
+  font-size: 18px;
 }
 .login {
   display: flex;
@@ -179,15 +204,24 @@ a:hover {
   width: 50px;
   height: 50px;
 }
+.dropdown-toggle{
+  /* font-size: 18px; */
+  padding:5px;
+}
+
 
 .options button {
-  width: inherit;
-  height: inherit;
-  background-image: url(../assets/rouage.png);
+  /* width: inherit;
+  height: inherit; */
+  background-image: url(../assets/settings.png);
   background-size: cover;
   background-color: transparent;
   border: none;
   cursor: pointer;
+  width:25px;
+  height:25px;
+  margin-left: 20px;
+  margin-top: 10px;
 }
 
 #liste_option {
@@ -329,33 +363,64 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+button.deconnection{
+  max-width:120px;
+  height:100%;
+  font-size:12px;
+}
+.deconnection .icone{
+  max-width: 25%;
+  max-height: 25%;
+}
+
+.drop_elem:hover {
+  background-color:#f5d18b;
+  
+}
+.drop_elem a{
+  font-size:22px;
+  font-weight: bold;
+  padding:15px 20px 15px 20px;
+}
+
 
 /* Mode mobile */
 @media screen and (max-width: 480px) {
+
   .haut {
     height: 40vh;
     font-size: 15px;
   }
   .login{
-    margin-top:90px;
+    /* margin-top:90px;
     margin-left:190px;
     padding:3px 10px 3px 10px;
-    width:auto;
-   
+    width:auto; */
+    margin-left: 10px;
   }
   .top_bar{
-    margin-left: -50px;
+    /* margin-left: -50px; */
     flex-direction:row;
-    box-sizing:unset;
+    /* box-sizing:unset; */
+    flex-wrap: wrap;
+    justify-content:space-evenly;
   }
   .logo_coin{
     display:none;
   }
-  .options button{
-   width: inherit;
+  .options{
+   /* width: inherit;
   height: inherit;
+   */
+   margin-left: -25%;
+   margin-right:0px;
+
   }
-  
+  .button.deconnection{
+    margin-left: 40%;
+  }
+ 
+
 }
 
 /* mode tablette */
@@ -386,11 +451,56 @@ input:checked + .slider:before {
   .logo_coin{
     display:none;
   }
-  .options button{
+  /* .options button{
    width: inherit;
   height: inherit;
-  }
+  } */
   
 }
+
+/*  */
+
+/* Style the navigation menu */
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+  position: relative;
+}
+
+/* Hide the links inside the navigation menu (except for logo/home) */
+.topnav #myLinks {
+  display: none;
+}
+
+/* Style navigation menu links */
+.topnav a {
+  color: white;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  display: block;
+}
+
+/* Style the hamburger menu */
+.topnav a.icon {
+  background: black;
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+/* Add a grey background color on mouse-over */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Style the active link (or home/logo) */
+.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
 
 </style>

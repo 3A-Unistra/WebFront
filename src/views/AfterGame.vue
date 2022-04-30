@@ -59,7 +59,7 @@ export default {
             players: [
                 {
                     profilePicture:require('../assets/grin.png'),
-                    namePlayer:"ra",
+                    namePlayer:"ss",
                     login:"",
                     score:5,
                     ranking: 1
