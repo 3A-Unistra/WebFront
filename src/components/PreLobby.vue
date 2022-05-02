@@ -44,7 +44,6 @@ export default {
       let paquet = JSON.parse(e.data)
       if (paquet.name === 'CreateGameSucceed') {
         this.$store.commit("gameToken",paquet.game_token)
-        console.log(" id de la room aprs succss" +this.$store.state.gameToken)
         this.$store.commit("setPiece", paquet.piece);
         this.$router.push("/lobby");
       }

@@ -1,9 +1,6 @@
 <template>
-<div>WebGL</div>
+<!-- for the test of the router -->
+    <h1>webGl page</h1>
+    
 </template>
 
-<script>
-</script>
-
-<style>
-</style>

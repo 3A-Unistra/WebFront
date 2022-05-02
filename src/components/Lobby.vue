@@ -328,16 +328,18 @@ export default {
 
       if (paquet.name === "StatusRoom") {
         let index = 0;
+        let playersData = paquet.players_data
         while (index < paquet.nb_players) {
+            console.log("l'username du joueur" + index + " : "+ playersData[index].username)
           if (
             this.$store.state.listePlayers
               .map((object) => object.pseudo)
-              .indexOf(paquet.players[index]) === -1
+              .indexOf(playersData[index].username) === -1
           ) {
             this.$store.commit("joinRoom", {
-              photo: "",
-              pseudo: paquet.players[index],
-              username: paquet.players[index],
+              photo: playersData[index].avatar_url,
+              pseudo: playersData[index].username,
+              username: playersData[index].username,
             });
           }
           index++;
