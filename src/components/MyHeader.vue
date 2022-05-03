@@ -16,9 +16,9 @@
           {{ $t("lobby") }}
         </router-link>
         <span class="sp_menu">&nbsp;|&nbsp;</span>
-        <router-link to="/profile" @click="getUserProfile(ownUsername)">
+        <p @click="getUserProfile(ownUsername)">
           {{ $t("profil") }}
-        </router-link>
+        </p>
         <span class="sp_menu">&nbsp;|&nbsp;</span>
         <router-link to="/post_login">postlogin</router-link>
         <!-- <span class="sp_menu">&nbsp;/&nbsp;</span> -->
@@ -86,6 +86,7 @@ export default {
         getUserProfile: function(name){
             this.$store.dispatch('getUserProfile',{
                 username:name,
+                id: this.$store.state.id
             })
             this.pseudo = this.$store.state.loginProfil
         }

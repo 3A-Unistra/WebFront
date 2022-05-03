@@ -63,6 +63,7 @@ export default createStore ({
                 console.log(response.data)
                 localStorage.setItem('user-token', JSON.stringify(token)); // store the token in localstorage
                 commit('saveToken',token);
+                commit('quickId',response.data.id);
                 //console.log(localStorage.getItem('user-token'));
                 //console.log("date expiration en plus: "+ JSON.stringify(token));
                 router.push('/post_login');
@@ -83,7 +84,6 @@ export default createStore ({
             const token = localStorage.getItem('user-token');
 
             console.log("voici le token:\n"+localStorage.getItem('user-token'));
-            console.log("voici la date d'expiration du token:\n"+token.expiresIn);
 
             axios.post('/users/getProfile',userInfos, {
                 headers: {
@@ -92,17 +92,21 @@ export default createStore ({
                     }
             })
             .then(function (response) {
-                console.log(response.data);
-                console.log("on est dans le then avec "+token);
+                //console.log(response.data);
+                if (response.data.success == 12) {
+                    console.log("on est dans le then avec "+token);
+                    commit('changeUsrnameProfil', response.data.username)
+                    commit('changeLoginProfil', response.data.login)
+                    commit('changePawnProfil', response.data.pawn)
 
-                commit('changeUsrnameProfil', response.data.username)
-                commit('changeLoginProfil', response.data.login)
-                commit('changePawnProfil', response.data.pawn)
-
-                router.push('/profile');
+                    router.push('/profile');
+                } else {
+                    console.log("token expiré depuis le else");
+                }
+                
             })
             .catch(function(error) {
-                console.log(error);
+                console.log(error.message);
             }); 
         },
 
