@@ -17,21 +17,23 @@
             <ul class="list_footer n2">
                 <li class="menu_title"> {{ $t("reseaux") }} </li>
                 <hr>
-                <li class="menu_logo">
-                    <a href="">
-                        <img id="insta_size" src="../assets/instagram.png" alt="instagram">
-                    </a>
-                </li>
-                <li class="menu_logo">
-                    <a href="">
-                        <img class="social fb" src="../assets/facebook.png" alt="facebook">
-                    </a>
-                </li>
-                <li class="menu_logo">
-                    <a href="">
-                        <img class="social twitter" src="../assets/twitter.png" alt="twitter">
-                    </a>
-                </li>
+                <div class="container_logo">
+                    <li class="menu_logo">
+                        <a href="">
+                            <img id="insta_size" src="../assets/instagram.png" alt="instagram">
+                        </a>
+                    </li>
+                    <li class="menu_logo">
+                        <a href="">
+                            <img class="social fb" src="../assets/facebook.png" alt="facebook">
+                        </a>
+                    </li>
+                    <li class="menu_logo">
+                        <a href="">
+                            <img class="social twitter" src="../assets/twitter.png" alt="twitter">
+                        </a>
+                    </li>
+                </div>
             </ul>
             <ul class="list_footer n3">
                 <li class="menu_title"> {{ $t("liens") }} </li>
@@ -239,11 +241,13 @@ hr {
         
     }
     .menu_info{
-    font-size:15px;
+        font-size:15px;
     }
     .n2{
         margin-left: -20px;
+    
     }
+   
     .fb{
         margin-left: 3px;
     }
@@ -255,6 +259,15 @@ hr {
     }
     .store_redirection{
         max-width: 500px;
+    }
+    .container_logo{
+        display:flex;
+        flex-direction: row;
+        justify-content:space-around;
+    }
+    .menu_logo{
+        display:block;
+        margin-bottom: -30px;
     }
 }
 
@@ -277,7 +290,8 @@ hr {
     .bottom {
         width: 100%;
     }
-
+    
 }
+
 
 </style>

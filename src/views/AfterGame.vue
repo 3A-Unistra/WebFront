@@ -33,6 +33,12 @@ export default {
         Header,
         PlayerResult
     },
+    mounted () {
+      if (!(this.$store.state.loggedin)) {
+        this.$router.push('/login');
+        this.$store.commit('clearUserData');
+      }
+  },
     methods: {
         updateInfos: function (numPlayer,toUpdate) { 
             // d'abord le numéro du joueur dans le tableau, puis le nom de la caractéristique à modifier (score,ranking,...)
@@ -59,7 +65,7 @@ export default {
             players: [
                 {
                     profilePicture:require('../assets/grin.png'),
-                    namePlayer:"ra",
+                    namePlayer:"ss",
                     login:"",
                     score:5,
                     ranking: 1

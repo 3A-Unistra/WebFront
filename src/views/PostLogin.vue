@@ -1,32 +1,40 @@
-<template >
-    <Header></Header>
-    
-    <section class="container">
-        
-        <section class="opt">
-            <LogOutButton></LogOutButton>
-            
-            <button class="creer_partie" @click="toPreLobby" type="boutton">{{ $t("creer") }}
-                <img class="icone" src="../assets/reseau.png" alt="icone reseau">
-            </button>  
+<template>
+  <Header></Header>
 
-        </section>
+  <section class="container">
+    <section class="opt">
+      <LogOutButton></LogOutButton>
 
-        <section class ="info_salon">
-            <div class="lien">
-                <input class="champLien" type="text" :placeholder='$t("entrer_lien")'>
-                <button class="rejoindre" type="boutton">{{ $t("rejoindre") }}
-                    <img class="icone" src="../assets/verif.png" alt="icone verif"/>
-                </button>
-            </div>
-            <div class="liste_salon" v-for="salon in salonsAffichables" :key="salon.name">
-                <Salon  :maxNbPlayers="salon.maxNbPlayers" :nameLobby="salon.name" :nbPlayers="salon.nbPlayers" :private="salon.private"></Salon>
-                </div>
-        </section>
-
+      <button class="creer_partie" @click="toPreLobby" type="boutton">{{ $t("creer") }}
+        <img class="icone" src="../assets/reseau.png" alt="icone reseau" />
+      </button>
     </section>
 
-    <Footer></Footer>
+    <section class="info_salon">
+      <div class="lien">
+        <input class="champLien" type="text" :placeholder="$t('entrer_lien')" />
+        <button class="rejoindre" type="boutton">
+          {{ $t("rejoindre") }}
+          <img class="icone" src="../assets/verif.png" alt="icone verif" />
+        </button>
+      </div>
+      <div
+        class="liste_salon"
+        v-for="(salon, index) in salonsAffichables"
+        :key="salon.name"
+      >
+        <Salon
+          :maxNbPlayers="salon.maxNbPlayers"
+          :nameLobby="salon.name"
+          :nbPlayers="salon.nbPlayers"
+          :private="salon.private"
+          @my-event="joinLobby(index)"
+        ></Salon>
+      </div>
+    </section>
+  </section>
+
+  <Footer></Footer>
 </template>
 
 <!-- Script JS -->
@@ -39,43 +47,127 @@ import Footer from '../components/MyFooter'
 import Header from '../components/MyHeader'
 import Salon  from '../components/SalonComponent.vue'
 
+import socket from "../services/ws";
+
 export default {
-  
-  created : function() {
-      console.log("bien connecté")
-      /*
-
-      partie socket à recevoir et envoyer
-
-
-
-      */
-  },
-  data () {
-      return {
-        listeSalons: [
-            { id:1, name:'salon1', private: true, nbPlayers:8, maxNbPlayers:8 },
-            { id:2, name:'salon2', private: true, nbPlayers:7, maxNbPlayers:8  },
-            { id:3, name:'salon3', private: false, nbPlayers:3, maxNbPlayers:8 },
-            { id:4 ,name:'salon4', private: false, nbPlayers:8, maxNbPlayers:8  },
-        ],
-        newSalon: {
-            id:2,
-            name:'salon dynamique',
-            private:true,
-            nbPlayers:10,
-            maxNbPlayers: 7
-        },
-        idToSend: '092bc519-40b0-4159-8801-b29e36575e83',
+  mounted () {
+      if (!(this.$store.state.loggedin)) {
+        this.$router.push('/login');
+        this.$store.commit('clearUserData');
       }
   },
-     name: 'PostLoginPage',
-    components: {
-        Header,
-        Footer,
-        Salon,
-        LogOutButton
-    },
+  created: function () {
+    socket.onopen = (e) => {
+      console.log("open");
+      console.log(e);
+    };
+    socket.onerror = (e) => {
+      console.log("error");
+      console.log(e);
+    };
+
+    socket.onclose = (e) => {
+      console.log("close");
+      console.log(e);
+    };
+    socket.onmessage = (e) => {
+      let paquet = JSON.parse(e.data);
+      console.log(
+        "contenu du paquet recu quand on envoie un paquet Postlogin : " +
+          JSON.stringify(e.data)
+      );
+      if (paquet.name === "BroadcastNewRoomToLobby") {
+        if (
+          this.$store.state.listeSalons
+            .map((object) => object.id)
+            .indexOf(paquet.game_token) !== -1
+        ) {
+          console.log("existe déja, ne pas afficher");
+          return;
+        }
+        this.$store.commit("createSalon", {
+          id: paquet.game_token,
+          name: paquet.name,
+          private: paquet.is_private,
+          nbPlayers: paquet.nb_players,
+          maxNbPlayers: 8,
+        });
+      }
+
+      if (paquet.name === "EnterRoomSucceed") {
+        this.$store.commit("gameToken", paquet.game_token);
+        this.$store.state.piece = paquet.piece;
+        this.$router.push("/lobby");
+      }
+
+      if (paquet.name === "BroadcastUpdateLobby") {
+        let index = this.$store.state.listeSalons
+          .map((object) => object.id)
+          .indexOf(paquet.game_token);
+        switch (paquet.reason) {
+          case 1:
+            console.log("nouveau joueur dans une room");
+            if (index !== -1) {
+              this.$store.state.listeSalons[index].nbPlayers++;
+            }
+
+            break;
+          case 2:
+            console.log("un joueur en moins dans la room");
+            if (index !== -1) {
+              this.$store.state.listeSalons[index].nbPlayers--;
+              console.log("index du salon a modif"+ index);
+            }
+            break;
+          case 3:
+            console.log("une room est supprimée");
+            this.deleteSalon(index);
+            console.log("index du salon a modif" + index);
+
+            break;
+          case 4:
+            console.log("une room est crée");
+            console.log("index du salon a modif")+ index;
+
+            break;
+          case 5:
+            console.log("nouveau host");
+
+            break;
+          case 6:
+            console.log("la game est lancée");
+
+            break;
+          case 7:
+            console.log("un bot est ajouté");
+            if (index !== -1) {
+              this.$store.state.listeSalons[index].nbPlayers++;
+            }
+            break;
+          case 8:
+            console.log("un bot est supprimée");
+
+            if (index !== -1) {
+              this.$store.state.listeSalons[index].nbPlayers--;
+              console.log("index du salon a modif"+ index);
+            }
+            break;
+          default:
+            console.log("unknow");
+        }
+      }
+    };
+  },
+  data() {
+    return {};
+  },
+  name: "PostLoginPage",
+  components: {
+    Header,
+    Footer,
+    Salon,
+    LogOutButton,
+  },
     methods: {
         logout: function() {
             this.$store.commit('clearUserData'),
@@ -144,12 +236,27 @@ export default {
             console.log("etape 2")
             console.log(newLobby.name + " a été ajouté a la liste");
         },
+    joinLobby: function (index) {
+      let salonToJoin = this.$store.state.listeSalons[index].id;
+      let EnterRoom = {
+        name: "EnterRoom",
+        player_token: this.$store.state.id,
+        game_token: salonToJoin,
+      };
+      socket.send(JSON.stringify(EnterRoom));
     },
-    computed: {
-      salonsAffichables: function () {
-        return this.listeSalons.filter(salon => salon.private && salon.nbPlayers < salon.maxNbPlayers)
-      }
+
+    deleteSalon: function (index) {
+      this.$store.state.listeSalons.splice(index, 1);
+    },
+  },
+  computed: {
+    salonsAffichables: function () {
+      return this.$store.state.listeSalons.filter(
+        (salon) => !salon.private && salon.nbPlayers < salon.maxNbPlayers
+      );
     }
+  },
 }
 </script>
 

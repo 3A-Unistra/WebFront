@@ -8,30 +8,47 @@
             </form>
 
                 <div CLASS="btn_container">
-
-                        <button href="#" class="btn btn-help bnt_nul">annuler</button>
-                        <button type="submit" class="btn  btn_rec">recuperer</button>
-                    </div>
+                     <button href="#" class="btn btn-help bnt_nul">Annuler</button>
+                        <button type="submit" class="btn  btn_rec">Récupérer</button>
+                </div>
             </section>
         </div>
     <Footer></Footer>
 </template>
-
 <!-- Script JS -->
 
 <script>
 import Footer from './MyFooter'
 import Header from './MyHeader'
 export default {
+    mounted () {
+      if (!(this.$store.state.loggedin)) {
+        this.$router.push('/login');
+        this.$store.commit('clearUserData');
+      }
+  },
     name: 'ForgetPage',
   props: {
       tit: String,
   },
+  data () {
+    return {
+        email: '',
+    }
+  },
+  
+    methods: {
+        checkforgot: function() {
+            this.$store.dispatch('checkforgot', {
+              forgetPass: this.forgetPass,
+          })    
+    }
+},
+
 components: {
     Header,
     Footer
 }
-    
 }
 </script>
 
@@ -46,6 +63,7 @@ components: {
         display: flex;
         flex-direction: column;
         justify-content: center;
+        width:auto;
     }
 
     .content_forget{
@@ -61,7 +79,7 @@ components: {
         margin-right: auto;
         margin-top: 50px;
         padding: 50px;
-}
+        }
 
     .form_container{
         display: flex;
@@ -94,7 +112,7 @@ components: {
         margin-top:30px;
     }
     .btn_rec{
-        display: flex;
+        display: block;
         justify-content: center;
         background-color:#ca9735;
         padding-left: 40px;
@@ -109,7 +127,7 @@ components: {
         background-color:#694f1b 
         }
     .bnt_nul{
-        display: flex;
+        display: block;
         justify-content: center;
         background-color:grey;
         padding-left: 40px;
@@ -124,6 +142,10 @@ components: {
     .btn_nul:active {
        background-color:#222121;
     }
+    a {
+    text-decoration: none;
+    color:black;
+}
 
     /* mode tablette*/
     @media screen and (max-width: 700px) {
@@ -138,9 +160,7 @@ components: {
             flex-direction: column;
             align-items: center;
         }
-        .bnt_nul{
-            margin-bottom: 15px;
-        }
+        
         .btn{
             width:200px;
         }
@@ -148,10 +168,33 @@ components: {
             height:auto;
             width:90%;
         }
+        .bnt_nul{
+            order: 2;
+        }
+        .btn_rec{
+            order: 1;
+             margin-bottom: 15px;
+        }
+        .dropdown-toggle{
+            max-width:125px;
+        }
+
+    }
+    @media screen and (max-width: 450px) {
+        .container{
+            max-width:300px;
+        }
+        
+
     }
 
-    /* mode telephone */
-    @media screen and (max-width: 480px){
+    @media screen  and (min-width: 450px) and (max-width: 700px) {
+        .container{
+            max-width:370px;
+            margin-right: 30px;
+        }
+                
 
     }
+    
 </style>
