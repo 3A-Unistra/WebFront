@@ -1,11 +1,13 @@
 <template>
   <Header></Header>
+<div id = "canvas-container">
   <canvas
     id="unity-canvas"
     width="960"
     height="600"
     style="width: 960px; height: 600px; background: #231f20"
   ></canvas>
+</div>
   <Footer></Footer>
 </template>
 
@@ -50,4 +52,14 @@ export default {
   },
 };
 </script>
-<style></style>
+<style>
+
+#canvas-container {
+   width: 100%;
+   text-align:center;
+}
+
+canvas {
+   display: inline;
+}
+</style>
