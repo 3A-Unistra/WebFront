@@ -83,7 +83,7 @@ export default createStore ({
             commit;
             const token = localStorage.getItem('user-token');
 
-            console.log("voici le token:\n"+localStorage.getItem('user-token'));
+           // console.log("voici le token:\n"+localStorage.getItem('user-token'));
 
             axios.post('/users/getProfile',userInfos, {
                 headers: {
@@ -94,7 +94,7 @@ export default createStore ({
             .then(function (response) {
                 //console.log(response.data);
                 if (response.data.success == 12) {
-                    console.log("on est dans le then avec "+token);
+                    console.log("on est dans le then");
                     commit('changeUsrnameProfil', response.data.username)
                     commit('changeLoginProfil', response.data.login)
                     commit('changePawnProfil', response.data.pawn)
@@ -115,7 +115,8 @@ export default createStore ({
             axios.post('/users/get_ids',userNames, {
                 
             headers: {
-                    'Content-Type': 'application/json'
+                'Authorization': 'Bearer '+localStorage.getItem('user-token'),
+                'Content-Type': 'application/json'
                 }
             })
             .then(function (response) {
@@ -141,6 +142,8 @@ export default createStore ({
             });
         } ,
 
+        // accéder au moment de la connexion pour stocker
+        // l'id dans un state du store
         getOwnId:({commit},username) => {
             commit;
             return axios.post('/users/getownid',username, {
@@ -158,12 +161,14 @@ export default createStore ({
             });
         },
 
+        // accéder au moment d'édit un profil
         changeNamePawn:({commit},userInfos) => {
             commit;
             axios.post('/users/editProfile',userInfos, {                
-            headers: {
+                headers: {
+                    'Authorization': 'Bearer '+localStorage.getItem('user-token'),
                     'Content-Type': 'application/json'
-                }
+                   }
             })
             .then(function () {
                 router.push('/profile');
@@ -177,9 +182,10 @@ export default createStore ({
             commit;
             axios.post('/users/get_ids',userNames, {
                 
-            headers: {
+                headers: {
+                    'Authorization': 'Bearer '+localStorage.getItem('user-token'),
                     'Content-Type': 'application/json'
-                }
+                   }
             })
             .then(function (response) {
                 console.log(response.data.ownId );
@@ -187,6 +193,7 @@ export default createStore ({
                 axios.post('/users/follow',response.data, {
                 
                 headers: {
+                    'Authorization': 'Bearer '+localStorage.getItem('user-token'),
                     'Content-Type': 'application/json'
                 }
                 })
@@ -210,7 +217,8 @@ export default createStore ({
             axios.post('/users/get_ids',userNames, {
                 
             headers: {
-                    'Content-Type': 'application/json'
+                'Authorization': 'Bearer '+localStorage.getItem('user-token'),
+                'Content-Type': 'application/json'
                 }
             })
             .then(function (response) {
@@ -219,6 +227,7 @@ export default createStore ({
                 axios.post('/users/unfollow',response.data, {
                 
                 headers: {
+                    'Authorization': 'Bearer '+localStorage.getItem('user-token'),
                     'Content-Type': 'application/json'
                 }
                 })

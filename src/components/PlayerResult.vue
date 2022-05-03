@@ -90,14 +90,5 @@ export default {
             this.$store.commit('changeFollowState',true);
         },
     }
-
-    /*data: function() {
-    return { 
-        profilePicture:"",
-        namePlayer:"",
-        score:7,
-        ranking
-        }
-    },*/
 }
 </script>

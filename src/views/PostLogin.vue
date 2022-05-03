@@ -8,10 +8,7 @@
             
             <button class="creer_partie" @click="$router.push('/prelobby')" type="boutton">{{ $t("creer") }}
                 <img class="icone" src="../assets/reseau.png" alt="icone reseau">
-            </button>
-            <button @click="postPost(idToSend)">afficher le profil du boug </button>
-            <button @click="postPostStore(this.idToSend)">afficher le profil depuis le store du boug </button>    
-  
+            </button>  
 
         </section>
 

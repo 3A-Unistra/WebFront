@@ -15,7 +15,7 @@
                     
             <section class="pseudo_img">
                 <div class = "img_cropper">
-                    <img id="img_avatar" @click="verifState" src="../assets/AvatarBateau.png" alt="">
+                    <img id="img_avatar" src="../assets/AvatarBateau.png" alt="">
                 </div>
             </section>
         </section>
