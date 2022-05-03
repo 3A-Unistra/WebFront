@@ -13,6 +13,7 @@ export default createStore({
         login: "",
         piece: 0,
         id: -1,
+        token:"",
 
         loggedin: false,
         sameProfile: true,
@@ -71,6 +72,7 @@ export default createStore({
             })
             .then(function (response) {
                 console.log(response.data);
+                commit('addToken', response.data.token)
                 router.push('/post_login');
 
             })
@@ -269,6 +271,10 @@ export default createStore({
         setHost(state, isHost) {
             state.isHost = isHost
         },
+
+        addToken(state,playerToken) {
+            state.token = playerToken
+        },  
 
         gameToken(state,gameToken) {
             state.gameToken =gameToken

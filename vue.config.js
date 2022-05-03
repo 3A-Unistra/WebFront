@@ -1,7 +1,7 @@
 const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
   transpileDependencies: true,
-  publicPath: process.env.NODE_ENV === 'production' ? process.env.OTHER_ENV: '/',
+  publicPath: process.env.NODE_ENV === 'production' ? process.env.VUE_APP_OTHER_ENV: '/',
   pluginOptions: {
     i18n: {
       locale: 'en',

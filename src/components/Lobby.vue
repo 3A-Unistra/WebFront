@@ -288,8 +288,8 @@ export default {
             if (!found) {
               this.$store.commit("joinRoom", {
                 photo: "",
-                pseudo: paquet.player,
-                username: paquet.player,
+                pseudo: paquet.username,
+                username: paquet.username,
               });
               console.log(
                 "on a bien ajouté " +
@@ -344,21 +344,20 @@ export default {
           }
           index++;
         }
+        this.$store.state.gameToken = paquet.game_token;
         this.$store.state.auctions = paquet.option_auction;
-
         this.$store.state.doubleGO = paquet.option_double_on_start;
-
         this.$store.state.buyFirstRound = paquet.option_first_round_buy;
-
         this.$store.state.timePerRound = paquet.option_max_time;
-
         this.$store.state.maxRound = paquet.option_max_rounds;
-
         this.$store.state.starterMoney = paquet.starting_balance;
       }
 
       if (paquet.name === "AppletPrepare") {
         console.log("reception unity");
+        this.$router.push('/webGL')
+
+        this
         //socket.close()
       }
     };
