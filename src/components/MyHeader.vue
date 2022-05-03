@@ -5,30 +5,31 @@
       
       <div class="Menu_principale dropdown">
 
-          <button class="btn bg-white dropdown-toggle" type="button" data-toggle="dropdown">
+          <button class="btn bg-white dropdown-toggle" type="button" data-toggle="dropdown" v-if="this.$store.state.username">
              <img class="gift" src="../assets/menu.png"/> 
             <!-- MENU -->
           </button>
             <ul class="dropdown-menu">
-              <li class="drop_elem"><router-link to="/"> {{ $t("home") }} </router-link></li>
+              <li class="drop_elem" ><router-link to="/"> {{ $t("home") }} </router-link></li>
                
                 <!-- <span class="sp_menu">&nbsp;|&nbsp;</span> -->
-                <li class="drop_elem"><router-link to="/lobby">{{ $t("lobby") }}</router-link></li>
+               <!--  <li class="drop_elem" v-if="this.$store.state.username"><router-link to="/lobby">{{ $t("lobby") }}</router-link></li> -->
 
                 <!-- <span class="sp_menu">&nbsp;|&nbsp;</span> -->
-                <li class="drop_elem"> <router-link to="/profile" @click="getUserProfile(ownUsername)">{{ $t("profil") }}</router-link></li>
+                <li class="drop_elem" v-if="this.$store.state.username"> <router-link to="/profile" @click="getUserProfile(ownUsername)">{{ $t("profil") }}</router-link></li>
                 
                 <!-- <span class="sp_menu">&nbsp;|&nbsp;</span> -->
-                <li class="drop_elem">  <router-link to="/post_login">Postlogin</router-link></li>
+                <li class="drop_elem" v-if="this.$store.state.username"> <router-link to="/post_login">{{ $t("lobby") }}</router-link></li>
             </ul>
           </div>
 
-           <div class="login">
-              <router-link to="/signup">{{ $t("signup") }}</router-link>
-              <span class="sp_menu">&nbsp;|&nbsp;</span>
-              <router-link to="/login">{{ $t("login") }}</router-link>
-            </div>
+           <button v-if="!this.$store.state.username"  @click="this.$router.push('/SignUp')" class="login">
+              {{ $t("signup") }}
+           </button>
 
+             <button v-if="!this.$store.state.username"  @click="this.$router.push('/Login')" class="login">
+              {{ $t("login") }}
+             </button>
 
            <div class="options">
           <button @click="dropdown_options"></button>
@@ -153,13 +154,6 @@ export default {
   max-width: inherit;
   padding-right: 12%;
   padding-top: 1%;
-}
-
-a {
-  text-decoration: none;
-}
-.login a {
-  color: red;
 }
 
 .top_right a {

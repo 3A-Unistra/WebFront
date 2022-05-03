@@ -288,8 +288,8 @@ export default {
             if (!found) {
               this.$store.commit("joinRoom", {
                 photo: "",
-                pseudo: paquet.player,
-                username: paquet.player,
+                pseudo: paquet.username,
+                username: paquet.username,
               });
               console.log(
                 "on a bien ajouté " +
@@ -328,35 +328,36 @@ export default {
 
       if (paquet.name === "StatusRoom") {
         let index = 0;
+        let playersData = paquet.players_data
         while (index < paquet.nb_players) {
+            console.log("l'username du joueur" + index + " : "+ playersData[index].username)
           if (
             this.$store.state.listePlayers
               .map((object) => object.pseudo)
-              .indexOf(paquet.players[index]) === -1
+              .indexOf(playersData[index].username) === -1
           ) {
             this.$store.commit("joinRoom", {
-              photo: "",
-              pseudo: paquet.players[index],
-              username: paquet.players[index],
+              photo: playersData[index].avatar_url,
+              pseudo: playersData[index].username,
+              username: playersData[index].username,
             });
           }
           index++;
         }
+        this.$store.state.gameToken = paquet.game_token;
         this.$store.state.auctions = paquet.option_auction;
-
         this.$store.state.doubleGO = paquet.option_double_on_start;
-
         this.$store.state.buyFirstRound = paquet.option_first_round_buy;
-
         this.$store.state.timePerRound = paquet.option_max_time;
-
         this.$store.state.maxRound = paquet.option_max_rounds;
-
         this.$store.state.starterMoney = paquet.starting_balance;
       }
 
       if (paquet.name === "AppletPrepare") {
         console.log("reception unity");
+        this.$router.push('/webGL')
+
+        this
         //socket.close()
       }
     };
