@@ -6,7 +6,7 @@
         <section class="opt">
             <LogOutButton></LogOutButton>
             
-            <button class="creer_partie" @click="$router.push('/prelobby')" type="boutton">{{ $t("creer") }}
+            <button class="creer_partie" @click="toPreLobby" type="boutton">{{ $t("creer") }}
                 <img class="icone" src="../assets/reseau.png" alt="icone reseau">
             </button>  
 
@@ -66,7 +66,7 @@ export default {
             nbPlayers:10,
             maxNbPlayers: 7
         },
-        idToSend: '092bc519-40b0-4159-8801-b29e36575e83'
+        idToSend: '092bc519-40b0-4159-8801-b29e36575e83',
       }
   },
      name: 'PostLoginPage',
@@ -83,6 +83,12 @@ export default {
         },
         affichetoken: function() {
             console.log("doit tenir 10sec: "+localStorage.getItem('user-token'))
+        },
+        toPreLobby: function() {
+          this.$store.dispatch('verifRequest',{
+            idClient: this.$store.state.id,
+            destPath: 'prelobby'
+            })
         },
 
         receptionSalon: function(newSalon) {

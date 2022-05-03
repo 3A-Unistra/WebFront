@@ -78,6 +78,34 @@ export default createStore ({
         fetchAccessToken({ commit }) {
             commit('saveToken', localStorage.getItem('user-token'));
         },
+
+        // infos comprend le chemin de destination pour réutiliser la méthode
+        // et l'id de la personne faisant la requête
+        verifRequest:({commit},infos) => {
+            commit;
+            axios.post('/users/verifToken', infos,{
+                headers: {
+                     'Authorization': 'Bearer '+localStorage.getItem('user-token'),
+                     'Content-Type': 'application/json'
+                    }
+            })
+            .then(function (response) {
+                //console.log(response.data);
+                if (response.data.success_value == 12) {
+                    console.log("on est dans le then, allant vers"+'/'+infos.destPath);
+
+                    router.push('/'+infos.destPath);
+                } else {
+                    console.log("token expiré");
+                    router.push('/');
+                    commit('clearUserData');
+                }
+                
+            })
+            .catch(function(error) {
+                console.log(error.message);
+            });
+        },
         
         getUserProfile:({commit},userInfos) => {
             commit;
