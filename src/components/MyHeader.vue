@@ -2,8 +2,7 @@
   <div class="haut">
     
     <div class="top_bar">
-              {{this.$store.state.loggedin}}
-
+      
       <div class="Menu_principale dropdown">
 
           <button class="btn bg-white dropdown-toggle" type="button" data-toggle="dropdown" v-if="this.$store.state.username">
