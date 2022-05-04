@@ -355,10 +355,8 @@ export default {
 
       if (paquet.name === "AppletPrepare") {
         console.log("reception unity");
+        socket.close()
         this.$router.push('/webGL')
-
-        this
-        //socket.close()
       }
     };
   },
