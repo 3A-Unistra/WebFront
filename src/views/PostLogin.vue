@@ -4,7 +4,7 @@
   <section class="container">
     <section class="opt">
       <LogOutButton></LogOutButton>
-
+  <p @click="montreToken"> montre token</p>
       <button class="creer_partie" @click="toPreLobby" type="boutton">{{ $t("creer") }}
         <img class="icone" src="../assets/reseau.png" alt="icone reseau" />
       </button>
@@ -169,6 +169,9 @@ export default {
     LogOutButton,
   },
     methods: {
+      montreToken: function() {
+        console.log(localStorage.getItem('user-token'));
+      },
         logout: function() {
             this.$store.commit('clearUserData'),
             this.$router.push('/')
