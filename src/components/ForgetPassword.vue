@@ -21,12 +21,6 @@
 import Footer from './MyFooter'
 import Header from './MyHeader'
 export default {
-    mounted () {
-      if (!(this.$store.state.loggedin)) {
-        this.$router.push('/login');
-        this.$store.commit('clearUserData');
-      }
-  },
     name: 'ForgetPage',
   props: {
       tit: String,
