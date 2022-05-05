@@ -73,8 +73,6 @@ export default createStore({
                 }
             })
             .then(function (response) {
-                console.log(response.data)
-                console.log(response.data.userid)
                 commit('quickId',response.data.id);
                 localStorage.setItem('user-token', JSON.stringify(response.data.token)); // store the token in localstorage
                 localStorage.setItem('own-id', JSON.stringify(response.data.userid)); // store the id in localstorage
@@ -83,7 +81,7 @@ export default createStore({
 
             })
             .catch(function(error) {
-                localStorage.removeItem('user-token') // if the request fails, remove any possible user token if possible
+                localStorage.removeItem('user-token')
                 console.log(error);
             });
         },
@@ -92,7 +90,7 @@ export default createStore({
         // et l'id de la personne faisant la requête
         verifRequest:({commit},infos) => {
             commit;
-            axios.post('/users/verifRequest', infos,{
+            axios.post('/users/verifToken', infos,{
                 headers: {
                      'Authorization': 'Bearer '+localStorage.getItem('user-token'),
                      'Content-Type': 'application/json'
@@ -113,6 +111,9 @@ export default createStore({
             })
             .catch(function(error) {
                 console.log(error.message);
+                console.log("token expiré");
+                router.push('/login');
+                commit('clearUserData');
             });
         },
 
@@ -204,11 +205,11 @@ export default createStore({
                 })
                 .then(function(response) {
                     console.log(response.data);
-                    return true;
+                    commit('changeFollowState',true);
                 })
-                .catch(function(error) {
-                    console.log(error.message);
-                    return false;
+                .catch(function() {
+                    console.log("pas de relation");
+                    commit('changeFollowState',false);
                 });
             })
             .catch(function(error) {
@@ -216,25 +217,6 @@ export default createStore({
                 return false;
             });
         } ,
-
-        // accéder au moment de la connexion pour stocker
-        // l'id dans un state du store
-        /*getOwnId:({commit},username) => {
-            commit;
-            return axios.post('/users/getownid',username, {
-                
-            headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(function (response) {
-                commit('quickId',response.data.ownId)
-                return response
-            })
-            .catch(function(error) {
-                return error;
-            });
-        },*/
 
         // accéder au moment d'édit un profil
         changeNamePawn:({commit},userInfos) => {

@@ -59,9 +59,6 @@ export default {
             this.$store.commit('rentreusrname',this.username); // on garde le nom pour comparer aux autres profils
             localStorage.setItem('own-username',this.username);
             this.$store.commit('gettingin',true); // on passe en état connecté
-            /*this.$store.dispatch('getOwnId',{
-                name:this.username
-            })*/
         },
     }
 }

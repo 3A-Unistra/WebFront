@@ -34,6 +34,7 @@ export default {
         PlayerResult
     },
     mounted () {
+        // à voir comment se passe la réception de données après la game
         this.$store.dispatch('verifToken');
   },
     methods: {

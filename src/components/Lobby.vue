@@ -234,10 +234,8 @@ import socket from "../services/ws";
 
 export default {
   mounted () {
-      if (!(this.$store.state.loggedin)) {
-        this.$router.push('/login');
-        this.$store.commit('clearUserData');
-      }
+        // à modifier vu que le lobby ça peut être particulier
+        this.$store.dispatch('verifToken');
   },
   name: "LobbyPage",
   props: {},

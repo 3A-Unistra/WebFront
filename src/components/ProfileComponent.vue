@@ -86,7 +86,7 @@
                     {{$t("editer")}}
                 </button>
                 
-                <button v-else-if="verif_follow == false" class="follow"
+                <button v-else-if="this.$store.state.IsFollowing == false" @click="Follow" class="follow"
                 type="button">
                     {{ $t("follow") }}
                 </button>
@@ -139,7 +139,7 @@ export default {
         return {
             edit: false,
             meilleurScore: '0',
-            verif_follow:this.$store.state.IsFollowing,
+            //verif_follow:this.$store.state.IsFollowing,
             pions: 
             [
                 {
@@ -179,16 +179,7 @@ export default {
         }
     },
     methods: {
-        /*  A ENLEVER ( fait pour tester la dynamicité des v-if avec changement de state)
-        changesameProfil: function(entier) {
-            if(entier == 0) { 
-               this.$store.commit('checkingSameProfile',true);  
-                console.log(this.$store.state.sameProfil);
-            } else {
-                this.$store.commit('checkingSameProfile',false);  
-                console.log(this.$store.state.sameProfil);
-            }
-        },*/
+
         verifState: function () {
             console.log(this.$store.state.usernameProfil);
             console.log(this.$store.state.loginProfil);
