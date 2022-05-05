@@ -5,12 +5,6 @@
     <section class="opt">
       <LogOutButton></LogOutButton>
 
-      <!--  A ENLEVER AVANT PUSH -->
-      <p @click="montreToken"> montre id et token</p>
-      <router-link to="/after_game"> after game</router-link>
-      <!--  A ENLEVER AVANT PUSH -->
-
-
       <button class="creer_partie" @click="toPreLobby" type="boutton">{{ $t("creer") }}
         <img class="icone" src="../assets/reseau.png" alt="icone reseau" />
       </button>
@@ -172,11 +166,6 @@ export default {
     LogOutButton,
   },
     methods: {
-      montreToken: function() {
-        console.log(localStorage.getItem('user-token'));
-        console.log(localStorage.getItem('own-id'));
-
-      },
         logout: function() {
             this.$store.commit('clearUserData'),
             this.$router.push('/')
