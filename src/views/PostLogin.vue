@@ -4,7 +4,13 @@
   <section class="container">
     <section class="opt">
       <LogOutButton></LogOutButton>
-  <p @click="montreToken"> montre token</p>
+
+      <!--  A ENLEVER AVANT PUSH -->
+      <p @click="montreToken"> montre id et token</p>
+      <router-link to="/after_game"> after game</router-link>
+      <!--  A ENLEVER AVANT PUSH -->
+
+
       <button class="creer_partie" @click="toPreLobby" type="boutton">{{ $t("creer") }}
         <img class="icone" src="../assets/reseau.png" alt="icone reseau" />
       </button>
@@ -51,10 +57,7 @@ import socket from "../services/ws";
 
 export default {
   mounted () {
-      if (!(this.$store.state.loggedin)) {
-        this.$router.push('/login');
-        this.$store.commit('clearUserData');
-      }
+    this.$store.dispatch('verifToken');
   },
   created: function () {
     socket.onopen = (e) => {
@@ -171,6 +174,8 @@ export default {
     methods: {
       montreToken: function() {
         console.log(localStorage.getItem('user-token'));
+        console.log(localStorage.getItem('own-id'));
+
       },
         logout: function() {
             this.$store.commit('clearUserData'),

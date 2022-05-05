@@ -1,6 +1,10 @@
 <template >
     <Header></Header>
     <section class="container">
+        <!--        A ENLEVER
+        <p @click="changesameProfil(0)">passer sameprofil à true </p>
+        <p @click="changesameProfil(1)">passer sameprofil à false </p>
+        -->
         <section class="pseudo_img">
             <div class="titre_edit">
                 <div v-if="this.$store.state.sameProfile==true" class = "titre_nom">
@@ -116,15 +120,16 @@
 import Footer from './MyFooter'
 import Header from './MyHeader'
 import { mapState } from 'vuex'
+//import func from 'vue-editor-bridge'
 
 export default {
   
-  mounted () {
-      if (!(this.$store.state.loggedin)) {
-        this.$router.push('/login');
-        this.$store.commit('clearUserData');
-      }
-  },
+    mounted() {
+        this.$store.dispatch('verifToken');
+        this.$store.dispatch('getUserProfile',{
+            username: localStorage.getItem('username-profil')
+        })
+    },
      name: 'profilePage',
      components: {
         Header,
@@ -133,7 +138,7 @@ export default {
     data() {
         return {
             edit: false,
-            meilleurScore: '1234',
+            meilleurScore: '0',
             verif_follow:this.$store.state.IsFollowing,
             pions: 
             [
@@ -174,6 +179,16 @@ export default {
         }
     },
     methods: {
+        /*  A ENLEVER ( fait pour tester la dynamicité des v-if avec changement de state)
+        changesameProfil: function(entier) {
+            if(entier == 0) { 
+               this.$store.commit('checkingSameProfile',true);  
+                console.log(this.$store.state.sameProfil);
+            } else {
+                this.$store.commit('checkingSameProfile',false);  
+                console.log(this.$store.state.sameProfil);
+            }
+        },*/
         verifState: function () {
             console.log(this.$store.state.usernameProfil);
             console.log(this.$store.state.loginProfil);
@@ -188,12 +203,7 @@ export default {
                 pawn:this.pionFav
             })
         },
-        getUserProfile: function(name){
-            this.$store.dispatch('getUserProfile',{
-                username:name,
-            })
-            //this.pseudo = this.$store.state.loginProfil
-        },
+        
         Follow: function() {
             this.$store.dispatch('Follow', {
                 otherName: this.$store.state.usernameProfil, // recup en cliquant sur le nom du joueur menant à sa page

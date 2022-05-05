@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
   // méme role que le href  
   // import inscriptionPage from './components/Inscription.vue'
   // import loginPage from './components/Login.vue'
@@ -34,16 +33,6 @@ export default {
     // loginPage,
     // forgetPage,
   },
-  methods: {
-    ...mapActions([
-      'fetchAccessToken'
-    ]),
-  },
-  created() {
-    // pour récupérer le token depuis localStorage
-    // lorsque la page est reloaded
-    this.fetchAccessToken();
-  }
 }
 </script>
 

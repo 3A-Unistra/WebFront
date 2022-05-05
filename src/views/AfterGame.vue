@@ -34,10 +34,7 @@ export default {
         PlayerResult
     },
     mounted () {
-      if (!(this.$store.state.loggedin)) {
-        this.$router.push('/login');
-        this.$store.commit('clearUserData');
-      }
+        this.$store.dispatch('verifToken');
   },
     methods: {
         updateInfos: function (numPlayer,toUpdate) { 
@@ -65,8 +62,8 @@ export default {
             players: [
                 {
                     profilePicture:require('../assets/grin.png'),
-                    namePlayer:"ss",
-                    login:"",
+                    namePlayer:"ra",
+                    login:"ra",
                     score:5,
                     ranking: 1
                 },

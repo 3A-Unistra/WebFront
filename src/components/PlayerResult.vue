@@ -77,17 +77,23 @@ export default {
             this.$store.commit('changeFollowState',true);
         },
         toProfil: function(nameClickedOn) {
+            // on regarde si c'est son propre profil
             if (nameClickedOn == this.$store.state.username) {
                 this.$store.commit('checkingSameProfile',true);       
             } 
             else {
                 this.$store.commit('checkingSameProfile',false);
             }
-            this.$store.dispatch('getUserProfile',{
-                username:nameClickedOn,
-            })
 
+            // on stocke l'username cliqué dans le store et en localstorage
+            this.$store.commit('changeUsrnameProfil',nameClickedOn);
+            localStorage.setItem('username-profil',nameClickedOn);
+            
+            //on regarde si il ya déjà une relation
             this.checkFollow(nameClickedOn)
+            //puis on va sur le profil
+            this.$router.push('/profile');
+
         },
     
     }
