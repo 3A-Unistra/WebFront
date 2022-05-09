@@ -19,22 +19,20 @@
 </template>
 
 <script>
-
   // méme role que le href  
   // import inscriptionPage from './components/Inscription.vue'
   // import loginPage from './components/Login.vue'
   // import forgetPage from './components/ForgetPassword.vue'
 
 export default {
-  created () {
-  },
+  
   name: 'App',
 
   components: {
     // inscriptionPage,
     // loginPage,
     // forgetPage,
-  }
+  },
 }
 </script>
 

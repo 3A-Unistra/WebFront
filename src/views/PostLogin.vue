@@ -5,12 +5,7 @@
     <section class="opt">
       <LogOutButton></LogOutButton>
 
-      <button
-        class="creer_partie"
-        @click="this.$router.push('../components/PreLobby')"
-        type="boutton"
-      >
-        {{ $t("creer") }}
+      <button class="creer_partie" @click="toPreLobby" type="boutton">{{ $t("creer") }}
         <img class="icone" src="../assets/reseau.png" alt="icone reseau" />
       </button>
     </section>
@@ -44,13 +39,20 @@
 
 <!-- Script JS -->
 <script>
-import LogOutButton from "../components/LogOutButton";
-import Footer from "../components/MyFooter";
-import Header from "../components/MyHeader";
-import Salon from "../components/SalonComponent.vue";
+import axios from 'axios';
+//axios.defaults.baseURL =process.env.VUE_APP_PATH_API
+
+import LogOutButton from '../components/LogOutButton'
+import Footer from '../components/MyFooter'
+import Header from '../components/MyHeader'
+import Salon  from '../components/SalonComponent.vue'
+
 import socket from "../services/ws";
 
 export default {
+  mounted () {
+    this.$store.dispatch('verifToken');
+  },
   created: function () {
     socket.onopen = (e) => {
       console.log("open");
@@ -163,11 +165,74 @@ export default {
     Salon,
     LogOutButton,
   },
-  methods: {
-    logout: function () {
-      socket.close();
-      this.$store.commit("clearUserData"), this.$router.push("/");
-    },
+    methods: {
+        logout: function() {
+            this.$store.commit('clearUserData'),
+            this.$router.push('/')
+        },
+        affichetoken: function() {
+            console.log("doit tenir 10sec: "+localStorage.getItem('user-token'))
+        },
+        toPreLobby: function() {
+          this.$store.dispatch('verifRequest',{
+            idClient: this.$store.state.id,
+            destPath: 'prelobby'
+            })
+        },
+
+        receptionSalon: function(newSalon) {
+            let foundSalon = 0 ;
+            this.listeSalons.find(salon => {
+                if(salon.id == newSalon.id)
+                {
+                    foundSalon = 1;
+                    this.replace(newSalon)
+                }
+            }) 
+            if(foundSalon == 0) {
+                this.addInstance(newSalon)
+            } 
+        },
+        postPost(idDuBoug) {
+            axios.post('http://localhost:3000/api/users/getProfil',idDuBoug, {
+                
+            headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(function (response) {
+                console.log(response.data);
+            })
+            .catch(function(error) {
+                console.log(error.response);
+                console.log(error.message);
+
+            }); 
+        },
+        postPostStore(idDuBoug) {
+            this.$store.dispatch('postPost',idDuBoug);
+       },
+
+        replace: function(oldLobbyNewVersion) {
+
+            //on cherche l'id dans la liste des salons déjà présents
+            this.listeSalons.find(salon => {
+                if (salon.id === oldLobbyNewVersion.id) {
+
+                    salon.name = oldLobbyNewVersion.name ;
+                    salon.nbPlayers = oldLobbyNewVersion.nbPlayers ;
+                    salon.maxNbPlayers = oldLobbyNewVersion.maxNbPlayers ;
+                    salon.private = oldLobbyNewVersion.private ;
+
+                }
+            })
+        },
+
+        addInstance: function(newLobby) {
+            this.listeSalons.push(newLobby);
+            console.log("etape 2")
+            console.log(newLobby.name + " a été ajouté a la liste");
+        },
     joinLobby: function (index) {
       let salonToJoin = this.$store.state.listeSalons[index].id;
       let EnterRoom = {
@@ -187,9 +252,9 @@ export default {
       return this.$store.state.listeSalons.filter(
         (salon) => !salon.private && salon.nbPlayers < salon.maxNbPlayers
       );
-    },
+    }
   },
-};
+}
 </script>
 
 <!-- Style Css -->

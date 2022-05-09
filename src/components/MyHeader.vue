@@ -88,6 +88,7 @@ export default {
         getUserProfile: function(name){
             this.$store.dispatch('getUserProfile',{
                 username:name,
+                id: this.$store.state.id
             })
             this.pseudo = this.$store.state.loginProfil
         }

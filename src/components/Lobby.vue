@@ -233,6 +233,10 @@ import {mapState} from "vuex";
 import socket from "../services/ws";
 
 export default {
+  mounted () {
+        // à modifier vu que le lobby ça peut être particulier
+        this.$store.dispatch('verifToken');
+  },
   name: "LobbyPage",
   props: {},
 

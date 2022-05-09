@@ -16,6 +16,12 @@ import socket from "../services/ws";
 
 
 export default {
+  mounted () {
+      if (!(this.$store.state.loggedin)) {
+        this.$router.push('/login');
+        this.$store.commit('clearUserData');
+      }
+  },
   name: "LoginPage",
   components: {
     Header,

@@ -22,6 +22,10 @@ export default {
   },
 
   mounted() {
+      if (!(this.$store.state.loggedin)) {
+        this.$router.push('/login');
+        this.$store.commit('clearUserData');
+      }
     console.log("url :"+ process.env.VUE_APP_WEBGL_URL)
     // eslint-disable-next-line no-undef
     createUnityInstance(document.querySelector("#unity-canvas"), {

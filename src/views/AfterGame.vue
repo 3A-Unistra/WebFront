@@ -33,6 +33,10 @@ export default {
         Header,
         PlayerResult
     },
+    mounted () {
+        // à voir comment se passe la réception de données après la game
+        this.$store.dispatch('verifToken');
+  },
     methods: {
         updateInfos: function (numPlayer,toUpdate) { 
             // d'abord le numéro du joueur dans le tableau, puis le nom de la caractéristique à modifier (score,ranking,...)
@@ -59,8 +63,8 @@ export default {
             players: [
                 {
                     profilePicture:require('../assets/grin.png'),
-                    namePlayer:"ss",
-                    login:"",
+                    namePlayer:"ra",
+                    login:"ra",
                     score:5,
                     ranking: 1
                 },

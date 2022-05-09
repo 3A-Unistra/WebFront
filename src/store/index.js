@@ -1,8 +1,11 @@
 import { createStore,/*, storeKey*/ } from "vuex";
 
-const axios = require('axios');
+import axios from 'axios';
 import router from '../router/index.js';
 axios.defaults.baseURL =process.env.VUE_APP_API_URL
+/*const config = {
+    headers: { 'Authorization': `Bearer ${this.state.token}` }
+};*/
 
 
 export default createStore({
@@ -13,7 +16,6 @@ export default createStore({
         login: "",
         piece: 0,
         id: -1,
-        token:"",
 
         loggedin: false,
         sameProfile: true,
@@ -27,13 +29,14 @@ export default createStore({
         loginProfil: "",
         pawnProfil: Math.floor(Math.random()*7),
 
-        publicLobby: false,
-        isHost: false,  
+        publicLobby: false  ,
+        isHost: false,
 
         //liste des salons a afficher dans PostLobby
         listeSalons: [],
         //liste des joueurs dans un lobby
         listePlayers: [],
+
         //paramètre de la room
         auctions: false,
         doubleGO: false,
@@ -61,7 +64,6 @@ export default createStore({
                 console.log(error);
             });
         },
-
         checkLogin:({commit},userInfos) => {
             commit;
             axios.post('/users/login',userInfos, {
@@ -71,34 +73,116 @@ export default createStore({
                 }
             })
             .then(function (response) {
-                console.log(response.data);
-                commit('addToken', response.data.token)
+                commit('quickId',response.data.id);
+                localStorage.setItem('user-token', JSON.stringify(response.data.token)); // store the token in localstorage
+                localStorage.setItem('own-id', JSON.stringify(response.data.userid)); // store the id in localstorage
+
                 router.push('/post_login');
 
             })
             .catch(function(error) {
+                localStorage.removeItem('user-token')
                 console.log(error);
+            });
+        },
+
+        // infos comprend le chemin de destination pour réutiliser la méthode
+        // et l'id de la personne faisant la requête
+        verifRequest:({commit},infos) => {
+            commit;
+            axios.post('/users/verifToken', infos,{
+                headers: {
+                     'Authorization': 'Bearer '+localStorage.getItem('user-token'),
+                     'Content-Type': 'application/json'
+                    }
+            })
+            .then(function (response) {
+                //console.log(response.data);
+                if (response.data.success_value == 12) {
+                    console.log("on est dans le then, allant vers"+'/'+infos.destPath);
+
+                    router.push('/'+infos.destPath);
+                } else {
+                    console.log("token expiré");
+                    router.push('/');
+                    commit('clearUserData');
+                }
+                
+            })
+            .catch(function(error) {
+                console.log(error.message);
+                console.log("token expiré");
+                router.push('/login');
+                commit('clearUserData');
+            });
+        },
+
+        // méthode qui est lancée à chaque refresh
+        // vérifie si le token est valide
+        // valide: recharge les values dans le state
+        // invalide: vide localstorage et renvoie au login
+        verifToken:({commit},infos) => {
+            commit;
+            axios.post('/users/verifToken', infos,{
+                headers: {
+                     'Authorization': 'Bearer '+localStorage.getItem('user-token'),
+                     'Content-Type': 'application/json'
+                    }
+            })
+            .then(function (response) {
+                //console.log(response.data);
+                if (response.data.success_value == 12) {
+                    console.log("token encore valide");
+                    commit('quickId', localStorage.getItem('own-id')); // on remet l'id
+                    commit('gettingin',true); // on se dit connecté
+                    commit('rentreusrname',localStorage.getItem('own-username')); // on remet l'username
+
+                } else {
+                    console.log("token expiré");
+                    router.push('/login');
+                    commit('clearUserData');
+                }
+                
+            })
+            .catch(function(error) {
+                console.log(error.message);
+                console.log("token expiré");
+                router.push('/login');
+                commit('clearUserData');
             });
         },
         
         getUserProfile:({commit},userInfos) => {
             commit;
+            const token = localStorage.getItem('user-token');
+
+           // console.log("voici le token:\n"+localStorage.getItem('user-token'));
+
             axios.post('/users/getProfile',userInfos, {
-                
-            headers: {
-                    'Content-Type': 'application/json'
-                }
+                headers: {
+                     'Authorization': 'Bearer '+token,
+                     'Content-Type': 'application/json'
+                    }
             })
             .then(function (response) {
-                console.log(response.data);
-                commit('changeUsrnameProfil', response.data.username)
-                commit('changeLoginProfil', response.data.login)
-                commit('changePawnProfil', response.data.pawn)
+                //console.log(response.data);
+                if (response.data.success == 12) {
+                    console.log("on est dans le then");
+                    commit('changeUsrnameProfil', response.data.username)
+                    commit('changeLoginProfil', response.data.login)
+                    commit('changePawnProfil', response.data.pawn)
 
-                router.push('/profile');
+                    router.push('/profile');
+                } else {
+                    console.log("token expiré depuis le else");
+                }
+                
             })
             .catch(function(error) {
-                console.log(error);
+                console.log(error.message);
+                console.log("profil vide");
+                router.push('/login');
+
             }); 
         },
 
@@ -107,7 +191,8 @@ export default createStore({
             axios.post('/users/get_ids',userNames, {
                 
             headers: {
-                    'Content-Type': 'application/json'
+                'Authorization': 'Bearer '+localStorage.getItem('user-token'),
+                'Content-Type': 'application/json'
                 }
             })
             .then(function (response) {
@@ -120,42 +205,27 @@ export default createStore({
                 })
                 .then(function(response) {
                     console.log(response.data);
-                    return true;
+                    commit('changeFollowState',true);
                 })
-                .catch(function(error) {
-                    console.log(error.data);
-                    return false;
+                .catch(function() {
+                    console.log("pas de relation");
+                    commit('changeFollowState',false);
                 });
             })
             .catch(function(error) {
-                console.log(error.data);
+                console.log(error.message);
                 return false;
             });
         } ,
 
-        getOwnId:({commit},username) => {
-            commit;
-            return axios.post('/users/getownid',username, {
-                
-            headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(function (response) {
-                commit('quickId',response.data.ownId)
-                return response
-            })
-            .catch(function(error) {
-                return error;
-            });
-        },
-
+        // accéder au moment d'édit un profil
         changeNamePawn:({commit},userInfos) => {
             commit;
             axios.post('/users/editProfile',userInfos, {                
-            headers: {
+                headers: {
+                    'Authorization': 'Bearer '+localStorage.getItem('user-token'),
                     'Content-Type': 'application/json'
-                }
+                   }
             })
             .then(function () {
                 router.push('/profile');
@@ -169,9 +239,10 @@ export default createStore({
             commit;
             axios.post('/users/get_ids',userNames, {
                 
-            headers: {
+                headers: {
+                    'Authorization': 'Bearer '+localStorage.getItem('user-token'),
                     'Content-Type': 'application/json'
-                }
+                   }
             })
             .then(function (response) {
                 console.log(response.data.ownId );
@@ -179,6 +250,7 @@ export default createStore({
                 axios.post('/users/follow',response.data, {
                 
                 headers: {
+                    'Authorization': 'Bearer '+localStorage.getItem('user-token'),
                     'Content-Type': 'application/json'
                 }
                 })
@@ -202,7 +274,8 @@ export default createStore({
             axios.post('/users/get_ids',userNames, {
                 
             headers: {
-                    'Content-Type': 'application/json'
+                'Authorization': 'Bearer '+localStorage.getItem('user-token'),
+                'Content-Type': 'application/json'
                 }
             })
             .then(function (response) {
@@ -211,6 +284,7 @@ export default createStore({
                 axios.post('/users/unfollow',response.data, {
                 
                 headers: {
+                    'Authorization': 'Bearer '+localStorage.getItem('user-token'),
                     'Content-Type': 'application/json'
                 }
                 })
@@ -260,15 +334,17 @@ export default createStore({
             .catch(function(error) {
                 console.log(error);
             });
-        },        
-    
+        },          
 
     },
     getters: {
     id: state => state.id
     },
     mutations: {
-        setHost(state, isHost) {
+
+        // LOBBY MUTATIONS
+        setHost(state,isHost)
+        {
             state.isHost = isHost
         },
 
@@ -291,29 +367,29 @@ export default createStore({
             state.listePlayers.splice(index, 1);
         },
 
-        //suppressionJoueur(state, index){
-        //},
         ajoutJoueur(state, index){
             state.this.$set(this.listeSalons[index].nbPlayers,this.listeSalons[index].nbPlayers);
-        },
-
-        setPiece(state, piece) {
-            state.piece = piece
         },
         setLobby(state, publicLobby) {
             state.publicLobby = publicLobby
         },
+
+
+
+        //  LOGIN & REFRESH MUTATIONS
         quickId(state, id) {
             state.id = id
         },
-        changeFollowState(state, newState) {
-            state.IsFollowing = newState
-        },
         clearUserData(state) {
             state.username = "",
-                state.login = "",
-                state.piece = 0,
-                state.loggedin = false
+            state.login = "",
+            state.piece = 0,
+            state.loggedin = false,
+            state.token = '',
+            localStorage.removeItem('user-token'),
+            localStorage.removeItem('own-id'),
+            localStorage.removeItem('own-username'),
+            localStorage.removeItem('username-profil')
 
         },
         rentreusrname(state, newusername) {
@@ -321,6 +397,16 @@ export default createStore({
         },
         gettingin(state, loggedin) {
             state.loggedin = loggedin;
+        },
+
+
+        //  PROFIL MUTATIONS
+        setPiece(state, piece) {
+            state.piece = piece
+        },
+        
+        changeFollowState(state, newState) {
+            state.IsFollowing = newState
         },
         checkingSameProfile(state, newSameProfile) {
             state.sameProfile = newSameProfile;
