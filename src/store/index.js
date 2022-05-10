@@ -82,7 +82,7 @@ export default createStore({
             })
             .catch(function(error) {
                 localStorage.removeItem('user-token')
-                console.log(error);
+                console.log(error.message);
             });
         },
 
@@ -98,7 +98,7 @@ export default createStore({
             })
             .then(function (response) {
                 //console.log(response.data);
-                if (response.data.success_value == 12) {
+                if (response.data.success_value === true) {
                     console.log("on est dans le then, allant vers"+'/'+infos.destPath);
 
                     router.push('/'+infos.destPath);
@@ -147,7 +147,7 @@ export default createStore({
             })
             .catch(function(error) {
                 console.log(error.message);
-                console.log("token expiré");
+                console.log("token expiré dans error");
                 router.push('/login');
                 commit('clearUserData');
             });
@@ -157,7 +157,7 @@ export default createStore({
             commit;
             const token = localStorage.getItem('user-token');
 
-           console.log("voici le token:\n"+localStorage.getItem('user-token'));
+           //console.log("voici le token:\n"+localStorage.getItem('user-token'));
 
             axios.post('/users/getProfile',userInfos, {
                 headers: {

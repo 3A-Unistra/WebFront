@@ -4,7 +4,7 @@
   <section class="container">
     <section class="opt">
       <LogOutButton></LogOutButton>
-
+<p @click="affichetoken"> clique pour afficher username du store</p>
       <button class="creer_partie" @click="toPreLobby" type="boutton">{{ $t("creer") }}
         <img class="icone" src="../assets/reseau.png" alt="icone reseau" />
       </button>
@@ -171,7 +171,7 @@ export default {
             this.$router.push('/')
         },
         affichetoken: function() {
-            console.log("doit tenir 10sec: "+localStorage.getItem('user-token'))
+            console.log(this.$store.state.username)
         },
         toPreLobby: function() {
           this.$store.dispatch('verifRequest',{

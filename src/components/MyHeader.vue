@@ -16,7 +16,7 @@
                <!--  <li class="drop_elem" v-if="this.$store.state.username"><router-link to="/lobby">{{ $t("lobby") }}</router-link></li> -->
 
                 <!-- <span class="sp_menu">&nbsp;|&nbsp;</span> -->
-                <li class="drop_elem" v-if="this.$store.state.username"> <router-link to="/profile" @click="getUserProfile(this.$store.state.username)">{{ $t("profil") }}</router-link></li>
+                <li class="drop_elem" v-if="this.$store.state.username"> <router-link to="/profile" @click="getUserProfile">{{ $t("profil") }}</router-link></li>
                 
                 <!-- <span class="sp_menu">&nbsp;|&nbsp;</span> -->
                 <li class="drop_elem" v-if="this.$store.state.username"> <router-link to="/post_login">{{ $t("lobby") }}</router-link></li>
@@ -85,12 +85,18 @@ export default {
             click.style.display ="none"; 
           }
         },
-        getUserProfile: function(name){
-            this.$store.dispatch('getUserProfile',{
-                username:name,
-                id: this.$store.state.id
-            })
-            this.pseudo = this.$store.state.loginProfil
+        getUserProfile: function(){
+
+          // vu que c'est son propre profil
+          this.$store.commit('checkingSameProfile',true);
+
+          // on stocke l'username cliqué dans le store et en localstorage
+          this.$store.commit('changeUsrnameProfil',this.$store.state.username);
+          localStorage.setItem('username-profil',this.$store.state.username);
+            
+  
+          //puis on va sur le profil
+          this.$router.push('/profile');
         }
     }
 };
