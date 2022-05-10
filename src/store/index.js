@@ -131,9 +131,10 @@ export default createStore({
             })
             .then(function (response) {
                 //console.log(response.data);
-                if (response.data.success_value == 12) {
+                if (response.data.success_value === true) {
                     console.log("token encore valide");
                     commit('quickId', localStorage.getItem('own-id')); // on remet l'id
+                    console.log(localStorage.getItem('own-id'))
                     commit('gettingin',true); // on se dit connecté
                     commit('rentreusrname',localStorage.getItem('own-username')); // on remet l'username
 
@@ -156,7 +157,7 @@ export default createStore({
             commit;
             const token = localStorage.getItem('user-token');
 
-           // console.log("voici le token:\n"+localStorage.getItem('user-token'));
+           console.log("voici le token:\n"+localStorage.getItem('user-token'));
 
             axios.post('/users/getProfile',userInfos, {
                 headers: {
@@ -166,7 +167,7 @@ export default createStore({
             })
             .then(function (response) {
                 //console.log(response.data);
-                if (response.data.success == 12) {
+                if (response.data.success === true) {
                     console.log("on est dans le then");
                     commit('changeUsrnameProfil', response.data.username)
                     commit('changeLoginProfil', response.data.login)
