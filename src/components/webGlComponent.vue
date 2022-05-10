@@ -44,7 +44,7 @@ export default {
         "PersistentGameObject",
         "WebGLBootstrap",
         JSON.stringify({
-          ip: process.env.VUE_APP_WEBSOCKET_URL,
+          ip: process.env.VUE_APP_WEBSOCKET_URL_WEBGL,
           port: process.env.VUE_APP_WEBSOCKET_PORT,
           token: this.$store.state.token,
           game: this.$store.state.gameToken,
