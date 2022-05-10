@@ -16,7 +16,7 @@
                <!--  <li class="drop_elem" v-if="this.$store.state.username"><router-link to="/lobby">{{ $t("lobby") }}</router-link></li> -->
 
                 <!-- <span class="sp_menu">&nbsp;|&nbsp;</span> -->
-                <li class="drop_elem" v-if="this.$store.state.username"> <router-link to="/profile" @click="getUserProfile(ownUsername)">{{ $t("profil") }}</router-link></li>
+                <li class="drop_elem" v-if="this.$store.state.username"> <router-link to="/profile" @click="getUserProfile(this.$store.state.username)">{{ $t("profil") }}</router-link></li>
                 
                 <!-- <span class="sp_menu">&nbsp;|&nbsp;</span> -->
                 <li class="drop_elem" v-if="this.$store.state.username"> <router-link to="/post_login">{{ $t("lobby") }}</router-link></li>
@@ -71,7 +71,7 @@ export default {
     
     data(){
       return{
-        ownUsername: this.$store.state.username
+        //ownUsername: this.$store.state.username
       }
     },
     methods: {
