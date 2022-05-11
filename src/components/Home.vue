@@ -43,17 +43,17 @@
                 <hr>
                 <div class="container_logo">
                     <li class="menu_logo">
-                        <a href="">
+                        <a href="https://www.instagram.com/terms/unblock/?next=/strassopoly/">
                             <img id="insta_size" src="../assets/instagram.png" alt="instagram">
                         </a>
                     </li>
                     <li class="menu_logo">
-                        <a href="">
+                        <a href="https://www.facebook.com/profile.php?id=100080875824582">
                             <img class="social fb" src="../assets/facebook.png" alt="facebook">
                         </a>
                     </li>
                     <li class="menu_logo">
-                        <a href="">
+                        <a href="https://twitter.com/PolyStras">
                             <img class="social twitter" src="../assets/twitter.png" alt="twitter">
                         </a>
                     </li>

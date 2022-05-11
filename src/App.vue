@@ -25,6 +25,8 @@
   // import forgetPage from './components/ForgetPassword.vue'
 
 export default {
+  created () {
+  },
   
   name: 'App',
 
