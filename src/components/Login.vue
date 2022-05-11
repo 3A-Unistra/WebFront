@@ -119,6 +119,7 @@ export default {
     .form-check-label{
       padding-bottom: 10px;
     }
+    
 
 @media screen and (max-width: 450px) {
     .img_login{
