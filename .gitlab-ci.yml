@@ -22,4 +22,6 @@ unit test:
   script:
     - npm install
     - npm run test
+  tags:
+    - gitlab-org
 
