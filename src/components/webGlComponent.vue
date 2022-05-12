@@ -46,9 +46,9 @@ export default {
         JSON.stringify({
           ip: process.env.VUE_APP_WEBSOCKET_URL_WEBGL,
           port: process.env.VUE_APP_WEBSOCKET_PORT,
-          token: this.$store.state.token,
+          token: JSON.parse(localStorage.getItem('user-token')),
           game: this.$store.state.gameToken,
-          uuid: this.$store.state.id,
+          uuid: JSON.parse(localStorage.getItem('own-id')),
           online: "0",
         })
       );
