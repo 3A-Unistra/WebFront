@@ -22,14 +22,14 @@
             <ul class="list_footer n1">
                 <li class="menu_title"> Menu </li>
                 <hr>
-                <li class="menu_info"><router-link class="menu_ff" to="/">{{ $t("home") }}</router-link></li>
-                <li class="menu_info"><router-link class="menu_ff" to="/login">{{ $t("login") }}</router-link></li>
-                <li class="menu_info"><router-link class="menu_ff" to="/signup">{{ $t("signup") }}</router-link></li>
+                <li class="menu_info"><router-link class="menu_ff" to="/">home</router-link></li>
+                <li class="menu_info"><router-link class="menu_ff" to="/login"> login</router-link></li>
+                <li class="menu_info"><router-link class="menu_ff" to="/signup">signup</router-link></li>
                
             </ul>
 
             <ul class="list_footer n2">
-                <li class="menu_title"> {{ $t("reseaux") }} </li>
+                <li class="menu_title"> reseaux </li>
                 <hr>
                 <div class="container_logo">
                    <li class="menu_logo">
@@ -50,20 +50,20 @@
                 </div>
             </ul>
             <ul class="list_footer n3">
-                <li class="menu_title"> {{ $t("liens") }} </li>
+                <li class="menu_title"> liens</li>
                 <hr>
-                <li class="menu_info">{{ $t("cond_gene") }}</li>
-                <li class="menu_info">{{ $t("faq") }}</li>
-                <li class="menu_info">{{ $t("license") }}</li>
-                <li class="menu_info">{{ $t("aide") }}</li>
+                <li class="menu_info">cond_gene</li>
+                <li class="menu_info">faq</li>
+                <li class="menu_info">license</li>
+                <li class="menu_info">aide</li>
             </ul>
         </div>
         
         <div class="store_bg">
             <p class="store_parag">
-                {{ $t("propagande1") }} 
+                 propagande1 
                 <br>
-                {{ $t("propagande2") }}
+                propagande2
             </p>
             <div class="store_redirection">   
                 <img class="logo_store" src="../assets/logo_appstore.png" alt="logo app store">
