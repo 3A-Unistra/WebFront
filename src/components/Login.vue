@@ -62,12 +62,16 @@
         <div class="img_login">
             <img id="img_login" src="../assets/img_form.png" alt="">
         </div>
-
         <div class="content_login">
             <h1 class="animate__animated animate__bounce animate__repeat-2 login_title">{{ $t("LOGIN") }}</h1>
-            
+           
             <form @submit.prevent="checkLogin" class="form_container">
-               
+                 <div v-if="error != ''" class="alert alert-danger fade in">
+                   {{ error }}
+                   </div>
+                   <div v-if="succes != ''" class="alert alert-success" role="alert">
+                   {{ succes }}
+                   </div> 
                     <input  v-model="username" type="text" class="champs_form" required  id="pseudo" aria-describedby="pseudo" :placeholder="$t('enter_name')">
                                                 
                     <input v-model="password" type="password" class="champs_form" required  id="password" :placeholder="$t('enter_password')">
@@ -164,19 +168,33 @@ export default {
     data () {
       return {
         username: '',
-        password: ''
+        password: '',
+        error:"",
+        succes:""
       }
   },
     methods: {
         checkLogin: function() {
-            this.$store.dispatch('checkLogin', {
-              username: this.username,
-              password: this.password,
-          }),
-            this.$store.commit('rentreusrname',this.username); // on garde le nom pour comparer aux autres profils
-            localStorage.setItem('own-username',this.username);
-            this.$store.commit('gettingin',true); // on passe en état connecté
-        },
+        this.$store.dispatch('checkLogin', {
+          username: this.username,
+          password: this.password,
+    }).then(() => {
+        this.$store.commit('rentreusrname', this.username); // on garde le nom pour comparer aux autres profils
+        localStorage.setItem('own-username', this.username);
+        this.$store.commit('gettingin', true); // on passe en état connecté
+        this.succes ="vous etes bien inscrit";
+    }).catch((e) => {
+        if (e.response.status === 404) {
+            this.error = "Identifiants non reconnus.";
+        }
+        else if(e.response.status==403){
+          this.error = "invalid password";
+        }
+        else {
+           this.error = "une erreur lors de connexion";
+        }
+    })
+},
         dropdown_options() {
           var click = document.getElementById("liste_option");  
 
@@ -214,6 +232,12 @@ export default {
   margin-right: auto;
   margin-left: auto;
 }
+/*.error{
+  display: flex;
+  justify-content: center;
+  color:red;
+  background: black;
+}*/
 .dropdown-menu{
   padding:20px;
   min-width:200px;

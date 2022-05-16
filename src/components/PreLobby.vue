@@ -3,8 +3,9 @@
   <div v-for="salon in listeSalons" :key="salon.name">
     <div v-if="salon.public == true && salon.nbPlayers != salon.maxNbPlayers">{{ salon.name }}</div>
   </div>
-  <button type="button" @click="setPrive(true)">salon privé</button>
-  <button type="button" @click="setPrive(false)">salon public</button>
+ <button type="button" @click="setPrive(true)" class="btn btn-warning btn-lg btn-block">salon privé</button>
+  <button type="button" @click="setPrive(false)" class="btn btn-warning btn-lg btn-block">salon public</button>
+
 
   <div class="bottom">
          <div> 

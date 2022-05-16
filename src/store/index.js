@@ -49,8 +49,7 @@ export default createStore({
     actions: {
        createAccount:({commit},userInfos) => {
             commit;
-            axios.post('/users/register',userInfos, {
-                
+            return  new Promise(((resolve, reject) => axios.post('/users/register',userInfos, {                
             headers: {
                     'Content-Type': 'application/json'
                 }
@@ -58,15 +57,17 @@ export default createStore({
             .then(function () {
                 //console.log(response);
                 router.push('/Login');
-                return true;
+                resolve()
+                return true
+                
             })
             .catch(function(error) {
-                console.log(error);
-            });
+                reject(error)
+            })));
         },
         checkLogin:({commit},userInfos) => {
             commit;
-            axios.post('/users/login',userInfos, {
+            return  new Promise(((resolve, reject) => axios.post('/users/login',userInfos, {
                 
             headers: {
                     'Content-Type': 'application/json'
@@ -78,12 +79,12 @@ export default createStore({
                 localStorage.setItem('own-id', JSON.stringify(response.data.userid)); // store the id in localstorage
 
                 router.push('/post_login');
-
+                resolve()
             })
             .catch(function(error) {
                 localStorage.removeItem('user-token')
-                console.log(error.message);
-            });
+                reject(error)
+            })));
         },
 
         // infos comprend le chemin de destination pour réutiliser la méthode
