@@ -306,7 +306,7 @@ export default createStore({
         } , 
         checkforgot:({commit},userInfos) => {
             commit;
-            axios.post('/users/forget',userInfos, {
+            return  new Promise(((resolve, reject) => axios.post('/users/forget',userInfos, {
                 
             headers: {
                     'Content-Type': 'application/json'
@@ -315,14 +315,15 @@ export default createStore({
             .then(function () {
                 //console.log(response);
                 router.push('/Login');
+                resolve()
             })
             .catch(function(error) {
-                console.log(error);
-            });
+                reject(error)
+            })));
         },
         checkreset:({commit},userInfos) => {
             commit;
-            axios.post('/users/reset/:token',userInfos, {
+            return  new Promise(((resolve, reject) => axios.post('/users/:token',userInfos, {  
                 
             headers: {
                     'Content-Type': 'application/json'
@@ -331,11 +332,13 @@ export default createStore({
             .then(function(response) {
                 console.log(response);
                 router.push('/Login');
+                resolve()
             })
             
             .catch(function(error) {
-                console.log(error);
-            });
+                reject(error)
+
+            })));
         },          
 
     },

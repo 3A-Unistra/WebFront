@@ -1,9 +1,70 @@
 <template>
-    <Header></Header>
+    <!-- <h3 class="title">{{ tit }}</h3> 
+    <h1 class="animate__animated animate__flipInX title">Page d'INSCRIPTION</h1>-->
+     <div class="haut">
+    
+    <div class="top_bar">
+      
+      <div class="Menu_principale dropdown">
+
+          <button class="btn bg-white dropdown-toggle" type="button" data-toggle="dropdown" v-if="this.$store.state.username">
+             <img class="gift" src="../assets/menu.png"/> 
+            <!-- MENU -->
+          </button>
+            <ul class="dropdown-menu">
+              <li class="drop_elem" ><router-link to="/"> {{ $t("home") }} </router-link></li>
+               
+                <!-- <span class="sp_menu">&nbsp;|&nbsp;</span> -->
+               <!--  <li class="drop_elem" v-if="this.$store.state.username"><router-link to="/lobby">{{ $t("lobby") }}</router-link></li> -->
+
+                <!-- <span class="sp_menu">&nbsp;|&nbsp;</span> -->
+              
+                
+                <!-- <span class="sp_menu">&nbsp;|&nbsp;</span> -->
+               
+            </ul>
+          </div>
+
+           <button v-if="!this.$store.state.username"  @click="this.$router.push('/login')" class="login">
+              {{ $t("login") }}
+           </button>
+
+             <button v-if="!this.$store.state.username"  @click="this.$router.push('/')" class="login">
+              {{ $t("home") }}
+             </button>
+
+           <div class="options">
+          <button @click="dropdown_options"></button>
+          <ul id="liste_option">            
+            <span class="titre_dropdown">
+              {{ $t("langue") }}:
+            </span>
+            <li class="list_elem">
+              <div class="locale-switcher">
+                <select v-model="$i18n.locale">
+                  <option value="en">English</option>
+                  <option value="fr">French</option>
+                </select>
+              </div> 
+            </li>
+          </ul>
+            </div>
+            </div>
+        </div>
+        
+
+
         <div class="content_forget">
            <form @submit.prevent="checkreset">
             <section class ="container">
+
             <h1 class="animate__animated animate__bounce animate__repeat-2 forget_title">{{ $t("EntN")}}</h1>
+             <div v-if="error != ''" class="alert alert-danger fade in">
+                   {{ error }}
+                   </div>
+                   <div v-if="succes != ''" class="alert alert-success" role="alert">
+                   {{ succes }}
+                   </div>
                <input v-model="password" type="password" class="champs_form" required  id="zpassword" :placeholder=" $t('CEntN')">
                <input v-model="confirmpassword" type="password" class="champs_form" required  id="password" :placeholder=" $t('CCEntN')">
             </section>
@@ -83,7 +144,6 @@
 </template>
 
 <script>
-import Header from './MyHeader'
 export default {
     mounted () {
       if (!(this.$store.state.loggedin)) {
@@ -98,7 +158,9 @@ export default {
     data () {
     return {
        password: '',
-       confirmpassword: ''
+       confirmpassword: '',
+       succes:"",
+       error:""
     }
   },methods: {
       
@@ -107,11 +169,24 @@ export default {
               password: this.password,
               confirmpassword:this.confirmpassword,
               token :this.$route.params.token
-          })    
-    }
-    },
+             }).then(() => {
+              this.succes ="Your password has been modified ";
+            }).catch((e) => {
+                if (e.response.status === 401) {
+                this.error = "Please check Your Password";
+            }
+                else if(e.response.status==507){
+                this.error = "Link has been expired.";
+                }
+                else if(e.response.status==403){
+                this.error = "Cann't change Your password.";
+                }
+                else {
+                    this.error = "Please resell later .";
+                }
+    })
+        },},
 components: {
-    Header,
 }
 }
 </script>

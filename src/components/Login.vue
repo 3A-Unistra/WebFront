@@ -185,7 +185,7 @@ export default {
         this.$store.commit('rentreusrname', this.username); // on garde le nom pour comparer aux autres profils
         localStorage.setItem('own-username', this.username);
         this.$store.commit('gettingin', true); // on passe en état connecté
-        this.succes ="vous etes bien inscrit";
+        this.succes ="vous etes bien connecter";
     }).catch((e) => {
         if (e.response.status === 404) {
             this.error = "Identifiants non reconnus.";

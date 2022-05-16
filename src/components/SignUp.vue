@@ -66,7 +66,12 @@
             <h1 class="animate__animated animate__bounce animate__repeat-2 inscription_title">{{ $t("SIGNUP") }}</h1>
 
             <form @submit.prevent="createAccount" class="form_container">
-               
+                     <div v-if="error != ''" class="alert alert-danger fade in">
+                        {{ error }}
+                   </div>
+                   <div v-if="succes != ''" class="alert alert-success" role="alert">
+                            {{ succes }}
+                   </div>
                     <input v-model="name" type="text" class="champs_form" required  id="pseudo" aria-describedby="pseudo" :placeholder="$t('enter_name')">
                 
                     <input v-model="login" type="text" class="champs_form" required  id="nom" aria-describedby="nom" :placeholder="$t('enter_pseudo')">
@@ -175,7 +180,9 @@ export default {
         password: '',
         email: '',
         name:'',
-        verifPassword: ''
+        verifPassword: '',
+        error:"",
+        succes:""
       }
   },
   methods: {
@@ -189,14 +196,26 @@ export default {
             click.style.display ="none"; 
           }
         },
-      createAccount: function () {
+        createAccount: function() {
           this.$store.dispatch('createAccount', {
               email:this.email,
               name :this.name ,
               login: this.login,
               password: this.password,
-          })
-        }
+          }).then(() => {
+              this.succes ="vous etes bien inscrit";
+          }).catch((e) => {
+                if (e.response.status === 409) {
+                this.error = "User already exists.";
+            }
+                else if(e.response.status==500){
+                this.error = "Icannot find user'.";
+                }
+                else {
+                    this.error = "Une erreur lors de l'inscription.";
+                }
+    })
+  },
   },
   computed: {
         PasswordDontMatch: function () {
@@ -209,9 +228,8 @@ export default {
       },
   },
   components: {
-    //Header,
+    //Header
 }
-    
 }
 </script>
 
