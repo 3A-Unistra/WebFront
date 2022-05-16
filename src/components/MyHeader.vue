@@ -12,13 +12,9 @@
             <ul class="dropdown-menu">
               <li class="drop_elem" ><router-link to="/"> {{ $t("home") }} </router-link></li>
                
-                <!-- <span class="sp_menu">&nbsp;|&nbsp;</span> -->
-               <!--  <li class="drop_elem" v-if="this.$store.state.username"><router-link to="/lobby">{{ $t("lobby") }}</router-link></li> -->
 
-                <!-- <span class="sp_menu">&nbsp;|&nbsp;</span> -->
                 <li class="drop_elem" v-if="this.$store.state.username"> <router-link to="/profile" @click="getUserProfile">{{ $t("profil") }}</router-link></li>
                 
-                <!-- <span class="sp_menu">&nbsp;|&nbsp;</span> -->
                 <li class="drop_elem" v-if="this.$store.state.username"> <router-link to="/post_login">{{ $t("lobby") }}</router-link></li>
             </ul>
           </div>
@@ -52,7 +48,6 @@
         </div>
 
         
-      <!-- <img class="logo_coin" src="../assets/logo_couleur.png" alt="logo"> -->
        
     </div>
 
@@ -72,7 +67,6 @@ export default {
     
     data(){
       return{
-        //ownUsername: this.$store.state.username
       }
     },
     methods: {
