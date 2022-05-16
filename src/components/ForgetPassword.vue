@@ -67,8 +67,7 @@
             <form  @submit.prevent="checkforgot" class="form_container">
                     <input v-model="forgetPass" type="email" class="champs_form" required  id="email" aria-describedby="emailHelp" placeholder="Entrez votre mail pour récupérer votre mot de passe">
                     <div CLASS="btn_container">
-
-                        <button href="#" class="btn btn-help bnt_nul">annuler</button>
+                        <button href="#" class="btn btn-help bnt_nul"><router-link to="/login">annuler</router-link></button>
                         <button type="submit" class="btn  btn_rec">recuperer</button>
                     </div>
             </form>
