@@ -43,6 +43,7 @@
                   <option value="en">English</option>
                   <option value="fr">French</option>
                 </select>
+                
               </div> 
             </li>
             <LogOutButton style="margin-bottom: 0;"></LogOutButton>
