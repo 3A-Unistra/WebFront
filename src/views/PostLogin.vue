@@ -10,13 +10,9 @@
             <!-- MENU -->
           </button>
             <ul class="dropdown-menu">
-                <!-- <span class="sp_menu">&nbsp;|&nbsp;</span> -->
-               <!--  <li class="drop_elem" v-if="this.$store.state.username"><router-link to="/lobby">{{ $t("lobby") }}</router-link></li> -->
 
-                <!-- <span class="sp_menu">&nbsp;|&nbsp;</span> -->
                 <li class="drop_elem" v-if="this.$store.state.username"> <router-link to="/profile" @click="getUserProfile">{{ $t("profil") }}</router-link></li>
                 
-                <!-- <span class="sp_menu">&nbsp;|&nbsp;</span> -->
                 
             </ul>
           </div>
@@ -57,7 +53,6 @@
   <section class="container">
     <section class="opt">
       <LogOutButton></LogOutButton>
-<p @click="affichetoken"> clique pour afficher username du store</p>
       <button class="creer_partie" @click="toPreLobby" type="boutton">{{ $t("creer") }}
         <img class="icone" src="../assets/reseau.png" alt="icone reseau" />
       </button>
