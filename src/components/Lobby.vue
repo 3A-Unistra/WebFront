@@ -20,28 +20,6 @@
               <button @click="deleteBot(index)">supprimer</button>
             </div>
 
-            <!-- PARTIE TOGGLE -->
-            <!--  <label
-              class="switch prt"
-              v-if="this.$store.state.id === player.id"
-            >
-              <input
-                type="checkbox"
-                class="t_attente"
-                :disabled="this.$store.state.isFollowing == true"
-              />
-              <span
-                class="slider round prts"
-                :disabled="this.$store.state.isFollowing == true"
-              ></span>
-              <span
-                class="labels"
-                data-on="PRÊT!"
-                data-off=""
-                :disabled="this.$store.state.isFollowing == true"
-              ></span>
-            </label>
--->
           </div>
         </div>
       </div>

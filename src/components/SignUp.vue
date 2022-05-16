@@ -14,14 +14,6 @@
             <ul class="dropdown-menu">
               <li class="drop_elem" ><router-link to="/"> {{ $t("home") }} </router-link></li>
                
-                <!-- <span class="sp_menu">&nbsp;|&nbsp;</span> -->
-               <!--  <li class="drop_elem" v-if="this.$store.state.username"><router-link to="/lobby">{{ $t("lobby") }}</router-link></li> -->
-
-                <!-- <span class="sp_menu">&nbsp;|&nbsp;</span> -->
-              
-                
-                <!-- <span class="sp_menu">&nbsp;|&nbsp;</span> -->
-               
             </ul>
           </div>
 
@@ -155,9 +147,6 @@
     
 </div>
 
-    <!-- <a class="uk-button uk-button-primary" href="#target" uk-scroll>  Scroll up </a>
-    <a href="#" uk-totop uk-scroll> </a> -->
-
 </template>
 
 <!-- Script JS -->
@@ -169,9 +158,7 @@
 
 export default {
     name: 'SignUpPage',
-  props: {/* Props  est un attribut que vous pouvez 
-              definir au niveau du composant qui sera 
-              transmis directement au template.*/
+  props: {
       tit: String,
   },
   data () {
@@ -780,7 +767,7 @@ hr {
 
 .logo_store {
     display: inline-block;
-    max-width: 200px;
+    max-width: 180px;
     max-height: 150px;
 }   
 .container_copyright{

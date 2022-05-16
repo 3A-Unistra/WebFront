@@ -1,11 +1,19 @@
 <template>
   <Header></Header>
-  <div v-for="salon in listeSalons" :key="salon.name">
-    <div v-if="salon.public == true && salon.nbPlayers != salon.maxNbPlayers">{{ salon.name }}</div>
-  </div>
- <button type="button" @click="setPrive(true)" class="btn btn-warning btn-lg btn-block">salon privé</button>
-  <button type="button" @click="setPrive(false)" class="btn btn-warning btn-lg btn-block">salon public</button>
+  <div class="choice_lobby">
 
+    <h1 id="type_lobby"> {{ $t("type_lobby") }}</h1>
+    <h3  id="ask_name_lobby"> {{ $t("enter_name_lobby") }}</h3>
+
+    <input  v-model="nameLobby" v-bind:style="{ border: borderStyle }" required type="text" class="champs_nom_lobby" aria-describedby="pseudo" :placeholder="$t('forbidden_char')">
+
+    <div class="diff_options">
+      <div class="button_lobby" @click="setPrive(true)"><p>{{ $t("prive") }}</p></div>
+      <div class="button_lobby" @click="setPrive(false)"><p>{{ $t("public") }}</p></div>
+    </div>
+
+  </div>
+  
 
   <div class="bottom">
          <div> 
@@ -94,6 +102,8 @@ export default {
   },
   data() {
     return {
+      nameLobby:'',
+      borderStyle:'2px solid black',
     };
   },
 
@@ -133,8 +143,107 @@ export default {
     setPrive: function (privateOrNot) {
       this.$store.commit("setLobby", privateOrNot);
       this.$store.commit("setHost", true);
-      this.createGame();
+      if(!(/^[A-Za-z0-9 - _]*$/.test(this.nameLobby)) || (this.nameLobby ===""))
+      {
+        this.borderStyle = "2px solid red";
+        this.nameLobby= '';
+      }
+      else {
+        this.borderStyle="2px solid black";
+
+        this.createGame();
+        
+      }
     },
   },
 };
 </script>
+<style scoped>
+
+.choice_lobby {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#ask_name_lobby{
+  color:  rgb(128, 104, 97);
+  font-size:2vh ;
+}
+.champs_nom_lobby {
+  padding: 8px;
+  min-width:400px;
+  border:1px solid #835B0E;
+  background:white;
+  margin-bottom:10% ;
+}
+#type_lobby {
+  color:  rgb(128, 104, 97);
+  font-size: 4vh;
+  font-weight: 700;
+  padding: 1% 0 3% 0;
+}
+.diff_options {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  height: 40vh;
+}
+
+.button_lobby {
+  display: flex;
+  justify-content: center;
+  border: 4px solid  rgb(128, 104, 97);
+  background-color: white;
+  border-radius: 3%;
+  width: 40%;
+  align-items: center;
+  font-size:3vh;
+  font-weight: 500;
+  color:  rgb(128, 104, 97) ;
+}
+
+.button_lobby:hover {
+  transition-duration: 200ms;
+  background-color:  rgb(128, 104, 97) ;
+  border: 4px solid  white;
+  color: white;
+  cursor: pointer;
+
+}
+
+  @media screen and (max-width: 550px)  {
+
+    .diff_options{
+      height: 12vh;
+    }
+
+  .champs_nom_lobby {
+    min-width:300px;
+    }
+
+  .button_lobby:active {
+    transition-duration: 200ms;
+    background-color:  rgb(128, 104, 97) ;
+    border: 4px solid  white;
+    color: white;
+    cursor: pointer;
+    }
+  }
+
+  @media screen and (max-width: 820px)  {
+
+    .diff_options{
+      height: 22vh;
+    }
+
+  .button_lobby:active {
+    transition-duration: 200ms;
+    background-color:  rgb(128, 104, 97) ;
+    border: 4px solid  white;
+    color: white;
+    cursor: pointer;
+    }
+  }
+</style>
