@@ -78,9 +78,7 @@
                     <input v-model.trim="password" required type="password" class="champs_form"   id="password" :placeholder="$t('enter_password')">
                     <!-- <span v-if="!$v.password.required && $v.password$dirty" class="text-danger">Username is required!</span> -->
                     
-                    <div class="form-check">
-                      <input class="form-check-input " type="radio" checked disabled>
-                       
+                    <div class="form-check">             
                       <label class="form-check-label"><router-link to="/forget">{{ $t("forgot_passw") }}</router-link> </label> 
                     </div>
                     
@@ -177,17 +175,7 @@ export default {
         succes:""
       }
   },
-  validation: {
-      username: {
-          required,
-          alpha
-      },
-      password: {
-          required
-          
-      }
-
-  },
+  
     methods: {
         checkLogin: function() {
         this.$store.dispatch('checkLogin', {
@@ -203,10 +191,10 @@ export default {
             this.error = "Identifiants non reconnus.";
         }
         else if(e.response.status==403){
-          this.error = "invalid password";
+          this.error = "Invalid password.";
         }
         else {
-           this.error = "une erreur lors de connexion";
+           this.error = "Une erreur lors de connexion.";
         }
     })
 },
