@@ -96,5 +96,11 @@
   "conf": "Confirme",
   "EntN":"Entrez votre Nouveau mot de passe",
   "CEntN":"Entrez votre mot de passe",
-  "CCEntN": "Confirmez mot de passe"
+  "CCEntN": "Confirmez mot de passe",
+
+  //PreLobby
+  "type_lobby": "Quel type de salon?",
+  "enter_name_lobby": "Entrez un nom pour le salon:",
+  "forbidden_char": "Charactères autorisés: chiffres, lettres, -, _"
+
 }
