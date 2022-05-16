@@ -12,10 +12,12 @@
             
             <form @submit.prevent="checkLogin" class="form_container">
                
-                    <input  v-model="username" type="text" class="champs_form" required  id="pseudo" aria-describedby="pseudo" :placeholder="$t('enter_name')">
-                                                
-                    <input v-model="password" type="password" class="champs_form" required  id="password" :placeholder="$t('enter_password')">
-                    
+                    <input  v-model.trim="username" required type="text" class="champs_form"   id="pseudo" aria-describedby="pseudo" :placeholder="$t('enter_name')">
+                    <!-- <span v-if="!$v.username.required && $v.username$dirty" class="text-danger">Name is required!</span>   -->
+
+                    <input v-model.trim="password" required type="password" class="champs_form"   id="password" :placeholder="$t('enter_password')">
+                    <!-- <span v-if="!$v.password.required && $v.password$dirty" class="text-danger">Username is required!</span> -->
+
                     <div class="form-check">
                       <input class="form-check-input " type="radio" checked disabled>
                        
@@ -23,6 +25,8 @@
                     </div>
                     
                     <button type="submit" class="champs_form btn btn-submit btn-lg btn_login" >{{ $t("to_login") }}</button>
+            
+            
             </form>
         </div>
       </div>
@@ -34,6 +38,7 @@
 
 import Footer from './MyFooter'
 import Header from './MyHeader'
+import { required, alpha } from 'vuelidate/lib/validators'
 
 export default {
   
@@ -50,6 +55,17 @@ export default {
         password: ''
       }
   },
+  validation: {
+      username: {
+          required,
+          alpha
+      },
+      password: {
+          required
+          
+      }
+
+  },
     methods: {
         checkLogin: function() {
             this.$store.dispatch('checkLogin', {
@@ -59,9 +75,21 @@ export default {
             this.$store.commit('rentreusrname',this.username); // on garde le nom pour comparer aux autres profils
             localStorage.setItem('own-username',this.username);
             this.$store.commit('gettingin',true); // on passe en état connecté
+
+            
         },
+
+        // submitForm(){
+        //     this.$v.$touch();
+        //     if(! this.$v.$invalid){
+        //         console.log(`username: ${this.username}, password: ${this.password}`)
+        //     }
+        // }
+        
     }
 }
+
+
 
 </script>
 

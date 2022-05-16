@@ -14,7 +14,7 @@
     <router-link to="/forget">ForgetPassword</router-link> -->
   </nav>
   <router-view/>
-
+ 
 </div>
 </template>
 
@@ -23,6 +23,8 @@
   // import inscriptionPage from './components/Inscription.vue'
   // import loginPage from './components/Login.vue'
   // import forgetPage from './components/ForgetPassword.vue'
+
+  
 
 export default {
   
