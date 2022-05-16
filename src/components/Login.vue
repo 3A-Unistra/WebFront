@@ -1,7 +1,4 @@
-<template >
-    <!-- <h3 class="title">{{ tit }}</h3> -->
-    <!--<h1 class="animate__animated animate__flipInX title">Page Login</h1>-->
-    
+<template >    
     <div id="app">
     <div class="haut">
     
@@ -15,14 +12,7 @@
           </button>
             <ul class="dropdown-menu">
               <li class="drop_elem" ><router-link to="/"> {{ $t("home") }} </router-link></li>
-               
-                <!-- <span class="sp_menu">&nbsp;|&nbsp;</span> -->
-               <!--  <li class="drop_elem" v-if="this.$store.state.username"><router-link to="/lobby">{{ $t("lobby") }}</router-link></li> -->
-
-                <!-- <span class="sp_menu">&nbsp;|&nbsp;</span> -->
               
-                
-                <!-- <span class="sp_menu">&nbsp;|&nbsp;</span> -->
                
             </ul>
           </div>
@@ -55,7 +45,6 @@
         </div>
 
         
-      <!-- <img class="logo_coin" src="../assets/logo_couleur.png" alt="logo"> -->
        
     </div>
     <div class="container_login">
@@ -68,11 +57,9 @@
             
             <form @submit.prevent="checkLogin" class="form_container">
                
-                    <input  v-model.trim="username" required type="text" class="champs_form"   id="pseudo" aria-describedby="pseudo" :placeholder="$t('enter_name')">
-                    <!-- <span v-if="!$v.username.required && $v.username$dirty" class="text-danger">Name is required!</span>   -->
+                    <input  v-model="username" required type="text" class="champs_form"   id="pseudo" aria-describedby="pseudo" :placeholder="$t('enter_name')">
 
-                    <input v-model.trim="password" required type="password" class="champs_form"   id="password" :placeholder="$t('enter_password')">
-                    <!-- <span v-if="!$v.password.required && $v.password$dirty" class="text-danger">Username is required!</span> -->
+                    <input v-model="password" required type="password" class="champs_form"   id="password" :placeholder="$t('enter_password')">
 
                     <div class="form-check">
                       <input class="form-check-input " type="radio" checked disabled>
@@ -171,7 +158,7 @@ export default {
         password: ''
       }
   },
-  validation: {
+  /*validation: {
       username: {
           required,
           alpha
@@ -181,7 +168,7 @@ export default {
           
       }
 
-  },
+  },*/
     methods: {
         checkLogin: function() {
             this.$store.dispatch('checkLogin', {

@@ -95,5 +95,10 @@
   "conf": "Confirm",
   "EntN":"Enter Your New Password",
   "CEntN":"Enter password",
-  "CCEntN": "Confirm password"
+  "CCEntN": "Confirm password",
+
+  // PreLobby
+  "type_lobby": "What kind of lobby?",
+  "enter_name_lobby": "Enter a name for the lobby:",
+  "forbidden_char": "Allowed caracters: letters, numbers, -, _"
 }
