@@ -158,7 +158,7 @@ export default {
         password: ''
       }
   },
-  validation: {
+  /*validation: {
       username: {
           required,
           alpha
@@ -168,7 +168,7 @@ export default {
           
       }
 
-  },
+  },*/
     methods: {
         checkLogin: function() {
             this.$store.dispatch('checkLogin', {
@@ -750,7 +750,7 @@ hr {
 
 .logo_store {
     display: inline-block;
-    max-width: 200px;
+    max-width: 180px;
     max-height: 150px;
 }   
 .container_copyright{

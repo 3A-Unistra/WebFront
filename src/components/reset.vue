@@ -295,7 +295,7 @@ hr {
 
 .logo_store {
     display: inline-block;
-    max-width: 200px;
+    max-width: 180px;
     max-height: 150px;
 }   
 .container_copyright{
