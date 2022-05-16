@@ -144,15 +144,16 @@ export default {
       this.$store.commit("setLobby", privateOrNot);
       this.$store.commit("setHost", true);
       console.log(this.nameLobby);
-      if(/^[A-Za-z0-9 - _]*$/.test(this.nameLobby))
+      if(!(/^[A-Za-z0-9 - _]*$/.test(this.nameLobby)) || (this.nameLobby ===""))
       {
+        this.borderStyle = "2px solid red";
+        this.nameLobby= '';
+      }
+      else {
         this.borderStyle="2px solid black";
 
         this.createGame();
-      }
-      else {
-        this.borderStyle = "2px solid red";
-        this.nameLobby= '';
+        
       }
     },
   },

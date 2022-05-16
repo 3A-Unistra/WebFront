@@ -57,9 +57,9 @@
             
             <form @submit.prevent="checkLogin" class="form_container">
                
-                    <input  v-model="username" required type="text" class="champs_form"   id="pseudo" aria-describedby="pseudo" :placeholder="$t('enter_name')">
+                    <input  v-model.trim="username" required type="text" class="champs_form"   id="pseudo" aria-describedby="pseudo" :placeholder="$t('enter_name')">
 
-                    <input v-model="password" required type="password" class="champs_form"   id="password" :placeholder="$t('enter_password')">
+                    <input v-model.trim="password" required type="password" class="champs_form"   id="password" :placeholder="$t('enter_password')">
 
                     <div class="form-check">
                       <input class="form-check-input " type="radio" checked disabled>
@@ -158,7 +158,7 @@ export default {
         password: ''
       }
   },
-  /*validation: {
+  validation: {
       username: {
           required,
           alpha
@@ -168,7 +168,7 @@ export default {
           
       }
 
-  },*/
+  },
     methods: {
         checkLogin: function() {
             this.$store.dispatch('checkLogin', {
