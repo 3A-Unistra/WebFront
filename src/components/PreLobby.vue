@@ -209,4 +209,10 @@ export default {
 
 }
 
+  @media screen and (max-width: 550px)  {
+
+    .diff_options{
+      height: 20vh;
+    }
+  }
 </style>
