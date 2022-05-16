@@ -49,7 +49,8 @@ export default {
           token: JSON.parse(localStorage.getItem('user-token')),
           game: this.$store.state.gameToken,
           uuid: JSON.parse(localStorage.getItem('own-id')),
-          online: "0",
+          online: "1",
+          secure: "1"
         })
       );
     });

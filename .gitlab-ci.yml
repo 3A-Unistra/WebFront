@@ -13,6 +13,8 @@ pages:
       - public
   only :
       - main
+  tags:
+    - gitlab-org
 
 unit test:
   image: node:alpine
@@ -20,4 +22,6 @@ unit test:
   script:
     - npm install
     - npm run test
+  tags:
+    - gitlab-org
 
