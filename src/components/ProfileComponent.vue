@@ -11,12 +11,10 @@
           </button>
             <ul class="dropdown-menu">
                 <!-- <span class="sp_menu">&nbsp;|&nbsp;</span> -->
-               <!--  <li class="drop_elem" v-if="this.$store.state.username"><router-link to="/lobby">{{ $t("lobby") }}</router-link></li> -->
 
                 <!-- <span class="sp_menu">&nbsp;|&nbsp;</span> -->
                 <li class="drop_elem" v-if="this.$store.state.username"> <router-link to="/post_login" @click="getUserProfile">{{ $t("Postlogin") }}</router-link></li>
                 
-                <!-- <span class="sp_menu">&nbsp;|&nbsp;</span> -->
                 
             </ul>
           </div>
@@ -50,14 +48,9 @@
         </div>
 
         
-      <!-- <img class="logo_coin" src="../assets/logo_couleur.png" alt="logo"> -->
        
     </div>
     <section class="container">
-        <!--        A ENLEVER
-        <p @click="changesameProfil(0)">passer sameprofil à true </p>
-        <p @click="changesameProfil(1)">passer sameprofil à false </p>
-        -->
         <section class="pseudo_img">
             <div class="titre_edit">
                 <div v-if="this.$store.state.sameProfile==true" class = "titre_nom">
@@ -76,9 +69,7 @@
                 <div :id="'img_avatar'+this.$store.state.pawnProfil">
                 </div>
             
-                <!--
-                    <img id="img_avatar" src="../assets/AvatarBateau.png" alt="">
-                -->
+                
                 </div>
             </section>
         </section>
@@ -310,11 +301,6 @@ export default {
           }
         },
 
-        verifState: function () {
-            console.log(this.$store.state.usernameProfil);
-            console.log(this.$store.state.loginProfil);
-            console.log(this.$store.state.pawnProfil);
-        },
 
         changeNamePawn: function() {
             console.log(this.pseudo);
