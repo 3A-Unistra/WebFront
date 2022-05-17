@@ -400,17 +400,23 @@ export default {
 }
 
 
-  @media screen and (max-width: 550px)  {
+  @media screen and (max-width: 800px)  {
+  .container {
+    flex-direction: column;
+    vertical-align: center;
+  }
   .opt {
     display: flex;
     flex-direction: row;
     margin-bottom: 30px;
-    height: 15%;
+    height: 4vh;
+    width: inherit;
   }
 
   .creer_partie, .deco_button {
     font-size: 1.5vh;
-    width: 50%;
+    width: 40%;
+    height: inherit;
   }
   .info_salon {
     min-width: 90%;
@@ -422,7 +428,7 @@ export default {
   }
 }
 
-  @media screen and (max-width: 1200px)  {
+  @media screen and (min-width: 800px) and (max-width: 1200px)  {
   .container {
     flex-direction: column;
     vertical-align: center;
