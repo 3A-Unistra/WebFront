@@ -87,8 +87,7 @@ export default {
         }
         this.$store.commit("createSalon", {
           id: paquet.game_token,
-          //name: paquet.name,
-          name: "nom lobby",
+          name: paquet.name,
           private: paquet.is_private,
           nbPlayers: paquet.nb_players,
           maxNbPlayers: 8,
@@ -345,7 +344,7 @@ export default {
   transition-duration: 200ms;
 }
 
-.deco_button:hover {
+.deco_button:hover, .deco_button:active {
   background-color: #70220f;
   cursor: pointer;
 }
@@ -366,21 +365,21 @@ export default {
 }
 
 .creer_partie {
-  background-color: #ffffff;
+  background-color: #8a5b4f;
   height: 15vh;
   border-radius: 7px;
   font-size: 3vh;
   font-weight: 600;
-  color: rgb(128, 104, 97);
+  color: white;
   transition-duration: 200ms;
 }
 
 .creer_partie:hover {
   transition-duration: 200ms;
-  background-color: rgb(224, 215, 212);
+  background-color: rgb(78, 47, 37);
 }
 .creer_partie:active {
-  background-color: #c4c4c4;
+  background-color: rgb(78, 47, 37);
 }
 
 .rejoindre:hover {
@@ -388,7 +387,7 @@ export default {
 }
 
 .rejoindre:active {
-  background-color: #ff8f0f !important;
+  background-color: #ff8f0f ;
 }
 
 .icone {
