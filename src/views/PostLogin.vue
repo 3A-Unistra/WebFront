@@ -296,15 +296,19 @@ export default {
 
 .info_salon {
   display: flex;
+  flex-direction: column;
   font-weight: bold;
   padding: 15px 20px 30px 20px;
   height: 550px;
   background-color: #c6c6c6;
   border-radius: 15px;
-  flex-direction: column;
-  justify-content: space-between;
   font-size: 16px;
   gap: 20px;
+}
+
+.liste_salons {
+  display: flex;
+  flex-direction: column;
 }
 
 .opt {
