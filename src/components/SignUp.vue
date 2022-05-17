@@ -1,10 +1,6 @@
 <template >
-    <!-- <h3 class="title">{{ tit }}</h3> 
-    <h1 class="animate__animated animate__flipInX title">Page d'INSCRIPTION</h1>-->
-     <div class="haut">
-    <Header></Header>
+  <Header></Header>
     
-</div>
     <div class="container_inscription">
         <div class="img_inscription">
             <img id="img_inscription" src="../assets/img_form.png" alt="">
