@@ -51,19 +51,20 @@
         <div class="img_login">
             <img id="img_login" src="../assets/img_form.png" alt="">
         </div>
-
         <div class="content_login">
             <h1 class="animate__animated animate__bounce animate__repeat-2 login_title">{{ $t("LOGIN") }}</h1>
-            
+           
             <form @submit.prevent="checkLogin" class="form_container">
-               
-                    <input  v-model.trim="username" required type="text" class="champs_form"   id="pseudo" aria-describedby="pseudo" :placeholder="$t('enter_name')">
-
+                 <div v-if="error != ''" class="alert alert-danger fade in">
+                   {{ error }}
+                   </div>
+                   <div v-if="succes != ''" class="alert alert-success" role="alert">
+                   {{ succes }}
+                   </div> 
+                   <input  v-model.trim="username" required type="text" class="champs_form"   id="pseudo" aria-describedby="pseudo" :placeholder="$t('enter_name')">
                     <input v-model.trim="password" required type="password" class="champs_form"   id="password" :placeholder="$t('enter_password')">
-
-                    <div class="form-check">
-                      <input class="form-check-input " type="radio" checked disabled>
-                       
+      
+                    <div class="form-check">             
                       <label class="form-check-label"><router-link to="/forget">{{ $t("forgot_passw") }}</router-link> </label> 
                     </div>
                     
@@ -155,32 +156,34 @@ export default {
     data () {
       return {
         username: '',
-        password: ''
+        password: '',
+        error:"",
+        succes:""
       }
   },
-  /*validation: {
-      username: {
-          required,
-          alpha
-      },
-      password: {
-          required
-          
-      }
-
-  },*/
+  
     methods: {
         checkLogin: function() {
-            this.$store.dispatch('checkLogin', {
-              username: this.username,
-              password: this.password,
-          }),
-            this.$store.commit('rentreusrname',this.username); // on garde le nom pour comparer aux autres profils
-            localStorage.setItem('own-username',this.username);
-            this.$store.commit('gettingin',true); // on passe en état connecté
-
-            
-        },
+        this.$store.dispatch('checkLogin', {
+          username: this.username,
+          password: this.password,
+    }).then(() => {
+        this.$store.commit('rentreusrname', this.username); // on garde le nom pour comparer aux autres profils
+        localStorage.setItem('own-username', this.username);
+        this.$store.commit('gettingin', true); // on passe en état connecté
+        this.succes ="vous etes bien connecter";
+    }).catch((e) => {
+        if (e.response.status === 404) {
+            this.error = "Identifiants non reconnus.";
+        }
+        else if(e.response.status==403){
+          this.error = "Invalid password.";
+        }
+        else {
+           this.error = "Une erreur lors de connexion.";
+        }
+    })
+},
         dropdown_options() {
           var click = document.getElementById("liste_option");  
 
@@ -220,6 +223,12 @@ export default {
   margin-right: auto;
   margin-left: auto;
 }
+/*.error{
+  display: flex;
+  justify-content: center;
+  color:red;
+  background: black;
+}*/
 .dropdown-menu{
   padding:20px;
   min-width:200px;

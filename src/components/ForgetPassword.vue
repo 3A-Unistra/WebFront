@@ -1,13 +1,19 @@
 <template>
     <Header></Header>
+
         <div class="content_forget">
             <section class ="container">
             <h1 class="animate__animated animate__bounce animate__repeat-2 forget_title">Entrez votre email</h1>
+             <div v-if="error != ''" class="alert alert-danger fade in">
+                   {{ error }}
+                   </div>
+                   <div v-if="succes != ''" class="alert alert-success" role="alert">
+                   {{ succes }}
+                   </div>
             <form  @submit.prevent="checkforgot" class="form_container">
                     <input v-model="forgetPass" type="email" class="champs_form" required  id="email" aria-describedby="emailHelp" placeholder="Entrez votre mail pour récupérer votre mot de passe">
                     <div CLASS="btn_container">
-
-                        <button href="#" class="btn btn-help bnt_nul">annuler</button>
+                        <button href="#" class="btn btn-help bnt_nul"><router-link to="/login">annuler</router-link></button>
                         <button type="submit" class="btn  btn_rec">recuperer</button>
                     </div>
             </form>
@@ -83,9 +89,8 @@
 </div>
 </template>
 <!-- Script JS -->
-
 <script>
-import Header from './MyHeader'
+import Header from '../components/MyHeader'
 export default {
     name: 'ForgetPage',
   props: {
@@ -94,6 +99,8 @@ export default {
   data () {
     return {
         email: '',
+        error:"",
+        succes:""
     }
   },
   
@@ -101,13 +108,23 @@ export default {
         checkforgot: function() {
             this.$store.dispatch('checkforgot', {
               forgetPass: this.forgetPass,
-          })    
+          }).then(() => {
+              this.succes ="Please check your email";
+          }) .catch((e) => {
+                if (e.response.status === 404) {
+                    this.error = "No account with this mail exits";
+                }
+                else {
+                    this.error = "Please resell later.";
+                }
+    })   
     }
 },
 
 components: {
-    Header,
+  Header,
 }
+
 }
 </script>
 
