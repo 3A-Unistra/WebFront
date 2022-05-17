@@ -15,12 +15,77 @@
   </div>
   
 
-<Footer></Footer>
+  <div class="bottom">
+         <div> 
+            <img id="le_chien" src="../assets/mascot_Footer.png" alt="pion chien">
+        </div>
+        <div id="liens">
+            
+            <ul class="list_footer n1">
+                <li class="menu_title"> Menu </li>
+                <hr>
+                <li class="menu_info"><router-link class="menu_ff" to="/profile">{{ $t("profil") }}</router-link></li>
+                <li class="menu_info"><router-link class="menu_ff" to="/post_login">{{ $t("postlogin") }}</router-link></li>
+               
+            </ul>
+
+            <ul class="list_footer n2">
+                <li class="menu_title"> {{ $t("reseaux") }} </li>
+                <hr>
+                <div class="container_logo">
+                    <li class="menu_logo">
+                        <a href="https://www.instagram.com/terms/unblock/?next=/strassopoly/">
+                            <img id="insta_size" src="../assets/instagram.png" alt="instagram">
+                        </a>
+                    </li>
+                    <li class="menu_logo">
+                        <a href="https://www.facebook.com/profile.php?id=100080875824582">
+                            <img class="social fb" src="../assets/facebook.png" alt="facebook">
+                        </a>
+                    </li>
+                    <li class="menu_logo">
+                        <a href="https://twitter.com/PolyStras">
+                            <img class="social twitter" src="../assets/twitter.png" alt="twitter">
+                        </a>
+                    </li>
+                </div>
+            </ul>
+            <ul class="list_footer n3">
+                <li class="menu_title"> {{ $t("liens") }} </li>
+                <hr>
+                <li class="menu_info">{{ $t("cond_gene") }}</li>
+                <li class="menu_info">{{ $t("faq") }}</li>
+                <li class="menu_info">{{ $t("license") }}</li>
+                <li class="menu_info">{{ $t("aide") }}</li>
+            </ul>
+        </div>
+        
+        <div class="store_bg">
+            <p class="store_parag">
+                {{ $t("propagande1") }} 
+                <br>
+                {{ $t("propagande2") }}
+            </p>
+            <div class="store_redirection">   
+                <img class="logo_store" src="../assets/logo_appstore.png" alt="logo app store">
+                <img class="logo_store" src="../assets/logo_playstore.png" alt="logo app store">
+            </div>
+        </div>
+
+        <div class="text-center text-lg-start container_copyright">
+            <!-- Copyright -->
+            <div class="text-center p-3 copy">
+                © 2022 Copyright:
+                <a class="strasspoly_copy" >STRASSOPOLY GAME</a>
+            </div>
+            <!-- Copyright -->
+        </div>
+    
+</div>
 </template>
 
 <script>
 import Header from "../components/MyHeader";
-import Footer from '../components/MyFooter'
 import socket from "../services/ws";
 
 
@@ -34,7 +99,6 @@ export default {
   name: "LoginPage",
   components: {
     Header,
-    Footer
   },
   data() {
     return {
