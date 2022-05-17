@@ -43,9 +43,9 @@ export default createStore({
         buyFirstRound: false,
         timePerRound: -1,
         maxRound: -1,
-        starterMoney: -1
+        starterMoney: -1, 
+        nomPage: ''
     },
-
     actions: {
        createAccount:({commit},userInfos) => {
             commit;
@@ -427,6 +427,9 @@ export default createStore({
         },
         changePhotoProfil(state, newPhotoProfil) {
             state.photoProfil = newPhotoProfil;
+        },
+        changePage(state, newPage) {
+            state.nomPage = newPage;
         }
 
     },

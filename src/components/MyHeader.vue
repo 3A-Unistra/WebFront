@@ -10,20 +10,20 @@
             <!-- MENU -->
           </button>
             <ul class="dropdown-menu">
-              <li class="drop_elem" ><router-link to="/"> {{ $t("home") }} </router-link></li>
-               
-
-                <li class="drop_elem" v-if="this.$store.state.username"> <router-link to="/profile" @click="getUserProfile">{{ $t("profil") }}</router-link></li>
+              
+                <li class="drop_elem" v-if="this.$store.state.username &&this.$store.state.loggedin && this.$store.state.nomPage !== 'profile'"> <router-link to="/profile" @click="getUserProfile">{{ $t("profil") }}</router-link></li>
                 
-                <li class="drop_elem" v-if="this.$store.state.username"> <router-link to="/post_login">{{ $t("lobby") }}</router-link></li>
+                <li class="drop_elem" v-if="this.$store.state.username && this.$store.state.loggedin && this.$store.state.nomPage !== 'postlogin'"> <router-link to="/post_login">{{ $t("post_login") }}</router-link></li>
             </ul>
           </div>
-
-           <button v-if="!this.$store.state.username"  @click="this.$router.push('/SignUp')" class="login">
+           <button class="login" v-if="!this.$store.state.username && this.$store.state.loggedin === false && this.$store.state.nomPage !== 'home'" @click="this.$router.push('/')">
+                   {{ $t("home") }}
+                    </button>
+           <button v-if="!this.$store.state.username && this.$store.state.loggedin === false && this.$store.state.nomPage !== 'signup'"  @click="this.$router.push('/SignUp')" class="login">
               {{ $t("signup") }}
            </button>
 
-             <button v-if="!this.$store.state.username"  @click="this.$router.push('/Login')" class="login">
+             <button v-if="!this.$store.state.username && this.$store.state.loggedin === false && this.$store.state.nomPage !== 'login'"  @click="this.$router.push('/Login')" class="login">
               {{ $t("login") }}
              </button>
 
