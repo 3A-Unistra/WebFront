@@ -1,5 +1,5 @@
 <template>
-    <button @click="logout" class="deconnection" type="boutton">{{ $t("deco") }}
+    <button @click="logout" class="deconnection" type="boutton" v-if="this.$store.state.loggedin">{{ $t("deco") }}
         <img class="icone" src="../assets/deco.png" alt="icone deco">
     </button>
 </template>

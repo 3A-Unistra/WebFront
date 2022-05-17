@@ -8,28 +8,29 @@
             <ul class="list_footer n1">
                 <li class="menu_title"> Menu </li>
                 <hr>
-                <li class="menu_info"><router-link class="menu_ff" to="/">{{ $t("home") }}</router-link></li>
-                <li class="menu_info"><router-link class="menu_ff" to="/signup">{{ $t("signup") }}/{{ $t("login") }}</router-link></li>
-                <li class="menu_info"><router-link class="menu_ff" to="/profile">{{ $t("profil") }}</router-link></li>
-                <li class="menu_info"><router-link class="menu_ff" to="/Lobby">{{ $t("lobby") }}</router-link></li>
+                <li class="menu_info" v-if="this.$store.state.loggedin === false && this.$store.state.nomPage !== 'home'" ><router-link class="menu_ff" to="/">{{ $t("home") }}</router-link></li>
+                <li class="menu_info" v-if="this.$store.state.loggedin === false && this.$store.state.nomPage !== 'signup'"><router-link class="menu_ff" to="/signup">{{ $t("signup") }}</router-link></li>
+                <li class="menu_info" v-if="this.$store.state.loggedin === false && this.$store.state.nomPage !== 'login'" ><router-link class="menu_ff" to="/login">{{ $t("login") }}</router-link></li>
+                <li class="menu_info" v-if="this.$store.state.loggedin && this.$store.state.nomPage !== 'profile'"><router-link class="menu_ff" to="/profile">{{ $t("profil") }}</router-link></li>
+                <li class="menu_info" v-if="this.$store.state.loggedin && this.$store.state.nomPage !== 'postlogin'"><router-link class="menu_ff" to="/post_login">{{ $t("post_login") }}</router-link></li>
             </ul>
 
             <ul class="list_footer n2">
                 <li class="menu_title"> {{ $t("reseaux") }} </li>
                 <hr>
                 <div class="container_logo">
-                    <li class="menu_logo">
-                        <a href="">
+                      <li class="menu_logo">
+                        <a href="https://www.instagram.com/terms/unblock/?next=/strassopoly/">
                             <img id="insta_size" src="../assets/instagram.png" alt="instagram">
                         </a>
                     </li>
                     <li class="menu_logo">
-                        <a href="">
+                        <a href="https://www.facebook.com/profile.php?id=100080875824582">
                             <img class="social fb" src="../assets/facebook.png" alt="facebook">
                         </a>
                     </li>
                     <li class="menu_logo">
-                        <a href="">
+                        <a href="https://twitter.com/PolyStras">
                             <img class="social twitter" src="../assets/twitter.png" alt="twitter">
                         </a>
                     </li>
