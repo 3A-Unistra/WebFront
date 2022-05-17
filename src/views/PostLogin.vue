@@ -4,11 +4,15 @@
   </div>
 
   <section class="container">
+    
     <section class="opt">
-      <LogOutButton></LogOutButton>
-      <button class="deco_button" @click="toPreLobby" type="boutton">
+      <button class="creer_partie" @click="toPreLobby" type="boutton">
         {{ $t("creer") }}
-        <img class="icone" src="../assets/reseau.png" alt="icone reseau" />
+      </button>
+
+      <button class="deco_button" @click="logout" type="boutton">
+        {{ $t("deco") }}
+       <!---- <img class="icone" src="../assets/reseau.png" alt="icone reseau" />-->
       </button>
     </section>
 
@@ -17,7 +21,7 @@
         <input class="champLien" type="text" :placeholder="$t('entrer_lien')" />
         <button class="rejoindre" type="boutton">
           {{ $t("rejoindre") }}
-          <img class="icone" src="../assets/verif.png" alt="icone verif" />
+        <i class="mdi mdi-lock-open-plus-outline" style="font-size:40px" ></i>
         </button>
       </div>
       <div
@@ -43,7 +47,7 @@
 import axios from "axios";
 //axios.defaults.baseURL =process.env.VUE_APP_PATH_API
 import Footer from "../components/MyFooter";
-import LogOutButton from "../components/LogOutButton";
+//import LogOutButton from "../components/LogOutButton";
 import Header from "../components/MyHeader";
 import Salon from "../components/SalonComponent.vue";
 
@@ -165,7 +169,7 @@ export default {
     Header,
     Salon,
     Footer,
-    LogOutButton,
+    //LogOutButton,
   },
   methods: {
     dropdown_options() {
@@ -310,6 +314,13 @@ export default {
   gap: 20px;
 }
 
+
+.opt {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  height: 40%;
+}
 .deco_button {
   background-color: #942e14;
   height: 15vh;
@@ -326,37 +337,38 @@ export default {
   transition-duration: 200ms;
   cursor: pointer;
 }
-.deconnection,
+.deco_button,
 .creer_partie,
 .rejoindre {
-  border-radius: 7px;
-  width: 200px;
-  font-weight: bold;
+
   border: none;
   outline: none;
 }
 
-.deconnection {
-  color: #eceae7;
-  background-color: black;
-  margin-bottom: 30px;
-}
-
-.creer_partie {
-  color: black;
-  background-color: #c4c4c4;
-}
 
 .rejoindre {
   background-color: #fab532;
+  border-radius: 7px;
+  font-weight: bold;
+}
+
+.creer_partie {
+  background-color: #ffffff;
+  height: 15vh;
+  border-radius: 7px;
+  font-size:3vh;
+  border: none;
+  font-weight: 600;
+  color: rgb(128, 104, 97) ;
+  transition-duration: 200ms;
 }
 
 .creer_partie:hover {
-  background-color: #999999;
+  transition-duration: 200ms;
+  background-color: rgb(224, 215, 212) ;
 }
-
 .creer_partie:active {
-  background-color: #c4c4c4 !important;
+  background-color: #c4c4c4 ;
 }
 
 .deconnection:hover {
@@ -364,7 +376,7 @@ export default {
 }
 
 .deconnection:active {
-  background-color: black !important;
+  background-color: black ;
 }
 
 .rejoindre:hover {
@@ -380,10 +392,6 @@ export default {
   height: 40px;
 }
 
-.opt {
-  width: 20%;
-  height: 40%;
-}
 
 .lien {
   display: flex;
@@ -402,40 +410,17 @@ export default {
   margin-right: 20px;
 }
 
-.opt {
-  display: flex;
-  flex-direction: column;
-}
 
-@media screen and (min-width: 700px) and (max-width: 1010px) {
-  .list_footer {
-    padding: 1% 5%;
-  }
-  #le_chien {
-    display: none;
-  }
-  .list_footer:last-child {
-    padding-right: 5%;
-  }
-  #liens {
-    justify-content: space-around;
-    max-width: 100%;
-    height: 50%;
-    width: 90%;
-  }
-  .bottom {
-    width: 100%;
-  }
-}
-
-@media screen and (min-width: 850px) and (max-width: 1200px) {
-  .container {
-    flex-direction: column;
-    justify-content: center;
-  }
+  @media screen and (max-width: 550px)  {
   .opt {
+    display: flex;
+    flex-direction: row;
     margin-bottom: 30px;
-    margin-left: 30%;
+    height: 15%;
+  }
+
+  .creer_partie, .deco_button {
+    font-size: 1.5vh;
   }
   .info_salon {
     min-width: 90%;
@@ -446,15 +431,28 @@ export default {
     margin-left: 10px;
   }
 }
-@media screen and (min-width: 300px) and (max-width: 850px) {
+
+  @media screen and (max-width: 1200px)  {
   .container {
     flex-direction: column;
-    justify-content: center;
+    vertical-align: center;
   }
+  
   .opt {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
     margin-bottom: 30px;
-    margin-left: 30%;
+    height: 3vh;
   }
+
+  .creer_partie, .deco_button {
+    width: 25%;
+    height: inherit;
+    font-size: 1.5vh;
+  }
+  
   .info_salon {
     min-width: 90%;
     margin: 0px;
@@ -462,7 +460,6 @@ export default {
   .champLien {
     border-radius: 10px;
     padding-left: 15px;
-    /* margin-left: 10px; */
   }
   .salon {
     display: flex;
