@@ -76,4 +76,5 @@ export default {
   padding-bottom: 20px;
   padding-right: 20px;
 }
+
 </style>

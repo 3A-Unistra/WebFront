@@ -18,7 +18,7 @@
         <input class="champLien" type="text" :placeholder="$t('entrer_lien')" />
         <button class="rejoindre" type="boutton">
           {{ $t("rejoindre") }}
-          <i class="mdi mdi-lock-open-plus-outline" style="font-size: 40px"></i>
+          <i class="mdi mdi-lock-open-plus-outline"></i>
         </button>
       </div>
       <div
@@ -192,7 +192,9 @@ export default {
     },
 
     logout: function () {
-      this.$store.commit("clearUserData"), this.$router.push("/");
+      this.$store.commit("clearUserData");
+      socket.close(); 
+      this.$router.push("/");
     },
     affichetoken: function () {
       console.log(this.$store.state.username);
@@ -285,22 +287,29 @@ export default {
 .container {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   /* gap: 50px; */
   margin-top: 20px;
   padding-bottom: 20px;
+  padding-right: 5px;
 }
 
 .mdi-logout-variant, .mdi-sticker-plus-outline {
   font-size: 50px;
 }
 
+.mdi-lock-open-plus-outline {
+  font-size: 25px;
+}
+
 .info_salon {
   display: flex;
   flex-direction: column;
+  width: auto;
   font-weight: bold;
   padding: 15px 20px 30px 20px;
   height: 550px;
+  width: inherit;
   background-color: #c6c6c6;
   border-radius: 15px;
   font-size: 16px;
@@ -310,13 +319,17 @@ export default {
 .liste_salons {
   display: flex;
   flex-direction: column;
+  flex-wrap: nowrap;
+  overflow-y: auto;
+  height: 100px;
 }
 
 .opt {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width: 20%;
+  width: 29%;
+  padding-right: 5%;
   height: inherit;
 }
 
@@ -339,14 +352,17 @@ export default {
 .deco_button,
 .creer_partie,
 .rejoindre {
-  border: none;
   outline: none;
+  border: none;
+
 }
 
 .rejoindre {
   background-color: #fab532;
   border-radius: 7px;
   font-weight: bold;
+  width: 15%;
+
 }
 
 .creer_partie {
@@ -354,7 +370,6 @@ export default {
   height: 15vh;
   border-radius: 7px;
   font-size: 3vh;
-  border: none;
   font-weight: 600;
   color: rgb(128, 104, 97);
   transition-duration: 200ms;
@@ -390,12 +405,11 @@ export default {
 }
 
 .champLien {
-  width: 600px;
   height: 50px;
   font-weight: bold;
-  padding-left: 20px;
   border-radius: 10px;
-  margin-right: 20px;
+  padding-left:10px;
+  width: 60%;
 }
 
 @media screen and (max-width: 800px) {
@@ -405,7 +419,7 @@ export default {
   }
 
 
-.mdi-logout-variant, .mdi-sticker-plus-outline {
+.mdi-logout-variant, .mdi-sticker-plus-outline, .mdi-lock-open-plus-outline {
   font-size: 20px;
 }
 
@@ -428,8 +442,8 @@ export default {
     margin: 0px;
   }
   .champLien {
-    border-radius: 10px;
     margin-left: 10px;
+    
   }
 }
 
@@ -440,7 +454,7 @@ export default {
   }
 
 
-.mdi-logout-variant , .mdi-sticker-plus-outline{
+.mdi-logout-variant , .mdi-sticker-plus-outline, .mdi-lock-open-plus-outline{
   font-size: 20px;
 }
 
@@ -461,13 +475,14 @@ export default {
   }
 
   .info_salon {
-    /*min-width: 90%;*/
     margin: 0px;
   }
+
   .champLien {
+    width: 50%;
     border-radius: 10px;
-    padding-left: 15px;
   }
+
   .salon {
     display: flex;
     flex-direction: row;
@@ -494,4 +509,5 @@ export default {
     margin-left: 10%;
   }
 }
+
 </style>
