@@ -1,8 +1,8 @@
 <template>
   <div class="salon">
     <p class="nom_salon">{{ nameLobby }}</p>
-    <p class="nbr_part">{{ $t("nb_participants") }}</p>
-    <p class="nbr_part">{{ nbPlayers }} / {{ maxNbPlayers }}</p>
+    <p class="nbr_part">{{ $t("nb_participants") }} {{ nbPlayers }} / {{ maxNbPlayers }}</p>
+    <!--<p class="nbr_part">{{ nbPlayers }} / {{ maxNbPlayers }}</p>-->
     <button class="rej_salon" @click="$emit('my-event')" type="boutton">
       {{ $t("rejoindre") }}
     </button>

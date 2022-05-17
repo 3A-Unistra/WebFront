@@ -56,7 +56,7 @@
     "entrer_lien":"Entrez le lien pour rejoindre le salon",
     "rejoindre":"Rejoindre",
     "salon":"Salon",
-    "nb_participants":"Nombre de participants : ",
+    "nb_participants":"Joueurs : ",
 
   // page lobby
     "participants": "Participants",

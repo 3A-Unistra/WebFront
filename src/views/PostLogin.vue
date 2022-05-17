@@ -87,7 +87,8 @@ export default {
         }
         this.$store.commit("createSalon", {
           id: paquet.game_token,
-          name: paquet.name,
+          //name: paquet.name,
+          name: "nom lobby",
           private: paquet.is_private,
           nbPlayers: paquet.nb_players,
           maxNbPlayers: 8,
@@ -423,7 +424,7 @@ export default {
     height: inherit;
   }
   .info_salon {
-    min-width: 90%;
+    /*min-width: 90%;*/
     margin: 0px;
   }
   .champLien {
@@ -460,7 +461,7 @@ export default {
   }
 
   .info_salon {
-    min-width: 90%;
+    /*min-width: 90%;*/
     margin: 0px;
   }
   .champLien {
@@ -472,7 +473,6 @@ export default {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
-    max-width: 500px;
     height: auto;
     padding-bottom: 10px;
   }
