@@ -52,8 +52,8 @@
 
   // page d'après co
     "deco": "Déconnexion",
-    "creer":"Créer une partie",
-    "entrer_lien":"Entrez le lien pour rejoindre la partie",
+    "creer":"Créer salon",
+    "entrer_lien":"Entrez le lien pour rejoindre le salon",
     "rejoindre":"Rejoindre",
     "salon":"Salon",
     "nb_participants":"Nombre de participants : ",

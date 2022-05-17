@@ -1,15 +1,15 @@
 <template>
-    <Header></Header>
-    <section class="container">
-    
-      <section class="opt">
-        <button class="creer_partie" @click="toPreLobby" type="boutton">
-          {{ $t("creer") }}
-        </button>
+  <Header></Header>
+  <section class="container">
+    <section class="opt">
+      <button class="creer_partie" @click="toPreLobby" type="boutton">
+        {{ $t("creer") }}
+        <i class="mdi mdi-sticker-plus-outline" ></i>
+      </button>
 
       <button class="deco_button" @click="logout" type="boutton">
         {{ $t("deco") }}
-       <!---- <img class="icone" src="../assets/reseau.png" alt="icone reseau" />-->
+          <i class="mdi mdi-logout-variant" ></i>
       </button>
     </section>
 
@@ -18,7 +18,7 @@
         <input class="champLien" type="text" :placeholder="$t('entrer_lien')" />
         <button class="rejoindre" type="boutton">
           {{ $t("rejoindre") }}
-        <i class="mdi mdi-lock-open-plus-outline" style="font-size:40px" ></i>
+          <i class="mdi mdi-lock-open-plus-outline" style="font-size: 40px"></i>
         </button>
       </div>
       <div
@@ -290,19 +290,15 @@ export default {
   padding-bottom: 20px;
 }
 
-.info_salon {
-  display: flex;
-  flex-direction: column;
-  font-weight: bold;
-  /* gap: 30px; */
-  padding: 30px 0px 30px 0px;
+.mdi-logout-variant, .mdi-sticker-plus-outline {
+  font-size: 50px;
 }
 
 .info_salon {
-  padding: 15px 20px 30px 20px;
-  /* width: 80%; */
-  height: 550px;
   display: flex;
+  font-weight: bold;
+  padding: 15px 20px 30px 20px;
+  height: 550px;
   background-color: #c6c6c6;
   border-radius: 15px;
   flex-direction: column;
@@ -311,7 +307,6 @@ export default {
   gap: 20px;
 }
 
-
 .opt {
   display: flex;
   flex-direction: column;
@@ -319,8 +314,10 @@ export default {
   width: 20%;
   height: inherit;
 }
+
 .deco_button {
   background-color: #942e14;
+  align-items: center;
   height: 15vh;
   border-radius: 7px;
   font-size: 3vh;
@@ -337,11 +334,9 @@ export default {
 .deco_button,
 .creer_partie,
 .rejoindre {
-
   border: none;
   outline: none;
 }
-
 
 .rejoindre {
   background-color: #fab532;
@@ -353,19 +348,19 @@ export default {
   background-color: #ffffff;
   height: 15vh;
   border-radius: 7px;
-  font-size:3vh;
+  font-size: 3vh;
   border: none;
   font-weight: 600;
-  color: rgb(128, 104, 97) ;
+  color: rgb(128, 104, 97);
   transition-duration: 200ms;
 }
 
 .creer_partie:hover {
   transition-duration: 200ms;
-  background-color: rgb(224, 215, 212) ;
+  background-color: rgb(224, 215, 212);
 }
 .creer_partie:active {
-  background-color: #c4c4c4 ;
+  background-color: #c4c4c4;
 }
 
 .rejoindre:hover {
@@ -380,7 +375,6 @@ export default {
   width: 40px;
   height: 40px;
 }
-
 
 .lien {
   display: flex;
@@ -399,21 +393,27 @@ export default {
   margin-right: 20px;
 }
 
-
-  @media screen and (max-width: 800px)  {
+@media screen and (max-width: 800px) {
   .container {
     flex-direction: column;
     vertical-align: center;
   }
+
+
+.mdi-logout-variant, .mdi-sticker-plus-outline {
+  font-size: 20px;
+}
+
   .opt {
     display: flex;
     flex-direction: row;
     margin-bottom: 30px;
     height: 4vh;
-    width: inherit;
+    width: 100%;
   }
 
-  .creer_partie, .deco_button {
+  .creer_partie,
+  .deco_button {
     font-size: 1.5vh;
     width: 40%;
     height: inherit;
@@ -428,12 +428,17 @@ export default {
   }
 }
 
-  @media screen and (min-width: 800px) and (max-width: 1200px)  {
+@media screen and (min-width: 800px) and (max-width: 1200px) {
   .container {
     flex-direction: column;
     vertical-align: center;
   }
-  
+
+
+.mdi-logout-variant , .mdi-sticker-plus-outline{
+  font-size: 20px;
+}
+
   .opt {
     display: flex;
     flex-direction: row;
@@ -443,12 +448,13 @@ export default {
     height: 3vh;
   }
 
-  .creer_partie, .deco_button {
+  .creer_partie,
+  .deco_button {
     width: 25%;
     height: inherit;
     font-size: 1.5vh;
   }
-  
+
   .info_salon {
     min-width: 90%;
     margin: 0px;
@@ -465,7 +471,6 @@ export default {
     max-width: 500px;
     height: auto;
     padding-bottom: 10px;
-    /* padding-top: 10px; */
   }
   .icone {
     display: none;
