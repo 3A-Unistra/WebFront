@@ -1,14 +1,11 @@
 <template>
-  <div class="haut">
     <Header></Header>
-  </div>
-
-  <section class="container">
+    <section class="container">
     
-    <section class="opt">
-      <button class="creer_partie" @click="toPreLobby" type="boutton">
-        {{ $t("creer") }}
-      </button>
+      <section class="opt">
+        <button class="creer_partie" @click="toPreLobby" type="boutton">
+          {{ $t("creer") }}
+        </button>
 
       <button class="deco_button" @click="logout" type="boutton">
         {{ $t("deco") }}
