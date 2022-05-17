@@ -371,14 +371,6 @@ export default {
   background-color: #c4c4c4 ;
 }
 
-.deconnection:hover {
-  background-color: rgb(48, 47, 47);
-}
-
-.deconnection:active {
-  background-color: black ;
-}
-
 .rejoindre:hover {
   background-color: #fda90b;
 }
@@ -421,6 +413,7 @@ export default {
 
   .creer_partie, .deco_button {
     font-size: 1.5vh;
+    width: 40%;
   }
   .info_salon {
     min-width: 90%;
