@@ -318,8 +318,9 @@ export default {
 .opt {
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
   width: 20%;
-  height: 40%;
+  height: inherit;
 }
 .deco_button {
   background-color: #942e14;
@@ -334,7 +335,6 @@ export default {
 
 .deco_button:hover {
   background-color: #70220f;
-  transition-duration: 200ms;
   cursor: pointer;
 }
 .deco_button,
@@ -413,7 +413,7 @@ export default {
 
   .creer_partie, .deco_button {
     font-size: 1.5vh;
-    width: 40%;
+    width: 50%;
   }
   .info_salon {
     min-width: 90%;

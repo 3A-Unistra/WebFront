@@ -11,7 +11,7 @@
                 <li class="menu_info" v-if="this.$store.state.loggedin === false && this.$store.state.nomPage !== 'home'" ><router-link class="menu_ff" to="/">{{ $t("home") }}</router-link></li>
                 <li class="menu_info" v-if="this.$store.state.loggedin === false && this.$store.state.nomPage !== 'signup'"><router-link class="menu_ff" to="/signup">{{ $t("signup") }}</router-link></li>
                 <li class="menu_info" v-if="this.$store.state.loggedin === false && this.$store.state.nomPage !== 'login'" ><router-link class="menu_ff" to="/login">{{ $t("login") }}</router-link></li>
-                <li class="menu_info" v-if="this.$store.state.loggedin && this.$store.state.nomPage !== 'profile'"><router-link class="menu_ff" to="/profile">{{ $t("profil") }}</router-link></li>
+                <li class="menu_info menu_ff" v-if="this.$store.state.loggedin && this.$store.state.nomPage !== 'profile'" style="cursor:pointer" @click="getUserProfile">{{ $t("profil") }}</li>
                 <li class="menu_info" v-if="this.$store.state.loggedin && this.$store.state.nomPage !== 'postlogin'"><router-link class="menu_ff" to="/post_login">{{ $t("post_login") }}</router-link></li>
             </ul>
 
@@ -69,6 +69,26 @@
     
 </div>
 </template>
+<script>
+
+export default {
+    methods:{
+        getUserProfile: function(){
+
+          // vu que c'est son propre profil
+          this.$store.commit('checkingSameProfile',true);
+
+          // on stocke l'username cliqué dans le store et en localstorage
+          this.$store.commit('changeUsrnameProfil',this.$store.state.username);
+          localStorage.setItem('username-profil',this.$store.state.username);
+            
+  
+          //puis on va sur le profil
+          this.$router.push('/profile');
+        }
+    }
+}
+</script>
 
 <style>
 
