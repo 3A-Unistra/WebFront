@@ -184,6 +184,7 @@ export default {
         max_nb_players: 8
       };
       socket.send(JSON.stringify(paquet));
+      console.log(localStorage.getItem('own-id'))
     },
     setPrive: function (privateOrNot) {
       this.$store.commit("setLobby", privateOrNot);

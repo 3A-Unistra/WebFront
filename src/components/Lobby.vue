@@ -500,7 +500,6 @@ export default {
       } else {
         this.leaveRoom();
       }
-      // this.$router.push('/post_login')
     },
     startGame: function () {
       let playerId = {
@@ -536,8 +535,8 @@ export default {
   display: flex;
   flex-direction: row;
   border-top: 4px solid #5f4339;
-  /*border: 2px solid red;*/
-  z-index: 1;
+  /*border: 2px solid red;
+  z-index: 1;*/
 }
 
 .part {
@@ -1009,10 +1008,9 @@ input {
   .amis input {
     margin-left: 1.5em;
   }
-  .haut {
-    height: 10vh;
-    padding-top: 30px;
-    background-size: inherit;
+  .haut{
+  padding-top: 30px;
+  background-size:inherit;
   }
 
   .login {

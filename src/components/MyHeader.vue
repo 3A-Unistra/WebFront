@@ -42,7 +42,7 @@
                 
               </div> 
             </li>
-            <LogOutButton style="margin-bottom: 0;"></LogOutButton>
+            <LogOutButton style="margin-right: 2%;"></LogOutButton>
           </ul>
         </div>
         </div>
@@ -59,7 +59,6 @@ import LogOutButton from '../components/LogOutButton'
 
 export default {        
     mounted() {
-      this.dropdown_options();
     },
     components: {
       LogOutButton
@@ -232,6 +231,7 @@ a:hover {
   border-radius: 25px;
   padding: 1% 0 2% 0;
   position: absolute;
+  margin-top: 20px;
 }
 
 #close_button {

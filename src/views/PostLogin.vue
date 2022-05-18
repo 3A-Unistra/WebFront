@@ -4,11 +4,13 @@
     <section class="opt">
       <button class="creer_partie" @click="toPreLobby" type="boutton">
         {{ $t("creer") }}
+        <i class="mdi mdi-sticker-plus-outline" ></i>
       </button>
 
       <button class="deco_button" @click="logout" type="boutton">
         {{ $t("deco") }}
         <!---- <img class="icone" src="../assets/reseau.png" alt="icone reseau" />-->
+          <i class="mdi mdi-logout-variant" ></i>
       </button>
     </section>
 
@@ -229,7 +231,9 @@ export default {
     },
 
     logout: function () {
-      this.$store.commit("clearUserData"), this.$router.push("/");
+      this.$store.commit("clearUserData");
+      socket.close(); 
+      this.$router.push("/");
     },
     affichetoken: function () {
       console.log(this.$store.state.username);
@@ -298,7 +302,6 @@ export default {
       };
       socket.send(JSON.stringify(EnterRoom));
     },
-
     joinLobbyWithToken: function (token) {
       let EnterRoom = {
         name: "EnterRoom",
@@ -307,6 +310,7 @@ export default {
       };
       socket.send(JSON.stringify(EnterRoom));
     },
+
 
     deleteSalon: function (index) {
       this.$store.state.listeSalons.splice(index, 1);
@@ -331,42 +335,55 @@ export default {
 .container {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   /* gap: 50px; */
   margin-top: 20px;
   padding-bottom: 20px;
+  padding-right: 5px;
+}
+
+.mdi-logout-variant, .mdi-sticker-plus-outline {
+  font-size: 50px;
+}
+
+.mdi-lock-open-plus-outline {
+  font-size: 25px;
 }
 
 .info_salon {
   display: flex;
   flex-direction: column;
+  width: auto;
   font-weight: bold;
-  /* gap: 30px; */
-  padding: 30px 0px 30px 0px;
-}
-
-.info_salon {
   padding: 15px 20px 30px 20px;
-  /* width: 80%; */
   height: 550px;
-  display: flex;
+  width: inherit;
   background-color: #c6c6c6;
   border-radius: 15px;
-  flex-direction: column;
-  justify-content: space-between;
   font-size: 16px;
   gap: 20px;
+}
+
+.liste_salons {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  overflow-y: auto;
+  height: 100px;
 }
 
 .opt {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width: 20%;
+  width: 29%;
+  padding-right: 5%;
   height: inherit;
 }
+
 .deco_button {
   background-color: #942e14;
+  align-items: center;
   height: 15vh;
   border-radius: 7px;
   font-size: 3vh;
@@ -376,40 +393,42 @@ export default {
   transition-duration: 200ms;
 }
 
-.deco_button:hover {
+.deco_button:hover, .deco_button:active {
   background-color: #70220f;
   cursor: pointer;
 }
 .deco_button,
 .creer_partie,
 .rejoindre {
-  border: none;
   outline: none;
+  border: none;
+
 }
 
 .rejoindre {
   background-color: #fab532;
   border-radius: 7px;
   font-weight: bold;
+  width: 15%;
+
 }
 
 .creer_partie {
-  background-color: #ffffff;
+  background-color: #8a5b4f;
   height: 15vh;
   border-radius: 7px;
   font-size: 3vh;
-  border: none;
   font-weight: 600;
-  color: rgb(128, 104, 97);
+  color: white;
   transition-duration: 200ms;
 }
 
 .creer_partie:hover {
   transition-duration: 200ms;
-  background-color: rgb(224, 215, 212);
+  background-color: rgb(78, 47, 37);
 }
 .creer_partie:active {
-  background-color: #c4c4c4;
+  background-color: rgb(78, 47, 37);
 }
 
 .rejoindre:hover {
@@ -417,7 +436,7 @@ export default {
 }
 
 .rejoindre:active {
-  background-color: #ff8f0f !important;
+  background-color: #ff8f0f ;
 }
 
 .icone {
@@ -434,42 +453,58 @@ export default {
 }
 
 .champLien {
-  width: 600px;
   height: 50px;
   font-weight: bold;
-  padding-left: 20px;
   border-radius: 10px;
-  margin-right: 20px;
+  padding-left:10px;
+  width: 60%;
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 800px) {
+  .container {
+    flex-direction: column;
+    vertical-align: center;
+  }
+
+
+.mdi-logout-variant, .mdi-sticker-plus-outline, .mdi-lock-open-plus-outline {
+  font-size: 20px;
+}
+
   .opt {
     display: flex;
     flex-direction: row;
     margin-bottom: 30px;
-    height: 15%;
+    height: 4vh;
+    width: 100%;
   }
 
   .creer_partie,
   .deco_button {
     font-size: 1.5vh;
-    width: 50%;
+    width: 40%;
+    height: inherit;
   }
   .info_salon {
-    min-width: 90%;
+    /*min-width: 90%;*/
     margin: 0px;
   }
   .champLien {
-    border-radius: 10px;
     margin-left: 10px;
+    
   }
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (min-width: 800px) and (max-width: 1200px) {
   .container {
     flex-direction: column;
     vertical-align: center;
   }
+
+
+.mdi-logout-variant , .mdi-sticker-plus-outline, .mdi-lock-open-plus-outline{
+  font-size: 20px;
+}
 
   .opt {
     display: flex;
@@ -488,22 +523,21 @@ export default {
   }
 
   .info_salon {
-    min-width: 90%;
     margin: 0px;
   }
+
   .champLien {
+    width: 50%;
     border-radius: 10px;
-    padding-left: 15px;
   }
+
   .salon {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
-    max-width: 500px;
     height: auto;
     padding-bottom: 10px;
-    /* padding-top: 10px; */
   }
   .icone {
     display: none;
@@ -523,4 +557,5 @@ export default {
     margin-left: 10%;
   }
 }
+
 </style>
