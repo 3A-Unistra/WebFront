@@ -11,50 +11,21 @@
         :key="player.pseudo"
       >
         <div v-if="player.username != ''">
-          <img class="pp" v-bind:src="player.photo" alt="photo de profil" />
+          <div class ='joueur'>
+          <img class="pp" src="../assets/appercuPions/5_Gargouille.png" alt="photo de profil" />
           <div class="txtzone">
             <div class="pseudo" @click="checkFollow(player.pseudo)">
               {{ player.pseudo }}
             </div>
+        </div>
             <div v-if="player.username === 'BOT'">
               <button @click="deleteBot(index)">supprimer</button>
             </div>
-
           </div>
         </div>
       </div>
 
-      <div class="infosb">
-        <div class="titrebot">
-          <img class="botbleu" src="../assets/botbleu.png" alt="robot bleu" />
-          <h1 class="bot">BOT</h1>
-        </div>
-        <div class="diff">
-          <button type="button" @click="modifyBotLevel(-1)" class="diff_bot">
-            <img
-              class="chevron"
-              @click="modifyBotLevel(-1)"
-              src="../assets/chevrons_gauche.png"
-            />
-          </button>
-          <div class="lobby_title" id="txtdif">
-            {{ $t("difficulte_bot") }}:
-            <input
-              type="text"
-              style="width: 40px"
-              v-model="botDifficulty"
-              readonly
-            />
-          </div>
-          <button type="button" class="diff_bot">
-            <img
-              class="chevron"
-              @click="modifyBotLevel(1)"
-              src="../assets/chevrons_droite.png"
-            />
-          </button>
-        </div>
-
+      <div>
         <button
           type="button"
           v-if="this.$store.state.isHost"
@@ -170,34 +141,26 @@
       </div>
       <!--------------------BT LANCER PARTIE------------------->
 
-      <button
-        type="button"
-        @click="startGame"
-        class="bt_lancer"
-        v-if="this.$store.state.isHost"
-        v-on:click="tempsCheck(tempsAction)"
-      >
-        <h1 class="Lancer">{{ $t("lancer_partie") }}</h1>
-      </button>
+      <div class="lancement">
+        <button
+          type="button"
+          @click="startGame"
+          class="bt_lancer"
+          v-if="this.$store.state.isHost"
+          v-on:click="tempsCheck(tempsAction)"
+        >
+          <h1 class="Lancer">{{ $t("lancer_partie") }}</h1>
+        </button>
 
-      <button type="button" @click="wantToQuit" class="bt_quitter">
-        {{ $t("quitter") }}
-      </button>
+        <button type="button" @click="wantToQuit" class="bt_quitter">
+          {{ $t("quitter") }}
+        </button>
+      </div>
     </div>
     <!----------------------FOLLOWS--------------------->
     <div class="amis">
-      <h1 class="h1Lobby">{{ $t("amis_co") }}</h1>
-      <div class="infos" v-for="player in players" :key="player.pseudo">
-        <img class="pp" v-bind:src="player.photo" alt="photo de profil" />
-        <div class="txtzone">
-          <div class="pseudo" @click="checkFollow(player.pseudo)">
-            {{ player.pseudo }}
-          </div>
-          <button type="button" class="bt_inviter">{{ $t("inviter") }}</button>
-        </div>
-      </div>
-      <h3 style="padding-top: 15%">Room ID:</h3>
-      <input type="text" style="width: 100%" readonly />
+      <h3>Room ID:</h3>
+      <div>{{ this.$store.state.gameToken }}</div>
     </div>
   </div>
   <Footer></Footer>
@@ -211,9 +174,9 @@ import {mapState} from "vuex";
 import socket from "../services/ws";
 
 export default {
-  mounted () {
-        // à modifier vu que le lobby ça peut être particulier
-        this.$store.dispatch('verifToken');
+  mounted() {
+    // à modifier vu que le lobby ça peut être particulier
+    this.$store.dispatch("verifToken");
   },
   name: "LobbyPage",
   props: {},
@@ -269,7 +232,7 @@ export default {
             console.log("nouveau joueur dans une room avec l'index :" + index);
             if (!found) {
               this.$store.commit("joinRoom", {
-                photo: "",
+                photo: '',
                 pseudo: paquet.username,
                 username: paquet.username,
               });
@@ -310,9 +273,11 @@ export default {
 
       if (paquet.name === "StatusRoom") {
         let index = 0;
-        let playersData = paquet.players_data
+        let playersData = paquet.players_data;
         while (index < paquet.nb_players) {
-            console.log("l'username du joueur" + index + " : "+ playersData[index].username)
+          console.log(
+            "l'username du joueur" + index + " : " + playersData[index].username
+          );
           if (
             this.$store.state.listePlayers
               .map((object) => object.pseudo)
@@ -337,8 +302,8 @@ export default {
 
       if (paquet.name === "AppletPrepare") {
         console.log("reception unity");
-        socket.close()
-        this.$router.push('/webGL')
+        socket.close();
+        this.$router.push("/webGL");
       }
     };
   },
@@ -353,6 +318,7 @@ export default {
         option_max_time: this.$store.state.timePerRound,
         option_max_rounds: this.$store.state.maxRound,
         starting_balance: this.$store.state.starterMoney,
+        max_nb_players: 8
       };
       console.log(
         "on envoie ça si on change l'option auction : " +
@@ -371,6 +337,7 @@ export default {
         option_max_time: this.$store.state.timePerRound,
         option_max_rounds: this.$store.state.maxRound,
         starting_balance: this.$store.state.starterMoney,
+        max_nb_players: 8
       };
       console.log(
         "on envoie ça si on change l'option double go : " +
@@ -389,6 +356,7 @@ export default {
         option_max_time: this.$store.state.timePerRound,
         option_max_rounds: this.$store.state.maxRound,
         starting_balance: this.$store.state.starterMoney,
+        max_nb_players: 8
       };
       socket.send(JSON.stringify(statusRoom));
       return !this.$store.state.buyFirstRound;
@@ -403,6 +371,7 @@ export default {
         option_max_time: this.$store.state.timePerRound,
         option_max_rounds: this.$store.state.maxRound,
         starting_balance: this.$store.state.starterMoney,
+        max_nb_players: 8
       };
       socket.send(JSON.stringify(statusRoom));
     },
@@ -416,6 +385,7 @@ export default {
         option_max_time: this.$store.state.timePerRound,
         option_max_rounds: this.$store.state.maxRound,
         starting_balance: this.$store.state.starterMoney,
+        max_nb_players: 8
       };
       socket.send(JSON.stringify(statusRoom));
     },
@@ -429,6 +399,7 @@ export default {
         option_max_time: this.$store.state.timePerRound,
         option_max_rounds: this.$store.state.maxRound,
         starting_balance: this.$store.state.starterMoney,
+        max_nb_players: 8
       };
       socket.send(JSON.stringify(statusRoom));
     },
@@ -522,7 +493,7 @@ export default {
         name: "LaunchGame",
         player_token: this.$store.state.id,
       };
-    console.log("on envoie launchgame :" + JSON.stringify(playerId))
+      console.log("on envoie launchgame :" + JSON.stringify(playerId));
       socket.send(JSON.stringify(playerId));
     },
   },
@@ -563,6 +534,7 @@ export default {
   width: 25%;
   color: white;
   text-align: center;
+  justify-content: space-evenly;
 }
 
 .param {
@@ -746,15 +718,13 @@ input:checked + .slider:before {
 
 .bt_lancer {
   border-radius: 15px;
-  height: 12%;
-  width: 70%;
+  width: 60%;
   font-weight: bold;
   border: none;
   outline: none;
   background-color: #d3aa5d;
   color: #6e4d0b;
   margin-top: 10%;
-  margin-left: 15%;
 }
 
 .bt_lancer:hover {
@@ -769,7 +739,6 @@ input:checked + .slider:before {
   border: none;
   outline: none;
   margin-top: 5vh;
-  margin-left: 36%;
   background-color: #272626;
   font-size: x-large;
   color: #c6c6c6;
@@ -792,14 +761,6 @@ input:checked + .slider:before {
   justify-content: space-around;
 }
 
-.infosb {
-  border-bottom: 2px solid #f4f2ec;
-  padding: 2.5% 0% 2.5% 0%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-}
-
 .pp {
   max-height: 60px;
   max-width: 60px;
@@ -809,6 +770,7 @@ input:checked + .slider:before {
 .pseudo {
   font-weight: bold;
   margin-right: 40%;
+  margin-top: 15px;
 }
 
 .bt_inviter {
@@ -825,8 +787,8 @@ input:checked + .slider:before {
 .bt_inviter:hover {
   background-color: #e5e5e5;
 }
-input{
-  color:#212529;
+input {
+  color: #212529;
 }
 
 .txtzone {
@@ -888,7 +850,14 @@ input{
   outline: none;
   background-color: #d3aa5d;
   color: black;
-  margin: 10% 0% 10% 5%;
+  margin: 5% 0% 5% 0%;
+}
+
+.lancement {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
 }
 
 .bt_ajout_bot:hover {
@@ -928,118 +897,118 @@ input{
   color: #eb0707;
   font-weight: bold;
 }
-.amis input{
-  max-width:80%;
+.amis input {
+  max-width: 80%;
 }
 
 /* mode tablette */
- @media screen  and (max-width: 1040px) {
-  .bt_inviter{
-    margin-left:-3%;
+@media screen and (max-width: 1040px) {
+  .bt_inviter {
+    margin-left: -3%;
   }
-  .bodyL{
+  .bodyL {
     flex-direction: column;
   }
 
-  .part{
-
-  display:block;
-  width:49%;
-
+  .part {
+    display: block;
+    width: 100%;
   }
-  .amis{
-    
-    display:block;
-    width:49%;
+  .amis {
+    display: block;
+    width: 100%;
   }
 
-  .param{
-  width:100%;
-  padding-bottom: 50px;
+  .param {
+    width: 100%;
+    padding-bottom: 50px;
   }
-  .champ{
-  max-width: 170px;
+  .champ {
+    max-width: 170px;
   }
-  .container_amis_part{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-
+  .container_amis_part {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   }
-  .bt_ajout_bot{
-  max-width:200px;
+  .bt_ajout_bot {
+    max-width: 200px;
   }
-  .h1Lobby{
+  .h1Lobby {
     font-size: 30px;
   }
- }
- /* mode telephone */
-  @media screen and (max-width: 550px)  {
-  .container_amis_part{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-
+}
+/* mode telephone */
+@media screen and (max-width: 550px) {
+  .container_amis_part {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   }
-  .bt_ajout_bot{
-  max-width:200px;
-  margin-left: 0px;
+  .bt_ajout_bot {
+    max-width: 200px;
+    margin-left: 0px;
   }
-  .botnoir{
+  .botnoir {
     display: none;
-    padding:0px;
+    padding: 0px;
   }
-  .h1Lobby{
+  .h1Lobby {
     font-size: 25px;
   }
-  .slider{
-    min-width:70px;
+  .slider {
+    min-width: 70px;
   }
-  .toggle, .tour{
-   margin-left: 0px;
-   padding-left: 0px;
-
+  .toggle,
+  .tour {
+    margin-left: 0px;
+    padding-left: 0px;
   }
-  .lobby_title{
-    width:250px;
+  .lobby_title {
+    width: 250px;
     margin-left: 20px;
-    text-align:start;
-    margin-right:20px;
+    text-align: start;
+    margin-right: 20px;
   }
-  .slider{
-    margin-left:95%;
+  .slider {
+    margin-left: 95%;
   }
-
-
+}
+/* mode pc */
+@media screen and (min-width: 1040px) {
+  .container_amis_part {
+    display: contents;
   }
-  /* mode pc */
-  @media screen and (min-width: 1040px)  {
-  .container_amis_part{
-    display:contents;
-  }
-  .part{
+  .part {
     order: 1;
   }
-  .param{
+  .param {
     order: 2;
-    width:60%;
+    width: 60%;
   }
-  .amis{
+  .amis {
     order: 3;
   }
-    .bt_inviter{
-    margin-left:-1%;
+  .bt_inviter {
+    margin-left: -1%;
   }
-  .amis input{
-    margin-left:1.5em;
+  .amis input {
+    margin-left: 1.5em;
   }
   .haut{
   padding-top: 30px;
   background-size:inherit;
   }
 
-  .login{
+  .login {
     display: none;
   }
-  }
+
+.joueur {
+display:flex;
+gap: 10px;
+text-align: center;
+
+}
+}
 </style>
