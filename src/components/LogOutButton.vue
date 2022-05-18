@@ -24,10 +24,13 @@ icone{
 
 <script>
 
+import socket from "../services/ws";
+
 export default {
     methods: {
         logout: function() {
-            this.$store.commit('clearUserData'),
+            this.$store.commit('clearUserData');
+            socket.close(); 
             this.$router.push('/')
         }
     }       

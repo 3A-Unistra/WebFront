@@ -112,7 +112,6 @@ export default createStore({
             })
             .catch(function(error) {
                 console.log(error.message);
-                console.log("token expiré");
                 router.push('/login');
                 commit('clearUserData');
             });
@@ -169,20 +168,16 @@ export default createStore({
             .then(function (response) {
                 //console.log(response.data);
                 if (response.data.success === true) {
-                    console.log("on est dans le then");
                     commit('changeUsrnameProfil', response.data.username)
                     commit('changeLoginProfil', response.data.login)
                     commit('changePawnProfil', response.data.pawn)
 
                     router.push('/profile');
-                } else {
-                    console.log("token expiré depuis le else");
                 }
                 
             })
             .catch(function(error) {
                 console.log(error.message);
-                console.log("profil vide");
                 router.push('/login');
 
             }); 
@@ -198,15 +193,13 @@ export default createStore({
                 }
             })
             .then(function (response) {
-                console.log(response.data);
                 axios.post('/users/is_follow',response.data, {
                 
                 headers: {
                     'Content-Type': 'application/json'
                 }
                 })
-                .then(function(response) {
-                    console.log(response.data);
+                .then(function() {
                     commit('changeFollowState',true);
                 })
                 .catch(function() {
@@ -247,8 +240,6 @@ export default createStore({
                    }
             })
             .then(function (response) {
-                console.log(response.data.ownId );
-                console.log(response.data.otherId );
                 axios.post('/users/follow',response.data, {
                 
                 headers: {
@@ -256,8 +247,7 @@ export default createStore({
                     'Content-Type': 'application/json'
                 }
                 })
-                .then(function(response) {
-                    console.log(response);
+                .then(function() {
                     return true;
                 })
                 .catch(function(error) {
@@ -281,8 +271,6 @@ export default createStore({
                 }
             })
             .then(function (response) {
-                console.log(response.data.ownId );
-                console.log(response.data.otherId );
                 axios.post('/users/unfollow',response.data, {
                 
                 headers: {
@@ -329,8 +317,7 @@ export default createStore({
                     'Content-Type': 'application/json'
                 }
             })  
-            .then(function(response) {
-                console.log(response);
+            .then(function() {
                 router.push('/Login');
                 resolve()
             })

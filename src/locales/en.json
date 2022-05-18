@@ -6,7 +6,7 @@
   "signup": "Sign up",
   "profil": "Profile",
   "lobby": "Lobby",
-  "Postlogin" : "Post login",
+  "postLogin" : "Hall",
   "affichage": "Display",
   "langue": "Language",
   // footer 
@@ -51,11 +51,11 @@
   "ici": "here",
   // page d'après co
   "deco": "Disconnect",
-  "creer": "Create new lobby",
+  "creer": "Create lobby",
   "entrer_lien": "Enter a link to join a lobby",
   "rejoindre": "Join",
   "salon": "Room",
-  "nb_participants": "Number of players: ",
+  "nb_participants": "Players: ",
 
   // page lobby
   "participants": "Participants",
