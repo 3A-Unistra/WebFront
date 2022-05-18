@@ -76,6 +76,32 @@ export default {
         "contenu du paquet recu quand on envoie un paquet Postlogin : " +
           JSON.stringify(e.data)
       );
+      if (paquet.name === "StatusRoom") {
+        let index = 0;
+        let playersData = paquet.players_data
+        while (index < paquet.nb_players) {
+            console.log("l'username du joueur" + index + " : "+ playersData[index].username)
+          if (
+            this.$store.state.listePlayers
+              .map((object) => object.pseudo)
+              .indexOf(playersData[index].username) === -1
+          ) {
+            this.$store.commit("joinRoom", {
+              photo: playersData[index].avatar_url,
+              pseudo: playersData[index].username,
+              username: playersData[index].username,
+            });
+          }
+          index++;
+        }
+        this.$store.state.gameToken = paquet.game_token;
+        this.$store.state.auctions = paquet.option_auction;
+        this.$store.state.doubleGO = paquet.option_double_on_start;
+        this.$store.state.buyFirstRound = paquet.option_first_round_buy;
+        this.$store.state.timePerRound = paquet.option_max_time;
+        this.$store.state.maxRound = paquet.option_max_rounds;
+        this.$store.state.starterMoney = paquet.starting_balance;
+      }
       if (paquet.name === "BroadcastNewRoomToLobby") {
         if (
           this.$store.state.listeSalons
@@ -262,6 +288,15 @@ export default {
       };
       socket.send(JSON.stringify(EnterRoom));
     },
+    joinLobbyWithToken: function (token) {
+      let EnterRoom = {
+        name: "EnterRoom",
+        player_token: this.$store.state.id,
+        game_token: token,
+      };
+      socket.send(JSON.stringify(EnterRoom));
+    },
+
 
     deleteSalon: function (index) {
       this.$store.state.listeSalons.splice(index, 1);
