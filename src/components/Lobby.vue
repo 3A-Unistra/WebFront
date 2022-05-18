@@ -486,7 +486,6 @@ export default {
       } else {
         this.leaveRoom();
       }
-      // this.$router.push('/post_login')
     },
     startGame: function () {
       let playerId = {

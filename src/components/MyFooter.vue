@@ -12,7 +12,7 @@
                 <li class="menu_info" v-if="this.$store.state.loggedin === false && this.$store.state.nomPage !== 'signup'"><router-link class="menu_ff" to="/signup">{{ $t("signup") }}</router-link></li>
                 <li class="menu_info" v-if="this.$store.state.loggedin === false && this.$store.state.nomPage !== 'login'" ><router-link class="menu_ff" to="/login">{{ $t("login") }}</router-link></li>
                 <li class="menu_info menu_ff" v-if="this.$store.state.loggedin && this.$store.state.nomPage !== 'profile'" style="cursor:pointer" @click="getUserProfile">{{ $t("profil") }}</li>
-                <li class="menu_info" v-if="this.$store.state.loggedin && this.$store.state.nomPage !== 'postlogin'"><router-link class="menu_ff" to="/post_login">{{ $t("post_login") }}</router-link></li>
+                <li class="menu_info" v-if="this.$store.state.loggedin && this.$store.state.nomPage !== 'postlogin'"><router-link class="menu_ff" to="/post_login">{{ $t("postLogin") }}</router-link></li>
             </ul>
 
             <ul class="list_footer n2">

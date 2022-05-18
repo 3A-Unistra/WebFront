@@ -39,7 +39,7 @@
         </li>
         <li class="menu_info">
           <router-link class="menu_ff" to="/post_login">{{
-            $t("postlogin")
+            $t("postLogin")
           }}</router-link>
         </li>
       </ul>
