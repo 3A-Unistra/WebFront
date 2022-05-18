@@ -11,13 +11,13 @@
         :key="player.pseudo"
       >
         <div v-if="player.username != ''">
-          <div class ='joueur'>
-          <img class="pp" src="../assets/appercuPions/5_Gargouille.png" alt="photo de profil" />
-          <div class="txtzone">
-            <div class="pseudo" @click="checkFollow(player.pseudo)">
-              {{ player.pseudo }}
+          <div class="joueur">
+            <img class="pp" :src="player.photo" alt="photo de profil" />
+            <div class="txtzone">
+              <div class="pseudo" @click="checkFollow(player.pseudo)">
+                {{ player.pseudo }}
+              </div>
             </div>
-        </div>
             <div v-if="player.username === 'BOT'">
               <button @click="deleteBot(index)">supprimer</button>
             </div>
@@ -192,6 +192,16 @@ export default {
       tourMax: 2,
       sommeDepart: 0,
       botDifficulty: 0,
+      pions: [
+        require("../assets/appercuPions/0_Bretzel.png"),
+        require("../assets/appercuPions/1_Biere.png"),
+        require("../assets/appercuPions/2_Bike.png"),
+        require("../assets/appercuPions/3_Bugatti.png"),
+        require("../assets/appercuPions/4_Cigogne.png"),
+        require("../assets/appercuPions/5_Gargouille.png"),
+        require("../assets/appercuPions/6_Hamster.png"),
+        require("../assets/appercuPions/7_Mannele.png"),
+      ],
     };
   },
   created: function () {
@@ -232,13 +242,15 @@ export default {
             console.log("nouveau joueur dans une room avec l'index :" + index);
             if (!found) {
               this.$store.commit("joinRoom", {
-                photo: '',
+                photo: this.pions[paquet.piece],
                 pseudo: paquet.username,
                 username: paquet.username,
               });
+              console.log("la pièce du boug:"+this.$store.state.piece)
+              console.log ("l'image du boug :"+ this.pions[this.$store.state.piece],)
               console.log(
                 "on a bien ajouté " +
-                  this.$store.state.listePlayers +
+                  JSON.stringify(this.$store.state.listePlayers) +
                   " dans la room"
               );
             }
@@ -284,11 +296,13 @@ export default {
               .indexOf(playersData[index].username) === -1
           ) {
             this.$store.commit("joinRoom", {
-              photo: playersData[index].avatar_url,
+              photo: this.pions[playersData[index].piece],
               pseudo: playersData[index].username,
               username: playersData[index].username,
             });
           }
+        console.log(" la liste des pièces par joueur :"+this.pions[playersData[index].piece]);
+
           index++;
         }
         this.$store.state.gameToken = paquet.game_token;
@@ -318,7 +332,7 @@ export default {
         option_max_time: this.$store.state.timePerRound,
         option_max_rounds: this.$store.state.maxRound,
         starting_balance: this.$store.state.starterMoney,
-        max_nb_players: 8
+        max_nb_players: 8,
       };
       console.log(
         "on envoie ça si on change l'option auction : " +
@@ -337,7 +351,7 @@ export default {
         option_max_time: this.$store.state.timePerRound,
         option_max_rounds: this.$store.state.maxRound,
         starting_balance: this.$store.state.starterMoney,
-        max_nb_players: 8
+        max_nb_players: 8,
       };
       console.log(
         "on envoie ça si on change l'option double go : " +
@@ -356,7 +370,7 @@ export default {
         option_max_time: this.$store.state.timePerRound,
         option_max_rounds: this.$store.state.maxRound,
         starting_balance: this.$store.state.starterMoney,
-        max_nb_players: 8
+        max_nb_players: 8,
       };
       socket.send(JSON.stringify(statusRoom));
       return !this.$store.state.buyFirstRound;
@@ -371,7 +385,7 @@ export default {
         option_max_time: this.$store.state.timePerRound,
         option_max_rounds: this.$store.state.maxRound,
         starting_balance: this.$store.state.starterMoney,
-        max_nb_players: 8
+        max_nb_players: 8,
       };
       socket.send(JSON.stringify(statusRoom));
     },
@@ -385,7 +399,7 @@ export default {
         option_max_time: this.$store.state.timePerRound,
         option_max_rounds: this.$store.state.maxRound,
         starting_balance: this.$store.state.starterMoney,
-        max_nb_players: 8
+        max_nb_players: 8,
       };
       socket.send(JSON.stringify(statusRoom));
     },
@@ -399,7 +413,7 @@ export default {
         option_max_time: this.$store.state.timePerRound,
         option_max_rounds: this.$store.state.maxRound,
         starting_balance: this.$store.state.starterMoney,
-        max_nb_players: 8
+        max_nb_players: 8,
       };
       socket.send(JSON.stringify(statusRoom));
     },
@@ -853,10 +867,10 @@ input {
 }
 
 .lancement {
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .bt_ajout_bot:hover {
@@ -1003,11 +1017,10 @@ justify-content: center;
     display: none;
   }
 
-.joueur {
-display:flex;
-gap: 10px;
-text-align: center;
-
-}
+  .joueur {
+    display: flex;
+    gap: 10px;
+    text-align: center;
+  }
 }
 </style>

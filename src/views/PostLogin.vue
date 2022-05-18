@@ -9,16 +9,17 @@
 
       <button class="deco_button" @click="logout" type="boutton">
         {{ $t("deco") }}
+        <!---- <img class="icone" src="../assets/reseau.png" alt="icone reseau" />-->
           <i class="mdi mdi-logout-variant" ></i>
       </button>
     </section>
 
     <section class="info_salon">
       <div class="lien">
-        <input class="champLien" type="text" :placeholder="$t('entrer_lien')" />
-        <button class="rejoindre" type="boutton">
+        <input class="champLien" type="text" :placeholder="$t('entrer_lien')" v-model="token" />
+        <button class="rejoindre" type="boutton" @click="joinLobbyWithToken(token)">
           {{ $t("rejoindre") }}
-          <i class="mdi mdi-lock-open-plus-outline"></i>
+          <i class="mdi mdi-lock-open-plus-outline" style="font-size: 40px"></i>
         </button>
       </div>
       <div
@@ -78,19 +79,22 @@ export default {
       );
       if (paquet.name === "StatusRoom") {
         let index = 0;
-        let playersData = paquet.players_data
+        let playersData = paquet.players_data;
         while (index < paquet.nb_players) {
-            console.log("l'username du joueur" + index + " : "+ playersData[index].username)
+          console.log(
+            "l'username du joueur" + index + " : " + playersData[index].username
+          );
           if (
             this.$store.state.listePlayers
               .map((object) => object.pseudo)
               .indexOf(playersData[index].username) === -1
           ) {
             this.$store.commit("joinRoom", {
-              photo: playersData[index].avatar_url,
+              photo: this.pions[playersData[index].piece],
               pseudo: playersData[index].username,
               username: playersData[index].username,
             });
+                console.log(this.pions[playersData[index].piece]);
           }
           index++;
         }
@@ -113,7 +117,7 @@ export default {
         }
         this.$store.commit("createSalon", {
           id: paquet.game_token,
-          name: paquet.name,
+          name: paquet.game_name,
           private: paquet.is_private,
           nbPlayers: paquet.nb_players,
           maxNbPlayers: 8,
@@ -185,7 +189,17 @@ export default {
     };
   },
   data() {
-    return {};
+    return {
+      pions: [
+        require("../assets/appercuPions/0_Bretzel.png"),
+        require("../assets/appercuPions/1_Biere.png"),
+        require("../assets/appercuPions/2_Bike.png"),
+        require("../assets/appercuPions/3_Bugatti.png"),
+        require("../assets/appercuPions/4_Cigogne.png"),
+        require("../assets/appercuPions/5_Gargouille.png"),
+        require("../assets/appercuPions/6_Hamster.png"),
+        require("../assets/appercuPions/7_Mannele.png"),
+      ],};
   },
   name: "PostLoginPage",
   components: {
