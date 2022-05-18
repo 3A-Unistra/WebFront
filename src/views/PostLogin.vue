@@ -1,24 +1,23 @@
 <template>
-    <Header></Header>
-    <section class="container">
-    
-      <section class="opt">
-        <button class="creer_partie" @click="toPreLobby" type="boutton">
-          {{ $t("creer") }}
-        </button>
+  <Header></Header>
+  <section class="container">
+    <section class="opt">
+      <button class="creer_partie" @click="toPreLobby" type="boutton">
+        {{ $t("creer") }}
+      </button>
 
       <button class="deco_button" @click="logout" type="boutton">
         {{ $t("deco") }}
-       <!---- <img class="icone" src="../assets/reseau.png" alt="icone reseau" />-->
+        <!---- <img class="icone" src="../assets/reseau.png" alt="icone reseau" />-->
       </button>
     </section>
 
     <section class="info_salon">
       <div class="lien">
-        <input class="champLien" type="text" :placeholder="$t('entrer_lien')" />
-        <button class="rejoindre" type="boutton">
+        <input class="champLien" type="text" :placeholder="$t('entrer_lien')" v-model="token" />
+        <button class="rejoindre" type="boutton" @click="joinLobbyWithToken(token)">
           {{ $t("rejoindre") }}
-        <i class="mdi mdi-lock-open-plus-outline" style="font-size:40px" ></i>
+          <i class="mdi mdi-lock-open-plus-outline" style="font-size: 40px"></i>
         </button>
       </div>
       <div
@@ -76,21 +75,24 @@ export default {
         "contenu du paquet recu quand on envoie un paquet Postlogin : " +
           JSON.stringify(e.data)
       );
-            if (paquet.name === "StatusRoom") {
+      if (paquet.name === "StatusRoom") {
         let index = 0;
-        let playersData = paquet.players_data
+        let playersData = paquet.players_data;
         while (index < paquet.nb_players) {
-            console.log("l'username du joueur" + index + " : "+ playersData[index].username)
+          console.log(
+            "l'username du joueur" + index + " : " + playersData[index].username
+          );
           if (
             this.$store.state.listePlayers
               .map((object) => object.pseudo)
               .indexOf(playersData[index].username) === -1
           ) {
             this.$store.commit("joinRoom", {
-              photo: playersData[index].avatar_url,
+              photo: this.pions[playersData[index].piece],
               pseudo: playersData[index].username,
               username: playersData[index].username,
             });
+                console.log(this.pions[playersData[index].piece]);
           }
           index++;
         }
@@ -185,7 +187,17 @@ export default {
     };
   },
   data() {
-    return {};
+    return {
+      pions: [
+        require("../assets/appercuPions/0_Bretzel.png"),
+        require("../assets/appercuPions/1_Biere.png"),
+        require("../assets/appercuPions/2_Bike.png"),
+        require("../assets/appercuPions/3_Bugatti.png"),
+        require("../assets/appercuPions/4_Cigogne.png"),
+        require("../assets/appercuPions/5_Gargouille.png"),
+        require("../assets/appercuPions/6_Hamster.png"),
+        require("../assets/appercuPions/7_Mannele.png"),
+      ],};
   },
   name: "PostLoginPage",
   components: {
@@ -287,7 +299,7 @@ export default {
       socket.send(JSON.stringify(EnterRoom));
     },
 
-        joinLobbyWithToken: function (token) {
+    joinLobbyWithToken: function (token) {
       let EnterRoom = {
         name: "EnterRoom",
         player_token: this.$store.state.id,
@@ -346,7 +358,6 @@ export default {
   gap: 20px;
 }
 
-
 .opt {
   display: flex;
   flex-direction: column;
@@ -372,11 +383,9 @@ export default {
 .deco_button,
 .creer_partie,
 .rejoindre {
-
   border: none;
   outline: none;
 }
-
 
 .rejoindre {
   background-color: #fab532;
@@ -388,19 +397,19 @@ export default {
   background-color: #ffffff;
   height: 15vh;
   border-radius: 7px;
-  font-size:3vh;
+  font-size: 3vh;
   border: none;
   font-weight: 600;
-  color: rgb(128, 104, 97) ;
+  color: rgb(128, 104, 97);
   transition-duration: 200ms;
 }
 
 .creer_partie:hover {
   transition-duration: 200ms;
-  background-color: rgb(224, 215, 212) ;
+  background-color: rgb(224, 215, 212);
 }
 .creer_partie:active {
-  background-color: #c4c4c4 ;
+  background-color: #c4c4c4;
 }
 
 .rejoindre:hover {
@@ -415,7 +424,6 @@ export default {
   width: 40px;
   height: 40px;
 }
-
 
 .lien {
   display: flex;
@@ -434,8 +442,7 @@ export default {
   margin-right: 20px;
 }
 
-
-  @media screen and (max-width: 550px)  {
+@media screen and (max-width: 550px) {
   .opt {
     display: flex;
     flex-direction: row;
@@ -443,7 +450,8 @@ export default {
     height: 15%;
   }
 
-  .creer_partie, .deco_button {
+  .creer_partie,
+  .deco_button {
     font-size: 1.5vh;
     width: 50%;
   }
@@ -457,12 +465,12 @@ export default {
   }
 }
 
-  @media screen and (max-width: 1200px)  {
+@media screen and (max-width: 1200px) {
   .container {
     flex-direction: column;
     vertical-align: center;
   }
-  
+
   .opt {
     display: flex;
     flex-direction: row;
@@ -472,12 +480,13 @@ export default {
     height: 3vh;
   }
 
-  .creer_partie, .deco_button {
+  .creer_partie,
+  .deco_button {
     width: 25%;
     height: inherit;
     font-size: 1.5vh;
   }
-  
+
   .info_salon {
     min-width: 90%;
     margin: 0px;
